@@ -9,16 +9,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Logger;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.TimelineBuilder;
+import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.util.Duration;
 
 /**
  * A Canvas used to render TileMaps.
@@ -27,15 +22,8 @@ import javafx.util.Duration;
  */
 public final class GameCanvas extends Canvas {
 
-    private int FPS = 30;
-
-    public int getFPS() {
-        return FPS;
-    }
-
-    public void setFPS(int FPS) {
-        this.FPS = FPS;
-    }
+    private Updater updater = new DefaultUpdater();
+    private AnimationTimer timer;
     private static Comparator<Sprite> comparator = new Comparator<Sprite>() {
         @Override
         public int compare(Sprite o1, Sprite o2) {
@@ -52,7 +40,6 @@ public final class GameCanvas extends Canvas {
     private final double screenHeight;
     private Sprite hero;
     private ArrayList<Layer> layers;
-    private ArrayList<MoveValidator> moveValidators;
     private final List<Sprite> sprites;
     public double cameraX;
     public double cameraY;
@@ -66,37 +53,22 @@ public final class GameCanvas extends Canvas {
         this.cameraMaxX = totalWidth - width;
         this.cameraMaxY = totalHeight - height;
         this.layers = new ArrayList<>();
-        this.moveValidators = new ArrayList<>();
 
-        final Duration oneFrameAmt = Duration.millis(1_000 / FPS);
-        final KeyFrame oneFrame = new KeyFrame(oneFrameAmt,
-                new EventHandler() {
-                    @Override
-                    public void handle(Event t) {
-                        pulse();
-                    }
-                });
 
-        TimelineBuilder.create()
-                .targetFramerate(FPS)
-                .cycleCount(Animation.INDEFINITE)
-                .keyFrames(oneFrame)
-                .build()
-                .play();
+        timer = new AnimationTimer() {
+            @Override
+            public void handle(long l) {
+                pulse();
+            }
+        };
+        timer.start();
+
 
         sprites = new ArrayList<>();
     }
 
     public Sprite getHero() {
         return hero;
-    }
-
-    public void addMoveValidator(MoveValidator moveValidator) {
-        moveValidators.add(moveValidator);
-    }
-
-    public void removeMoveValidator(MoveValidator moveValidator) {
-        moveValidators.remove(moveValidator);
     }
 
     public void render() {
@@ -158,11 +130,10 @@ public final class GameCanvas extends Canvas {
     }
 
     private void update() {
-
         for (Sprite sprite : sprites) {
             sprite.pulse(this);
-            updateSpritePosition(sprite);
         }
+        updateWorld();
         updateCamera();
         for (Layer layer : layers) {
             layer.pulse();
@@ -170,38 +141,8 @@ public final class GameCanvas extends Canvas {
 
     }
 
-    private void updateSpritePosition(Sprite sprite) {
-        double velocityX = sprite.getVelocityX();
-        double velocityY = sprite.getVelocityY();
-        Rectangle2D moveBox = sprite.getMoveBox();
-        double x = sprite.getX();
-        double y = sprite.getY();
-        double newX = velocityX + x;
-        double newY = velocityY + y;
-        if (isValidMove(newX + moveBox.getMinX(), newY + moveBox.getMinY(), moveBox.getWidth(), moveBox.getHeight())) {
-            sprite.setX(newX);
-            sprite.setY(newY);
-        }
-    }
-
-    /**
-     * Check if this is a valid move by calling all registered
-     * {@link MoveValidator MoveValidators}
-     *
-     * @param x
-     * @param y
-     * @param width
-     * @param height
-     * @return true, if this is a valid move, false otherwise
-     */
-    public boolean isValidMove(double x, double y, double width, double height) {
-
-        for (MoveValidator moveValidator : moveValidators) {
-            if (!moveValidator.isValidMove(x, y, width, height)) {
-                return false;
-            }
-        }
-        return true;
+    private void updateWorld() {
+        updater.update(this);
     }
 
     public void addSprite(Sprite monsterSprite) {
@@ -260,6 +201,87 @@ public final class GameCanvas extends Canvas {
                 sprites.remove(sprite);
             }
         });
+    }
+
+    public List<Sprite> getSprites() {
+        return sprites;
+    }
+    /**
+     *
+     * @param moveValidator
+     * @deprecated use Physics instead or implement updater to constrain movement
+     */
+    @Deprecated
+    public void addMoveValidator(MoveValidator moveValidator) {
+        if (updater instanceof DefaultUpdater){
+            ((DefaultUpdater)updater).addMoveValidator(moveValidator);
+        }
+    }
+
+    /**
+     * This can be used to plug in simple constraints or a physics engine
+     */
+    public interface Updater {
+        public void update(GameCanvas canvas);
+    }
+
+    private static class DefaultUpdater implements Updater {
+
+        public DefaultUpdater() {
+            this.moveValidators = new ArrayList<>();
+
+        }
+
+        @Override
+        public void update(GameCanvas canvas) {
+            List<Sprite> sprites1 = canvas.getSprites();
+            for (Sprite sprite : sprites1) {
+                updateSpritePosition(sprite);
+            }
+        }
+
+        private void updateSpritePosition(Sprite sprite) {
+            double velocityX = sprite.getVelocityX();
+            double velocityY = sprite.getVelocityY();
+            Rectangle2D moveBox = sprite.getMoveBox();
+            double x = sprite.getX();
+            double y = sprite.getY();
+            double newX = velocityX + x;
+            double newY = velocityY + y;
+            if (isValidMove(newX + moveBox.getMinX(), newY + moveBox.getMinY(), moveBox.getWidth(), moveBox.getHeight())) {
+                sprite.setX(newX);
+                sprite.setY(newY);
+            }
+        }
+
+        /**
+         * Check if this is a valid move by calling all registered
+         * {@link MoveValidator MoveValidators}
+         *
+         * @param x
+         * @param y
+         * @param width
+         * @param height
+         * @return true, if this is a valid move, false otherwise
+         */
+        private boolean isValidMove(double x, double y, double width, double height) {
+
+            for (MoveValidator moveValidator : moveValidators) {
+                if (!moveValidator.isValidMove(x, y, width, height)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        private ArrayList<MoveValidator> moveValidators;
+
+        public void addMoveValidator(MoveValidator moveValidator) {
+            moveValidators.add(moveValidator);
+        }
+
+        public void removeMoveValidator(MoveValidator moveValidator) {
+            moveValidators.remove(moveValidator);
+        }
     }
 
     public interface MoveValidator {
