@@ -26,10 +26,10 @@ public class Monster extends Sprite {
 
     public Monster(final GameCanvas parent, String name, double x, double y, int width, int height, TileSet monster) {
         super(parent, name, x, y, width, height, Lookup.EMPTY);
-        monsterUp = new TileSetAnimation(monster, new int[]{1, 2, 3, 4, 5, 6, 7, 8}, 75f);
-        monsterLeft = new TileSetAnimation(monster, new int[]{10, 11, 12, 13, 14, 15, 16, 17}, 75f);
-        monsterDown = new TileSetAnimation(monster, new int[]{19, 20, 21, 22, 23, 24, 25, 26}, 75f);
-        monsterRight = new TileSetAnimation(monster, new int[]{28, 29, 30, 31, 32, 33, 34, 35}, 75);
+        monsterUp = new TileSetAnimation(monster, new int[]{1, 2, 3, 4, 5, 6, 7, 8}, 10f);
+        monsterLeft = new TileSetAnimation(monster, new int[]{10, 11, 12, 13, 14, 15, 16, 17}, 10f);
+        monsterDown = new TileSetAnimation(monster, new int[]{19, 20, 21, 22, 23, 24, 25, 26}, 10f);
+        monsterRight = new TileSetAnimation(monster, new int[]{28, 29, 30, 31, 32, 33, 34, 35}, 10);
         addBehaviour(new ActionImpl(parent));
         addBehaviour(new Behavior() {
             @Override
