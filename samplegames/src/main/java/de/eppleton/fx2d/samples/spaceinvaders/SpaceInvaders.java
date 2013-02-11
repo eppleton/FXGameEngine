@@ -10,9 +10,9 @@ import de.eppleton.fx2d.GameCanvas;
 import de.eppleton.fx2d.Layer;
 import de.eppleton.fx2d.Sprite;
 import de.eppleton.fx2d.SpriteLayer;
-import de.eppleton.fx2d.action.Action;
+import de.eppleton.fx2d.action.Behavior;
 import de.eppleton.fx2d.action.ActionFactory;
-import de.eppleton.fx2d.action.Animation;
+import de.eppleton.fx2d.action.Renderer;
 import de.eppleton.fx2d.action.SpriteAction;
 import de.eppleton.fx2d.tileengine.TileMapReader;
 import de.eppleton.fx2d.tileengine.TileSet;
@@ -22,6 +22,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javax.xml.bind.JAXBException;
@@ -37,7 +40,10 @@ public class SpaceInvaders extends Game {
     private Points TEN = new Points(10);
     private Points TWENTY = new Points(30);
     private Points THIRTY = new Points(40);
-    private Animation invaderExplode;
+    AudioClip shootSound = new AudioClip(SpaceInvaders.class.getResource("/assets/sound/shoot.wav").toString());
+    AudioClip invaderKilledSound = new AudioClip(SpaceInvaders.class.getResource("/assets/sound/invaderkilled.wav").toString());
+    MediaPlayer mediaPlayer = new MediaPlayer(new Media(SpaceInvaders.class.getResource("/assets/sound/invader_loop1.mp3").toString()));
+    private Renderer invaderExplode;
     private Points MYSTERY = new Points(50) {
         @Override
         public int getPoints() {
@@ -59,12 +65,20 @@ public class SpaceInvaders extends Game {
         {10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10},
         {10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10}
     };
+    int soundIndex = 0;
 
     @Override
     protected void initGame() {
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        mediaPlayer.play();
         GameCanvas canvas = getCanvas();
+
         try {
             TileSet invaders = TileMapReader.readSet("/assets/graphics/invaders1.tsx");
+            final TileSetAnimation animation30 = new TileSetAnimation(invaders, new int[]{0, 1}, 2f);
+            final TileSetAnimation animation10 = new TileSetAnimation(invaders, new int[]{4, 5}, 2);
+            final TileSetAnimation animation20 = new TileSetAnimation(invaders, new int[]{2, 3}, 2);
+
             // add enemies
             for (int i = 0; i < enemies.length; i++) {
                 int[] is = enemies[i];
@@ -73,7 +87,7 @@ public class SpaceInvaders extends Game {
                     Points points = k == 30 ? THIRTY : k == 20 ? TWENTY : TEN;
 
                     Sprite sprite = new Sprite(canvas, "" + ((j * 11) + i), 50 + (40 * j), 140 + (40 * i), 30, 20, Lookups.fixed(points));
-                    sprite.setAnimation(k == 30 ? new TileSetAnimation(invaders, new int[]{0, 1}, 500) : k == 20 ? new TileSetAnimation(invaders, new int[]{2, 3}, 500) : new TileSetAnimation(invaders, new int[]{4, 5}, 500));
+                    sprite.setAnimation(k == 30 ? animation30 : k == 20 ? animation20 : animation10);
                     sprite.setVelocityX(.3);
                 }
             }
@@ -90,6 +104,7 @@ public class SpaceInvaders extends Game {
                 @Override
                 public void started(Sprite sprite) {
                     if (sprite.getParent().getSprite("bullet") == null) {
+                        shootSound.play();
                         Sprite bullet = new Sprite(sprite.getParent(), "bullet", sprite.getX(), sprite.getY() + 10, 10, 20, Lookup.EMPTY);
                         bullet.setVelocityY(-10);
                         SeekAndDestroyBehaviour action = new SeekAndDestroyBehaviour();
@@ -98,7 +113,7 @@ public class SpaceInvaders extends Game {
                     }
                 }
 
-                class SeekAndDestroyBehaviour extends Action {
+                class SeekAndDestroyBehaviour extends Behavior {
 
                     @Override
                     public boolean perform(Sprite sprite, GameCanvas playingField) {
@@ -106,17 +121,18 @@ public class SpaceInvaders extends Game {
                             playingField.removeSprite(sprite);
                             return false;
                         }
-                        Collection<Collision> collisions = playingField.getCollisions(sprite);
+                        Collection<Collision> collisions = playingField.checkCollisions(sprite);
                         for (Collision collision : collisions) {
                             Points points = collision.getSpriteTwo().getLookup().lookup(Points.class);
                             if (points != null) {
                                 score += points.getPoints();
+                                invaderKilledSound.play();
                                 playingField.removeSprite(sprite);
                                 playingField.removeSprite(collision.getSpriteTwo());
                                 double x = collision.getSpriteTwo().getX();
                                 double y = collision.getSpriteTwo().getY();
                                 Sprite explosion = new Sprite(playingField, invaderExplode, "explode", x, y, 32, 32, Lookup.EMPTY);
-                                Action remove = new Action() {
+                                Behavior remove = new Behavior() {
                                     @Override
                                     public boolean perform(Sprite sprite, GameCanvas playingField) {
                                         playingField.removeSprite(sprite);
@@ -153,7 +169,7 @@ public class SpaceInvaders extends Game {
             }
         });
 
-        canvas.addBehaviour(new Action() {
+        canvas.addBehaviour(new Behavior() {
             boolean rightward = true;
 
             @Override
@@ -161,25 +177,32 @@ public class SpaceInvaders extends Game {
                 Collection<Sprite> sprites = playingField.getSprites();
                 boolean change = false;
                 boolean stop = false;
-                if (sprites.isEmpty()) {
-                    message = "You win!";
-                    stop = true;
-                }
+                boolean win = true;
                 for (Sprite sprite1 : sprites) {
                     if (sprite1.getLookup().lookup(Points.class) != null) {
+                        win = false;
                         if (sprite1.getX() > 650 || sprite1.getX() < 50) {
                             rightward = !rightward;
                             change = true;
                             if (sprite1.getY() >= 600) {
                                 message = "Game Over!";
                                 stop = true;
+
+                                mediaPlayer.stop();
                             }
                         }
                     }
                 }
-                
+                if (win) {
+                    message = "You win!";
+                    stop = true;
+                    playingField.stop();
+                    mediaPlayer.stop();
+                }
+
 
                 if (change) {
+
                     for (Sprite sprite1 : sprites) {
                         if (sprite1.getLookup().lookup(Points.class) != null) {
                             sprite1.setVelocityX(-sprite1.getVelocityX() * (stop ? 0 : 1.3));
@@ -193,6 +216,7 @@ public class SpaceInvaders extends Game {
 
 
         canvas.addLayer(new SpriteLayer());
+        canvas.start();
     }
 
     @Override

@@ -4,21 +4,22 @@
  */
 package de.eppleton.fx2d;
 
-import de.eppleton.fx2d.action.Action;
-import de.eppleton.fx2d.action.Animation;
+import de.eppleton.fx2d.action.Behavior;
+import de.eppleton.fx2d.action.Renderer;
 import de.eppleton.fx2d.action.SpriteAction;
 import de.eppleton.fx2d.action.State;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
-import javax.media.j3d.Behavior;
 import org.openide.util.Lookup;
 import org.openide.util.lookup.AbstractLookup;
 import org.openide.util.lookup.InstanceContent;
@@ -29,10 +30,10 @@ import org.openide.util.lookup.InstanceContent;
  */
 public class Sprite {
 
-    private ConcurrentHashMap<Action, Long> behaviours = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<Behavior, Long> behaviours = new ConcurrentHashMap<>();
     private String name;
-    private double x;
-    private double y;
+    private DoubleProperty xProperty;
+    private DoubleProperty yProperty;
     private double velocityX = 0;
     private double velocityY = 0;
     private final int width;
@@ -41,14 +42,14 @@ public class Sprite {
     private double energy = 1_000;
     private State currentState;
     private SpriteAction currentAction;
-    private Animation currentAnimation;
+    private Renderer currentAnimation;
     private Rectangle2D moveBox;
     private Rectangle2D collisionBox;
     private GameCanvas parent;
     private Lookup lookup = Lookup.EMPTY;
-    public static Animation NO_ANIMATION = new Animation() {
+    public static Renderer NO_ANIMATION = new Renderer() {
         @Override
-        public void drawFrame(Sprite sprite, GraphicsContext context) {
+        public void render(Sprite sprite, GraphicsContext context, float alpha, long delta) {
             context.setFill(Color.RED);
             context.fillRect(0, 0, sprite.getWidth(), sprite.getHeight());
         }
@@ -57,13 +58,13 @@ public class Sprite {
     private static State NO_STATE = new State(NO_ANIMATION, "No State");
     private InstanceContent content;
 
-    public Sprite(GameCanvas parent, Animation animation, String name, double x, double y, int width, int height, Lookup lookup) {
+    public Sprite(GameCanvas parent, Renderer animation, String name, double x, double y, int width, int height, Lookup lookup) {
         this.parent = parent;
         this.currentState = new State(animation, "default");
         this.currentAnimation = animation;
         this.name = name;
-        this.x = x;
-        this.y = y;
+        this.xProperty = new SimpleDoubleProperty(x);
+        this.yProperty = new SimpleDoubleProperty(y);
         this.width = width;
         this.height = height;
         this.lookup = lookup;
@@ -74,6 +75,8 @@ public class Sprite {
         this(canvas, NO_ANIMATION, name, x, y, width, height, lookup);
     }
 
+    
+    
     public void addToLookup(Object o) {
         if (lookup == Lookup.EMPTY) {
             content = new InstanceContent();
@@ -82,6 +85,15 @@ public class Sprite {
         content.add(o);
     }
 
+    public DoubleProperty getXProperty() {
+        return xProperty;
+    }
+
+
+    public DoubleProperty getYProperty() {
+        return yProperty;
+    }
+    
     public GameCanvas getParent() {
         return parent;
     }
@@ -136,7 +148,7 @@ public class Sprite {
      *
      * @param spriteBehaviour
      */
-    public void addBehaviour(Action spriteBehaviour) {
+    public void addBehaviour(Behavior spriteBehaviour) {
         behaviours.put(spriteBehaviour, System.nanoTime());
     }
 
@@ -168,22 +180,22 @@ public class Sprite {
     private void die() {
     }
 
-    public void setAnimation(Animation animation) {
+    public void setAnimation(Renderer animation) {
         if (animation == null) {
             return;
         }
-        if (behaviours.containsKey(currentAnimation)) {
-            behaviours.remove(currentAnimation);
-        }
-        behaviours.put(animation, animation.getEvaluationInterval());
+//        if (behaviours.containsKey(currentAnimation)) {
+//            behaviours.remove(currentAnimation);
+//        }
+//        behaviours.put(animation, animation.getEvaluationInterval());
         if (currentState == null) {
             currentState = new State(animation, "default");
         }
         this.currentAnimation = animation;
     }
 
-    public void drawSprite(GraphicsContext context) {
-        currentAnimation.drawFrame(this, context);
+    public void drawSprite(GraphicsContext context, float alpha, long delta) {
+        currentAnimation.render(this, context, alpha, delta);
     }
 
     /**
@@ -210,7 +222,7 @@ public class Sprite {
      * @return x position of the Sprites upper left corner
      */
     public double getX() {
-        return x;
+        return xProperty.doubleValue();
     }
 
     /**
@@ -218,17 +230,17 @@ public class Sprite {
      * @return y position of the Sprites upper left corner
      */
     public double getY() {
-        return y;
+        return yProperty.doubleValue();
     }
 
     public void pulse(GameCanvas field, long l) {
 
-        Set<Map.Entry<Action, Long>> entrySet = behaviours.entrySet();
-        for (Map.Entry<Action, Long> entry : entrySet) {
+        Set<Map.Entry<Behavior, Long>> entrySet = behaviours.entrySet();
+        for (Map.Entry<Behavior, Long> entry : entrySet) {
             long evaluationInterval = entry.getKey().getEvaluationInterval();
             long currentTime = System.nanoTime();
             if (currentTime - entry.getValue() > evaluationInterval) {
-                Action behavior = entry.getKey();
+                Behavior behavior = entry.getKey();
                 behavior.perform(this, field);
                 entry.setValue(currentTime);
             }
@@ -243,7 +255,7 @@ public class Sprite {
     }
 
     /**
-     * Define an area to be used for collision detection with background tiles.
+     * Define an area to be used for isCollision detection with background tiles.
      * Typically the area around the feet/legs, so th eupper part of the body
      * can pass in front of blocked tiles.
      *
@@ -256,23 +268,23 @@ public class Sprite {
     /**
      * This defines the part of the body you can interact with. TileSets
      * typically leave a lot of free space araound the body. Use this to check
-     * for collision with a part of the body instead of the free space around
+     * for isCollision with a part of the body instead of the free space around
      * it.
      *
-     * @return the Rectangle used for collision detection with other Sprites.
+     * @return the Rectangle used for isCollision detection with other Sprites.
      */
     public Rectangle2D getCollisionBox() {
         if (collisionBox == null) {
             collisionBox = new Rectangle2D(0, 0, getWidth(), getHeight());
         }
-        return new Rectangle2D(x + collisionBox.getMinX(), y + collisionBox.getMinY(), collisionBox.getWidth(), collisionBox.getHeight());
+        return new Rectangle2D(xProperty.doubleValue() + collisionBox.getMinX(), yProperty.doubleValue() + collisionBox.getMinY(), collisionBox.getWidth(), collisionBox.getHeight());
     }
 
     /**
      * This defines the part of the body you can interact with. TileSets
      * typically leave a lot of free space around the body.
      *
-     * @param collisionBox the Rectangle used for collision detection with other
+     * @param collisionBox the Rectangle used for isCollision detection with other
      * Sprites.
      */
     public void setCollisionBox(Rectangle2D collisionBox) {
@@ -283,7 +295,7 @@ public class Sprite {
      * @param x position of the Sprites upper left corner
      */
     public void setX(double x) {
-        this.x = x;
+        this.xProperty.set(x);
     }
 
     /**
@@ -291,7 +303,7 @@ public class Sprite {
      * @param y position of the Sprites upper left corner
      */
     public void setY(double y) {
-        this.y = y;
+        this.yProperty.set(y);
     }
 
     private class KeyEventHandler implements EventHandler<KeyEvent> {

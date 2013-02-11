@@ -11,8 +11,8 @@ import javafx.scene.canvas.GraphicsContext;
  *
  * @author antonepple
  */
-public abstract class Animation extends Action {
+public interface Renderer  {
 
-    public abstract void drawFrame(Sprite sprite, GraphicsContext context);
+    public void render(Sprite sprite, GraphicsContext context, float alpha, long delta);
     
 }

@@ -16,20 +16,20 @@ import javafx.scene.canvas.GraphicsContext;
  * @author antonepple
  */
 public class StateAnimation extends TileSetAnimation {
+
     HashMap<State, int[]> state2Indices;
-    
-    
-    public StateAnimation(TileSet set, int[] indices, HashMap<State, int[]>state2Indices ,float speed) {
+
+    public StateAnimation(TileSet set, int[] indices, HashMap<State, int[]> state2Indices, float speed) {
         super(set, indices, speed);
         this.state2Indices = state2Indices;
     }
 
     @Override
-    public void drawFrame(Sprite sprite, GraphicsContext context) {
+    public void render(Sprite sprite, GraphicsContext context, float alpha, long delta) {
         State state = sprite.getState();
         indices = state2Indices.get(state);
-        super.drawFrame(sprite, context); //To change body of generated methods, choose Tools | Templates.
+        super.render(sprite, context, alpha, delta);
     }
 
-   
+    
 }

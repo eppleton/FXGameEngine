@@ -4,7 +4,7 @@
  */
 package de.eppleton.fx2d;
 
-import de.eppleton.fx2d.action.Action;
+import de.eppleton.fx2d.action.Behavior;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -19,8 +19,6 @@ import javafx.animation.AnimationTimer;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javax.media.j3d.Behavior;
-import org.openide.util.Lookup;
 
 /**
  * A Canvas used to render TileMaps.
@@ -29,7 +27,9 @@ import org.openide.util.Lookup;
  */
 public final class GameCanvas extends Canvas {
 
-    private ConcurrentHashMap<Action, Long> behaviours = new ConcurrentHashMap<>();
+    private Camera camera;
+    private float alpha = 1;
+    private ConcurrentHashMap<Behavior, Long> behaviours = new ConcurrentHashMap<>();
     private Updater updater = new DefaultUpdater();
     private AnimationTimer timer;
     private static Comparator<Sprite> comparator = new Comparator<Sprite>() {
@@ -46,7 +46,6 @@ public final class GameCanvas extends Canvas {
     };
     private final double screenWidth;
     private final double screenHeight;
-    private Sprite hero;
     private ArrayList<Layer> layers;
     private final HashMap<String, Sprite> sprites;
     public double cameraX;
@@ -68,12 +67,15 @@ public final class GameCanvas extends Canvas {
                 pulse(l);
             }
         };
-        timer.start();
         sprites = new HashMap<>();
     }
 
-    public Sprite getHero() {
-        return hero;
+    public void start() {
+        timer.start();
+    }
+
+    public void stop() {
+        timer.stop();
     }
 
     /**
@@ -81,18 +83,26 @@ public final class GameCanvas extends Canvas {
      *
      * @param spriteBehaviour
      */
-    public void addBehaviour(Action spriteBehaviour) {
+    public void addBehaviour(Behavior spriteBehaviour) {
         behaviours.put(spriteBehaviour, System.nanoTime());
     }
 
-    public void render() {
+    public void pulse(long l) {
+        update(l);
+        render(l);
+    }
+
+    public void render(long delta) {
         GraphicsContext graphicsContext2D = getGraphicsContext2D();
         // clear the background
         graphicsContext2D.clearRect(0, 0, screenWidth, screenHeight);
+        
         // draw each individual layer
         for (Layer layer : layers) {
+//            System.out.println("render layer "+layer.getName()+" "+layer.isVisible());
+//                System.out.println("camera "+cameraX+", "+cameraY );
             if (layer.isVisible()) {
-                layer.draw(graphicsContext2D, cameraX, cameraY, screenWidth, screenHeight);
+                layer.draw(graphicsContext2D, cameraX * layer.getParallaxFactor(), cameraY * layer.getParallaxFactor(), screenWidth, screenHeight);
             }
 
             if (layer.getName().equals("sprites")) {
@@ -103,11 +113,12 @@ public final class GameCanvas extends Canvas {
                 for (Sprite sprite : values) {
                     double x = sprite.getX();
                     double y = sprite.getY();
+
                     if (isOnScreen(sprite)) {
                         graphicsContext2D.save();
                         graphicsContext2D.translate(x - cameraX,
                                 y - cameraY);
-                        sprite.drawSprite(graphicsContext2D);
+                        sprite.drawSprite(graphicsContext2D, alpha, delta);
                         graphicsContext2D.restore();
                     }
                 }
@@ -117,15 +128,19 @@ public final class GameCanvas extends Canvas {
         }
     }
 
+    public void setCamera(Camera camera) {
+        this.camera = camera;
+    }
+
     private void updateCamera() {
         // the center of the screen is the preferred location of our hero
         double centerX = screenWidth / 2;
         double centerY = screenHeight / 2;
-        if (hero == null) {
-            hero = new Sprite(this, "center", centerX, centerY, 0, 0, Lookup.EMPTY);
+        if (camera == null) {
+            camera = new Camera(centerX, centerY);
         }
-        cameraX = hero.getX() - centerX;
-        cameraY = hero.getY() - centerY;
+        cameraX = camera.getX() - centerX;
+        cameraY = camera.getY() - centerY;
 
         // if we get too close to the borders  
         if (cameraX <= 0) {
@@ -141,23 +156,18 @@ public final class GameCanvas extends Canvas {
         }
     }
 
-    public void pulse(long l) {
-        Set<Map.Entry<Action, Long>> entrySet = behaviours.entrySet();
-        for (Map.Entry<Action, Long> entry : entrySet) {
+    private void update(long l) {
+        // invoke Behaviours, Animation, etc.
+        Set<Map.Entry<Behavior, Long>> entrySet = behaviours.entrySet();
+        for (Map.Entry<Behavior, Long> entry : entrySet) {
             long evaluationInterval = entry.getKey().getEvaluationInterval();
-            long currentTime = System.nanoTime();
+            long currentTime = l;
             if (currentTime - entry.getValue() > evaluationInterval) {
-                Action behavior = entry.getKey();
+                Behavior behavior = entry.getKey();
                 behavior.perform(null, this);
                 entry.setValue(currentTime);
             }
         }
-        update(l);
-        render();
-    }
-
-    private void update(long l) {
-        // invoke Behaviours, Animation, etc.
         ArrayList<Sprite> arrayList = new ArrayList<>(sprites.values());
         for (Sprite sprite : arrayList) {
             sprite.pulse(this, l);
@@ -165,19 +175,6 @@ public final class GameCanvas extends Canvas {
         // update the World, e.g. apply Physics
         updater.update(this, l);
         updateCamera();
-
-    }
-
-    /**
-     * TODO this is currently required so the TileMap focuses the hero
-     * character. Should propaply be schanged to add more flexibility, e.g. for
-     * single-screen games.
-     *
-     * @param hero
-     */
-    public void setHero(Sprite hero) {
-        this.hero = hero;
-        sprites.put(hero.getName(), hero);
     }
 
     public boolean isOnScreen(Sprite sprite) {
@@ -203,12 +200,13 @@ public final class GameCanvas extends Canvas {
     private boolean isOnScreen(double x, double y) {
         double screenCoordX = x - cameraX;
         double screenCoordY = y - cameraY;
+
         if (screenCoordX > 0 && screenCoordX < screenWidth && screenCoordY > 0 && screenCoordY < screenHeight) {
             return true;
         }
         return false;
     }
-    
+
     public void addLayer(Layer tileMapLayer) {
         layers.add(tileMapLayer);
     }
@@ -259,12 +257,12 @@ public final class GameCanvas extends Canvas {
         return sprites.get(ball);
     }
 
-    public Collection<Collision> getCollisions(Sprite sprite) {
+    public Collection<Collision> checkCollisions(Sprite sprite) {
         ArrayList<Collision> collisions = new ArrayList<>();
         ArrayList<Sprite> spriteList = new ArrayList<>(sprites.values());
         for (Sprite sprite1 : spriteList) {
             if (sprite1 != sprite) {
-                if (collision(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight(),
+                if (isCollision(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight(),
                         sprite1.getX(), sprite1.getY(), sprite1.getWidth(), sprite1.getHeight())) {
                     collisions.add(new Collision(sprite, sprite1));
                 }
@@ -273,7 +271,7 @@ public final class GameCanvas extends Canvas {
         return collisions;
     }
 
-    boolean collision(double x0, double y0, double w0, double h0, double x2, double y2, double w1, double h1) {
+    boolean isCollision(double x0, double y0, double w0, double h0, double x2, double y2, double w1, double h1) {
         double x1 = x0 + w0;
         double y1 = y0 + h0;
 
@@ -284,9 +282,19 @@ public final class GameCanvas extends Canvas {
     }
 
     /**
+     * This returns zero by default, meaning that we call update on every tick.
+     *
+     * @return the update rate in ms
+     */
+    public int updateRate() {
+        return 0;
+    }
+
+    /**
      * This can be used to plug in simple constraints or a physics engine
      */
     public interface Updater {
+
         public void update(GameCanvas aThis, long l);
     }
 
@@ -323,8 +331,8 @@ public final class GameCanvas extends Canvas {
          * Check if this is a valid move by calling all registered
          * {@link MoveValidator MoveValidators}
          *
-         * @param x
-         * @param y
+         * @param xProperty
+         * @param yProperty
          * @param width
          * @param height
          * @return true, if this is a valid move, false otherwise

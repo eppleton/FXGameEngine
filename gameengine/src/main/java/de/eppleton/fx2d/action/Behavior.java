@@ -20,7 +20,7 @@ import de.eppleton.fx2d.Sprite;
  *
  * @author antonepple
  */
-public abstract class Action {
+public abstract class Behavior {
     private long evaluationInterval = 100_000_000;
 
     /**

@@ -4,7 +4,7 @@
  */
 package de.eppleton.tileengine.sample.sprites.actions;
 
-import de.eppleton.fx2d.action.Animation;
+import de.eppleton.fx2d.action.Renderer;
 import de.eppleton.fx2d.Sprite;
 import de.eppleton.fx2d.action.State;
 import de.eppleton.fx2d.action.SpriteAction;
@@ -19,7 +19,7 @@ public class MoveAction extends SpriteAction {
     double dY = 0;
     State state;
     
-    public MoveAction(Animation animation, String name, double dX, double dY, State finalState) {
+    public MoveAction(Renderer animation, String name, double dX, double dY, State finalState) {
         super(animation, name);
         this.dX = dX;
         this.dY = dY;

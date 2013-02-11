@@ -29,7 +29,7 @@ public class Pong extends Game {
         physicsEngine.createWall(0, 580, 800, 10);
         physicsEngine.createWall(0, 10, 800, 10);
         addBall(canvas, physicsEngine, 400, 300);
-        canvas.addBehaviour(new Action() {
+        canvas.addBehaviour(new Behavior() {
             @Override
             public boolean perform(Sprite sprite, GameCanvas playingField) {
                 Sprite sprite1 = playingField.getSprite("ball");
@@ -54,7 +54,7 @@ public class Pong extends Game {
         bat.addAction(KeyCode.Z, PhysicsActionFactory.createLinearMoveAction(null, "down", new Vec2(0, -4), new Vec2(0, 0)));
         Sprite computer = new Sprite(canvas, "Computer", 750, 262, 30, 75, Lookup.EMPTY);
         physicsEngine.createDefaultBody(computer, BodyType.KINEMATIC, 1, .3f, 0);
-        computer.addBehaviour(new Action() {
+        computer.addBehaviour(new Behavior() {
             @Override
             public boolean perform(Sprite sprite, GameCanvas playingField) {
                 Body me = sprite.getLookup().lookup(Body.class);

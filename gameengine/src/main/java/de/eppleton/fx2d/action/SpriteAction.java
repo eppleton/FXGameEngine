@@ -13,13 +13,13 @@ import de.eppleton.fx2d.Sprite;
  */
 public class SpriteAction {
 
-    private Animation animation;
+    private Renderer animation;
 
-    public SpriteAction(Animation animation, String name) {
+    public SpriteAction(Renderer animation, String name) {
         this.animation = animation == null? Sprite.NO_ANIMATION:animation;
     }
 
-    public Animation getAnimation() {
+    public Renderer getAnimation() {
         return animation;
     }
 

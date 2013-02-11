@@ -4,6 +4,7 @@
  */
 package de.eppleton.tileengine.sample.sprites;
 
+import de.eppleton.fx2d.Camera;
 import de.eppleton.fx2d.GameCanvas;
 import de.eppleton.fx2d.Sprite;
 import de.eppleton.fx2d.tileengine.ObjectGroup;
@@ -45,7 +46,7 @@ public class SpriteHandler implements ObjectGroupHandler {
                         double y = tObject.getY();
                         TileSet tileSet = group.getTileMap().getTileSet(tObject.getProperties().getProperty("tileset"));
                         hero = new Hero(field, tileSet, "hero", x, y, 64, 64);
-                        field.setHero(hero);
+                        field.setCamera(new Camera(hero.getXProperty(), hero.getYProperty()));
                         Properties properties = tObject.getProperties();
                         Set<String> keySet = properties.stringPropertyNames();
                         for (String key : keySet) {

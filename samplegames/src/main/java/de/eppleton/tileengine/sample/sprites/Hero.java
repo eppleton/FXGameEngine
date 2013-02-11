@@ -6,7 +6,7 @@ package de.eppleton.tileengine.sample.sprites;
 
 import de.eppleton.fx2d.GameCanvas;
 import de.eppleton.fx2d.Sprite;
-import de.eppleton.fx2d.action.Animation;
+import de.eppleton.fx2d.action.Renderer;
 import de.eppleton.fx2d.action.SpriteAction;
 import de.eppleton.fx2d.action.State;
 import de.eppleton.fx2d.tileengine.TileMapReader;
@@ -225,7 +225,7 @@ public class Hero extends Sprite {
 
     private static class SpriteActionImpl extends SpriteAction {
 
-        public SpriteActionImpl(Animation animation, String name) {
+        public SpriteActionImpl(Renderer animation, String name) {
             super(animation, name);
         }
 

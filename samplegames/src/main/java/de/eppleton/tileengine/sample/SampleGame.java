@@ -51,6 +51,7 @@ public class SampleGame extends Application {
             borderPane.setCenter(playingField);
             Scene scene = new Scene(borderPane, 500, 500);
             playingField.requestFocus();
+            playingField.start();
             primaryStage.setTitle("Tile Engine Sample");
             primaryStage.setScene(scene);
             primaryStage.show();

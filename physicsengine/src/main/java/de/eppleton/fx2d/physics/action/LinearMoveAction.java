@@ -5,7 +5,7 @@
 package de.eppleton.fx2d.physics.action;
 
 import de.eppleton.fx2d.Sprite;
-import de.eppleton.fx2d.action.Animation;
+import de.eppleton.fx2d.action.Renderer;
 import de.eppleton.fx2d.action.SpriteAction;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
@@ -18,7 +18,7 @@ class LinearMoveAction extends SpriteAction {
     private final Vec2 reset;
     private final Vec2 force;
 
-    public LinearMoveAction(Animation animation, String name, Vec2 onStart, Vec2 onFinish) {
+    public LinearMoveAction(Renderer animation, String name, Vec2 onStart, Vec2 onFinish) {
         super(animation, name);
         this.force = onStart;
         this.reset = onFinish;

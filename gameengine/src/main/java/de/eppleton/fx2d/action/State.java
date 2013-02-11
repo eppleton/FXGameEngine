@@ -10,7 +10,7 @@ package de.eppleton.fx2d.action;
  */
 public class State extends SpriteAction {
 
-    public State(Animation animation, String name) {
+    public State(Renderer animation, String name) {
         super(animation, name);
     }
     

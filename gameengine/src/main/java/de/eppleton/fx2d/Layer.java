@@ -15,6 +15,7 @@ public class Layer {
     private String name = "";
     private double opacity;
     private boolean visible = true;
+    private float parallaxFactor = 1;
 
     public void draw(GraphicsContext graphicsContext, double x, double y, double width, double height) {
     }
@@ -43,4 +44,12 @@ public class Layer {
         this.visible = visible;
     }
 
+    public float getParallaxFactor() {
+        return parallaxFactor;
+    }
+
+    public void setParallaxFactor(float parallaxFactor) {
+        this.parallaxFactor = parallaxFactor;
+    }
+    
 }

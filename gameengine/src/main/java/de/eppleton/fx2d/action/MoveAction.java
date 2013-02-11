@@ -17,7 +17,7 @@ public class MoveAction extends SpriteAction {
     double endX;
     double endY;
 
-    public MoveAction(double velocityX, double velocityY, double endX, double endY, Animation animation, String name) {
+    public MoveAction(double velocityX, double velocityY, double endX, double endY, Renderer animation, String name) {
         super(animation, name);
         this.velocityX = velocityX;
         this.velocityY = velocityY;
