@@ -209,8 +209,12 @@ public final class GameCanvas extends Canvas {
         return false;
     }
 
-    public void addLayer(Layer tileMapLayer) {
-        layers.add(tileMapLayer);
+    public void addLayer(Layer layer) {
+        layers.add(layer);
+    }
+    
+    public void addLayer(int index, Layer layer){
+        layers.add(index, layer);
     }
 
     /**
@@ -290,6 +294,11 @@ public final class GameCanvas extends Canvas {
      */
     public int updateRate() {
         return 0;
+    }
+
+
+    public void removeLayer(Layer layer) {
+        layers.remove(layer);
     }
 
     /**

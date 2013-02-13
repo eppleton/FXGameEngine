@@ -38,22 +38,15 @@ public class Data {
 
     public void setContent(String content) {
         this.content = content;
-
     }
 
     public int getGid(int idx) {
-        if (gids == null) {
-            String[] gidStrings = content.trim().split(",");
-            gids = new int[gidStrings.length];
-            for (int i = 0; i < gidStrings.length; i++) {
-                String string = gidStrings[i];
-                gids[i] = Integer.valueOf(string.trim());
-            }
-        }
+        initGids();
         return gids[idx];
     }
 
     public void setGid(int i, int gid) {
+        initGids();
         gids[i] = gid;
         dirty = true;
     }
@@ -67,6 +60,17 @@ public class Data {
 
             }
             content = content.substring(0, content.lastIndexOf(",") - 1);
+        }
+    }
+
+    public void initGids() throws NumberFormatException {
+        if (gids == null) {
+            String[] gidStrings = content.trim().split(",");
+            gids = new int[gidStrings.length];
+            for (int i = 0; i < gidStrings.length; i++) {
+                String string = gidStrings[i];
+                gids[i] = Integer.valueOf(string.trim());
+            }
         }
     }
 }

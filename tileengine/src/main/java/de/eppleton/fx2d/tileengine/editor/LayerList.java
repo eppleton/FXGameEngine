@@ -4,9 +4,9 @@
  */
 package de.eppleton.fx2d.tileengine.editor;
 
+import de.eppleton.fx2d.tileengine.Data;
 import de.eppleton.fx2d.tileengine.TileMap;
 import de.eppleton.fx2d.tileengine.TileMapLayer;
-import java.util.ArrayList;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -38,13 +38,13 @@ class LayerList extends BorderPane {
     public ObservableList<TileMapLayer> layerList;
     TileMap tileMap;
 
-    public LayerList(TileMap map, ArrayList<TileMapLayer> layers) {
+    public LayerList(TileMap map) {
         this.tileMap = map;
         opacity = new Slider(0, 1, 1);
         HBox box = new HBox();
         box.getChildren().addAll(new Label("Opacity: "), opacity);
         setTop(box);
-        layerList = FXCollections.observableArrayList(layers);
+        layerList = FXCollections.observableArrayList(tileMap.getLayers());
         listView = new ListView<TileMapLayer>();
         listView.setItems(layerList);
         if (!layerList.isEmpty()) {
@@ -82,10 +82,41 @@ class LayerList extends BorderPane {
 
     }
 
+    public ObservableList<TileMapLayer> getLayerList() {
+        return layerList;
+    }
+
     private Node initToolBar() {
         Button newLayer = new Button("new");
         Button up = new Button("up");
+        up.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                TileMapLayer selected = listView.getSelectionModel().getSelectedItems().get(0);
+                final int selectedIndex = listView.getSelectionModel().getSelectedIndex();
+                if (selectedIndex == 0 || layerList.size() <= 1) {
+                    return;
+                }
+                System.out.println("selected " + selectedIndex);
+                layerList.remove(selected);
+                layerList.add(selectedIndex - 1, selected);
+            }
+        });
         Button down = new Button("down");
+        down.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                TileMapLayer selected = listView.getSelectionModel().getSelectedItems().get(0);
+                final int selectedIndex = listView.getSelectionModel().getSelectedIndex();
+
+                if (selectedIndex == layerList.size() - 1 || layerList.size() <= 1) {
+                    return;
+                }
+                System.out.println("selected " + selectedIndex);
+                layerList.remove(selected);
+                layerList.add(selectedIndex + 1, selected);
+            }
+        });
         Button copy = new Button("copy");
         copy.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -98,8 +129,38 @@ class LayerList extends BorderPane {
                 }
             }
         });
+        newLayer.setOnAction(new EventHandler<ActionEvent>() {
+            private int i;
 
+            @Override
+            public void handle(ActionEvent t) {
+                TileMapLayer newLayer = new TileMapLayer();
+                init(newLayer);
+                while (!testName("new Layer " + i)) {
+                    i++;
+                };
+                newLayer.setName("new Layer " + i);
+                tileMap.getLayers().add(newLayer);
+                layerList.add(newLayer);
+            }
+
+            private boolean testName(String name) {
+                for (TileMapLayer tileMapLayer : layerList) {
+                    if (tileMapLayer.getName().equals(name)) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        });
         Button trash = new Button("trash");
+        trash.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                ObservableList<TileMapLayer> selectedItems = listView.getSelectionModel().getSelectedItems();
+                layerList.remove(selectedItems.get(0));
+            }
+        });
         toolbar = new ToolBar(newLayer, up, down, copy, trash);
         return toolbar;
     }
@@ -109,8 +170,27 @@ class LayerList extends BorderPane {
         copy.setName("copy of " + tileMapLayer.getName());
         copy.setOpacity(tileMapLayer.getOpacity());
         copy.setVisible(tileMapLayer.isVisible());
-        copy.setData(tileMapLayer.getData());
+        copy.setTileMap(tileMap);
+        Data newData = new Data();
+        newData.setContent(tileMapLayer.getData().getContent());
+        copy.setData(newData);
         return copy;
+    }
+
+    private void init(TileMapLayer newLayer) {
+        newLayer.setOpacity(1);
+        newLayer.setVisible(true);
+        newLayer.setTileMap(tileMap);
+
+        Data data = new Data();
+        int tiles = tileMap.getWidth() * tileMap.getHeight();
+        String content = "0";
+        for (int i = 0; i < tiles - 1; i++) {
+            content += ",0";
+
+        }
+        data.setContent(content);
+        newLayer.setData(data);
     }
 
     TileMapLayer getSelected() {

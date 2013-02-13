@@ -165,4 +165,10 @@ public class TileMapLayer extends Layer {
     public BooleanProperty getVisibleProperty() {
         return visibleProperty;
     }
+
+    public void setTileMap(TileMap tileMap) {
+        this.tileMap = tileMap;
+    }
+    
+    
 }
