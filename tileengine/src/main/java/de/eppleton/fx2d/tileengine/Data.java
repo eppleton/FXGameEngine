@@ -17,6 +17,7 @@ public class Data {
     private String content;
     private String encoding;
     private int[] gids;
+    private boolean dirty = false;
 
     @XmlAttribute
     public String getEncoding() {
@@ -29,6 +30,9 @@ public class Data {
 
     @XmlValue
     public String getContent() {
+        if (dirty) {
+            updateContent();
+        }
         return content;
     }
 
@@ -48,5 +52,21 @@ public class Data {
         }
         return gids[idx];
     }
+
+    public void setGid(int i, int gid) {
+        gids[i] = gid;
+        dirty = true;
+    }
     private static final Logger LOG = Logger.getLogger(Data.class.getName());
+
+    private void updateContent() {
+        if (gids != null) {
+
+            for (int i = 0; i < gids.length; i++) {
+                content += "" + gids[i] + ",";
+
+            }
+            content = content.substring(0, content.lastIndexOf(",") - 1);
+        }
+    }
 }

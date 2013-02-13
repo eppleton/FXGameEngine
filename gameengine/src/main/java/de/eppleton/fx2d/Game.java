@@ -5,6 +5,7 @@
 package de.eppleton.fx2d;
 
 import javafx.application.Application;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -21,12 +22,13 @@ public  class Game extends Application {
     private double viewPortHeight = 600;
     private String title = "My Game";
     private GameCanvas canvas;
+    public BorderPane pane;
 
     @Override
     public void start(Stage primaryStage) {
         canvas = new GameCanvas(getPlayfieldWidth(), getPlayfieldHeight(), getViewPortWidth(), getViewPortHeight());
+        pane = new BorderPane();
         initGame();
-        BorderPane pane = new BorderPane();
         pane.setCenter(canvas);
         Scene scene = new Scene(pane, getViewPortWidth(), getViewPortHeight());
         primaryStage.setTitle(title);
@@ -34,7 +36,25 @@ public  class Game extends Application {
         canvas.requestFocus();
         primaryStage.show();
     }
+    
+    public void setBottom(Node bottom){
+        pane.setBottom(bottom);
+    }
 
+    public void setRight(Node right){
+        pane.setRight(right);
+    }
+    
+    public void setLeft(Node left){
+        pane.setLeft(left);
+       
+    }
+    
+    
+      public void setTop(Node top){
+        pane.setTop(top);
+       
+    }
     public GameCanvas getCanvas() {
         return canvas;
     }
@@ -92,6 +112,6 @@ public  class Game extends Application {
     }
 
     protected  void initGame() {
-        System.out.println("<<<<<<<<<<<<<<<<");
+        throw new UnsupportedOperationException("implement this!");
     }
 }

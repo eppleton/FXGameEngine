@@ -4,7 +4,9 @@
  */
 package de.eppleton.fx2d;
 
+import de.eppleton.fx2d.collision.Collision;
 import de.eppleton.fx2d.action.Behavior;
+import de.eppleton.fx2d.action.SpriteBehavior;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -79,12 +81,12 @@ public final class GameCanvas extends Canvas {
     }
 
     /**
-     * add a {@link  Behavior}
+     * add a {@link  SpriteBehavior}
      *
      * @param spriteBehaviour
      */
-    public void addBehaviour(Behavior spriteBehaviour) {
-        behaviours.put(spriteBehaviour, System.nanoTime());
+    public void addBehaviour(Behavior behaviour) {
+        behaviours.put(behaviour, System.nanoTime());
     }
 
     public void pulse(long l) {
@@ -164,7 +166,7 @@ public final class GameCanvas extends Canvas {
             long currentTime = l;
             if (currentTime - entry.getValue() > evaluationInterval) {
                 Behavior behavior = entry.getKey();
-                behavior.perform(null, this);
+                behavior.perform(this, l);
                 entry.setValue(currentTime);
             }
         }

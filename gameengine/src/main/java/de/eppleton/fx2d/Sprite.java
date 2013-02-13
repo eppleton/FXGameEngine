@@ -4,7 +4,7 @@
  */
 package de.eppleton.fx2d;
 
-import de.eppleton.fx2d.action.Behavior;
+import de.eppleton.fx2d.action.SpriteBehavior;
 import de.eppleton.fx2d.action.Renderer;
 import de.eppleton.fx2d.action.SpriteAction;
 import de.eppleton.fx2d.action.State;
@@ -30,12 +30,12 @@ import org.openide.util.lookup.InstanceContent;
  */
 public class Sprite {
 
-    private ConcurrentHashMap<Behavior, Long> behaviours = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<SpriteBehavior, Long> behaviours = new ConcurrentHashMap<>();
     private String name;
     private DoubleProperty xProperty;
     private DoubleProperty yProperty;
-    private double velocityX = 0;
-    private double velocityY = 0;
+    private DoubleProperty velocityXProperty;
+    private DoubleProperty velocityYProperty;
     private final int width;
     private final int height;
     private double speed = 2;
@@ -65,6 +65,8 @@ public class Sprite {
         this.name = name;
         this.xProperty = new SimpleDoubleProperty(x);
         this.yProperty = new SimpleDoubleProperty(y);
+        this.velocityXProperty = new SimpleDoubleProperty(0);
+        this.velocityYProperty = new SimpleDoubleProperty(0);
         this.width = width;
         this.height = height;
         this.lookup = lookup;
@@ -75,8 +77,6 @@ public class Sprite {
         this(canvas, NO_ANIMATION, name, x, y, width, height, lookup);
     }
 
-    
-    
     public void addToLookup(Object o) {
         if (lookup == Lookup.EMPTY) {
             content = new InstanceContent();
@@ -89,11 +89,10 @@ public class Sprite {
         return xProperty;
     }
 
-
     public DoubleProperty getYProperty() {
         return yProperty;
     }
-    
+
     public GameCanvas getParent() {
         return parent;
     }
@@ -127,28 +126,44 @@ public class Sprite {
         this.currentAction = action;
     }
 
+    public DoubleProperty getVelocityXProperty() {
+        return velocityXProperty;
+    }
+
+    public void setVelocityXProperty(DoubleProperty velocityXProperty) {
+        this.velocityXProperty = velocityXProperty;
+    }
+
+    public DoubleProperty getVelocityYProperty() {
+        return velocityYProperty;
+    }
+
+    public void setVelocityYProperty(DoubleProperty velocityYProperty) {
+        this.velocityYProperty = velocityYProperty;
+    }
+
     public double getVelocityX() {
-        return velocityX;
+        return velocityXProperty.doubleValue();
     }
 
     public void setVelocityX(double velocityX) {
-        this.velocityX = velocityX;
+        this.velocityXProperty.set(velocityX);
     }
 
     public double getVelocityY() {
-        return velocityY;
+        return velocityYProperty.doubleValue();
     }
 
     public void setVelocityY(double velocityY) {
-        this.velocityY = velocityY;
+        this.velocityYProperty.set(velocityY);
     }
 
     /**
-     * add a {@link  Behavior}
+     * add a {@link  SpriteBehavior}
      *
      * @param spriteBehaviour
      */
-    public void addBehaviour(Behavior spriteBehaviour) {
+    public void addBehaviour(SpriteBehavior spriteBehaviour) {
         behaviours.put(spriteBehaviour, System.nanoTime());
     }
 
@@ -235,13 +250,13 @@ public class Sprite {
 
     public void pulse(GameCanvas field, long l) {
 
-        Set<Map.Entry<Behavior, Long>> entrySet = behaviours.entrySet();
-        for (Map.Entry<Behavior, Long> entry : entrySet) {
+        Set<Map.Entry<SpriteBehavior, Long>> entrySet = behaviours.entrySet();
+        for (Map.Entry<SpriteBehavior, Long> entry : entrySet) {
             long evaluationInterval = entry.getKey().getEvaluationInterval();
             long currentTime = System.nanoTime();
             if (currentTime - entry.getValue() > evaluationInterval) {
-                Behavior behavior = entry.getKey();
-                behavior.perform(this, field);
+                SpriteBehavior behavior = entry.getKey();
+                behavior.perform(this);
                 entry.setValue(currentTime);
             }
         }
@@ -255,9 +270,9 @@ public class Sprite {
     }
 
     /**
-     * Define an area to be used for isCollision detection with background tiles.
-     * Typically the area around the feet/legs, so th eupper part of the body
-     * can pass in front of blocked tiles.
+     * Define an area to be used for isCollision detection with background
+     * tiles. Typically the area around the feet/legs, so th eupper part of the
+     * body can pass in front of blocked tiles.
      *
      * @param moveBoundingBox
      */
@@ -284,8 +299,8 @@ public class Sprite {
      * This defines the part of the body you can interact with. TileSets
      * typically leave a lot of free space around the body.
      *
-     * @param collisionBox the Rectangle used for isCollision detection with other
-     * Sprites.
+     * @param collisionBox the Rectangle used for isCollision detection with
+     * other Sprites.
      */
     public void setCollisionBox(Rectangle2D collisionBox) {
         this.collisionBox = collisionBox;
@@ -304,6 +319,13 @@ public class Sprite {
      */
     public void setY(double y) {
         this.yProperty.set(y);
+    }
+
+    /**
+     * override this to do something more spectacular
+     */
+    public void remove() {
+        getParent().removeSprite(this);
     }
 
     private class KeyEventHandler implements EventHandler<KeyEvent> {

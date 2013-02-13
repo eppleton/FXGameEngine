@@ -29,20 +29,20 @@ public class Pong extends Game {
         physicsEngine.createWall(0, 580, 800, 10);
         physicsEngine.createWall(0, 10, 800, 10);
         addBall(canvas, physicsEngine, 400, 300);
-        canvas.addBehaviour(new Behavior() {
+        canvas.addBehaviour(new SpriteBehavior() {
             @Override
-            public boolean perform(Sprite sprite, GameCanvas playingField) {
-                Sprite sprite1 = playingField.getSprite("ball");
+            public boolean perform(Sprite sprite) {
+                Sprite sprite1 = sprite.getParent().getSprite("ball");
                 if (sprite1 != null) {
                     Body ball = sprite1.getLookup().lookup(Body.class);
                     if (ball.getPosition().x <= 0) {
                         scoreComputer++;
                         physicsEngine.remove(ball);
-                        addBall(playingField, physicsEngine, 400, 300);
+                        addBall(sprite1.getParent(), physicsEngine, 400, 300);
                     } else if (ball.getPosition().x >= 8) {
                         scorePlayer++;
                         physicsEngine.remove(ball);
-                        addBall(playingField, physicsEngine, 400, 300);
+                        addBall(sprite1.getParent(), physicsEngine, 400, 300);
                     }
                 }
                 return true;
@@ -54,11 +54,11 @@ public class Pong extends Game {
         bat.addAction(KeyCode.Z, PhysicsActionFactory.createLinearMoveAction(null, "down", new Vec2(0, -4), new Vec2(0, 0)));
         Sprite computer = new Sprite(canvas, "Computer", 750, 262, 30, 75, Lookup.EMPTY);
         physicsEngine.createDefaultBody(computer, BodyType.KINEMATIC, 1, .3f, 0);
-        computer.addBehaviour(new Behavior() {
+        computer.addBehaviour(new SpriteBehavior() {
             @Override
-            public boolean perform(Sprite sprite, GameCanvas playingField) {
+            public boolean perform(Sprite sprite) {
                 Body me = sprite.getLookup().lookup(Body.class);
-                Sprite ball = playingField.getSprite("ball");
+                Sprite ball = sprite.getParent().getSprite("ball");
                 if (ball != null) {
                     Body lookup = ball.getLookup().lookup(Body.class);
                     me.setLinearVelocity(lookup.getPosition().y < me.getPosition().y

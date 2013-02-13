@@ -152,6 +152,10 @@ public class TileSet {
         return cols;
     }
     
+        public int getNumRows(){
+        return rows;
+    }
+    
     public void merge(TileSet other){
         Image merge = ImageUtilities.merge(this.getTileImage(), other.getTileImage());
         init(merge);
@@ -170,7 +174,7 @@ public class TileSet {
         int y = tileIndex / cols;
         graphicsContext2D.drawImage(tileImage, x * tilewidth, y* tileheight, tilewidth, tileheight, 0, 0, tilewidth, tileheight);
     }
-
+   
    public int getNumTiles() {
         return numTiles;
     }

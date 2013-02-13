@@ -47,6 +47,14 @@ public class TileMap {
     }
     
     
+    public int getWidthInPixels(){
+        return width*tilewidth;
+    }
+    
+    public int getHeighInPixels(){
+        return height*tileheight;
+    }
+    
     /** 
      * 
      * @param name

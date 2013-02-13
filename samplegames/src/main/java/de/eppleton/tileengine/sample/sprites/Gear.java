@@ -6,7 +6,7 @@ package de.eppleton.tileengine.sample.sprites;
 
 import de.eppleton.fx2d.GameCanvas;
 import de.eppleton.fx2d.Sprite;
-import de.eppleton.fx2d.action.Behavior;
+import de.eppleton.fx2d.action.SpriteBehavior;
 import de.eppleton.fx2d.tileengine.TileSet;
 import java.util.Properties;
 import java.util.logging.Logger;
@@ -27,13 +27,13 @@ public class Gear extends Sprite {
         this.tileset = tileset;
         this.properties = properties;
         this.layer = layer;
-        addBehaviour(new Behavior() {
+        addBehaviour(new SpriteBehavior() {
             @Override
-            public boolean perform(Sprite sprite, GameCanvas playingField) {
-                if (sprite.getCollisionBox().intersects(playingField.getSprite("hero").getCollisionBox())) {
-                    boolean taken = ((Hero) playingField.getSprite("hero")).offer(Gear.this);
+            public boolean perform(Sprite sprite) {
+                if (sprite.getCollisionBox().intersects(sprite.getParent().getSprite("hero").getCollisionBox())) {
+                    boolean taken = ((Hero) sprite.getParent().getSprite("hero")).offer(Gear.this);
                     if (taken) {
-                        playingField.removeSprite(sprite);
+                        sprite.getParent().removeSprite(sprite);
                     }
                 }
                 return true;

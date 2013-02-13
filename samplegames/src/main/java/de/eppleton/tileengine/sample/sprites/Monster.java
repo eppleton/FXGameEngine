@@ -6,8 +6,7 @@ package de.eppleton.tileengine.sample.sprites;
 
 import de.eppleton.fx2d.GameCanvas;
 import de.eppleton.fx2d.Sprite;
-import de.eppleton.fx2d.action.Behavior;
-import de.eppleton.fx2d.action.Renderer;
+import de.eppleton.fx2d.action.SpriteBehavior;
 import de.eppleton.fx2d.tileengine.TileSet;
 import de.eppleton.fx2d.tileengine.TileSetAnimation;
 import java.util.logging.Logger;
@@ -31,9 +30,9 @@ public class Monster extends Sprite {
         monsterDown = new TileSetAnimation(monster, new int[]{19, 20, 21, 22, 23, 24, 25, 26}, 10f);
         monsterRight = new TileSetAnimation(monster, new int[]{28, 29, 30, 31, 32, 33, 34, 35}, 10);
         addBehaviour(new ActionImpl(parent));
-        addBehaviour(new Behavior() {
+        addBehaviour(new SpriteBehavior() {
             @Override
-            public boolean perform(Sprite sprite, GameCanvas playingField) {
+            public boolean perform(Sprite sprite) {
                 double x1 = ((Hero) parent.getSprite("hero")).getX();
                 double y1 = ((Hero) parent.getSprite("hero")).getY();
                 double x2 = sprite.getX();
@@ -76,7 +75,7 @@ public class Monster extends Sprite {
     }
     private static final Logger LOG = Logger.getLogger(Monster.class.getName());
 
-    private static class ActionImpl extends Behavior {
+    private static class ActionImpl extends SpriteBehavior {
 
         private final GameCanvas parent;
 
@@ -85,7 +84,7 @@ public class Monster extends Sprite {
         }
 
         @Override
-        public boolean perform(Sprite sprite, GameCanvas playingField) {
+        public boolean perform(Sprite sprite) {
             if (sprite.getCollisionBox().intersects(((Hero) parent.getSprite("hero")).getCollisionBox())) {
                 ((Hero) parent.getSprite("hero")).hurt(1);
             }
