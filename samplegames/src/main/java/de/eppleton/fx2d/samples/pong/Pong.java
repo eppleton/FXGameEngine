@@ -49,10 +49,12 @@ public class Pong extends Game {
         physicsEngine.createWall(0, 580, 800, 10);
         physicsEngine.createWall(0, 10, 800, 10);
         addBall(canvas, physicsEngine, 400, 300);
-        canvas.addBehaviour(new SpriteBehavior() {
+        canvas.addBehaviour(new Behavior() {
+            
+            
             @Override
-            public boolean perform(Sprite sprite) {
-                Sprite sprite1 = sprite.getParent().getSprite("ball");
+            public boolean perform(GameCanvas canvas, long nanos) {
+                Sprite sprite1 = canvas.getSprite("ball");
                 if (sprite1 != null) {
                     Body ball = sprite1.getLookup().lookup(Body.class);
                     if (ball.getPosition().x <= 0) {
@@ -69,6 +71,7 @@ public class Pong extends Game {
             }
         });
         Sprite bat = new Sprite(canvas, "Player", 10, 262, 30, 75, Lookup.EMPTY);
+        canvas.addLayer(new SpriteLayer());
         physicsEngine.createDefaultBody(bat, BodyType.KINEMATIC, 1, .4f, 0);
         bat.addAction(KeyCode.A, PhysicsActionFactory.createLinearMoveAction(null, "up", new Vec2(0, 4), new Vec2(0, 0)));
         bat.addAction(KeyCode.Z, PhysicsActionFactory.createLinearMoveAction(null, "down", new Vec2(0, -4), new Vec2(0, 0)));
@@ -87,11 +90,12 @@ public class Pong extends Game {
                 return true;
             }
         });
+        canvas.start();
     }
 
     private void addBall(GameCanvas canvas, PhysicsEngine physicsEngine, int x, int y) {
         Sprite ball = new Sprite(canvas, "ball", x, y, 20, 20, Lookup.EMPTY);
-        Body ballBody = physicsEngine.createDefaultBody(ball, BodyType.DYNAMIC, 1, .4f, .2f, true);
+        Body ballBody = physicsEngine.createDefaultBody(ball, BodyType.DYNAMIC, 1, .4f, .2f, false);
         ballBody.setLinearVelocity(new Vec2(4, 1));
     }
 

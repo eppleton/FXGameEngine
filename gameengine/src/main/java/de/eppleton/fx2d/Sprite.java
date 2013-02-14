@@ -1,23 +1,22 @@
 /**
- * This file is part of FXGameEngine 
- * A Game Engine written in JavaFX
- * Copyright (C) 2012 Anton Epple <info@eppleton.de>
+ * This file is part of FXGameEngine A Game Engine written in JavaFX Copyright
+ * (C) 2012 Anton Epple <info@eppleton.de>
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 2 of the License.
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, version 2 of the License.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program. Look for COPYING file in the top folder.
- * If not, see http://opensource.org/licenses/GPL-2.0.
- * 
- * For alternative licensing or use in closed source projects contact Anton Epple 
- * <info@eppleton.de>
+ * You should have received a copy of the GNU General Public License along with
+ * this program. Look for COPYING file in the top folder. If not, see
+ * http://opensource.org/licenses/GPL-2.0.
+ *
+ * For alternative licensing or use in closed source projects contact Anton
+ * Epple <info@eppleton.de>
  */
 package de.eppleton.fx2d;
 
@@ -74,6 +73,7 @@ public class Sprite {
     private KeyEventHandler keyEventHandler;
     private static State NO_STATE = new State(NO_ANIMATION, "No State");
     private InstanceContent content;
+    private double angle;
 
     public Sprite(GameCanvas parent, Renderer animation, String name, double x, double y, int width, int height, Lookup lookup) {
         this.parent = parent;
@@ -227,7 +227,12 @@ public class Sprite {
     }
 
     public void drawSprite(GraphicsContext context, float alpha, long delta) {
+        context.save();
+        context.translate(getWidth()/2, getHeight()/2);
+        context.rotate(angle);
+        context.translate(-getWidth()/2, -getHeight()/2);
         currentAnimation.render(this, context, alpha, delta);
+        context.restore();
     }
 
     /**
@@ -343,6 +348,18 @@ public class Sprite {
      */
     public void remove() {
         getParent().removeSprite(this);
+    }
+
+    public void setCenterY(float y) {
+        setY(y - (getHeight() / 2));
+    }
+
+    public void setCenterX(float x) {
+        setX(x - getWidth() / 2);
+    }
+
+    public void setRotation(double angle) {
+        this.angle = angle;
     }
 
     private class KeyEventHandler implements EventHandler<KeyEvent> {

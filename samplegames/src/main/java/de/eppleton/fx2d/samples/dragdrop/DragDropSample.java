@@ -60,6 +60,9 @@ public class DragDropSample extends Game {
             }
         });
 
+        
+     
+        
         canvas.setOnDragOver(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
                 /* data is dragged over the target */

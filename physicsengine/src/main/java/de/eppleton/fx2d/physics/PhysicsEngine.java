@@ -94,9 +94,11 @@ public class PhysicsEngine implements GameCanvas.Updater {
             Sprite sprite = (Sprite) nextBody.getUserData();
             if (sprite != null) {
                 Vec2 transformed = camera.worldToScreen(nextBody.getWorldCenter());
-
-                sprite.setX(transformed.x);
-                sprite.setY(transformed.y);
+                double angle = -Math.toDegrees(nextBody.getAngle());
+                sprite.setCenterX(transformed.x);
+                sprite.setCenterY(transformed.y);
+                sprite.setRotation(angle);
+                
             }
             nextBody = nextBody.getNext();
         }
