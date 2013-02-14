@@ -1,6 +1,23 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * This file is part of FXGameEngine 
+ * A Game Engine written in JavaFX
+ * Copyright (C) 2012 Anton Epple <info@eppleton.de>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. Look for COPYING file in the top folder.
+ * If not, see http://opensource.org/licenses/GPL-2.0.
+ * 
+ * For alternative licensing or use in closed source projects contact Anton Epple 
+ * <info@eppleton.de>
  */
 package de.eppleton.fx2d.tileengine.editor;
 
@@ -13,10 +30,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
-/**
- *
- * @author antonepple
- */
 class TileSetView extends StackPane {
 
     ImageView imageView;
@@ -41,11 +54,8 @@ class TileSetView extends StackPane {
             public void handle(MouseEvent t) {
                 double x = t.getX();
                 double y = t.getY();
-                System.out.println("t " + t);
                 selectedIndex = (int) ((int) x / set.getTilewidth() + (((int) y / set.getTileheight()) * set.getNumColumns()));
-                System.out.println("selected " + selectedIndex);
-                System.out.println("x " + ((int) x / set.getTilewidth()));
-                System.out.println("y " + ((int) y / set.getTileheight()));
+         
                 updateCanvas();
             }
         });
