@@ -4,6 +4,9 @@
  */
 package de.eppleton.fx2d.tileengine;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -12,6 +15,7 @@ import java.util.logging.Logger;
 import javafx.scene.image.Image;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 /**
@@ -22,6 +26,42 @@ import javax.xml.bind.Unmarshaller;
  */
 public class TileMapReader {
 
+    
+    /**
+     *
+     * @param url the url as used for laoding resources from a regular file
+     * @return the initialized TileMap
+     * @throws JAXBException
+     */
+    public static TileMap readMapFromFile(String url) throws JAXBException, FileNotFoundException {
+        String baseUrl = url.substring(0, url.lastIndexOf('/'));
+        JAXBContext context = JAXBContext.newInstance(TileMap.class);
+        Unmarshaller um = context.createUnmarshaller();
+        TileMap map = (TileMap) um.unmarshal(new FileInputStream(url));
+        ArrayList<TileSet> tileSetlist = map.getTileSetlist();
+        JAXBContext tileSetContext = JAXBContext.newInstance(TileSet.class);
+        Unmarshaller tsum = tileSetContext.createUnmarshaller();
+        for (TileSet tileSet : tileSetlist) {
+            if (tileSet.getSource() != null) {
+                String resourcePath = resourcePath(tileSet.getSource(), baseUrl);
+                TileSet set = (TileSet) tsum.unmarshal(new FileInputStream(resourcePath));
+                tileSet.setBaseUrl(baseUrl);
+                tileSet.setImage(set.getImage());
+                tileSet.setMargin(set.getMargin());
+                tileSet.setName(set.getName());
+                tileSet.setSpacing(set.getSpacing());
+                tileSet.setTileheight(set.getTileheight());
+                tileSet.setTilewidth(set.getTilewidth());
+            }
+            String source = resourcePath(tileSet.getImage().getSource(), baseUrl);
+            LOG.log(Level.INFO, "loading image " + source);
+            Image image = new Image(new FileInputStream(source));
+            tileSet.init(image);
+        }
+        return map;
+    }
+
+    
     /**
      *
      * @param url the url as used for laoding resources from a jar
@@ -91,9 +131,9 @@ public class TileMapReader {
         Unmarshaller tsum = tileSetContext.createUnmarshaller();
         TileSet tileSet = null;
         try (InputStream resourceAsStream = TileSet.class.getResourceAsStream(url)) {
-             tileSet = (TileSet) tsum.unmarshal(resourceAsStream);
-        } catch (IOException iox){
-            LOG.log(Level.ALL, "Unable to load tileset "+url, iox);
+            tileSet = (TileSet) tsum.unmarshal(resourceAsStream);
+        } catch (IOException iox) {
+            LOG.log(Level.ALL, "Unable to load tileset " + url, iox);
         }
         tileSet.setBaseUrl(baseUrl);
         String source = tileSet.getImage().getSource();
@@ -101,6 +141,13 @@ public class TileMapReader {
         Image image = new Image(TileMapReader.class.getResourceAsStream(resourcePath));
         tileSet.init(image);
         return tileSet;
+    }
+
+    public static void writeMap(TileMap tileMap, String fileURL) throws JAXBException, FileNotFoundException{
+        JAXBContext tileMapContext = JAXBContext.newInstance(TileMap.class);
+        Marshaller marshaller = tileMapContext.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        marshaller.marshal(tileMap, new FileOutputStream(fileURL));    
     }
 
     private TileMapReader() {

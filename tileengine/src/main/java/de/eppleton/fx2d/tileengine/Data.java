@@ -53,13 +53,14 @@ public class Data {
     private static final Logger LOG = Logger.getLogger(Data.class.getName());
 
     private void updateContent() {
-        if (gids != null) {
 
+        if (gids != null) {
+            content = "";
             for (int i = 0; i < gids.length; i++) {
                 content += "" + gids[i] + ",";
 
             }
-            content = content.substring(0, content.lastIndexOf(",") - 1);
+            content = content.substring(0, content.lastIndexOf(",") );
         }
     }
 

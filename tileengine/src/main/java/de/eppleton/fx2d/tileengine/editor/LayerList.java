@@ -97,7 +97,6 @@ class LayerList extends BorderPane {
                 if (selectedIndex == 0 || layerList.size() <= 1) {
                     return;
                 }
-                System.out.println("selected " + selectedIndex);
                 layerList.remove(selected);
                 layerList.add(selectedIndex - 1, selected);
             }
@@ -112,7 +111,6 @@ class LayerList extends BorderPane {
                 if (selectedIndex == layerList.size() - 1 || layerList.size() <= 1) {
                     return;
                 }
-                System.out.println("selected " + selectedIndex);
                 layerList.remove(selected);
                 layerList.add(selectedIndex + 1, selected);
             }

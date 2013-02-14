@@ -27,8 +27,11 @@ public class PropertyAdapter extends XmlAdapter<Properties, java.util.Properties
 
     @Override
     public Properties marshal(java.util.Properties v) throws Exception {
+        
         Properties properties = new Properties();
+            if (v==null)return properties;
         ArrayList<Property> propertyList = new ArrayList<>();
+        
         Set<Object> keySet = v.keySet();
         for (Object object : keySet) {
             Property current = new Property();
