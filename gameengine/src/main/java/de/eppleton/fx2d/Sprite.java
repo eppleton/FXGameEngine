@@ -228,9 +228,9 @@ public class Sprite {
 
     public void drawSprite(GraphicsContext context, float alpha, long delta) {
         context.save();
-        context.translate(getWidth()/2, getHeight()/2);
+        context.translate(getWidth() / 2, getHeight() / 2);
         context.rotate(angle);
-        context.translate(-getWidth()/2, -getHeight()/2);
+        context.translate(-getWidth() / 2, -getHeight() / 2);
         currentAnimation.render(this, context, alpha, delta);
         context.restore();
     }
@@ -277,6 +277,7 @@ public class Sprite {
             long evaluationInterval = entry.getKey().getEvaluationInterval();
             long currentTime = System.nanoTime();
             if (currentTime - entry.getValue() > evaluationInterval) {
+
                 SpriteBehavior behavior = entry.getKey();
                 behavior.perform(this);
                 entry.setValue(currentTime);
@@ -360,6 +361,10 @@ public class Sprite {
 
     public void setRotation(double angle) {
         this.angle = angle;
+    }
+
+    public void invalidMove() {
+        
     }
 
     private class KeyEventHandler implements EventHandler<KeyEvent> {

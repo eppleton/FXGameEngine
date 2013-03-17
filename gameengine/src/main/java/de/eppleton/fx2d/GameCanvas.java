@@ -1,23 +1,22 @@
 /**
- * This file is part of FXGameEngine 
- * A Game Engine written in JavaFX
- * Copyright (C) 2012 Anton Epple <info@eppleton.de>
+ * This file is part of FXGameEngine A Game Engine written in JavaFX Copyright
+ * (C) 2012 Anton Epple <info@eppleton.de>
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 2 of the License.
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, version 2 of the License.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program. Look for COPYING file in the top folder.
- * If not, see http://opensource.org/licenses/GPL-2.0.
- * 
- * For alternative licensing or use in closed source projects contact Anton Epple 
- * <info@eppleton.de>
+ * You should have received a copy of the GNU General Public License along with
+ * this program. Look for COPYING file in the top folder. If not, see
+ * http://opensource.org/licenses/GPL-2.0.
+ *
+ * For alternative licensing or use in closed source projects contact Anton
+ * Epple <info@eppleton.de>
  */
 package de.eppleton.fx2d;
 
@@ -115,7 +114,7 @@ public final class GameCanvas extends Canvas {
         GraphicsContext graphicsContext2D = getGraphicsContext2D();
         // clear the background
         graphicsContext2D.clearRect(0, 0, screenWidth, screenHeight);
-        
+
         // draw each individual layer
         for (Layer layer : layers) {
 //            System.out.println("render layer "+layer.getName()+" "+layer.isVisible());
@@ -181,9 +180,11 @@ public final class GameCanvas extends Canvas {
         for (Map.Entry<Behavior, Long> entry : entrySet) {
             long evaluationInterval = entry.getKey().getEvaluationInterval();
             long currentTime = l;
-            if (currentTime - entry.getValue() > evaluationInterval) {
+            if ((currentTime - entry.getValue()) > evaluationInterval) {
                 Behavior behavior = entry.getKey();
-                behavior.perform(this, l);
+                if (!behavior.perform(this, l)) {
+                    behaviours.remove(behavior);
+                }
                 entry.setValue(currentTime);
             }
         }
@@ -229,8 +230,8 @@ public final class GameCanvas extends Canvas {
     public void addLayer(Layer layer) {
         layers.add(layer);
     }
-    
-    public void addLayer(int index, Layer layer){
+
+    public void addLayer(int index, Layer layer) {
         layers.add(index, layer);
     }
 
@@ -263,11 +264,8 @@ public final class GameCanvas extends Canvas {
     }
 
     public void addSprite(Sprite sprite) {
-        System.out.println("adding sprite " + sprite.getName());
         sprites.put(sprite.getName(), sprite);
-        for (String name : sprites.keySet()) {
-            System.out.println(">> " + name);
-        }
+
     }
 
     public Sprite getSprite(String ball) {
@@ -313,7 +311,6 @@ public final class GameCanvas extends Canvas {
         return 0;
     }
 
-
     public void removeLayer(Layer layer) {
         layers.remove(layer);
     }
@@ -352,6 +349,8 @@ public final class GameCanvas extends Canvas {
             if (isValidMove(newX + moveBox.getMinX(), newY + moveBox.getMinY(), moveBox.getWidth(), moveBox.getHeight())) {
                 sprite.setX(newX);
                 sprite.setY(newY);
+            } else {
+                sprite.invalidMove();
             }
         }
 
