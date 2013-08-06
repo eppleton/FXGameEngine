@@ -26,6 +26,7 @@ import java.util.logging.Logger;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -150,7 +151,7 @@ public class TileMapLayer extends Layer {
 
         double cameraMaxX = (tileMap.getWidth() * tileMap.getTilewidth()) - screenWidth;
         double cameraMaxY = (tileMap.getHeight() * tileMap.getTileheight()) - screenHeight;
-
+       
         for (int y = 0; y < screenHeightInTiles
                 // render an extra row to make up for the offset
                 + (startY >= (int) (cameraMaxY / tileMap.getTileheight()) ? 0 : 1); y++) {
@@ -166,7 +167,6 @@ public class TileMapLayer extends Layer {
                 graphicsContext.restore();
             }
         }
-
     }
 
     /**
