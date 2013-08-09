@@ -21,6 +21,8 @@
  */
 package de.eppleton.fx2d.action;
 
+import de.eppleton.fx2d.Renderer;
+
 /**
  * A State is an Action that never finishes. It's used for example to define
  * the direction

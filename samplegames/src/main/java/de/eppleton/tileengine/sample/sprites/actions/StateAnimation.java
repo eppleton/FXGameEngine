@@ -24,7 +24,7 @@ package de.eppleton.tileengine.sample.sprites.actions;
 import de.eppleton.fx2d.Sprite;
 import de.eppleton.fx2d.action.State;
 import de.eppleton.fx2d.tileengine.TileSet;
-import de.eppleton.fx2d.tileengine.TileSetAnimation;
+import de.eppleton.fx2d.tileengine.action.TileSetAnimation;
 import java.util.HashMap;
 import javafx.scene.canvas.GraphicsContext;
 

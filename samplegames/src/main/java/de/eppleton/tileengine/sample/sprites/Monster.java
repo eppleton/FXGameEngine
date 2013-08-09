@@ -25,7 +25,7 @@ import de.eppleton.fx2d.GameCanvas;
 import de.eppleton.fx2d.Sprite;
 import de.eppleton.fx2d.action.SpriteBehavior;
 import de.eppleton.fx2d.tileengine.TileSet;
-import de.eppleton.fx2d.tileengine.TileSetAnimation;
+import de.eppleton.fx2d.tileengine.action.TileSetAnimation;
 import java.util.logging.Logger;
 import org.openide.util.Lookup;
 

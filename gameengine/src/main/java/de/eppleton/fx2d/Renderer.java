@@ -19,7 +19,7 @@
  * For alternative licensing or use in closed source projects contact Anton Epple 
  * <info@eppleton.de>
  */
-package de.eppleton.fx2d.action;
+package de.eppleton.fx2d;
 
 import de.eppleton.fx2d.Sprite;
 import javafx.scene.canvas.GraphicsContext;
@@ -31,6 +31,8 @@ import javafx.scene.canvas.GraphicsContext;
  */
 public interface Renderer {
 
+    
+     public boolean prepare(Sprite sprite, long time);
     /**
      * Implement this to render a Sprite. For animations it's suggested to use 
      * the alpha and time value to calculate the progress.

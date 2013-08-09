@@ -28,15 +28,10 @@ import de.eppleton.fx2d.Layer;
 import de.eppleton.fx2d.Sprite;
 import de.eppleton.fx2d.SpriteLayer;
 import de.eppleton.fx2d.action.ActionFactory;
-import de.eppleton.fx2d.tileengine.TileMapReader;
-import de.eppleton.fx2d.tileengine.TileSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.ImagePattern;
-import javax.xml.bind.JAXBException;
 import org.openide.util.Lookup;
 
 /**

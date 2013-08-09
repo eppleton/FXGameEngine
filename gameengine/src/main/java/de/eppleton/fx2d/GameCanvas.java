@@ -37,9 +37,10 @@ import javafx.animation.AnimationTimer;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 /**
- * A Canvas used to render TileMaps.
+ * A Canvas used to render Games.
  *
  * @author antonepple
  */
@@ -70,6 +71,14 @@ public final class GameCanvas extends Canvas {
     public double cameraY;
     public final double cameraMaxX;
     public final double cameraMaxY;
+    private long lastPulse;
+    private long timePassed;
+    private boolean dirty = true;
+    private int cleanCounter;
+    private int pulses;
+    private int stutter;
+    private long lastSlowness;
+    private long maxTimePassed = 0;
 
     public GameCanvas(double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
         super(viewPortWidth, viewPortHeight);
@@ -105,24 +114,64 @@ public final class GameCanvas extends Canvas {
         behaviours.put(behaviour, System.nanoTime());
     }
 
+    public int getPulses() {
+        return pulses;
+    }
+
     public void pulse(long l) {
-        update(l);
-        render(l);
+        // performance measurement
+        pulses++;
+        timePassed = l - lastPulse;
+        if (timePassed > 30000000) {
+            stutter++;
+            lastSlowness = timePassed;
+            if (timePassed > maxTimePassed) {
+                if (maxTimePassed == 0) { // skip the first value
+                    maxTimePassed = -1;
+                } else {
+                    maxTimePassed = timePassed;
+                }
+            }
+        }
+        
+        dirty = update(l);
+        if (dirty) {
+            render(l);
+            dirty = false;
+        } else {
+            cleanCounter++;
+        }
+        lastPulse = l;
+    }
+
+    public int getStutter() {
+        return stutter;
+    }
+
+    public long getLastSlowness() {
+        return lastSlowness;
+    }
+
+    public long getMaxTimePassed() {
+        return maxTimePassed;
+    }
+
+    public int getCleanCounter() {
+        return cleanCounter;
     }
 
     public void render(long delta) {
         GraphicsContext graphicsContext2D = getGraphicsContext2D();
         // clear the background
         graphicsContext2D.clearRect(0, 0, screenWidth, screenHeight);
-
+        graphicsContext2D.setFill(Color.BLACK);
+        graphicsContext2D.fillRect(0, 0, screenWidth, screenHeight);
         // draw each individual layer
         for (Layer layer : layers) {
-//            System.out.println("render layer "+layer.getName()+" "+layer.isVisible());
-//                System.out.println("camera "+cameraX+", "+cameraY );
             if (layer.isVisible()) {
                 layer.draw(graphicsContext2D, cameraX * layer.getParallaxFactor(), cameraY * layer.getParallaxFactor(), screenWidth, screenHeight);
             }
-
+            // @TODO Hallo
             if (layer.getName().equals("sprites")) {
 
                 List<Sprite> values = new ArrayList<>(sprites.values());
@@ -174,7 +223,8 @@ public final class GameCanvas extends Canvas {
         }
     }
 
-    private void update(long l) {
+    private boolean update(long l) {
+        boolean changed = false;
         // invoke Behaviours, Animation, etc.
         Set<Map.Entry<Behavior, Long>> entrySet = behaviours.entrySet();
         for (Map.Entry<Behavior, Long> entry : entrySet) {
@@ -184,17 +234,23 @@ public final class GameCanvas extends Canvas {
                 Behavior behavior = entry.getKey();
                 if (!behavior.perform(this, l)) {
                     behaviours.remove(behavior);
+                } else {
+                    entry.setValue(currentTime);
                 }
-                entry.setValue(currentTime);
             }
         }
         ArrayList<Sprite> arrayList = new ArrayList<>(sprites.values());
         for (Sprite sprite : arrayList) {
-            sprite.pulse(this, l);
+            if (sprite.pulse(this, l)) {
+                changed = true;
+            }
         }
         // update the World, e.g. apply Physics
-        updater.update(this, l);
+        if (updater.update(this, l)) {
+            changed = true;
+        }
         updateCamera();
+        return changed;
     }
 
     public boolean isOnScreen(Sprite sprite) {
@@ -320,10 +376,14 @@ public final class GameCanvas extends Canvas {
      */
     public interface Updater {
 
-        public void update(GameCanvas aThis, long l);
+        public boolean update(GameCanvas aThis, long l);
     }
 
     private static class DefaultUpdater implements Updater {
+
+        private long lastUpdate;
+        private long delay = -1;
+        private double factor;
 
         public DefaultUpdater() {
             this.moveValidators = new ArrayList<>();
@@ -331,16 +391,32 @@ public final class GameCanvas extends Canvas {
         }
 
         @Override
-        public void update(GameCanvas canvas, long l) {
+        public boolean update(GameCanvas canvas, long l) {
+            boolean dirty = false;
+            if (delay == -1) {
+                delay = 16666667;
+            } else {
+                delay = l - lastUpdate;
+            }
             Collection<Sprite> sprites1 = canvas.getSprites();
             for (Sprite sprite : sprites1) {
-                updateSpritePosition(sprite);
+                if (updateSpritePosition(sprite)) {
+                    dirty = true;
+                }
             }
+            lastUpdate = l;
+            return dirty;
         }
 
-        private void updateSpritePosition(Sprite sprite) {
-            double velocityX = sprite.getVelocityX();
-            double velocityY = sprite.getVelocityY();
+        private boolean updateSpritePosition(Sprite sprite) {
+            boolean dirty = true;
+            factor = (double) delay / 16666667;
+            double velocityX = sprite.getVelocityX() * factor;
+            double velocityY = sprite.getVelocityY() * factor;
+            if (velocityX == 0 && velocityY == 0) {
+                return false;
+            }
+
             Rectangle2D moveBox = sprite.getMoveBox();
             double x = sprite.getX();
             double y = sprite.getY();
@@ -351,7 +427,9 @@ public final class GameCanvas extends Canvas {
                 sprite.setY(newY);
             } else {
                 sprite.invalidMove();
+                dirty = false;
             }
+            return dirty;
         }
 
         /**

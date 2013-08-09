@@ -1,22 +1,22 @@
 /**
- * This file is part of FXGameEngine 
- * A Game Engine written in JavaFX
- * Copyright (C) 2012 Anton Epple <info@eppleton.de>
+ * This file is part of FXGameEngine A Game Engine written in JavaFX Copyright
+ * (C) 2012 Anton Epple <info@eppleton.de>
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 2 of the License.
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, version 2 of the License.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program. Look for COPYING file in the top folder.
- * If not, see http://opensource.org/licenses/GPL-2.0.
- * 
- * For alternative licensing or use in closed source projects contact Anton Epple 
+ * You should have received a copy of the GNU General Public License along with
+ * this program. Look for COPYING file in the top folder. If not, see
+ * http://opensource.org/licenses/GPL-2.0.
+ *
+ * For alternative licensing or use in closed source projects contact Anton
+ * Epple
  * <info@eppleton.de>
  */
 package de.eppleton.fx2d;
@@ -31,7 +31,7 @@ import javafx.stage.Stage;
  *
  * @author antonepple
  */
-public  class Game extends Application {
+public class Game extends Application {
 
     private double playfieldWidth = 800;
     private double playfieldHeight = 600;
@@ -53,25 +53,25 @@ public  class Game extends Application {
         canvas.requestFocus();
         primaryStage.show();
     }
-    
-    public void setBottom(Node bottom){
+
+    public void setBottom(Node bottom) {
         pane.setBottom(bottom);
     }
 
-    public void setRight(Node right){
+    public void setRight(Node right) {
         pane.setRight(right);
     }
-    
-    public void setLeft(Node left){
+
+    public void setLeft(Node left) {
         pane.setLeft(left);
-       
+
     }
-    
-    
-      public void setTop(Node top){
+
+    public void setTop(Node top) {
         pane.setTop(top);
-       
+
     }
+
     public GameCanvas getCanvas() {
         return canvas;
     }
@@ -128,7 +128,7 @@ public  class Game extends Application {
         launch(args);
     }
 
-    protected  void initGame() {
+    protected void initGame() {
         throw new UnsupportedOperationException("implement this!");
     }
 }

@@ -21,7 +21,7 @@
  */
 package de.eppleton.fx2d.physics.action;
 
-import de.eppleton.fx2d.action.Renderer;
+import de.eppleton.fx2d.Renderer;
 import de.eppleton.fx2d.action.SpriteAction;
 import org.jbox2d.common.Vec2;
 

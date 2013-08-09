@@ -25,7 +25,7 @@ import de.eppleton.fx2d.GameCanvas;
 import de.eppleton.fx2d.tileengine.TObject;
 import de.eppleton.fx2d.tileengine.TileMap;
 import de.eppleton.fx2d.tileengine.TileSet;
-import de.eppleton.fx2d.tileengine.TileSetAnimation;
+import de.eppleton.fx2d.tileengine.action.TileSetAnimation;
 import java.util.Properties;
 
 /**

@@ -21,6 +21,7 @@
  */
 package de.eppleton.fx2d.action;
 
+import de.eppleton.fx2d.Renderer;
 import de.eppleton.fx2d.Sprite;
 
 /**

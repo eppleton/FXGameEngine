@@ -21,13 +21,8 @@
  */
 package de.eppleton.fx2d;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 
-/**
- *
- * @author antonepple
- */
+
 public class Camera {
 
     DoubleProperty xProperty;
@@ -35,8 +30,8 @@ public class Camera {
 
     public Camera(double x, double y) {
 
-        this.xProperty = new SimpleDoubleProperty(x);
-        this.yProperty = new SimpleDoubleProperty(y);
+        this.xProperty = new DoubleProperty(x);
+        this.yProperty = new DoubleProperty(y);
     }
 
     public Camera(DoubleProperty x, DoubleProperty y) {

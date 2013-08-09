@@ -21,15 +21,13 @@
 package de.eppleton.fx2d;
 
 import de.eppleton.fx2d.action.SpriteBehavior;
-import de.eppleton.fx2d.action.Renderer;
 import de.eppleton.fx2d.action.SpriteAction;
 import de.eppleton.fx2d.action.State;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
+
 import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
@@ -69,6 +67,11 @@ public class Sprite {
             context.setFill(Color.RED);
             context.fillRect(0, 0, sprite.getWidth(), sprite.getHeight());
         }
+
+        @Override
+        public boolean prepare(Sprite sprite, long time) {
+            return false;
+        }
     };
     private KeyEventHandler keyEventHandler;
     private static State NO_STATE = new State(NO_ANIMATION, "No State");
@@ -80,10 +83,10 @@ public class Sprite {
         this.currentState = new State(animation, "default");
         this.currentAnimation = animation;
         this.name = name;
-        this.xProperty = new SimpleDoubleProperty(x);
-        this.yProperty = new SimpleDoubleProperty(y);
-        this.velocityXProperty = new SimpleDoubleProperty(0);
-        this.velocityYProperty = new SimpleDoubleProperty(0);
+        this.xProperty = new DoubleProperty(x);
+        this.yProperty = new DoubleProperty(y);
+        this.velocityXProperty = new DoubleProperty(0d);
+        this.velocityYProperty = new DoubleProperty(0d);
         this.width = width;
         this.height = height;
         this.lookup = lookup;
@@ -270,19 +273,25 @@ public class Sprite {
         return yProperty.doubleValue();
     }
 
-    public void pulse(GameCanvas field, long l) {
-
+    public final boolean pulse(GameCanvas field, long l) {
+        boolean dirty = false;
         Set<Map.Entry<SpriteBehavior, Long>> entrySet = behaviours.entrySet();
         for (Map.Entry<SpriteBehavior, Long> entry : entrySet) {
             long evaluationInterval = entry.getKey().getEvaluationInterval();
             long currentTime = System.nanoTime();
             if (currentTime - entry.getValue() > evaluationInterval) {
-
                 SpriteBehavior behavior = entry.getKey();
-                behavior.perform(this);
-                entry.setValue(currentTime);
+                if (!behavior.perform(this)) {
+                    behaviours.remove(behavior);
+                } else {
+                    entry.setValue(currentTime);
+                }
             }
         }
+        if (currentAnimation.prepare(this, l)) {
+            dirty=true;
+        }
+        return dirty;
     }
 
     public Rectangle2D getMoveBox() {
@@ -364,7 +373,6 @@ public class Sprite {
     }
 
     public void invalidMove() {
-        
     }
 
     private class KeyEventHandler implements EventHandler<KeyEvent> {

@@ -20,14 +20,13 @@
  * <info@eppleton.de>
  */package de.eppleton.fx2d.samples.spaceinvaders;
 
+import de.eppleton.fx2d.tileengine.action.TileSetAnimation;
 import de.eppleton.fx2d.collision.*;
 import de.eppleton.fx2d.*;
 import de.eppleton.fx2d.action.*;
 import de.eppleton.fx2d.tileengine.*;
 import java.util.Collection;
 import java.util.logging.*;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.canvas.*;
 import javafx.scene.input.*;
 import javafx.scene.media.*;
@@ -42,7 +41,7 @@ public class SpaceInvaders extends Game {
     Points TEN = new Points(10);
     Points TWENTY = new Points(30);
     Points THIRTY = new Points(40);
-    DoubleProperty invaderXVelocity = new SimpleDoubleProperty(0.3);
+    DoubleProperty invaderXVelocity = new DoubleProperty(0.3);
     AudioClip shootSound = new AudioClip(SpaceInvaders.class.getResource("/assets/sound/shoot.wav").toString());
     AudioClip invaderKilledSound = new AudioClip(SpaceInvaders.class.getResource("/assets/sound/invaderkilled.wav").toString());
     MediaPlayer mediaPlayer = new MediaPlayer(new Media(SpaceInvaders.class.getResource("/assets/sound/invader_loop1.mp3").toString()));

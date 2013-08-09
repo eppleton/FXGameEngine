@@ -76,12 +76,13 @@ public class PhysicsEngine implements GameCanvas.Updater {
     }
 
     @Override
-    public void update(GameCanvas canvas, long l) {
+    public boolean update(GameCanvas canvas, long l) {
         // timestep clamping
         float dt = (float) Math.min(((double) (l - lastPulse)) / 1_000_000_000, 1.0 / 15.0);
         world.step(dt, 8, 2);
         lastPulse = l;
         updateSprites();
+        return true;
     }
 
     public void remove(Body b) {

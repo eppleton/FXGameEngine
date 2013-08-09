@@ -21,7 +21,7 @@
  */
 package de.eppleton.tileengine.sample.sprites.actions;
 
-import de.eppleton.fx2d.action.Renderer;
+import de.eppleton.fx2d.Renderer;
 import de.eppleton.fx2d.Sprite;
 import de.eppleton.fx2d.action.State;
 import de.eppleton.fx2d.action.SpriteAction;

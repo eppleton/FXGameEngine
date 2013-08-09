@@ -21,7 +21,6 @@
  */
 package de.eppleton.fx2d;
 
-import de.eppleton.fx2d.Layer;
 import javafx.scene.canvas.GraphicsContext;
 
 

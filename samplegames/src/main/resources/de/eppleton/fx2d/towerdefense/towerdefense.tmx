@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="10" height="9" tilewidth="46" tileheight="46">
+ <tileset firstgid="1" source="terrain.tsx"/>
+ <tileset firstgid="8" source="turrets.tsx"/>
+ <tileset firstgid="15" source="background.tsx"/>
+ <tileset firstgid="16" source="enemy1.tsx"/>
+ <tileset firstgid="22" source="turret-bases.tsx"/>
+ <tileset firstgid="29" source="turret-cannons.tsx"/>
+ <tileset firstgid="36" source="pellet.tsx"/>
+ <tileset firstgid="44" source="explosion.tsx"/>
+ <layer name="terrain" width="10" height="9">
+  <data encoding="csv">
+0,0,0,1,0,0,0,0,0,0,
+0,0,0,1,0,0,0,0,0,0,
+0,2,7,6,7,7,4,0,0,0,
+0,1,0,0,0,0,1,0,0,0,
+0,0,0,7,7,0,1,0,0,0,
+7,7,7,7,7,0,1,0,0,0,
+0,0,0,0,0,0,1,0,0,0,
+0,7,7,7,7,7,5,0,0,0,
+0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer name="turret-bases" width="10" height="9">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer name="sprites" width="10" height="9">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup name="spawnpoints" width="10" height="9">
+  <object name="spawnpoint" x="106" y="15" width="23" height="25">
+   <properties>
+    <property name="delay" value="5000000000"/>
+    <property name="monsters" value="10,0,0,0,0,0,0"/>
+   </properties>
+  </object>
+  <object name="target" x="415" y="245" width="22" height="21"/>
+ </objectgroup>
+</map>
