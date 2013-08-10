@@ -133,10 +133,10 @@ public final class GameCanvas extends Canvas {
                 }
             }
         }
-        
+
         dirty = update(l);
+        render(l);
         if (dirty) {
-            render(l);
             dirty = false;
         } else {
             cleanCounter++;
@@ -289,6 +289,15 @@ public final class GameCanvas extends Canvas {
 
     public void addLayer(int index, Layer layer) {
         layers.add(index, layer);
+    }
+
+    public Layer getLayer(String name) {
+        for (Layer layer : layers) {
+            if (layer.getName().equals(name)) {
+                return layer;
+            }
+        }
+        return null;
     }
 
     /**

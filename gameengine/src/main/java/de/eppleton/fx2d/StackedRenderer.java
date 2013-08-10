@@ -18,6 +18,14 @@ public class StackedRenderer implements Renderer {
 
     List<Renderer> renderers = new ArrayList<>();
 
+    public StackedRenderer(Renderer ... stack) {
+        for (Renderer renderer : stack) {
+            this.renderers.add(renderer);
+        }
+    }
+
+    
+    
     @Override
     public boolean prepare(Sprite sprite, long time) {
         boolean dirty = false;

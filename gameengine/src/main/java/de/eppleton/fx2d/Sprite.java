@@ -195,6 +195,14 @@ public class Sprite {
         return speed;
     }
 
+    public double getEnergy() {
+        return energy;
+    }
+
+    public void setEnergy(double energy) {
+        this.energy = energy;
+    }
+
     /**
      * Hurt the Sprite. This will decrease the Sprites Energy by the specified
      * value. Probably too simple if you want to use armor, shields or RPG
@@ -212,7 +220,8 @@ public class Sprite {
     /**
      * Does nothing very useful yet....
      */
-    private void die() {
+    public void die() {
+        getParent().removeSprite(this);
     }
 
     public void setAnimation(Renderer animation) {
@@ -370,6 +379,10 @@ public class Sprite {
 
     public void setRotation(double angle) {
         this.angle = angle;
+    }
+    
+    public double getRotation(){
+        return angle;
     }
 
     public void invalidMove() {
