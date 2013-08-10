@@ -4,10 +4,90 @@
  <tileset firstgid="8" source="turrets.tsx"/>
  <tileset firstgid="15" source="background.tsx"/>
  <tileset firstgid="16" source="enemy1.tsx"/>
- <tileset firstgid="22" source="turret-bases.tsx"/>
- <tileset firstgid="29" source="turret-cannons.tsx"/>
- <tileset firstgid="36" source="pellet.tsx"/>
- <tileset firstgid="44" source="explosion.tsx"/>
+ <tileset firstgid="22" source="turret-cannons.tsx"/>
+ <tileset firstgid="29" source="pellet.tsx"/>
+ <tileset firstgid="37" source="explosion.tsx"/>
+ <tileset firstgid="101" name="turret-bases" tilewidth="46" tileheight="46">
+  <image source="turret-bases.png" width="46" height="322"/>
+  <tile id="0">
+   <properties>
+    <property name="damage" value="200"/>
+    <property name="description" value="The ultimate blaster combining pure destructive power with a wide range and fast recovery."/>
+    <property name="firerate" value="1"/>
+    <property name="name" value="Anihilator"/>
+    <property name="price" value="400"/>
+    <property name="range" value="200"/>
+    <property name="type" value="doubleplasma"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="damage" value="3"/>
+    <property name="description" value="A rapid fire pellet gun with a short range."/>
+    <property name="firerate" value=".3"/>
+    <property name="name" value="El Rapido"/>
+    <property name="price" value="80"/>
+    <property name="range" value="60"/>
+    <property name="type" value="pellet"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="damage" value="20"/>
+    <property name="description" value="This plasma cannon causes great damage with it's double shot, but takes a while to recover after each blast. "/>
+    <property name="firerate" value="2"/>
+    <property name="name" value="Plasma Cannon"/>
+    <property name="price" value="70"/>
+    <property name="range" value="75"/>
+    <property name="type" value="plasma"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="damage" value="0"/>
+    <property name="description" value="This turret can slow down enemies via an electric shockwave."/>
+    <property name="firerate" value="1.2"/>
+    <property name="name" value="Stun Gun"/>
+    <property name="price" value="145"/>
+    <property name="range" value="100"/>
+    <property name="slowdown" value="0.3"/>
+    <property name="type" value="electro"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="damage" value="30"/>
+    <property name="description" value="A slow, double bullet pellet gun with a wide range, causing very high damage."/>
+    <property name="firerate" value="2"/>
+    <property name="name" value="Twin Shot"/>
+    <property name="price" value="160"/>
+    <property name="range" value="100"/>
+    <property name="type" value="doublepellet"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="damage" value="1"/>
+    <property name="description" value="This tower melts Insectoids with it's powerful plasma beam."/>
+    <property name="firerate" value="0"/>
+    <property name="name" value="The Beam"/>
+    <property name="price" value="200"/>
+    <property name="range" value="600"/>
+    <property name="type" value="laser"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="damage" value="200"/>
+    <property name="description" value="The anihilator features ultimate firepower."/>
+    <property name="firerate" value="1"/>
+    <property name="name" value="The Anihilator"/>
+    <property name="price" value="200"/>
+    <property name="range" value="600"/>
+    <property name="type" value="laser"/>
+   </properties>
+  </tile>
+ </tileset>
  <layer name="terrain" width="10" height="9">
   <data encoding="csv">
 0,0,0,1,0,0,0,0,0,0,
@@ -55,5 +135,10 @@
    </properties>
   </object>
   <object name="target" x="415" y="245" width="22" height="21"/>
+  <object name="turret-properties" x="422" y="345" width="21" height="21">
+   <properties>
+    <property name="turret.properties.0" value="10,75,6"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
