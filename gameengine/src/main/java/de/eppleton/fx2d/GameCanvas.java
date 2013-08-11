@@ -34,9 +34,11 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 import javafx.animation.AnimationTimer;
+import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 /**
@@ -95,6 +97,7 @@ public final class GameCanvas extends Canvas {
             }
         };
         sprites = new HashMap<>();
+        setOnMouseClicked(new MouseClickHandler());
     }
 
     public void start() {
@@ -476,4 +479,24 @@ public final class GameCanvas extends Canvas {
         public abstract boolean isValidMove(double x, double y, double width, double height);
     }
     private static final Logger LOG = Logger.getLogger(GameCanvas.class.getName());
+
+    private class MouseClickHandler implements EventHandler<MouseEvent> {
+
+        public MouseClickHandler() {
+        }
+
+        @Override
+        public void handle(MouseEvent t) {
+            Collection<Sprite> sprites1 = getSprites();
+            double x = t.getX();
+            double y = t.getY();
+            for (Sprite sprite : sprites1) {
+
+                if (sprite.getMouseClickHandler() != null && sprite.contains(x, y)) {
+                    sprite.getMouseClickHandler().handle(new MouseClick(x,y));
+                }
+
+            }
+        }
+    }
 }

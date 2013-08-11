@@ -9,19 +9,19 @@ package de.eppleton.fx2d;
  * This is required to make the move to the #bck2brwsr Canvas API
  * @author antonepple
  */
-public class DoubleProperty {
+public class IntegerProperty {
     
-    private double value;
+    private int value;
 
-    public DoubleProperty(double value) {
+    public IntegerProperty(int value) {
         this.value = value;
     }
 
-    public double doubleValue() {
+    public int integerValue() {
         return value;
     }
 
-    public void set(double value) {
+    public void set(int value) {
         this.value = value;
     }
 

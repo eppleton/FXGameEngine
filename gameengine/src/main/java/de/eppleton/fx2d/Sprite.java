@@ -20,6 +20,7 @@
  */
 package de.eppleton.fx2d;
 
+import de.eppleton.fx2d.action.MouseEventHandler;
 import de.eppleton.fx2d.action.SpriteBehavior;
 import de.eppleton.fx2d.action.SpriteAction;
 import de.eppleton.fx2d.action.State;
@@ -77,6 +78,7 @@ public class Sprite {
     private static State NO_STATE = new State(NO_ANIMATION, "No State");
     private InstanceContent content;
     private double angle;
+    private MouseEventHandler mouseEventHandler;
 
     public Sprite(GameCanvas parent, Renderer animation, String name, double x, double y, int width, int height, Lookup lookup) {
         this.parent = parent;
@@ -386,6 +388,18 @@ public class Sprite {
     }
 
     public void invalidMove() {
+    }
+    
+    public void setOnMouseClicked(MouseEventHandler clickHandler){
+        this.mouseEventHandler = clickHandler;
+    }
+
+    public MouseEventHandler getMouseClickHandler() {
+      return mouseEventHandler;
+    }
+
+    boolean contains(double x, double y) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private class KeyEventHandler implements EventHandler<KeyEvent> {
