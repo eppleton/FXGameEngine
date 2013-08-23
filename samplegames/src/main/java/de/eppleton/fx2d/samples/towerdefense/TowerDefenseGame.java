@@ -23,6 +23,7 @@ import de.eppleton.fx2d.tileengine.TileSet;
 import de.eppleton.fx2d.tileengine.action.TileSetAnimation;
 import de.eppleton.fx2d.tileengine.algorithms.AStar;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Properties;
 
@@ -71,8 +72,6 @@ public class TowerDefenseGame extends Application {
         // read the Map
         tileMap = TileMapReader.readMap(fileURL);
         backgroundImage = tileMap.getTileSet("background").getTileImage();
-
-
 
         // create the canvas
         canvas = new GameCanvas(tileMap.getTilewidth() * tileMap.getWidth(), tileMap.getHeight() * tileMap.getTileheight(), tileMap.getTilewidth() * tileMap.getWidth(), tileMap.getHeight() * tileMap.getTileheight());
@@ -136,6 +135,8 @@ public class TowerDefenseGame extends Application {
             for (final TObject tObject : objectGroup.getObjectLIst()) {
                 if (tObject.getName().equals("spawnpoint")) {
                     Properties properties = tObject.getProperties();
+                    spawnpointTileX = tObject.getX() / tileMap.getTilewidth();
+                    spawnpointTileY = tObject.getY() / tileMap.getTilewidth();
                     for (int i = 0; i < properties.size() / 2; i++) {
                         long evaluationInterval = Long.parseLong(properties.getProperty("wave" + i + "."
                                 + "delay"));
@@ -143,8 +144,7 @@ public class TowerDefenseGame extends Application {
                         waves.add(new Wave(stacked, evaluationInterval, properties.getProperty("wave" + i + "."
                                 + "monsters").split(",")));
                     }
-                    spawnpointTileX = tObject.getX() / tileMap.getTilewidth();
-                    spawnpointTileY = tObject.getY() / tileMap.getTilewidth();
+                    
                 }
                 if (tObject.getName().equals("target")) {
                     targetX = tObject.getX() / tileMap.getTilewidth();
@@ -159,12 +159,38 @@ public class TowerDefenseGame extends Application {
         Wave current = waves.get(currentWave++);
         canvas.addBehaviour(current);
     }
+    
+    private void stopWave(){
+        System.out.println("Wave finished!");
+    }
 
     private void calculateAttackPath() {
         // calculate the attack path
         AStar.AStarTile start = new AStar.AStarTile((int) spawnpointTileX, (int) spawnpointTileY);
         AStar.AStarTile end = new AStar.AStarTile((int) targetX, (int) targetY);
         attackPath = AStar.getPath(tileMap, platformLayer, end, start);
+    }
+
+    private class ScanForLastEnemyBevavior extends Behavior {
+
+        public ScanForLastEnemyBevavior() {
+            setEvaluationInterval(100000000l );
+        }
+
+        @Override
+        public boolean perform(GameCanvas canvas, long nanos) {
+            Collection<Sprite> sprites = canvas.getSprites();
+            for (Sprite sprite : sprites) {
+                if (sprite instanceof EnemySprite) return true;
+            }
+            
+            
+            stopWave();
+            return false;
+        }
+    
+        
+    
     }
 
     private class HUD extends Layer {
@@ -224,14 +250,16 @@ public class TowerDefenseGame extends Application {
 
         @Override
         public boolean perform(GameCanvas canvas, long nanos) {
-            System.out.println("sending Enemy "+enemyIndex+ " of "+enemySprites.size());
             if (enemyIndex < enemySprites.size()) {
                 EnemySprite nextEnemy = enemySprites.get(enemyIndex);
                 nextEnemy.setAttackPath(attackPath);
                 canvas.addSprite(nextEnemy);
             } else {
+                canvas.addBehaviour(new ScanForLastEnemyBevavior());
             }
             return !(enemySprites.size() == enemyIndex++);
         }
+        
+        
     }
 }

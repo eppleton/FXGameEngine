@@ -32,7 +32,7 @@ public class CannonSprite extends Sprite {
 
     public CannonSprite(GameCanvas parent, Properties properties, TileSetAnimation animation, final TileSetAnimation shoot, String name, final double x, final double y, final int width, final int height) {
         super(parent, animation, name, x, y, width, height, Lookup.EMPTY);
-        
+
         this.width = width;
         this.height = height;
         this.shoot = shoot;
@@ -84,7 +84,7 @@ public class CannonSprite extends Sprite {
 
         @Override
         public long getEvaluationInterval() {
-            return (long)(2000000000*rate); 
+            return (long) (2000000000 * rate);
         }
 
         private class BulletBehavior extends SpriteBehavior {
@@ -118,6 +118,7 @@ public class CannonSprite extends Sprite {
         public boolean perform(Sprite sprite) {
             double dist = Double.MAX_VALUE;
             Collection<Sprite> sprites = sprite.getParent().getSprites();
+            closest = null;
             for (Sprite sprite1 : sprites) {
                 if (sprite1 instanceof EnemySprite) {
                     double distance = distance(getX(), getY(), sprite1.getX(), sprite1.getY());
