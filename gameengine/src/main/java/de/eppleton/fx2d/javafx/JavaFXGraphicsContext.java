@@ -72,12 +72,12 @@ class JavaFXGraphicsContext implements FX2DGraphicsContext {
 
     @Override
     public FX2DLinearGradient createLinearGradient(double x0, double y0, double x1, double y1) {
-        return new JavaFXLinearGradient(new LinearGradient(x0, y0, x1, y1, true, CycleMethod.REPEAT, null));
+        return new JavaFXLinearGradient(new LinearGradient(x0, y0, x1, y1, true, CycleMethod.REPEAT));
     }
 
     @Override
     public FX2DRadialGradient createRadialGradient(double x0, double y0, double r0, double x1, double y1, double r1) {
-        return new JavaFXRadialGradient(new RadialGradient(x0, y0, x1, y1, r1, true, CycleMethod.REPEAT, null));
+        return new JavaFXRadialGradient(new RadialGradient(x0, y0, x1, y1, r1, true, CycleMethod.REPEAT));
     }
 
     @Override
