@@ -75,6 +75,7 @@ public class EnemySprite extends Sprite {
                 if (Math.abs(pathX - x) < 2 && Math.abs(pathY - y) < 2) {
                     start = start.getParent();
                     if (start == null) {
+                        sprite.die();
                         return false;
                     }
                 }

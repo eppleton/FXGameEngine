@@ -61,6 +61,7 @@ public class TowerDefenseGame extends Application {
     private double targetY;
     private Image backgroundImage;
     private List<Wave> waves = new ArrayList<>();
+    private String message;
 
     public static void main(String[] args) {
         launch(args);
@@ -144,7 +145,7 @@ public class TowerDefenseGame extends Application {
                         waves.add(new Wave(stacked, evaluationInterval, properties.getProperty("wave" + i + "."
                                 + "monsters").split(",")));
                     }
-                    
+
                 }
                 if (tObject.getName().equals("target")) {
                     targetX = tObject.getX() / tileMap.getTilewidth();
@@ -159,9 +160,9 @@ public class TowerDefenseGame extends Application {
         Wave current = waves.get(currentWave++);
         canvas.addBehaviour(current);
     }
-    
-    private void stopWave(){
-        System.out.println("Wave finished!");
+
+    private void stopWave() {
+        message = "Wave finished!";
     }
 
     private void calculateAttackPath() {
@@ -174,23 +175,21 @@ public class TowerDefenseGame extends Application {
     private class ScanForLastEnemyBevavior extends Behavior {
 
         public ScanForLastEnemyBevavior() {
-            setEvaluationInterval(100000000l );
+            setEvaluationInterval(100000000l);
         }
 
         @Override
         public boolean perform(GameCanvas canvas, long nanos) {
             Collection<Sprite> sprites = canvas.getSprites();
             for (Sprite sprite : sprites) {
-                if (sprite instanceof EnemySprite) return true;
+                if (sprite instanceof EnemySprite) {
+                    return true;
+                }
             }
-            
-            
+
             stopWave();
             return false;
         }
-    
-        
-    
     }
 
     private class HUD extends Layer {
@@ -200,6 +199,13 @@ public class TowerDefenseGame extends Application {
             graphicsContext.setFill(Color.RED);
             graphicsContext.setFont(Font.font("OricNeo", FontWeight.BOLD, 24));
             graphicsContext.fillText("Score: " + score, 10, 28);
+            if (message != null) {
+                graphicsContext.fillText( message, 150, 200);
+            }
+        
+    
+
+   
         }
     }
 
@@ -259,7 +265,5 @@ public class TowerDefenseGame extends Application {
             }
             return !(enemySprites.size() == enemyIndex++);
         }
-        
-        
     }
 }

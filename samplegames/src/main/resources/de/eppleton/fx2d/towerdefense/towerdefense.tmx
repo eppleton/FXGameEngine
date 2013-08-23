@@ -131,7 +131,7 @@
   <object name="spawnpoint" x="106" y="15" width="23" height="25">
    <properties>
     <property name="wave0.delay" value="5000000000"/>
-    <property name="wave0.monsters" value="15,0,0,0,0,0,0"/>
+    <property name="wave0.monsters" value="2,0,0,0,0,0,0"/>
    </properties>
   </object>
   <object name="target" x="415" y="245" width="22" height="21"/>
