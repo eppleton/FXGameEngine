@@ -48,6 +48,7 @@ import org.openide.util.Lookup;
 public class TowerDefenseGame extends Application {
 
     private IntegerProperty score = new IntegerProperty(0);
+    private IntegerProperty hits = new IntegerProperty(0);
     private TileMap tileMap;
     private GameCanvas canvas;
     private String fileURL = "/de/eppleton/fx2d/towerdefense/towerdefense.tmx";
@@ -67,6 +68,7 @@ public class TowerDefenseGame extends Application {
         launch(args);
     }
     private int currentWave;
+    private int maxHits = 2;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -84,6 +86,7 @@ public class TowerDefenseGame extends Application {
             canvas.addLayer(tileMapLayer);
         }
         canvas.addLayer(new HUD());
+
         final Sprite button = new Sprite(canvas, "button", tileMap.getWidthInPixels() - 30, 20, 20, 20, Lookup.EMPTY);
         button.setOnMouseClicked(new MouseEventHandler() {
             @Override
@@ -159,10 +162,16 @@ public class TowerDefenseGame extends Application {
         // setup Enemy Spawning
         Wave current = waves.get(currentWave++);
         canvas.addBehaviour(current);
+        canvas.addBehaviour(new CheckHitsBehavior(hits));
     }
 
     private void stopWave() {
-        message = "Wave finished!";
+        if (hits.integerValue() >= maxHits) {
+            message = "Section destroyed!";
+        }else {
+            message = "Wave finished, hits: "+hits;
+        }
+        
     }
 
     private void calculateAttackPath() {
@@ -172,10 +181,30 @@ public class TowerDefenseGame extends Application {
         attackPath = AStar.getPath(tileMap, platformLayer, end, start);
     }
 
+    private class CheckHitsBehavior extends Behavior {
+
+        private final IntegerProperty hits;
+
+        public CheckHitsBehavior(IntegerProperty hits) {
+            this.hits = hits;
+            setEvaluationInterval(1000000l);
+        }
+
+        @Override
+        public boolean perform(GameCanvas canvas, long nanos) {
+            if (hits.integerValue() < maxHits) {
+                return true;
+            } else {
+                stopWave();
+                return false;
+            }
+        }
+    }
+
     private class ScanForLastEnemyBevavior extends Behavior {
 
         public ScanForLastEnemyBevavior() {
-            setEvaluationInterval(100000000l);
+            setEvaluationInterval(10000000l);
         }
 
         @Override
@@ -200,12 +229,8 @@ public class TowerDefenseGame extends Application {
             graphicsContext.setFont(Font.font("OricNeo", FontWeight.BOLD, 24));
             graphicsContext.fillText("Score: " + score, 10, 28);
             if (message != null) {
-                graphicsContext.fillText( message, 150, 200);
+                graphicsContext.fillText(message, 150, 200);
             }
-        
-    
-
-   
         }
     }
 
@@ -249,7 +274,7 @@ public class TowerDefenseGame extends Application {
             for (int i = 0; i < waveProperties.length; i++) {
                 int numEnemies = Integer.parseInt(waveProperties[i]);
                 for (int j = 0; j < numEnemies; j++) {
-                    enemySprites.add(new EnemySprite(canvas, score, new Properties(), stacked, "enemy" + (enemyCount++), ((int) spawnpointTileX) * tileMap.getTilewidth(), ((int) spawnpointTileY) * tileMap.getTileheight(), 46, 46));
+                    enemySprites.add(new EnemySprite(canvas, score, hits, new Properties(), stacked, "enemy" + (enemyCount++), ((int) spawnpointTileX) * tileMap.getTilewidth(), ((int) spawnpointTileY) * tileMap.getTileheight(), 46, 46));
                 }
             }
         }

@@ -31,6 +31,8 @@ public class EnemySprite extends Sprite {
     private double maxHealth = 50;
     private int killPoints = 50;
     private IntegerProperty score;
+    private IntegerProperty hits;
+    private boolean reachedTarget = false; 
     static TileSet explosion;
 
     static {
@@ -42,9 +44,10 @@ public class EnemySprite extends Sprite {
     }
     private TileSetAnimation explosionAnimation;
 
-    public EnemySprite(GameCanvas parent, IntegerProperty score, Properties properties, Renderer animation, String name, double x, double y, final int width, final int height) {
+    public EnemySprite(GameCanvas parent, IntegerProperty score,IntegerProperty hits, Properties properties, Renderer animation, String name, double x, double y, final int width, final int height) {
         super(parent, animation, name, x, y, width, height, Lookup.EMPTY);
         this.score = score;
+        this.hits = hits;
         setCollisionBox(new Rectangle2D(10, 10, 26, 26));
         setEnergy(maxHealth);
         explosionAnimation = new TileSetAnimation(explosion, 100f);
@@ -75,6 +78,7 @@ public class EnemySprite extends Sprite {
                 if (Math.abs(pathX - x) < 2 && Math.abs(pathY - y) < 2) {
                     start = start.getParent();
                     if (start == null) {
+                        reachedTarget = true;
                         sprite.die();
                         return false;
                     }
@@ -105,7 +109,8 @@ public class EnemySprite extends Sprite {
     public void die() {
         super.die(); //To change body of generated methods, choose Tools | Templates.
         getParent().addSprite(new Sprite(getParent(), explosionAnimation, "explosion", getX() - 30, getY() - 80, 128, 128, Lookup.EMPTY));
-        score.set(score.integerValue() + killPoints);
+        if (! reachedTarget)score.set(score.integerValue() + killPoints);
+        else hits.set(hits.integerValue()+1);
     }
 
     public double getMaxHealth() {
