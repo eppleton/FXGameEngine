@@ -328,7 +328,7 @@ public final class GameCanvas extends Canvas {
     }
 
     public Collection<Sprite> getSprites() {
-        return sprites.values();
+        return new ArrayList<>(sprites.values());
     }
 
     public void addSprite(Sprite sprite) {

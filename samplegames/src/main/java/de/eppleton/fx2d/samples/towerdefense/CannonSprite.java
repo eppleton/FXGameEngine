@@ -32,6 +32,7 @@ public class CannonSprite extends Sprite {
 
     public CannonSprite(GameCanvas parent, Properties properties, TileSetAnimation animation, final TileSetAnimation shoot, String name, final double x, final double y, final int width, final int height) {
         super(parent, animation, name, x, y, width, height, Lookup.EMPTY);
+        
         this.width = width;
         this.height = height;
         this.shoot = shoot;
@@ -51,6 +52,7 @@ public class CannonSprite extends Sprite {
         if (rateProperty != null) {
             rate = Float.parseFloat(rateProperty);
         }
+        parent.addSprite(this);
     }
 
     public double distance(double x1, double y1, double x2, double y2) {
@@ -76,12 +78,13 @@ public class CannonSprite extends Sprite {
             bullet.setVelocityX(xVelocity);
             bullet.setVelocityY(yVelocity);
             bullet.addBehaviour(new BulletBehavior());
+            bullet.getParent().addSprite(bullet);
             return true;
         }
 
         @Override
         public long getEvaluationInterval() {
-            return (long)(2000000000*rate); //To change body of generated methods, choose Tools | Templates.
+            return (long)(2000000000*rate); 
         }
 
         private class BulletBehavior extends SpriteBehavior {

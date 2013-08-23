@@ -146,6 +146,10 @@ public class TileSetAnimation implements Renderer {
         return dirty;
     }
 
+    public TileSet getTileSet() {
+        return tileSet;
+    }
+    
     @Override
     public void render(Sprite sprite, GraphicsContext context, float alpha, long delta) {
         tileSet.drawTile(context, tile);

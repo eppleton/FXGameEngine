@@ -92,7 +92,7 @@ public class Sprite {
         this.width = width;
         this.height = height;
         this.lookup = lookup;
-        parent.addSprite(this);
+ 
     }
 
     public Sprite(GameCanvas canvas, String name, double x, double y, int width, int height, Lookup lookup) {
@@ -398,8 +398,8 @@ public class Sprite {
       return mouseEventHandler;
     }
 
-    boolean contains(double x, double y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    boolean contains(double x1, double y1) {
+       return (x1 > getX() && x1< (getX()+getWidth()) && y1 > getY() && y1 < getY() +getHeight());
     }
 
     private class KeyEventHandler implements EventHandler<KeyEvent> {

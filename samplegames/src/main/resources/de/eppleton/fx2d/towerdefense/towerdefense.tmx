@@ -11,13 +11,13 @@
   <image source="turret-bases.png" width="46" height="322"/>
   <tile id="0">
    <properties>
-    <property name="damage" value="200"/>
-    <property name="description" value="The ultimate blaster combining pure destructive power with a wide range and fast recovery."/>
+    <property name="damage" value="6"/>
+    <property name="description" value="A simple, robust, pellet gun, that combines medium range with nice fire power"/>
     <property name="firerate" value="1"/>
-    <property name="name" value="Anihilator"/>
-    <property name="price" value="400"/>
-    <property name="range" value="200"/>
-    <property name="type" value="doubleplasma"/>
+    <property name="name" value="Pellet Gun"/>
+    <property name="price" value="75"/>
+    <property name="range" value="70"/>
+    <property name="type" value="pellet"/>
    </properties>
   </tile>
   <tile id="1">
@@ -130,8 +130,8 @@
  <objectgroup name="spawnpoints" width="10" height="9">
   <object name="spawnpoint" x="106" y="15" width="23" height="25">
    <properties>
-    <property name="delay" value="5000000000"/>
-    <property name="monsters" value="10,0,0,0,0,0,0"/>
+    <property name="wave0.delay" value="5000000000"/>
+    <property name="wave0.monsters" value="15,0,0,0,0,0,0"/>
    </properties>
   </object>
   <object name="target" x="415" y="245" width="22" height="21"/>
