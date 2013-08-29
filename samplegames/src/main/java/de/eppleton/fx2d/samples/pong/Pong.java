@@ -24,9 +24,9 @@ import de.eppleton.fx2d.*;
 import de.eppleton.fx2d.action.*;
 import de.eppleton.fx2d.physics.*;
 import de.eppleton.fx2d.physics.action.PhysicsActionFactory;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.text.Font;
+import net.java.html.canvas.GraphicsContext;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.*;
 import org.openide.util.Lookup;
@@ -42,7 +42,7 @@ public class Pong extends Game {
         canvas.addLayer(new Layer() {
             @Override
             public void draw(GraphicsContext graphicsContext, double x, double y, double width, double height) {
-                graphicsContext.setFont(Font.font("Verdana", 36));
+                graphicsContext.setFont("36 Verdana");
                 graphicsContext.fillText("" + scorePlayer + "   " + scoreComputer, 380, 60);
             }
         });
@@ -76,6 +76,7 @@ public class Pong extends Game {
         bat.addAction(KeyCode.A, PhysicsActionFactory.createLinearMoveAction(null, "up", new Vec2(0, 4), new Vec2(0, 0)));
         bat.addAction(KeyCode.Z, PhysicsActionFactory.createLinearMoveAction(null, "down", new Vec2(0, -4), new Vec2(0, 0)));
         Sprite computer = new Sprite(canvas, "Computer", 750, 262, 30, 75, Lookup.EMPTY);
+        canvas.addSprite(computer);
         physicsEngine.createDefaultBody(computer, BodyType.KINEMATIC, 1, .3f, 0);
         computer.addBehaviour(new SpriteBehavior() {
             @Override
@@ -97,6 +98,7 @@ public class Pong extends Game {
         Sprite ball = new Sprite(canvas, "ball", x, y, 20, 20, Lookup.EMPTY);
         Body ballBody = physicsEngine.createDefaultBody(ball, BodyType.DYNAMIC, 1, .4f, .2f, false);
         ballBody.setLinearVelocity(new Vec2(4, 1));
+        canvas.addSprite(ball);
     }
 
     public static void main(String[] args) {

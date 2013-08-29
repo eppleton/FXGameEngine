@@ -28,6 +28,7 @@ import java.util.Properties;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
@@ -50,9 +51,9 @@ final class Palette extends StackPane {
         }
         getChildren().clear();
         ImageView turretBases = new ImageView();
-        turretBases.setImage(bases.getTileImage());
+        turretBases.setImage(new Image(bases.getTileImage().getSrc()));
         ImageView turretCannons = new ImageView();
-        turretCannons.setImage(cannons.getTileImage());
+        turretCannons.setImage(new Image(cannons.getTileImage().getSrc()));
         getChildren().addAll(turretBases, turretCannons);
 
         canvas = new Canvas(cannons.getTileImage().getWidth(), cannons.getTileImage().getHeight());

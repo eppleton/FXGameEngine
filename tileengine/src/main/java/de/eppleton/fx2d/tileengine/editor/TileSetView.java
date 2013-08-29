@@ -21,14 +21,16 @@
  */
 package de.eppleton.fx2d.tileengine.editor;
 
+import de.eppleton.fx2d.graphicsenvironment.JavaFXGraphicsEnvironment;
 import de.eppleton.fx2d.tileengine.TileSet;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
+import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.Style.Color;
 
 class TileSetView extends StackPane {
 
@@ -36,7 +38,7 @@ class TileSetView extends StackPane {
     Canvas canvas;
     TileSet set;
     int selectedIndex = 0;
-    Color selected = Color.rgb(100, 100, 255, .005);
+    Color selected = new Color("rgb(100, 100, 255, .005)");
 
     public TileSetView() {
     }
@@ -46,7 +48,7 @@ class TileSetView extends StackPane {
         getChildren().clear();
         imageView = new ImageView();
         getChildren().add(imageView);
-        imageView.setImage(set.getTileImage());
+        imageView.setImage(new Image(set.getTileImage().getSrc()));
         canvas = new Canvas(set.getTileImage().getWidth(), set.getTileImage().getWidth());
         getChildren().add(canvas);
         canvas.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -70,16 +72,16 @@ class TileSetView extends StackPane {
     }
 
     public void updateCanvas() {
-        GraphicsContext graphicsContext2D = canvas.getGraphicsContext2D();
+        GraphicsContext graphicsContext2D = new GraphicsContext(new JavaFXGraphicsEnvironment(canvas));
         graphicsContext2D.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         for (int i = 0; i < set.getNumRows(); i++) {
             for (int j = 0; j < set.getNumColumns(); j++) {
-                graphicsContext2D.setFill(Color.WHITE);
+                graphicsContext2D.setFillStyle(new Color("#ffffff"));
                 graphicsContext2D.fillRect(j * set.getTilewidth(), 0, 1, set.getTileheight() * set.getNumRows());
                 graphicsContext2D.fillRect(0, i * set.getTileheight(), set.getTilewidth() * set.getNumColumns(), 1);
 
                 if (selectedIndex >= 0) {
-                    graphicsContext2D.setFill(selected);
+                    graphicsContext2D.setFillStyle(selected);
                     int x = selectedIndex % set.getNumColumns();
                     int y = selectedIndex / set.getNumColumns();
                     graphicsContext2D.fillRect(x * set.getTilewidth(), y * set.getTileheight(), set.getTilewidth(), set.getTileheight());

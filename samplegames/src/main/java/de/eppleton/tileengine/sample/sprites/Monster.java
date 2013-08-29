@@ -42,6 +42,7 @@ public class Monster extends Sprite {
 
     public Monster(final GameCanvas parent, String name, double x, double y, int width, int height, TileSet monster) {
         super(parent, name, x, y, width, height, Lookup.EMPTY);
+        parent.addSprite(this);
         monsterUp = new TileSetAnimation(monster, new int[]{1, 2, 3, 4, 5, 6, 7, 8}, 10f);
         monsterLeft = new TileSetAnimation(monster, new int[]{10, 11, 12, 13, 14, 15, 16, 17}, 10f);
         monsterDown = new TileSetAnimation(monster, new int[]{19, 20, 21, 22, 23, 24, 25, 26}, 10f);

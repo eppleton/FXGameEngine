@@ -6,9 +6,8 @@ package de.eppleton.fx2d.tileengine.algorithms;
 
 import de.eppleton.fx2d.Layer;
 import de.eppleton.fx2d.tileengine.TileMap;
-import de.eppleton.fx2d.tileengine.algorithms.AStar;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
+import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.Style.Color;
 
 /**
  *
@@ -24,13 +23,13 @@ class AStarLayer extends Layer {
         this.tileMap = tileMap;
 
     }
-    Color pathColor = Color.rgb(255, 100, 100, .3);
+    Color pathColor = new Color("rgb(255, 100, 100, .3");
 
     @Override
     public void draw(GraphicsContext graphicsContext, double x, double y, double width, double height) {
         AStar.PathNode start = attackPath;
         if (start != null) {
-            graphicsContext.setFill(pathColor);
+            graphicsContext.setFillStyle(pathColor);
             graphicsContext.fillRect(start.getX() * tileMap.getTilewidth(), start.getY() * tileMap.getTileheight(), tileMap.getTilewidth(), tileMap.getTileheight());
             while (start.getParent() != null) {
                 start = start.getParent();

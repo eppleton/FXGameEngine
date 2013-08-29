@@ -24,11 +24,11 @@ package de.eppleton.fx2d.tileengine;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.logging.Logger;
-import javafx.scene.canvas.GraphicsContext;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import net.java.html.canvas.GraphicsContext;
 
 /**
  *

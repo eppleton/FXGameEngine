@@ -4,8 +4,8 @@
  */
 package de.eppleton.fx2d;
 
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
+import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.Image;
 
 /**
  *

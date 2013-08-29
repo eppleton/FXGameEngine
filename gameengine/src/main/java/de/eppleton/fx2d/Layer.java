@@ -21,7 +21,8 @@
  */
 package de.eppleton.fx2d;
 
-import javafx.scene.canvas.GraphicsContext;
+import net.java.html.canvas.GraphicsContext;
+
 
 /**
  *
@@ -68,5 +69,5 @@ public class Layer {
     public void setParallaxFactor(float parallaxFactor) {
         this.parallaxFactor = parallaxFactor;
     }
-    
+
 }

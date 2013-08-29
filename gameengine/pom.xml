@@ -98,6 +98,16 @@
             <version>RELEASE721</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>net.java.html</groupId>
+            <artifactId>canvas</artifactId>
+            <version>0.8-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>graphicsenvironment</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
     <repositories>
         <repository>

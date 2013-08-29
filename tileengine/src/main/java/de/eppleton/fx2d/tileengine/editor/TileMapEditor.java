@@ -44,7 +44,6 @@ import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
@@ -54,9 +53,10 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.ToolBar;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javax.xml.bind.JAXBException;
+import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.Style.Color;
 
 /**
  *
@@ -242,13 +242,14 @@ public class TileMapEditor extends Application implements ListChangeListener<Til
 
         public AStarLayer() {
         }
-        Color pathColor = Color.rgb(255, 100, 100, .2);
+        Color pathColor ;
 
         @Override
         public void draw(GraphicsContext graphicsContext, double x, double y, double width, double height) {
             PathNode start = path;
             if (start != null) {
-                graphicsContext.setFill(pathColor);
+                if (pathColor == null) pathColor= graphicsContext.getWebColor("rgba(255,100,100,0.2)");
+                graphicsContext.setFillStyle(pathColor);
                 graphicsContext.fillRect(start.getX() * tileMap.getTilewidth(), start.getY() * tileMap.getTileheight(), tileMap.getTilewidth(), tileMap.getTileheight());
                 while (start.getParent() != null) {
                     start = start.getParent();

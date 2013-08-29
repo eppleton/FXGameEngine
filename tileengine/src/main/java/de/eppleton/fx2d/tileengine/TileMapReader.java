@@ -29,11 +29,11 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.image.Image;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import net.java.html.canvas.Image;
 
 /**
  * Factory for TileMaps and TileSets to Unmarshal them from Files and initialize
@@ -72,7 +72,7 @@ public class TileMapReader {
             }
             String source = resourcePath(tileSet.getImage().getSource(), baseUrl);
             LOG.log(Level.INFO, "loading image " + source);
-            Image image = new Image(new FileInputStream(source));
+            Image image = new Image(source);
             tileSet.init(image);
         }
         return map;
@@ -108,7 +108,8 @@ public class TileMapReader {
             }
             String source = resourcePath(tileSet.getImage().getSource(), baseUrl);
             LOG.log(Level.INFO, "loading image " + source);
-            Image image = new Image(TileMapReader.class.getResourceAsStream(source));
+            Image image = new Image(TileMapReader.class.getResource
+                    (source).toExternalForm());
             tileSet.init(image);
         }
         return map;
@@ -155,14 +156,14 @@ public class TileMapReader {
         tileSet.setBaseUrl(baseUrl);
         String source = tileSet.getImage().getSource();
         String resourcePath = resourcePath(source, baseUrl);
-        Image image = new Image(TileMapReader.class.getResourceAsStream(resourcePath));
+        Image image = new Image(TileMapReader.class.getResource(resourcePath).toExternalForm());
         tileSet.init(image);
         return tileSet;
     }
 
     public static void writeMap(TileMap tileMap, String fileURL) throws JAXBException, FileNotFoundException{
         JAXBContext tileMapContext = JAXBContext.newInstance(TileMap.class);
-        Marshaller marshaller = tileMapContext.createMarshaller();
+        Marshaller marshaller =             tileMapContext.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         marshaller.marshal(tileMap, new FileOutputStream(fileURL));    
     }

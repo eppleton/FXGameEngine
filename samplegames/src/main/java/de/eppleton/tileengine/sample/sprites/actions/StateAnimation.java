@@ -26,7 +26,7 @@ import de.eppleton.fx2d.action.State;
 import de.eppleton.fx2d.tileengine.TileSet;
 import de.eppleton.fx2d.tileengine.action.TileSetAnimation;
 import java.util.HashMap;
-import javafx.scene.canvas.GraphicsContext;
+import net.java.html.canvas.GraphicsContext;
 
 /**
  *

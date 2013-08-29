@@ -28,10 +28,11 @@ import de.eppleton.fx2d.Layer;
 import de.eppleton.fx2d.Sprite;
 import de.eppleton.fx2d.SpriteLayer;
 import de.eppleton.fx2d.action.ActionFactory;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.ImagePattern;
+import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.Image;
+import net.java.html.canvas.Style;
 import org.openide.util.Lookup;
 
 /**
@@ -44,15 +45,16 @@ public class ParallaxSample extends Game {
     protected void initGame() {
         GameCanvas canvas = getCanvas();
         canvas.addLayer(
-                new ImageLayer(new Image(ParallaxSample.class.getResourceAsStream("/assets/graphics/back.png")), 0.2f, "back"));
-        canvas.addLayer(new ImageLayer(new Image(ParallaxSample.class.getResourceAsStream("/assets/graphics/middle.png")), 0.5f, "mid"));
+                new ImageLayer(new Image(ParallaxSample.class.getResource("/assets/graphics/back.png").toExternalForm()), 0.2f, "back"));
+        canvas.addLayer(new ImageLayer(new Image(ParallaxSample.class.getResource("/assets/graphics/middle.png").toExternalForm()), 0.5f, "mid"));
         canvas.addLayer(new SpriteLayer());
-        canvas.addLayer(new ImageLayer(new Image(ParallaxSample.class.getResourceAsStream("/assets/graphics/front.png")), 1.1f, "front"));
+        canvas.addLayer(new ImageLayer(new Image(ParallaxSample.class.getResource("/assets/graphics/front.png").toExternalForm()), 1.1f, "front"));
         Sprite player = new Sprite(canvas, Sprite.NO_ANIMATION, "Player", 1050, 240, 40, 30, Lookup.EMPTY);
         player.addAction(KeyCode.LEFT, ActionFactory.createMoveAction(Sprite.NO_ANIMATION, "left", -4, 0, 0, 0));
         player.addAction(KeyCode.RIGHT, ActionFactory.createMoveAction(Sprite.NO_ANIMATION, "right", 4, 0, 0, 0));
         player.addAction(KeyCode.UP, ActionFactory.createMoveAction(Sprite.NO_ANIMATION, "up", 0, -4, 0, 0));
         player.addAction(KeyCode.DOWN, ActionFactory.createMoveAction(Sprite.NO_ANIMATION, "down", 0, 4, 0, 0));
+        canvas.addSprite(player);
         canvas.setCamera(new Camera(player.getXProperty(), player.getYProperty()));
         canvas.start();
     }
@@ -73,8 +75,9 @@ public class ParallaxSample extends Game {
 
         @Override
         public void draw(GraphicsContext graphicsContext, double x, double y, double width, double height) {
-            ImagePattern pattern = new ImagePattern(image, x, y, image.getWidth(), image.getHeight(), false);
-            graphicsContext.setFill(pattern);
+            Style pattern = new Style.Pattern(image, "repeat-x");
+//            ImagePattern pattern = new ImagePattern(image, x, y, image.getWidth(), image.getHeight(), false);
+            graphicsContext.setFillStyle(pattern);
             graphicsContext.fillRect(0, 0, width, height);
             /*
              double startX = x;

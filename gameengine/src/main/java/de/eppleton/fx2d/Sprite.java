@@ -31,10 +31,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
+import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.Style;
 import org.openide.util.Lookup;
 import org.openide.util.lookup.AbstractLookup;
 import org.openide.util.lookup.InstanceContent;
@@ -65,7 +65,7 @@ public class Sprite {
     public static Renderer NO_ANIMATION = new Renderer() {
         @Override
         public void render(Sprite sprite, GraphicsContext context, float alpha, long delta) {
-            context.setFill(Color.RED);
+            context.setFillStyle(context.getWebColor("#ff0000"));
             context.fillRect(0, 0, sprite.getWidth(), sprite.getHeight());
         }
 

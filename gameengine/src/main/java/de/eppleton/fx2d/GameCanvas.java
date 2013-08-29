@@ -23,6 +23,7 @@ package de.eppleton.fx2d;
 import de.eppleton.fx2d.collision.Collision;
 import de.eppleton.fx2d.action.Behavior;
 import de.eppleton.fx2d.action.SpriteBehavior;
+import de.eppleton.fx2d.graphicsenvironment.JavaFXGraphicsEnvironment;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -37,9 +38,8 @@ import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
+import net.java.html.canvas.GraphicsContext;
 
 /**
  * A Canvas used to render Games.
@@ -164,10 +164,10 @@ public final class GameCanvas extends Canvas {
     }
 
     public void render(long delta) {
-        GraphicsContext graphicsContext2D = getGraphicsContext2D();
+        GraphicsContext graphicsContext2D = new GraphicsContext(new JavaFXGraphicsEnvironment(this));
         // clear the background
         graphicsContext2D.clearRect(0, 0, screenWidth, screenHeight);
-        graphicsContext2D.setFill(Color.BLACK);
+        graphicsContext2D.setFillStyle(graphicsContext2D.getWebColor("#000000"));
         graphicsContext2D.fillRect(0, 0, screenWidth, screenHeight);
         // draw each individual layer
         for (Layer layer : layers) {

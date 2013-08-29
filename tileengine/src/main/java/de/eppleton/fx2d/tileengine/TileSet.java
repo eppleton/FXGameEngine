@@ -23,11 +23,11 @@ package de.eppleton.fx2d.tileengine;
 
 import java.util.ArrayList;
 import java.util.logging.Logger;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.Image;
 
 /**
  *
@@ -175,8 +175,8 @@ public class TileSet {
     }
     
     public void merge(TileSet other){
-        Image merge = ImageUtilities.merge(this.getTileImage(), other.getTileImage());
-        init(merge);
+//        Image merge = ImageUtilities.merge(this.getTileImage(), other.getTileImage());
+//        init(merge);
     }
     
     

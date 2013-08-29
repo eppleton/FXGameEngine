@@ -128,16 +128,12 @@
 </data>
  </layer>
  <objectgroup name="spawnpoints" width="10" height="9">
+ 
+  <object name="target" x="415" y="245" width="22" height="21"/>
   <object name="spawnpoint" x="106" y="15" width="23" height="25">
    <properties>
-    <property name="wave0.delay" value="5000000000"/>
-    <property name="wave0.monsters" value="2,0,0,0,0,0,0"/>
-   </properties>
-  </object>
-  <object name="target" x="415" y="245" width="22" height="21"/>
-  <object name="turret-properties" x="422" y="345" width="21" height="21">
-   <properties>
-    <property name="turret.properties.0" value="10,75,6"/>
+    <property name="wave0.delay" value="1000000000"/>
+    <property name="wave0.monsters" value="15,0,0,0,0,0,0"/>
    </properties>
   </object>
  </objectgroup>

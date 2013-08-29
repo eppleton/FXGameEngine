@@ -27,12 +27,13 @@ import de.eppleton.fx2d.action.*;
 import de.eppleton.fx2d.tileengine.*;
 import java.util.Collection;
 import java.util.logging.*;
-import javafx.scene.canvas.*;
 import javafx.scene.input.*;
 import javafx.scene.media.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javax.xml.bind.JAXBException;
+import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.Style;
 import org.openide.util.Lookup;
 import org.openide.util.lookup.Lookups;
 
@@ -70,11 +71,13 @@ public class SpaceInvaders extends Game {
                 for (int j = 0; j < is.length; j++) {
                     Points points = is[j] == 30 ? THIRTY : is[j] == 20 ? TWENTY : TEN;
                     Sprite sprite = new Sprite(canvas, "" + ((j * 11) + i), 50 + (40 * j), 140 + (40 * i), 30, 20, Lookups.fixed(points));
+                    canvas.addSprite(sprite);
                     sprite.setAnimation(is[j] == 30 ? animation30 : is[j] == 20 ? animation20 : animation10);
                     sprite.setVelocityXProperty(invaderXVelocity);
                 }
             }
             Sprite player = new Sprite(canvas, playerAnimation, "Player", 350, 620, 40, 30, Lookup.EMPTY);
+            canvas.addSprite(player);
             player.setAnimation(playerAnimation);
             player.addAction(KeyCode.LEFT, ActionFactory.createMoveAction(playerAnimation, "left", -4, 0, 0, 0));
             player.addAction(KeyCode.RIGHT, ActionFactory.createMoveAction(playerAnimation, "right", 4, 0, 0, 0));
@@ -121,7 +124,9 @@ public class SpaceInvaders extends Game {
         
         @Override
         public Sprite getSprite(GameCanvas parent, double x, double y) {
-            return new Sprite(parent, "bullet", x, y + 10, 10, 20, Lookup.EMPTY);
+            final Sprite bullet = new Sprite(parent, "bullet", x, y + 10, 10, 20, Lookup.EMPTY);
+            parent.addSprite(bullet);
+            return bullet;
         }
     }
     
@@ -178,15 +183,15 @@ public class SpaceInvaders extends Game {
         
         @Override
         public void draw(GraphicsContext graphicsContext, double x, double y, double width, double height) {
-            graphicsContext.setFill(Color.BLACK);
+            graphicsContext.setFillStyle(new Style.Color("#000000"));
             graphicsContext.fillRect(0, 0, width, height);
-            graphicsContext.setFill(Color.WHITE);
-            graphicsContext.setFont(Font.font("OCR A Std", 20));
+            graphicsContext.setFillStyle(new Style.Color("#ffffff"));
+            graphicsContext.setFont("20 'OCR A Std'");
             graphicsContext.fillText("SCORE<1>    HI-SCORE    SCORE<2>", 30, 30);
             graphicsContext.fillText("" + score + "            9990   ", 30, 60);
             graphicsContext.fillText(message, 300, 400);
             graphicsContext.fillText("" + 3 + "                   CREDIT " + 1, 30, 680);
-            graphicsContext.setFill(Color.GREEN);
+            graphicsContext.setFillStyle(new Style.Color("#00ff00"));
             graphicsContext.fillRect(30, 650, 640, 4);
         }
     }

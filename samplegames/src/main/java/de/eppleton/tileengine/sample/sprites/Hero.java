@@ -38,8 +38,8 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.logging.Logger;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
+import net.java.html.canvas.Image;
 import org.openide.util.Lookup;
 
 /**
@@ -98,7 +98,7 @@ public class Hero extends Sprite {
      */
     public Hero(GameCanvas field, TileSet base, String name, double x, double y, int width, int height) {
         super(field, name, x, y, width, height, Lookup.EMPTY);
-
+        field.addSprite(this);
         heroSet = base;
         setMoveBox(new Rectangle2D(18, 42, 28, 20));
         UP = new State(new TileSetAnimation(heroSet, new int[]{0}, 10f), "up");
@@ -135,7 +135,7 @@ public class Hero extends Sprite {
     private void mergeTileSets() {
         String source = heroSet.getImage().getSource();
         String resourcePath = TileMapReader.resourcePath(source, heroSet.getBaseUrl());
-        Image image = new Image(SampleGame.class.getResourceAsStream(resourcePath));
+        Image image = new Image(SampleGame.class.getResource(resourcePath).toString());
         heroSet.init(image);
 
 

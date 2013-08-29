@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<map height="9" orientation="orthogonal" tileheight="46" tilewidth="46" version="1.0" width="10">
+    <layer name="terrain" opacity="0.0" visible="true">
+        <parallaxFactor>1.0</parallaxFactor>
+        <data encoding="csv">
+0,0,0,1,0,0,0,0,0,0,
+0,0,0,1,0,0,0,0,0,0,
+0,2,7,6,7,7,4,0,0,0,
+0,1,0,0,0,0,1,0,0,0,
+0,0,0,7,7,0,1,0,0,0,
+7,7,7,7,7,0,1,0,0,0,
+0,0,0,0,0,0,1,0,0,0,
+0,7,7,7,7,7,5,0,0,0,
+0,0,0,0,0,0,0,0,0,0
+</data>
+    </layer>
+    <layer name="turret-bases" opacity="0.0" visible="true">
+        <parallaxFactor>1.0</parallaxFactor>
+        <data encoding="csv">0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,101,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</data>
+    </layer>
+    <layer name="sprites" opacity="0.0" visible="true">
+        <parallaxFactor>1.0</parallaxFactor>
+        <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0
+</data>
+    </layer>
+    <objectgroup name="spawnpoints" opacity="0.0" visible="false">
+        <object gid="0.0" height="21.0" name="target" type="UNDEFINED" visible="false" width="22.0" x="415.0" y="245.0">
+            <properties/>
+        </object>
+        <object gid="0.0" height="25.0" name="spawnpoint" type="UNDEFINED" visible="false" width="23.0" x="106.0" y="15.0">
+            <properties>
+                <property name="wave0.monsters" value="15,0,0,0,0,0,0"/>
+                <property name="wave0.delay" value="1000000000"/>
+            </properties>
+        </object>
+        <properties/>
+    </objectgroup>
+    <properties/>
+    <tileset firstgid="1" margin="0" name="terrain" source="terrain.tsx" spacing="0" tileheight="46" tilewidth="46">
+        <baseUrl>/de/eppleton/fx2d/towerdefense</baseUrl>
+        <image height="322" source="tower_defense_terrain.png" width="46"/>
+    </tileset>
+    <tileset firstgid="8" margin="0" name="turrets" source="turrets.tsx" spacing="0" tileheight="46" tilewidth="46">
+        <baseUrl>/de/eppleton/fx2d/towerdefense</baseUrl>
+        <image height="322" source="turrets_complete.png" width="46"/>
+    </tileset>
+    <tileset firstgid="15" margin="0" name="background" source="background.tsx" spacing="0" tileheight="400" tilewidth="470">
+        <baseUrl>/de/eppleton/fx2d/towerdefense</baseUrl>
+        <image height="400" source="background.jpg" width="470"/>
+    </tileset>
+    <tileset firstgid="16" margin="0" name="enemy1" source="enemy1.tsx" spacing="0" tileheight="46" tilewidth="46">
+        <baseUrl>/de/eppleton/fx2d/towerdefense</baseUrl>
+        <image height="276" source="enemy_1.png" width="46"/>
+    </tileset>
+    <tileset firstgid="22" margin="0" name="turret-cannons" source="turret-cannons.tsx" spacing="0" tileheight="46" tilewidth="46">
+        <baseUrl>/de/eppleton/fx2d/towerdefense</baseUrl>
+        <image height="322" source="turret-cannons.png" width="46"/>
+    </tileset>
+    <tileset firstgid="29" margin="0" name="pellet" source="pellet.tsx" spacing="0" tileheight="8" tilewidth="8">
+        <baseUrl>/de/eppleton/fx2d/towerdefense</baseUrl>
+        <image height="64" source="pellet.png" width="8"/>
+    </tileset>
+    <tileset firstgid="37" margin="0" name="explosion" source="explosion.tsx" spacing="0" tileheight="128" tilewidth="128">
+        <baseUrl>/de/eppleton/fx2d/towerdefense</baseUrl>
+        <image height="1024" source="boom3_0.png" width="1024"/>
+    </tileset>
+    <tileset firstgid="101" margin="0" name="turret-bases" spacing="0" tileheight="46" tilewidth="46">
+        <image height="322" source="turret-bases.png" width="46"/>
+        <tile id="0">
+            <properties>
+                <property name="range" value="70"/>
+                <property name="name" value="Pellet Gun"/>
+                <property name="type" value="pellet"/>
+                <property name="damage" value="6"/>
+                <property name="price" value="75"/>
+                <property name="description" value="A simple, robust, pellet gun, that combines medium range with nice fire power"/>
+                <property name="firerate" value="1"/>
+            </properties>
+        </tile>
+        <tile id="1">
+            <properties>
+                <property name="range" value="60"/>
+                <property name="name" value="El Rapido"/>
+                <property name="type" value="pellet"/>
+                <property name="damage" value="3"/>
+                <property name="price" value="80"/>
+                <property name="description" value="A rapid fire pellet gun with a short range."/>
+                <property name="firerate" value=".3"/>
+            </properties>
+        </tile>
+        <tile id="2">
+            <properties>
+                <property name="range" value="75"/>
+                <property name="name" value="Plasma Cannon"/>
+                <property name="type" value="plasma"/>
+                <property name="damage" value="20"/>
+                <property name="price" value="70"/>
+                <property name="description" value="This plasma cannon causes great damage with it's double shot, but takes a while to recover after each blast. "/>
+                <property name="firerate" value="2"/>
+            </properties>
+        </tile>
+        <tile id="3">
+            <properties>
+                <property name="range" value="100"/>
+                <property name="name" value="Stun Gun"/>
+                <property name="type" value="electro"/>
+                <property name="damage" value="0"/>
+                <property name="price" value="145"/>
+                <property name="description" value="This turret can slow down enemies via an electric shockwave."/>
+                <property name="slowdown" value="0.3"/>
+                <property name="firerate" value="1.2"/>
+            </properties>
+        </tile>
+        <tile id="4">
+            <properties>
+                <property name="range" value="100"/>
+                <property name="name" value="Twin Shot"/>
+                <property name="type" value="doublepellet"/>
+                <property name="damage" value="30"/>
+                <property name="price" value="160"/>
+                <property name="description" value="A slow, double bullet pellet gun with a wide range, causing very high damage."/>
+                <property name="firerate" value="2"/>
+            </properties>
+        </tile>
+        <tile id="5">
+            <properties>
+                <property name="range" value="600"/>
+                <property name="name" value="The Beam"/>
+                <property name="type" value="laser"/>
+                <property name="damage" value="1"/>
+                <property name="price" value="200"/>
+                <property name="description" value="This tower melts Insectoids with it's powerful plasma beam."/>
+                <property name="firerate" value="0"/>
+            </properties>
+        </tile>
+        <tile id="6">
+            <properties>
+                <property name="range" value="600"/>
+                <property name="name" value="The Anihilator"/>
+                <property name="type" value="laser"/>
+                <property name="damage" value="200"/>
+                <property name="price" value="200"/>
+                <property name="description" value="The anihilator features ultimate firepower."/>
+                <property name="firerate" value="1"/>
+            </properties>
+        </tile>
+    </tileset>
+</map>

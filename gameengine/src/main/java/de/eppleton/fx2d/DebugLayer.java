@@ -23,10 +23,10 @@ package de.eppleton.fx2d;
 
 import com.sun.javafx.perf.PerformanceTracker;
 import javafx.scene.Scene;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.Style.Color;
 
 /**
  *
@@ -49,8 +49,8 @@ public class DebugLayer extends Layer{
     public void draw(GraphicsContext graphicsContext, double x, double y, double width, double height) {
         
         
-        graphicsContext.setFont(Font.font("Monospaced", FontWeight.BOLD, 10));
-        graphicsContext.setFill(fill);
+//        graphicsContext.setFont(Font.font("Monospaced", FontWeight.BOLD, 10));
+        graphicsContext.setFillStyle(fill);
         graphicsContext.fillText("#pulses "+canvas.getPulses() , x, y+12);
         graphicsContext.fillText("skipped "+canvas.getCleanCounter() , x, y+24);
         graphicsContext.fillText("AveragePulses "+perfTracker.getAveragePulses() , x, y+36);

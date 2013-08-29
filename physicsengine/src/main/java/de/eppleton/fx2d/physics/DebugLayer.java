@@ -22,12 +22,10 @@
 package de.eppleton.fx2d.physics;
 
 import de.eppleton.fx2d.Layer;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
+import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.Style.Color;
 import org.jbox2d.collision.shapes.CircleShape;
 import org.jbox2d.collision.shapes.PolygonShape;
-import org.jbox2d.collision.shapes.Shape;
-import org.jbox2d.common.Settings;
 import org.jbox2d.common.Transform;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
@@ -59,17 +57,17 @@ public class DebugLayer extends Layer {
             while (nextFixture != null) {
                 switch (nextFixture.getType()) {
                     case CIRCLE: {
-                        graphicsContext.setFill(Color.RED);
+                        graphicsContext.setFillStyle(graphicsContext.getWebColor("#ff0000"));
                         CircleShape circle = (CircleShape) nextFixture.getShape();
                         float radius = camera.scale(circle.m_radius);
                         Vec2 worldToScreen = camera.worldToScreen(circle.m_p);
-                        graphicsContext.fillOval(worldToScreen.x - radius, worldToScreen.y - radius, radius * 2, radius * 2);
+                        graphicsContext.fillCircle(worldToScreen.x - radius, worldToScreen.y - radius, radius * 2);
                     }
                     case POLYGON: {
                         PolygonShape polygon = (PolygonShape) nextFixture.getShape();
                         double[] x_coord = new double[polygon.getVertexCount()];
                         double[] y_coord = new double[polygon.getVertexCount()];
-                        graphicsContext.setFill(Color.BLUE);
+                        graphicsContext.setFillStyle(graphicsContext.getWebColor("#0000ff"));
 
                         for (int i = 0; i < polygon.getVertexCount(); i++) {
                             Vec2 vec2 = polygon.getVertex(i);

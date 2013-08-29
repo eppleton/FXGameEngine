@@ -21,8 +21,7 @@
  */
 package de.eppleton.fx2d;
 
-import de.eppleton.fx2d.Sprite;
-import javafx.scene.canvas.GraphicsContext;
+import net.java.html.canvas.GraphicsContext;
 
 /**
  * A class used to render a Sprite.

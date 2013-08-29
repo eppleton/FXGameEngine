@@ -6,7 +6,7 @@ package de.eppleton.fx2d;
 
 import java.util.ArrayList;
 import java.util.List;
-import javafx.scene.canvas.GraphicsContext;
+import net.java.html.canvas.GraphicsContext;
 
 /**
  * A Renderer that allows you to stack renderers on top of each others. 

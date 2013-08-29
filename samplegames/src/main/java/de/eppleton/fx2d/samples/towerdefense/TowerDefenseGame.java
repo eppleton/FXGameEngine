@@ -22,23 +22,27 @@ import de.eppleton.fx2d.tileengine.TileMapReader;
 import de.eppleton.fx2d.tileengine.TileSet;
 import de.eppleton.fx2d.tileengine.action.TileSetAnimation;
 import de.eppleton.fx2d.tileengine.algorithms.AStar;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import javax.xml.bind.JAXBException;
+import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.Image;
+import net.java.html.canvas.Style.Color;
 import org.openide.util.Lookup;
 
 /**
@@ -69,6 +73,7 @@ public class TowerDefenseGame extends Application {
     }
     private int currentWave;
     private int maxHits = 2;
+    private boolean levelLost;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -144,6 +149,7 @@ public class TowerDefenseGame extends Application {
                     for (int i = 0; i < properties.size() / 2; i++) {
                         long evaluationInterval = Long.parseLong(properties.getProperty("wave" + i + "."
                                 + "delay"));
+                        System.out.println("Spawn monsters every " + evaluationInterval + " nanos");
 
                         waves.add(new Wave(stacked, evaluationInterval, properties.getProperty("wave" + i + "."
                                 + "monsters").split(",")));
@@ -159,8 +165,16 @@ public class TowerDefenseGame extends Application {
     }
 
     private void startWave() {
+        try {
+            TileMapReader.writeMap(tileMap, "LevelState.tmx");
+        } catch (JAXBException ex) {
+            Logger.getLogger(TowerDefenseGame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(TowerDefenseGame.class.getName()).log(Level.SEVERE, null, ex);
+        }
         // setup Enemy Spawning
         Wave current = waves.get(currentWave++);
+        levelLost = false;
         canvas.addBehaviour(current);
         canvas.addBehaviour(new CheckHitsBehavior(hits));
     }
@@ -168,10 +182,14 @@ public class TowerDefenseGame extends Application {
     private void stopWave() {
         if (hits.integerValue() >= maxHits) {
             message = "Section destroyed!";
-        }else {
-            message = "Wave finished, hits: "+hits;
+        } else {
+            message = "Wave finished, hits: " + hits;
         }
-        
+        if (!levelLost) {
+            canvas.addBehaviour(new FadeBehaviour());
+            levelLost = true;
+        }
+
     }
 
     private void calculateAttackPath() {
@@ -225,8 +243,8 @@ public class TowerDefenseGame extends Application {
 
         @Override
         public void draw(GraphicsContext graphicsContext, double x, double y, double width, double height) {
-            graphicsContext.setFill(Color.RED);
-            graphicsContext.setFont(Font.font("OricNeo", FontWeight.BOLD, 24));
+            graphicsContext.setFillStyle(new Color("#ff0000"));
+            graphicsContext.setFont("Bold 24 OricNeo");
             graphicsContext.fillText("Score: " + score, 10, 28);
             if (message != null) {
                 graphicsContext.fillText(message, 150, 200);

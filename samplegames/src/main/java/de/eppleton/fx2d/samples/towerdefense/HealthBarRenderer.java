@@ -6,8 +6,8 @@ package de.eppleton.fx2d.samples.towerdefense;
 
 import de.eppleton.fx2d.Renderer;
 import de.eppleton.fx2d.Sprite;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
+import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.Style.Color;
 
 /**
  *
@@ -35,15 +35,15 @@ public class HealthBarRenderer implements Renderer {
         int width = sprite.getWidth();
         int height = sprite.getHeight();
         double percent = health / maxHealth;
-        context.setFill( Color.rgb(200,200,200,.5));
+        context.setFillStyle(new Color("rgba(200,200,200,.5)"));
         context.fillRect(4+(width / 2), 10+(height / 2), (width / 2), 4);
         
-        context.setFill( Color.rgb(0,255,0,.5));
+        context.setFillStyle(new Color("rgba(0,255,0,.5)"));
         if (percent < .5) {
-            context.setFill(Color.rgb(255,255,0,.5));
+            context.setFillStyle(new Color("rgba(255,255,0,.5)"));
         }
         if (percent < .2) {
-            context.setFill(Color.rgb(255,0,0,0.5));
+            context.setFillStyle(new Color("rgba(255,0,0,0.5)"));
         }
         context.fillRect(4+(width / 2), 10+(height / 2), (width / 2 * percent), 4);
     }

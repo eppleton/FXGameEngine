@@ -25,7 +25,7 @@ import de.eppleton.fx2d.Sprite;
 import de.eppleton.fx2d.Renderer;
 import de.eppleton.fx2d.tileengine.TileSet;
 import java.util.Arrays;
-import javafx.scene.canvas.GraphicsContext;
+import net.java.html.canvas.GraphicsContext;
 
 /**
  *
