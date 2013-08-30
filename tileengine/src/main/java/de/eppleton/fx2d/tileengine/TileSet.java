@@ -174,9 +174,9 @@ public class TileSet {
         return rows;
     }
     
-    public void merge(TileSet other){
-//        Image merge = ImageUtilities.merge(this.getTileImage(), other.getTileImage());
-//        init(merge);
+    public void merge(GraphicsContext gc, TileSet other){
+        Image merge = gc.merge(this.getTileImage(), other.getTileImage());
+        init(merge);
     }
     
     

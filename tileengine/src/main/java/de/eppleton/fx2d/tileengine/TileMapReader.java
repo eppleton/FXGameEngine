@@ -72,7 +72,7 @@ public class TileMapReader {
             }
             String source = resourcePath(tileSet.getImage().getSource(), baseUrl);
             LOG.log(Level.INFO, "loading image " + source);
-            Image image = new Image(source);
+            Image image = Image.create(source);
             tileSet.init(image);
         }
         return map;
@@ -108,7 +108,7 @@ public class TileMapReader {
             }
             String source = resourcePath(tileSet.getImage().getSource(), baseUrl);
             LOG.log(Level.INFO, "loading image " + source);
-            Image image = new Image(TileMapReader.class.getResource
+            Image image = Image.create(TileMapReader.class.getResource
                     (source).toExternalForm());
             tileSet.init(image);
         }
@@ -156,7 +156,7 @@ public class TileMapReader {
         tileSet.setBaseUrl(baseUrl);
         String source = tileSet.getImage().getSource();
         String resourcePath = resourcePath(source, baseUrl);
-        Image image = new Image(TileMapReader.class.getResource(resourcePath).toExternalForm());
+        Image image = Image.create(TileMapReader.class.getResource(resourcePath).toExternalForm());
         tileSet.init(image);
         return tileSet;
     }
