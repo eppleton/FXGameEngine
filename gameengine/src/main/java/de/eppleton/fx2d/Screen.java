@@ -4,7 +4,6 @@
  */
 package de.eppleton.fx2d;
 
-import java.awt.GraphicsEnvironment;
 import net.java.html.canvas.GraphicsContext;
 
 /**

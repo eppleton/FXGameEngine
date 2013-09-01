@@ -11,7 +11,7 @@ import net.java.html.canvas.GraphicsContext;
 /**
  * A Renderer that allows you to stack renderers on top of each others. 
  * This creates a mini-Layer system. The benefit is that you can easily add more 
- * than one renderer to a sprite at the same time.
+ * than one renderer to a sprite at the same time, e.g. to decorate a sprite.
  * @author antonepple
  */
 public class StackedRenderer implements Renderer {
