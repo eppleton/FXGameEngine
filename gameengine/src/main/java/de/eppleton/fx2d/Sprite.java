@@ -20,7 +20,7 @@
  */
 package de.eppleton.fx2d;
 
-import de.eppleton.fx2d.action.MouseEventHandler;
+import de.eppleton.fx2d.event.MouseEventHandler;
 import de.eppleton.fx2d.action.SpriteBehavior;
 import de.eppleton.fx2d.action.SpriteAction;
 import de.eppleton.fx2d.action.State;
