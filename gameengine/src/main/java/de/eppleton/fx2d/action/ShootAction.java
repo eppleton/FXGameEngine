@@ -25,7 +25,7 @@ import de.eppleton.fx2d.Renderer;
 import de.eppleton.fx2d.Sprite;
 import de.eppleton.fx2d.SpriteProvider;
 import de.eppleton.fx2d.collision.CollisionHandler;
-import javafx.scene.media.AudioClip;
+import net.java.html.sound.AudioClip;
 
 /**
  *

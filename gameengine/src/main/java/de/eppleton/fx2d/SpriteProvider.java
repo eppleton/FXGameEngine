@@ -27,5 +27,5 @@ package de.eppleton.fx2d;
  */
 public interface SpriteProvider {
 
-    public Sprite getSprite(GameCanvas parent, double x, double y);
+    public Sprite getSprite(Level parent, double x, double y);
 }

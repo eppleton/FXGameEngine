@@ -21,7 +21,7 @@
  */
 package de.eppleton.fx2d.action;
 
-import de.eppleton.fx2d.GameCanvas;
+import de.eppleton.fx2d.Level;
 
 /**
  *
@@ -51,7 +51,7 @@ public class Behavior {
         this.evaluationInterval = evaluationInterval;
     }
 
-    public boolean perform(GameCanvas canvas, long nanos) {
+    public boolean perform(Level canvas, long nanos) {
         return true;
     }
     

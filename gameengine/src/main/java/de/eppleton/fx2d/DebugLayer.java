@@ -21,10 +21,6 @@
  */
 package de.eppleton.fx2d;
 
-import com.sun.javafx.perf.PerformanceTracker;
-import javafx.scene.Scene;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import net.java.html.canvas.GraphicsContext;
 import net.java.html.canvas.Style.Color;
 
@@ -35,14 +31,14 @@ import net.java.html.canvas.Style.Color;
 public class DebugLayer extends Layer{
 
     private final Color fill;
-    private final GameCanvas canvas;
-    private final PerformanceTracker perfTracker;
+    private final Level canvas;
+//    private final PerformanceTracker perfTracker;
 
-    public DebugLayer(Color textFill, GameCanvas canvas) {
+    public DebugLayer(Color textFill, Level canvas) {
         this.fill = textFill;
         this.canvas = canvas;
-        Scene scene = canvas.getScene();
-        perfTracker =  PerformanceTracker.getSceneTracker(scene);
+//        Scene scene = canvas.getScene();
+//        perfTracker =  PerformanceTracker.getSceneTracker(scene);
     }
 
     @Override
@@ -53,11 +49,11 @@ public class DebugLayer extends Layer{
         graphicsContext.setFillStyle(fill);
         graphicsContext.fillText("#pulses "+canvas.getPulses() , x, y+12);
         graphicsContext.fillText("skipped "+canvas.getCleanCounter() , x, y+24);
-        graphicsContext.fillText("AveragePulses "+perfTracker.getAveragePulses() , x, y+36);
-        graphicsContext.fillText("AverageFPS "+perfTracker.getAverageFPS() , x, y+48);
-        
-        graphicsContext.fillText("InstantFPS "+perfTracker.getInstantFPS() , x, y+60);
-        graphicsContext.fillText("InstantPulses "+perfTracker.getInstantPulses(), x, y+72);
+//        graphicsContext.fillText("AveragePulses "+perfTracker.getAveragePulses() , x, y+36);
+//        graphicsContext.fillText("AverageFPS "+perfTracker.getAverageFPS() , x, y+48);
+//        
+//        graphicsContext.fillText("InstantFPS "+perfTracker.getInstantFPS() , x, y+60);
+//        graphicsContext.fillText("InstantPulses "+perfTracker.getInstantPulses(), x, y+72);
         graphicsContext.fillText("StutterPulses "+canvas.getStutter() , x, y+84);
         graphicsContext.fillText("LastSlowness "+canvas.getLastSlowness(), x, y+96);
         graphicsContext.fillText("Maxdelta "+canvas.getMaxTimePassed(), x, y+108);

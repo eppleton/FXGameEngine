@@ -1,29 +1,13 @@
-/**
- * This file is part of FXGameEngine A Game Engine written in JavaFX Copyright
- * (C) 2012 Anton Epple <info@eppleton.de>
- *
- * This program is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, version 2 of the License.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * this program. Look for COPYING file in the top folder. If not, see
- * http://opensource.org/licenses/GPL-2.0.
- *
- * For alternative licensing or use in closed source projects contact Anton
- * Epple <info@eppleton.de>
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
  */
 package de.eppleton.fx2d;
 
-import de.eppleton.fx2d.collision.Collision;
 import de.eppleton.fx2d.action.Behavior;
 import de.eppleton.fx2d.action.SpriteBehavior;
-import de.eppleton.fx2d.graphicsenvironment.JavaFXGraphicsEnvironment;
+import de.eppleton.fx2d.collision.Collision;
+import de.eppleton.fx2d.timer.Pulse;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -33,26 +17,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Logger;
-import javafx.animation.AnimationTimer;
-import javafx.event.EventHandler;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.input.MouseEvent;
 import net.java.html.canvas.GraphicsContext;
 
 /**
- * A Canvas used to render Games.
  *
  * @author antonepple
  */
-public final class GameCanvas extends Canvas {
-
+public class Level extends Screen implements Pulse.Handler{
+    
     private Camera camera;
     private float alpha = 1;
     private ConcurrentHashMap<Behavior, Long> behaviours = new ConcurrentHashMap<>();
     private Updater updater = new DefaultUpdater();
-    private AnimationTimer timer;
+    private Pulse timer;
     private static Comparator<Sprite> comparator = new Comparator<Sprite>() {
         @Override
         public int compare(Sprite o1, Sprite o2) {
@@ -81,23 +58,18 @@ public final class GameCanvas extends Canvas {
     private int stutter;
     private long lastSlowness;
     private long maxTimePassed = 0;
+    
+     public Level(double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
 
-    public GameCanvas(double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
-        super(viewPortWidth, viewPortHeight);
         this.screenWidth = viewPortWidth;
         this.screenHeight = viewPortHeight;
         this.cameraMaxX = playfieldWidth - viewPortWidth;
         this.cameraMaxY = playfieldHeight - viewPortHeight;
         this.layers = new ArrayList<>();
 
-        timer = new AnimationTimer() {
-            @Override
-            public void handle(long l) {
-                pulse(l);
-            }
-        };
+        timer = Pulse.create(this);
         sprites = new HashMap<>();
-        setOnMouseClicked(new MouseClickHandler());
+//        setOnMouseClicked(new MouseClickHandler());
     }
 
     public void start() {
@@ -164,15 +136,15 @@ public final class GameCanvas extends Canvas {
     }
 
     public void render(long delta) {
-        GraphicsContext graphicsContext2D = new GraphicsContext(new JavaFXGraphicsEnvironment(this));
+        
         // clear the background
-        graphicsContext2D.clearRect(0, 0, screenWidth, screenHeight);
-        graphicsContext2D.setFillStyle(graphicsContext2D.getWebColor("#000000"));
-        graphicsContext2D.fillRect(0, 0, screenWidth, screenHeight);
+        graphicsContext.clearRect(0, 0, screenWidth, screenHeight);
+        graphicsContext.setFillStyle(graphicsContext.getWebColor("#000000"));
+        graphicsContext.fillRect(0, 0, screenWidth, screenHeight);
         // draw each individual layer
         for (Layer layer : layers) {
             if (layer.isVisible()) {
-                layer.draw(graphicsContext2D, cameraX * layer.getParallaxFactor(), cameraY * layer.getParallaxFactor(), screenWidth, screenHeight);
+                layer.draw(graphicsContext, cameraX * layer.getParallaxFactor(), cameraY * layer.getParallaxFactor(), screenWidth, screenHeight);
             }
             // @TODO Hallo
             if (layer.getName().equals("sprites")) {
@@ -185,11 +157,11 @@ public final class GameCanvas extends Canvas {
                     double y = sprite.getY();
 
                     if (isOnScreen(sprite)) {
-                        graphicsContext2D.save();
-                        graphicsContext2D.translate(x - cameraX,
+                        graphicsContext.save();
+                        graphicsContext.translate(x - cameraX,
                                 y - cameraY);
-                        sprite.drawSprite(graphicsContext2D, alpha, delta);
-                        graphicsContext2D.restore();
+                        sprite.drawSprite(graphicsContext, alpha, delta);
+                        graphicsContext.restore();
                     }
                 }
 
@@ -198,6 +170,12 @@ public final class GameCanvas extends Canvas {
         }
     }
 
+    public GraphicsContext getGraphicsContext() {
+        return graphicsContext;
+    }
+
+    
+    
     public void setCamera(Camera camera) {
         this.camera = camera;
     }
@@ -383,12 +361,13 @@ public final class GameCanvas extends Canvas {
         layers.remove(layer);
     }
 
+
     /**
      * This can be used to plug in simple constraints or a physics engine
      */
     public interface Updater {
 
-        public boolean update(GameCanvas aThis, long l);
+        public boolean update(Level aThis, long l);
     }
 
     private static class DefaultUpdater implements Updater {
@@ -403,7 +382,7 @@ public final class GameCanvas extends Canvas {
         }
 
         @Override
-        public boolean update(GameCanvas canvas, long l) {
+        public boolean update(Level canvas, long l) {
             boolean dirty = false;
             if (delay == -1) {
                 delay = 16666667;
@@ -429,7 +408,7 @@ public final class GameCanvas extends Canvas {
                 return false;
             }
 
-            Rectangle2D moveBox = sprite.getMoveBox();
+            de.eppleton.fx2d.Rectangle2D moveBox = sprite.getMoveBox();
             double x = sprite.getX();
             double y = sprite.getY();
             double newX = velocityX + x;
@@ -475,28 +454,8 @@ public final class GameCanvas extends Canvas {
     }
 
     public interface MoveValidator {
-
         public abstract boolean isValidMove(double x, double y, double width, double height);
     }
-    private static final Logger LOG = Logger.getLogger(GameCanvas.class.getName());
 
-    private class MouseClickHandler implements EventHandler<MouseEvent> {
-
-        public MouseClickHandler() {
-        }
-
-        @Override
-        public void handle(MouseEvent t) {
-            Collection<Sprite> sprites1 = getSprites();
-            double x = t.getX();
-            double y = t.getY();
-            for (Sprite sprite : sprites1) {
-
-                if (sprite.getMouseClickHandler() != null && sprite.contains(x, y)) {
-                    sprite.getMouseClickHandler().handle(new MouseClick(x,y));
-                }
-
-            }
-        }
-    }
+   
 }

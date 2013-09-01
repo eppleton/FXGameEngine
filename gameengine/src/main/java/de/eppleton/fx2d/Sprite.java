@@ -30,11 +30,9 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javafx.event.EventHandler;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import net.java.html.canvas.GraphicsContext;
-import net.java.html.canvas.Style;
 import org.openide.util.Lookup;
 import org.openide.util.lookup.AbstractLookup;
 import org.openide.util.lookup.InstanceContent;
@@ -60,7 +58,7 @@ public class Sprite {
     private Renderer currentAnimation;
     private Rectangle2D moveBox;
     private Rectangle2D collisionBox;
-    private GameCanvas parent;
+    private Level parent;
     private Lookup lookup = Lookup.EMPTY;
     public static Renderer NO_ANIMATION = new Renderer() {
         @Override
@@ -80,7 +78,7 @@ public class Sprite {
     private double angle;
     private MouseEventHandler mouseEventHandler;
 
-    public Sprite(GameCanvas parent, Renderer animation, String name, double x, double y, int width, int height, Lookup lookup) {
+    public Sprite(Level parent, Renderer animation, String name, double x, double y, int width, int height, Lookup lookup) {
         this.parent = parent;
         this.currentState = new State(animation, "default");
         this.currentAnimation = animation;
@@ -95,7 +93,7 @@ public class Sprite {
  
     }
 
-    public Sprite(GameCanvas canvas, String name, double x, double y, int width, int height, Lookup lookup) {
+    public Sprite(Level canvas, String name, double x, double y, int width, int height, Lookup lookup) {
         this(canvas, NO_ANIMATION, name, x, y, width, height, lookup);
     }
 
@@ -115,7 +113,7 @@ public class Sprite {
         return yProperty;
     }
 
-    public GameCanvas getParent() {
+    public Level getParent() {
         return parent;
     }
 
@@ -123,14 +121,14 @@ public class Sprite {
         return lookup;
     }
 
-    public void setParent(GameCanvas parent) {
+    public void setParent(Level parent) {
         this.parent = parent;
     }
 
     public void addAction(KeyCode code, SpriteAction action) {
         if (keyEventHandler == null) {
             keyEventHandler = new KeyEventHandler();
-            parent.addEventHandler(KeyEvent.ANY, keyEventHandler);
+//            parent.addEventHandler(KeyEvent.ANY, keyEventHandler);
         }
         keyEventHandler.actionMap.put(code, action);
     }
@@ -284,7 +282,7 @@ public class Sprite {
         return yProperty.doubleValue();
     }
 
-    public final boolean pulse(GameCanvas field, long l) {
+    public final boolean pulse(Level field, long l) {
         boolean dirty = false;
         Set<Map.Entry<SpriteBehavior, Long>> entrySet = behaviours.entrySet();
         for (Map.Entry<SpriteBehavior, Long> entry : entrySet) {
