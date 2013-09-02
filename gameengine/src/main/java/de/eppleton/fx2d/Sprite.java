@@ -24,14 +24,14 @@ import de.eppleton.fx2d.event.MouseEventHandler;
 import de.eppleton.fx2d.action.SpriteBehavior;
 import de.eppleton.fx2d.action.SpriteAction;
 import de.eppleton.fx2d.action.State;
+import de.eppleton.fx2d.event.EventHandler;
+import de.eppleton.fx2d.event.KeyCode;
+import de.eppleton.fx2d.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javafx.event.EventHandler;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import net.java.html.canvas.GraphicsContext;
 import org.openide.util.Lookup;
 import org.openide.util.lookup.AbstractLookup;
@@ -406,22 +406,22 @@ public class Sprite {
 
         @Override
         public void handle(KeyEvent t) {
-            if (t.getEventType() == KeyEvent.KEY_PRESSED) {
-                SpriteAction action = actionMap.get(((KeyEvent) t).getCode());
+            if (t.getType() == KeyEvent.KEY_PRESSED) {
+                SpriteAction action = actionMap.get(((KeyEvent) t).getKeyCode());
                 if (action != null) {
                     setAction(action);
                     action.started(Sprite.this);
                 }
-            } else if (t.getEventType() == KeyEvent.KEY_RELEASED) {
-                SpriteAction action = actionMap.get(((KeyEvent) t).getCode());
+            } else if (t.getType() == KeyEvent.KEY_RELEASED) {
+                SpriteAction action = actionMap.get(((KeyEvent) t).getKeyCode());
                 if (action != null) {
                     if (currentAction == action) {
                         action.finished(Sprite.this);
                         setAnimation(currentState.getAnimation());
                     }
                 }
-            } else if (t.getEventType() == KeyEvent.KEY_TYPED) {
-                SpriteAction action = actionMap.get(((KeyEvent) t).getCode());
+            } else if (t.getType() == KeyEvent.KEY_TYPED) {
+                SpriteAction action = actionMap.get(((KeyEvent) t).getKeyCode());
                 if (action != null) {
                     setAction(action);
                     action.started(Sprite.this);

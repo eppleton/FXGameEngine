@@ -7,6 +7,8 @@ package de.eppleton.fx2d;
 import de.eppleton.fx2d.action.Behavior;
 import de.eppleton.fx2d.action.SpriteBehavior;
 import de.eppleton.fx2d.collision.Collision;
+import de.eppleton.fx2d.event.EventHandler;
+import de.eppleton.fx2d.event.MouseEvent;
 import de.eppleton.fx2d.timer.Pulse;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+
 import net.java.html.canvas.GraphicsContext;
 
 /**
@@ -59,8 +62,8 @@ public class Level extends Screen implements Pulse.Handler{
     private long lastSlowness;
     private long maxTimePassed = 0;
     
-     public Level(double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
-
+     public Level(GraphicsContext graphicsContext, double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
+        this.graphicsContext = graphicsContext;
         this.screenWidth = viewPortWidth;
         this.screenHeight = viewPortHeight;
         this.cameraMaxX = playfieldWidth - viewPortWidth;
@@ -69,7 +72,6 @@ public class Level extends Screen implements Pulse.Handler{
 
         timer = Pulse.create(this);
         sprites = new HashMap<>();
-//        setOnMouseClicked(new MouseClickHandler());
     }
 
     public void start() {
@@ -455,6 +457,26 @@ public class Level extends Screen implements Pulse.Handler{
 
     public interface MoveValidator {
         public abstract boolean isValidMove(double x, double y, double width, double height);
+    }
+    
+    private class MouseClickHandler implements EventHandler<MouseEvent> {
+
+        public MouseClickHandler() {
+        }
+
+        @Override
+        public void handle(MouseEvent t) {
+            Collection<Sprite> sprites1 = getSprites();
+            double x = t.getX();
+            double y = t.getY();
+            for (Sprite sprite : sprites1) {
+
+                if (sprite.getMouseClickHandler() != null && sprite.contains(x, y)) {
+                    sprite.getMouseClickHandler().handle(new de.eppleton.fx2d.event.MouseEvent(this,de.eppleton.fx2d.event.MouseEvent.ANY, x,y));
+                }
+
+            }
+        }
     }
 
    

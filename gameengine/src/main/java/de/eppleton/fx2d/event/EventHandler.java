@@ -8,8 +8,6 @@ package de.eppleton.fx2d.event;
  *
  * @author antonepple
  */
-public abstract class MouseEventHandler {
-    
-    public abstract void handle (MouseEvent click);
-    
+public interface EventHandler<T extends Event> {
+    public void handle (T event);
 }
