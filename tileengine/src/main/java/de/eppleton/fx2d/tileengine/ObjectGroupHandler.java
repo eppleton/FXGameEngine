@@ -21,8 +21,7 @@
  */
 package de.eppleton.fx2d.tileengine;
 
-import de.eppleton.fx2d.GameCanvas;
-import de.eppleton.fx2d.tileengine.ObjectGroup;
+import de.eppleton.fx2d.Level;
 
 /**
  * ObjectGroupHandlers take care of ObjectGroups. ObjectGroups can be used for
@@ -43,5 +42,5 @@ public interface ObjectGroupHandler {
      * @param group
      * @param field 
      */
-    public void handle(ObjectGroup group, GameCanvas field);
+    public void handle(ObjectGroup group, Level field);
 }

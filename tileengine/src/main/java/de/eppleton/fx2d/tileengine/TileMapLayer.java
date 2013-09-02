@@ -22,8 +22,8 @@
 package de.eppleton.fx2d.tileengine;
 
 import de.eppleton.fx2d.Layer;
+import de.eppleton.fx2d.beans.BooleanProperty;
 import java.util.logging.Logger;
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -40,7 +40,7 @@ public class TileMapLayer extends Layer {
 
     private String name;
     private double opacity;
-    private BooleanProperty visibleProperty = new SimpleBooleanProperty(true);
+    private BooleanProperty visibleProperty = new BooleanProperty(true);
     private Data data;
     private TileMap tileMap;
 
@@ -106,7 +106,7 @@ public class TileMapLayer extends Layer {
     @XmlAttribute
     @Override
     public boolean isVisible() {
-        return visibleProperty.get();
+        return visibleProperty.getValue();
     }
 
     /**
@@ -115,7 +115,7 @@ public class TileMapLayer extends Layer {
      */
     @Override
     public void setVisible(boolean visible) {
-        this.visibleProperty.set(visible);
+        this.visibleProperty.setValue(visible);
     }
 
     /**
