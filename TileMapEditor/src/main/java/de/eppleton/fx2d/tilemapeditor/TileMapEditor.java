@@ -21,8 +21,8 @@
  */
 package de.eppleton.fx2d.tilemapeditor;
 
-import de.eppleton.fx2d.GameCanvas;
-import de.eppleton.fx2d.Layer;
+import de.eppleton.fx2d.Level;
+import de.eppleton.fx2d.graphicsenvironment.JavaFXGraphicsEnvironment;
 import de.eppleton.fx2d.tileengine.TileMap;
 import de.eppleton.fx2d.tileengine.TileMapLayer;
 import de.eppleton.fx2d.tileengine.TileMapReader;
@@ -32,7 +32,6 @@ import de.eppleton.fx2d.tileengine.TileSet;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
@@ -44,6 +43,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
@@ -56,7 +56,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javax.xml.bind.JAXBException;
 import net.java.html.canvas.GraphicsContext;
-import net.java.html.canvas.Style.Color;
 
 /**
  *
@@ -69,7 +68,8 @@ public class TileMapEditor extends Application implements ListChangeListener<Til
     public TileSetChooser tileSets;
     private DrawTileHandler drawTileHandler;
     private EraseHandler eraseHandler;
-    public GameCanvas canvas;
+    public Level level;
+    private Canvas canvas;
 //    AStar.PathNode path;
 
     public String fileURL = "/Users/antonepple/NetBeansProjects/FXGames/samplegames/src/main/resources/de/eppleton/tileengine/sample/resources/maps/sample.tmx";
@@ -86,9 +86,9 @@ public class TileMapEditor extends Application implements ListChangeListener<Til
                 try {
                     TileMapReader.writeMap(tileMap, fileURL);
                 } catch (JAXBException ex) {
-                    Logger.getLogger(TileMapEditor.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(TileMapEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
                 } catch (FileNotFoundException ex) {
-                    Logger.getLogger(TileMapEditor.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(TileMapEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
                 }
             }
         });
@@ -139,24 +139,26 @@ public class TileMapEditor extends Application implements ListChangeListener<Til
         try {
             
             tileMap = TileMapReader.readMapFromFile(fileURL);
-            canvas = new GameCanvas(tileMap.getTilewidth() * tileMap.getWidth(), tileMap.getHeight() * tileMap.getTileheight(), tileMap.getTilewidth() * tileMap.getWidth(), tileMap.getHeight() * tileMap.getTileheight());
+            canvas = new Canvas(tileMap.getTilewidth() * tileMap.getWidth(), tileMap.getHeight() * tileMap.getTileheight());
+            level = new Level(new GraphicsContext(new JavaFXGraphicsEnvironment(canvas)),tileMap.getTilewidth() * tileMap.getWidth(), tileMap.getHeight() * tileMap.getTileheight(), tileMap.getTilewidth() * tileMap.getWidth(), tileMap.getHeight() * tileMap.getTileheight());
             Node rightSide = initSplitPane();
             final ObservableList<TileMapLayer> layers = layerList.getLayerList();
 
             for (TileMapLayer tileMapLayer : layers) {
-                canvas.addLayer(tileMapLayer);
+                level.addLayer(tileMapLayer);
             }
-//            canvas.addLayer(new AStarLayer());
+//            level.addLayer(new AStarLayer());
 
             layers.addListener(this);
             BorderPane bp = new BorderPane();
             ScrollPane scrollPane = new ScrollPane();
             scrollPane.setContent(canvas);
+            level.setGraphicsContext(new GraphicsContext(new JavaFXGraphicsEnvironment(canvas)));
             SplitPane split = new SplitPane();
             bp.setCenter(split);
             bp.setTop(initToolBar());
             split.getItems().addAll(scrollPane, rightSide);
-            canvas.start();
+            level.start();
             Scene scene = new Scene(bp, 1024, 762);
             primaryStage.setTitle("Tile Editor");
             primaryStage.setScene(scene);
@@ -164,7 +166,7 @@ public class TileMapEditor extends Application implements ListChangeListener<Til
 
             primaryStage.show();
         } catch (JAXBException ex) {
-            Logger.getLogger(TileMapEditor.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TileMapEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
     }
@@ -179,7 +181,7 @@ public class TileMapEditor extends Application implements ListChangeListener<Til
         if (change.wasRemoved()) {
             List<? extends TileMapLayer> removed = change.getRemoved();
             for (TileMapLayer tileMapLayer : removed) {
-                canvas.removeLayer(tileMapLayer);
+                level.removeLayer(tileMapLayer);
             }
         }
         if (change.wasAdded()) {
@@ -189,7 +191,7 @@ public class TileMapEditor extends Application implements ListChangeListener<Til
                 int idx = 0;
                 for (TileMapLayer tileMapLayer1 : list) {
                     if (tileMapLayer == tileMapLayer1) {
-                        canvas.addLayer(idx, tileMapLayer);
+                        level.addLayer(idx, tileMapLayer);
                         break;
                     }
                     idx++;

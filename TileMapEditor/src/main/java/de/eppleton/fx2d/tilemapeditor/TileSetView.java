@@ -61,7 +61,7 @@ class TileSetView extends StackPane {
                 try {
                     image = new javafx.scene.image.Image(new FileInputStream(set.getTileImage().getSrc()));
                 } catch (FileNotFoundException ex) {
-                    Logger.getLogger(JavaFXGraphicsEnvironment.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(TileSetView.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             
