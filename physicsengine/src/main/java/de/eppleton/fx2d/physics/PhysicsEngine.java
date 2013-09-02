@@ -21,11 +21,11 @@
  */
 package de.eppleton.fx2d.physics;
 
-import de.eppleton.fx2d.GameCanvas;
+import de.eppleton.fx2d.Level;
+import de.eppleton.fx2d.Rectangle2D;
 import de.eppleton.fx2d.Sprite;
 import de.eppleton.jbox2d.builders.BoxBuilder;
 import java.util.ArrayList;
-import javafx.geometry.Rectangle2D;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.BodyType;
@@ -35,7 +35,7 @@ import org.jbox2d.dynamics.World;
  *
  * @author antonepple
  */
-public class PhysicsEngine implements GameCanvas.Updater {
+public class PhysicsEngine implements Level.Updater {
 
     private World world;
     private long lastPulse;
@@ -50,7 +50,7 @@ public class PhysicsEngine implements GameCanvas.Updater {
     }
     ArrayList<Body> toKill;
 
-    public PhysicsEngine(Vec2 gravity, Vec2 translate, float scale, GameCanvas canvas, boolean debug) {
+    public PhysicsEngine(Vec2 gravity, Vec2 translate, float scale, Level canvas, boolean debug) {
         canvas.setUpdater(this);
         if (debug) canvas.addLayer(new DebugLayer(this));
         camera = new WorldCam(translate, scale);
@@ -76,7 +76,7 @@ public class PhysicsEngine implements GameCanvas.Updater {
     }
 
     @Override
-    public boolean update(GameCanvas canvas, long l) {
+    public boolean update(Level canvas, long l) {
         // timestep clamping
         float dt = (float) Math.min(((double) (l - lastPulse)) / 1_000_000_000, 1.0 / 15.0);
         world.step(dt, 8, 2);
