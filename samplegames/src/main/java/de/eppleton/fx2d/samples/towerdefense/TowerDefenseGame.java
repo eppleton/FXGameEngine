@@ -4,15 +4,16 @@
  */
 package de.eppleton.fx2d.samples.towerdefense;
 
-import de.eppleton.fx2d.GameCanvas;
+import de.eppleton.fx2d.Level;
 import de.eppleton.fx2d.ImageLayer;
-import de.eppleton.fx2d.IntegerProperty;
+import de.eppleton.fx2d.beans.IntegerProperty;
 import de.eppleton.fx2d.Layer;
-import de.eppleton.fx2d.MouseClick;
+
 import de.eppleton.fx2d.Sprite;
 import de.eppleton.fx2d.StackedRenderer;
 import de.eppleton.fx2d.action.Behavior;
-import de.eppleton.fx2d.action.MouseEventHandler;
+import de.eppleton.fx2d.event.EventHandler;
+import de.eppleton.fx2d.event.MouseEvent;
 import de.eppleton.fx2d.tileengine.ObjectGroup;
 import de.eppleton.fx2d.tileengine.TObject;
 import de.eppleton.fx2d.tileengine.TileMap;
@@ -27,19 +28,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Properties;
-import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javafx.application.Application;
-import static javafx.application.Application.launch;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
 import javax.xml.bind.JAXBException;
+
+
 import net.java.html.canvas.GraphicsContext;
 import net.java.html.canvas.Image;
 import net.java.html.canvas.Style.Color;
@@ -49,12 +41,11 @@ import org.openide.util.Lookup;
  *
  * @author antonepple
  */
-public class TowerDefenseGame extends Application {
-
-    private IntegerProperty score = new IntegerProperty(0);
+public class TowerDefenseGame extends Level {
+   private IntegerProperty score = new IntegerProperty(0);
     private IntegerProperty hits = new IntegerProperty(0);
     private TileMap tileMap;
-    private GameCanvas canvas;
+    private Level level;
     private String fileURL = "/de/eppleton/fx2d/towerdefense/towerdefense.tmx";
     private AStar.PathNode attackPath;
     private Palette palette;
@@ -67,72 +58,74 @@ public class TowerDefenseGame extends Application {
     private Image backgroundImage;
     private List<Wave> waves = new ArrayList<>();
     private String message;
-
-    public static void main(String[] args) {
-        launch(args);
-    }
     private int currentWave;
     private int maxHits = 2;
     private boolean levelLost;
 
-    @Override
-    public void start(Stage stage) throws Exception {
-        // read the Map
-        tileMap = TileMapReader.readMap(fileURL);
-        backgroundImage = tileMap.getTileSet("background").getTileImage();
-
-        // create the canvas
-        canvas = new GameCanvas(tileMap.getTilewidth() * tileMap.getWidth(), tileMap.getHeight() * tileMap.getTileheight(), tileMap.getTilewidth() * tileMap.getWidth(), tileMap.getHeight() * tileMap.getTileheight());
-
-        // add all the layers
-        canvas.addLayer(new ImageLayer(backgroundImage));
-        ArrayList<TileMapLayer> layers = tileMap.getLayers();
-        for (TileMapLayer tileMapLayer : layers) {
-            canvas.addLayer(tileMapLayer);
-        }
-        canvas.addLayer(new HUD());
-
-        final Sprite button = new Sprite(canvas, "button", tileMap.getWidthInPixels() - 30, 20, 20, 20, Lookup.EMPTY);
-        button.setOnMouseClicked(new MouseEventHandler() {
-            @Override
-            public void handle(MouseClick click) {
-                startWave();
-                button.die();
-            }
-        });
-        canvas.addSprite(button);
-
-        turretBaseLayer = (TileMapLayer) canvas.getLayer("turret-bases");
-        platformLayer = (TileMapLayer) canvas.getLayer("terrain");
-
-        // initialize the Palette
-        TileSet bullets = tileMap.getTileSet("pellet");
-        final TileSetAnimation shoot = new TileSetAnimation(bullets, new int[]{0}, .00000001f);
-        final TileSet cannons = tileMap.getTileSet("turret-cannons");
-        TileSet bases = tileMap.getTileSet("turret-bases");
-        palette = new Palette(bases, cannons);
-
-        // add Handler for placing Turrets
-        canvas.setOnMousePressed(new TurretHandler(cannons, shoot));
-
-        // read spawnpoints, target, turret-properties,...
-        readObjectProperties();
-        calculateAttackPath();
-
-        // setup the basic Layout
-        BorderPane borderPane = new BorderPane();
-        borderPane.setCenter(canvas);
-        borderPane.setRight(palette);
-
-        Scene scene = new Scene(borderPane);
-        scene.getStylesheets().add("/de/eppleton/fx2d/towerdefense/towerdefense.css");
-        stage.setScene(scene);
-
-        // start the game
-        canvas.requestFocus();
-        canvas.start();
-        stage.show();
+    public TowerDefenseGame(GraphicsContext graphicsContext, double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
+        super(graphicsContext, playfieldWidth, playfieldHeight, viewPortWidth, viewPortHeight);
     }
+
+    
+    
+    @Override
+    public void initGame() {
+        try {
+            // read the Map
+            tileMap = TileMapReader.readMap(fileURL);
+            backgroundImage = tileMap.getTileSet("background").getTileImage();
+
+            // create the level
+//            canvas = new Canvas(tileMap.getTilewidth() * tileMap.getWidth(), tileMap.getHeight() * tileMap.getTileheight());
+//            level = new Level(new GraphicsContext(new JavaFXGraphicsEnvironment(canvas)), tileMap.getTilewidth() * tileMap.getWidth(), tileMap.getHeight() * tileMap.getTileheight(), tileMap.getTilewidth() * tileMap.getWidth(), tileMap.getHeight() * tileMap.getTileheight());
+            level = this;
+            // add all the layers
+            level.addLayer(new ImageLayer(backgroundImage));
+            ArrayList<TileMapLayer> layers = tileMap.getLayers();
+            for (TileMapLayer tileMapLayer : layers) {
+                level.addLayer(tileMapLayer);
+            }
+            level.addLayer(new HUD());
+
+           
+
+            final Sprite button = new Sprite(level, "button", tileMap.getWidthInPixels() - 30, 20, 20, 20, Lookup.EMPTY);
+            button.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent click) {
+                    startWave();
+                    button.die();
+                }
+            });
+            level.addSprite(button);
+
+            turretBaseLayer = (TileMapLayer) level.getLayer("turret-bases");
+            platformLayer = (TileMapLayer) level.getLayer("terrain");
+
+            // initialize the Palette
+            TileSet bullets = tileMap.getTileSet("pellet");
+            final TileSetAnimation shoot = new TileSetAnimation(bullets, new int[]{0}, .00000001f);
+            final TileSet cannons = tileMap.getTileSet("turret-cannons");
+            TileSet bases = tileMap.getTileSet("turret-bases");
+            palette = new Palette(bases, cannons);
+
+            // add Handler for placing Turrets
+            level.addEventHandler(MouseEvent.MOUSE_PRESSED, new TurretHandler(cannons, shoot));
+
+
+            // read spawnpoints, target, turret-properties,...
+            readObjectProperties();
+            calculateAttackPath();
+
+
+            level.start();
+
+        } catch (Exception ex) {
+            Logger.getLogger(TowerDefenseGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+    }
+
+
 
     private void readObjectProperties() throws NumberFormatException, TileMapException {
         final TileSet enemy1 = tileMap.getTileSet("enemy1");
@@ -168,15 +161,15 @@ public class TowerDefenseGame extends Application {
         try {
             TileMapReader.writeMap(tileMap, "LevelState.tmx");
         } catch (JAXBException ex) {
-            Logger.getLogger(TowerDefenseGame.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TowerDefenseGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(TowerDefenseGame.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TowerDefenseGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         // setup Enemy Spawning
         Wave current = waves.get(currentWave++);
         levelLost = false;
-        canvas.addBehaviour(current);
-        canvas.addBehaviour(new CheckHitsBehavior(hits));
+        level.addBehaviour(current);
+        level.addBehaviour(new CheckHitsBehavior(hits));
     }
 
     private void stopWave() {
@@ -186,7 +179,7 @@ public class TowerDefenseGame extends Application {
             message = "Wave finished, hits: " + hits;
         }
         if (!levelLost) {
-            canvas.addBehaviour(new FadeBehaviour());
+            level.addBehaviour(new FadeBehaviour());
             levelLost = true;
         }
 
@@ -209,7 +202,7 @@ public class TowerDefenseGame extends Application {
         }
 
         @Override
-        public boolean perform(GameCanvas canvas, long nanos) {
+        public boolean perform(Level canvas, long nanos) {
             if (hits.integerValue() < maxHits) {
                 return true;
             } else {
@@ -226,7 +219,7 @@ public class TowerDefenseGame extends Application {
         }
 
         @Override
-        public boolean perform(GameCanvas canvas, long nanos) {
+        public boolean perform(Level canvas, long nanos) {
             Collection<Sprite> sprites = canvas.getSprites();
             for (Sprite sprite : sprites) {
                 if (sprite instanceof EnemySprite) {
@@ -273,7 +266,7 @@ public class TowerDefenseGame extends Application {
             int idx = (tileGridX + (tileGridY * tileMap.getWidth()));
             if (platformLayer.getGid(idx) != 0 && turretBaseLayer.getGid(idx) == 0) {
                 turretBaseLayer.getData().setGid(idx, palette.getSelectedGid());
-                new CannonSprite(canvas, palette.getSelectedProperties(), new TileSetAnimation(cannons, new int[]{palette.getSelectedIndex()}, .1f), shoot, "cannon " + (cannoncount++), tileGridX * tileMap.getTilewidth(), tileGridY * tileMap.getTileheight(), 46, 46);
+                new CannonSprite(level, palette.getSelectedProperties(), new TileSetAnimation(cannons, new int[]{palette.getSelectedIndex()}, .1f), shoot, "cannon " + (cannoncount++), tileGridX * tileMap.getTilewidth(), tileGridY * tileMap.getTileheight(), 46, 46);
             }
         }
     }
@@ -292,13 +285,13 @@ public class TowerDefenseGame extends Application {
             for (int i = 0; i < waveProperties.length; i++) {
                 int numEnemies = Integer.parseInt(waveProperties[i]);
                 for (int j = 0; j < numEnemies; j++) {
-                    enemySprites.add(new EnemySprite(canvas, score, hits, new Properties(), stacked, "enemy" + (enemyCount++), ((int) spawnpointTileX) * tileMap.getTilewidth(), ((int) spawnpointTileY) * tileMap.getTileheight(), 46, 46));
+                    enemySprites.add(new EnemySprite(level, score, hits, new Properties(), stacked, "enemy" + (enemyCount++), ((int) spawnpointTileX) * tileMap.getTilewidth(), ((int) spawnpointTileY) * tileMap.getTileheight(), 46, 46));
                 }
             }
         }
 
         @Override
-        public boolean perform(GameCanvas canvas, long nanos) {
+        public boolean perform(Level canvas, long nanos) {
             if (enemyIndex < enemySprites.size()) {
                 EnemySprite nextEnemy = enemySprites.get(enemyIndex);
                 nextEnemy.setAttackPath(attackPath);

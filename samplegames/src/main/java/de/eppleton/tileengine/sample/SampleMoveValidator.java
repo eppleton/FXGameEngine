@@ -21,7 +21,7 @@
  */
 package de.eppleton.tileengine.sample;
 
-import de.eppleton.fx2d.GameCanvas.MoveValidator;
+import de.eppleton.fx2d.Level.MoveValidator;
 import de.eppleton.fx2d.tileengine.Tile;
 import de.eppleton.fx2d.tileengine.TileMap;
 import de.eppleton.fx2d.tileengine.TileMapLayer;

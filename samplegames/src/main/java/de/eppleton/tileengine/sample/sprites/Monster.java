@@ -21,7 +21,7 @@
  */
 package de.eppleton.tileengine.sample.sprites;
 
-import de.eppleton.fx2d.GameCanvas;
+import de.eppleton.fx2d.Level;
 import de.eppleton.fx2d.Sprite;
 import de.eppleton.fx2d.action.SpriteBehavior;
 import de.eppleton.fx2d.tileengine.TileSet;
@@ -40,7 +40,7 @@ public class Monster extends Sprite {
     private TileSetAnimation monsterDown;
     private TileSetAnimation monsterRight;
 
-    public Monster(final GameCanvas parent, String name, double x, double y, int width, int height, TileSet monster) {
+    public Monster(final Level parent, String name, double x, double y, int width, int height, TileSet monster) {
         super(parent, name, x, y, width, height, Lookup.EMPTY);
         parent.addSprite(this);
         monsterUp = new TileSetAnimation(monster, new int[]{1, 2, 3, 4, 5, 6, 7, 8}, 10f);
@@ -95,9 +95,9 @@ public class Monster extends Sprite {
 
     private static class ActionImpl extends SpriteBehavior {
 
-        private final GameCanvas parent;
+        private final Level parent;
 
-        public ActionImpl(GameCanvas parent) {
+        public ActionImpl(Level parent) {
             this.parent = parent;
         }
 

@@ -22,7 +22,8 @@
 package de.eppleton.tileengine.sample.sprites;
 
 import de.eppleton.fx2d.Camera;
-import de.eppleton.fx2d.GameCanvas;
+import de.eppleton.fx2d.Level;
+import de.eppleton.fx2d.Rectangle2D;
 import de.eppleton.fx2d.Sprite;
 import de.eppleton.fx2d.tileengine.ObjectGroup;
 import de.eppleton.fx2d.tileengine.ObjectGroupHandler;
@@ -31,7 +32,6 @@ import de.eppleton.fx2d.tileengine.TileSet;
 import java.util.Properties;
 import java.util.Set;
 import java.util.logging.Logger;
-import javafx.geometry.Rectangle2D;
 
 /**
  *
@@ -42,7 +42,7 @@ public class SpriteHandler implements ObjectGroupHandler {
     Hero hero;
 
     @Override
-    public void handle(ObjectGroup group, final GameCanvas field) {
+    public void handle(ObjectGroup group, final Level field) {
         if (group.getName().equals("sprites")) {
             for (final TObject tObject : group.getObjectLIst()) {
                 if (tObject.getType().equals("gear")) {

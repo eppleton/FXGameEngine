@@ -21,7 +21,7 @@
  */
 package de.eppleton.tileengine.sample.sprites;
 
-import de.eppleton.fx2d.GameCanvas;
+import de.eppleton.fx2d.Level;
 import de.eppleton.fx2d.tileengine.TObject;
 import de.eppleton.fx2d.tileengine.TileMap;
 import de.eppleton.fx2d.tileengine.TileSet;
@@ -34,7 +34,7 @@ import java.util.Properties;
  */
 public class GearFactory {
 
-    public static Gear createGear(TObject tObject, TileMap map, GameCanvas field) {
+    public static Gear createGear(TObject tObject, TileMap map, Level field) {
         double x = tObject.getX();
         double y = tObject.getY();
 
@@ -47,7 +47,7 @@ public class GearFactory {
         return createGear(x, y, tileSet, tileindex, tObject.getProperties(), field, Integer.parseInt(property));
     }
 
-    public static Gear createGear(double x, double y, TileSet tileSet, int tileindex, Properties properties, GameCanvas field, int layer) {
+    public static Gear createGear(double x, double y, TileSet tileSet, int tileindex, Properties properties, Level field, int layer) {
         TileSetAnimation tileSetAnimation = new TileSetAnimation(tileSet, new int[]{tileindex}, .1f);
 
         final Gear gear = new Gear(tileSet, properties, field, properties.getProperty("name"), x, y, 32, 32, layer);

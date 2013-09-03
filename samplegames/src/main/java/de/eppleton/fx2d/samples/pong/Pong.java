@@ -22,24 +22,29 @@
 
 import de.eppleton.fx2d.*;
 import de.eppleton.fx2d.action.*;
+import de.eppleton.fx2d.event.KeyCode;
 import de.eppleton.fx2d.physics.*;
 import de.eppleton.fx2d.physics.action.PhysicsActionFactory;
-import javafx.scene.input.KeyCode;
-import javafx.scene.text.Font;
 import net.java.html.canvas.GraphicsContext;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.*;
 import org.openide.util.Lookup;
 
-public class Pong extends Game {
+public class Pong extends Level {
 
     int scorePlayer, scoreComputer = 0;
 
+    public Pong(GraphicsContext graphicsContext, double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
+        super(graphicsContext, playfieldWidth, playfieldHeight, viewPortWidth, viewPortHeight);
+    }
+
+    
+    
     @Override
     protected void initGame() {
-        GameCanvas canvas = getCanvas();
-        final PhysicsEngine physicsEngine = new PhysicsEngine(new Vec2(0, 0), new Vec2(0, 6), 100, canvas, true);
-        canvas.addLayer(new Layer() {
+       
+        final PhysicsEngine physicsEngine = new PhysicsEngine(new Vec2(0, 0), new Vec2(0, 6), 100, this, true);
+        this.addLayer(new Layer() {
             @Override
             public void draw(GraphicsContext graphicsContext, double x, double y, double width, double height) {
                 graphicsContext.setFont("36 Verdana");
@@ -48,12 +53,12 @@ public class Pong extends Game {
         });
         physicsEngine.createWall(0, 580, 800, 10);
         physicsEngine.createWall(0, 10, 800, 10);
-        addBall(canvas, physicsEngine, 400, 300);
-        canvas.addBehaviour(new Behavior() {
+        addBall(this, physicsEngine, 400, 300);
+        this.addBehaviour(new Behavior() {
             
             
             @Override
-            public boolean perform(GameCanvas canvas, long nanos) {
+            public boolean perform(Level canvas, long nanos) {
                 Sprite sprite1 = canvas.getSprite("ball");
                 if (sprite1 != null) {
                     Body ball = sprite1.getLookup().lookup(Body.class);
@@ -70,13 +75,13 @@ public class Pong extends Game {
                 return true;
             }
         });
-        Sprite bat = new Sprite(canvas, "Player", 10, 262, 30, 75, Lookup.EMPTY);
-        canvas.addLayer(new SpriteLayer());
+        Sprite bat = new Sprite(this, "Player", 10, 262, 30, 75, Lookup.EMPTY);
+        this.addLayer(new SpriteLayer());
         physicsEngine.createDefaultBody(bat, BodyType.KINEMATIC, 1, .4f, 0);
         bat.addAction(KeyCode.A, PhysicsActionFactory.createLinearMoveAction(null, "up", new Vec2(0, 4), new Vec2(0, 0)));
         bat.addAction(KeyCode.Z, PhysicsActionFactory.createLinearMoveAction(null, "down", new Vec2(0, -4), new Vec2(0, 0)));
-        Sprite computer = new Sprite(canvas, "Computer", 750, 262, 30, 75, Lookup.EMPTY);
-        canvas.addSprite(computer);
+        Sprite computer = new Sprite(this, "Computer", 750, 262, 30, 75, Lookup.EMPTY);
+        this.addSprite(computer);
         physicsEngine.createDefaultBody(computer, BodyType.KINEMATIC, 1, .3f, 0);
         computer.addBehaviour(new SpriteBehavior() {
             @Override
@@ -91,17 +96,14 @@ public class Pong extends Game {
                 return true;
             }
         });
-        canvas.start();
+        this.start();
     }
 
-    private void addBall(GameCanvas canvas, PhysicsEngine physicsEngine, int x, int y) {
+    private void addBall(Level canvas, PhysicsEngine physicsEngine, int x, int y) {
         Sprite ball = new Sprite(canvas, "ball", x, y, 20, 20, Lookup.EMPTY);
         Body ballBody = physicsEngine.createDefaultBody(ball, BodyType.DYNAMIC, 1, .4f, .2f, false);
         ballBody.setLinearVelocity(new Vec2(4, 1));
         canvas.addSprite(ball);
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
 }

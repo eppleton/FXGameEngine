@@ -20,32 +20,31 @@
  * <info@eppleton.de>
  */package de.eppleton.fx2d.samples.spaceinvaders;
 
+import de.eppleton.fx2d.beans.DoubleProperty;
 import de.eppleton.fx2d.tileengine.action.TileSetAnimation;
 import de.eppleton.fx2d.collision.*;
 import de.eppleton.fx2d.*;
+import de.eppleton.fx2d.Level;
 import de.eppleton.fx2d.action.*;
+import de.eppleton.fx2d.event.KeyCode;
 import de.eppleton.fx2d.tileengine.*;
 import java.util.Collection;
 import java.util.logging.*;
-import javafx.scene.input.*;
-import javafx.scene.media.*;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javax.xml.bind.JAXBException;
 import net.java.html.canvas.GraphicsContext;
 import net.java.html.canvas.Style;
+import net.java.html.sound.AudioClip;
 import org.openide.util.Lookup;
 import org.openide.util.lookup.Lookups;
 
-public class SpaceInvaders extends Game {
+public class SpaceInvaders extends Level {
     
     Points TEN = new Points(10);
     Points TWENTY = new Points(30);
     Points THIRTY = new Points(40);
     DoubleProperty invaderXVelocity = new DoubleProperty(0.3);
-    AudioClip shootSound = new AudioClip(SpaceInvaders.class.getResource("/assets/sound/shoot.wav").toString());
-    AudioClip invaderKilledSound = new AudioClip(SpaceInvaders.class.getResource("/assets/sound/invaderkilled.wav").toString());
-    MediaPlayer mediaPlayer = new MediaPlayer(new Media(SpaceInvaders.class.getResource("/assets/sound/invader_loop1.mp3").toString()));
+    AudioClip shootSound = AudioClip.create(SpaceInvaders.class.getResource("/assets/sound/shoot.wav").toString());
+    AudioClip invaderKilledSound = AudioClip.create(SpaceInvaders.class.getResource("/assets/sound/invaderkilled.wav").toString());
     int score = 0;
     String message;
     int[][] enemies = new int[][]{
@@ -55,10 +54,16 @@ public class SpaceInvaders extends Game {
         {10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10},
         {10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10}
     };
+
+    public SpaceInvaders(GraphicsContext graphicsContext, double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
+        super(graphicsContext, playfieldWidth, playfieldHeight, viewPortWidth, viewPortHeight);
+    }
+    
+    
     
     @Override
     protected void initGame() {
-        final GameCanvas canvas = getCanvas();
+        final Level canvas = this;
         try {
             TileSet invaders = TileMapReader.readSet("/assets/graphics/invaders1.tsx");
             TileSet playerTiles = TileMapReader.readSet("/assets/graphics/player.tsx");
@@ -83,30 +88,17 @@ public class SpaceInvaders extends Game {
             player.addAction(KeyCode.RIGHT, ActionFactory.createMoveAction(playerAnimation, "right", 4, 0, 0, 0));
             player.addAction(KeyCode.UP, new ShootAction(playerAnimation, "fire", new BulletProvider(), new HitHandler(), shootSound));
         } catch (JAXBException ex) {
-            Logger.getLogger(SpaceInvaders.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SpaceInvaders.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         canvas.addLayer(new Background());
         canvas.addBehaviour(new MoveInvadersBehavior());
-        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-        mediaPlayer.play();
+
         canvas.addLayer(new SpriteLayer());
         canvas.start();
     }
     
-    @Override
-    protected double getViewPortWidth() {
-        return 700;
-    }
-    
-    @Override
-    protected double getViewPortHeight() {
-        return 700;
-    }
-    
-    public static void main(String[] args) {
-        launch(args);
-    }
-    
+  
+   
     private class Points {
         
         int points;
@@ -123,7 +115,7 @@ public class SpaceInvaders extends Game {
     static class BulletProvider implements SpriteProvider {
         
         @Override
-        public Sprite getSprite(GameCanvas parent, double x, double y) {
+        public Sprite getSprite(Level parent, double x, double y) {
             final Sprite bullet = new Sprite(parent, "bullet", x, y + 10, 10, 20, Lookup.EMPTY);
             parent.addSprite(bullet);
             return bullet;
@@ -147,7 +139,7 @@ public class SpaceInvaders extends Game {
     class MoveInvadersBehavior extends Behavior {
         
         @Override
-        public boolean perform(GameCanvas canvas, long nanos) {
+        public boolean perform(Level canvas, long nanos) {
             Collection<Sprite> sprites = canvas.getSprites();
             boolean stop = false;
             boolean win = true;
@@ -159,7 +151,7 @@ public class SpaceInvaders extends Game {
                         if (sprite1.getY() >= 600) {
                             message = "Game Over!";
                             stop = true;
-                            mediaPlayer.stop();
+                            
                         }
                         for (Sprite sprite2 : sprites) {
                             if (sprite2.getLookup().lookup(Points.class) != null) {
@@ -173,7 +165,6 @@ public class SpaceInvaders extends Game {
             if (win) {
                 message = "You win!";
                 canvas.stop();
-                mediaPlayer.stop();
             }
             return true;
         }

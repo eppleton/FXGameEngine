@@ -4,7 +4,7 @@
  */
 package de.eppleton.fx2d.samples.towerdefense;
 
-import de.eppleton.fx2d.GameCanvas;
+import de.eppleton.fx2d.Level;
 import de.eppleton.fx2d.Layer;
 import de.eppleton.fx2d.Sprite;
 import de.eppleton.fx2d.action.Behavior;
@@ -21,7 +21,7 @@ class FadeBehaviour extends Behavior {
     FadeLayer fadeLayer = new FadeLayer();
 
     @Override
-    public boolean perform(GameCanvas canvas, long nanos) {
+    public boolean perform(Level canvas, long nanos) {
         if (canvas.getLayer("fadeLayer") == null) {
             canvas.addLayer(fadeLayer);
         }

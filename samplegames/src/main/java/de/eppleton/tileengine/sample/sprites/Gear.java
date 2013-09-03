@@ -21,7 +21,7 @@
  */
 package de.eppleton.tileengine.sample.sprites;
 
-import de.eppleton.fx2d.GameCanvas;
+import de.eppleton.fx2d.Level;
 import de.eppleton.fx2d.Sprite;
 import de.eppleton.fx2d.action.SpriteBehavior;
 import de.eppleton.fx2d.tileengine.TileSet;
@@ -39,7 +39,7 @@ public class Gear extends Sprite {
     private Properties properties;
     private int layer;
 
-    public Gear(TileSet tileset, Properties properties, GameCanvas parent, String name, double x, double y, int width, int height, int layer) {
+    public Gear(TileSet tileset, Properties properties, Level parent, String name, double x, double y, int width, int height, int layer) {
         super(parent, name, x, y, width, height, Lookup.EMPTY);
         this.tileset = tileset;
         this.properties = properties;

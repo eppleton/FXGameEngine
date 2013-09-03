@@ -22,14 +22,12 @@
 package de.eppleton.fx2d.samples.parallax;
 
 import de.eppleton.fx2d.Camera;
-import de.eppleton.fx2d.Game;
-import de.eppleton.fx2d.GameCanvas;
+import de.eppleton.fx2d.Level;
 import de.eppleton.fx2d.Layer;
 import de.eppleton.fx2d.Sprite;
 import de.eppleton.fx2d.SpriteLayer;
 import de.eppleton.fx2d.action.ActionFactory;
-import javafx.scene.input.KeyCode;
-import javafx.scene.paint.ImagePattern;
+import de.eppleton.fx2d.event.KeyCode;
 import net.java.html.canvas.GraphicsContext;
 import net.java.html.canvas.Image;
 import net.java.html.canvas.Style;
@@ -39,29 +37,33 @@ import org.openide.util.Lookup;
  *
  * @author antonepple
  */
-public class ParallaxSample extends Game {
+public class ParallaxSample extends Level {
 
+    public ParallaxSample(GraphicsContext graphicsContext, double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
+        super(graphicsContext, playfieldWidth, playfieldHeight, viewPortWidth, viewPortHeight);
+    }
+  
+    
+    
+    
     @Override
     protected void initGame() {
-        GameCanvas canvas = getCanvas();
-        canvas.addLayer(
-                new ImageLayer(new Image(ParallaxSample.class.getResource("/assets/graphics/back.png").toExternalForm()), 0.2f, "back"));
-        canvas.addLayer(new ImageLayer(new Image(ParallaxSample.class.getResource("/assets/graphics/middle.png").toExternalForm()), 0.5f, "mid"));
-        canvas.addLayer(new SpriteLayer());
-        canvas.addLayer(new ImageLayer(new Image(ParallaxSample.class.getResource("/assets/graphics/front.png").toExternalForm()), 1.1f, "front"));
-        Sprite player = new Sprite(canvas, Sprite.NO_ANIMATION, "Player", 1050, 240, 40, 30, Lookup.EMPTY);
+  
+        this.addLayer(
+                new ImageLayer(Image.create(ParallaxSample.class.getResource("/assets/graphics/back.png").toExternalForm()), 0.2f, "back"));
+        this.addLayer(new ImageLayer(Image.create(ParallaxSample.class.getResource("/assets/graphics/middle.png").toExternalForm()), 0.5f, "mid"));
+        this.addLayer(new SpriteLayer());
+        this.addLayer(new ImageLayer( Image.create(ParallaxSample.class.getResource("/assets/graphics/front.png").toExternalForm()), 1.1f, "front"));
+        Sprite player = new Sprite(this, Sprite.NO_ANIMATION, "Player", 1050, 240, 40, 30, Lookup.EMPTY);
         player.addAction(KeyCode.LEFT, ActionFactory.createMoveAction(Sprite.NO_ANIMATION, "left", -4, 0, 0, 0));
         player.addAction(KeyCode.RIGHT, ActionFactory.createMoveAction(Sprite.NO_ANIMATION, "right", 4, 0, 0, 0));
         player.addAction(KeyCode.UP, ActionFactory.createMoveAction(Sprite.NO_ANIMATION, "up", 0, -4, 0, 0));
         player.addAction(KeyCode.DOWN, ActionFactory.createMoveAction(Sprite.NO_ANIMATION, "down", 0, 4, 0, 0));
-        canvas.addSprite(player);
-        canvas.setCamera(new Camera(player.getXProperty(), player.getYProperty()));
-        canvas.start();
+        this.addSprite(player);
+        this.setCamera(new Camera(player.getXProperty(), player.getYProperty()));
+        this.start();
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
 
     private static class ImageLayer extends Layer {
 
@@ -79,32 +81,8 @@ public class ParallaxSample extends Game {
 //            ImagePattern pattern = new ImagePattern(image, x, y, image.getWidth(), image.getHeight(), false);
             graphicsContext.setFillStyle(pattern);
             graphicsContext.fillRect(0, 0, width, height);
-            /*
-             double startX = x;
-             if (startX > 0) {
-             startX = -x;
-             } else {
-             startX = (image.getWidth() - x) % image.getWidth();
-             }
-             double startY = y;
 
-             graphicsContext.drawImage(image, startX, startY);
-             while ((startX + image.getWidth()) < width) {
-             startX = startX + image.getWidth();
-             graphicsContext.drawImage(image, startX, startY);
-
-             }
-             */
         }
     }
 
-    @Override
-    protected double getViewPortHeight() {
-        return 800;
-    }
-
-    @Override
-    protected double getPlayfieldWidth() {
-        return 5000;
-    }
 }

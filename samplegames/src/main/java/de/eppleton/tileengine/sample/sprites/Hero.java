@@ -21,11 +21,13 @@
  */
 package de.eppleton.tileengine.sample.sprites;
 
-import de.eppleton.fx2d.GameCanvas;
+import de.eppleton.fx2d.Level;
+import de.eppleton.fx2d.Rectangle2D;
 import de.eppleton.fx2d.Sprite;
 import de.eppleton.fx2d.Renderer;
 import de.eppleton.fx2d.action.SpriteAction;
 import de.eppleton.fx2d.action.State;
+import de.eppleton.fx2d.event.KeyCode;
 import de.eppleton.fx2d.tileengine.TileMapReader;
 import de.eppleton.fx2d.tileengine.TileSet;
 import de.eppleton.fx2d.tileengine.action.TileSetAnimation;
@@ -37,8 +39,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.logging.Logger;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.input.KeyCode;
 import net.java.html.canvas.Image;
 import org.openide.util.Lookup;
 
@@ -96,7 +96,7 @@ public class Hero extends Sprite {
      * @param width
      * @param height
      */
-    public Hero(GameCanvas field, TileSet base, String name, double x, double y, int width, int height) {
+    public Hero(Level field, TileSet base, String name, double x, double y, int width, int height) {
         super(field, name, x, y, width, height, Lookup.EMPTY);
         field.addSprite(this);
         heroSet = base;
@@ -135,13 +135,13 @@ public class Hero extends Sprite {
     private void mergeTileSets() {
         String source = heroSet.getImage().getSource();
         String resourcePath = TileMapReader.resourcePath(source, heroSet.getBaseUrl());
-        Image image = new Image(SampleGame.class.getResource(resourcePath).toString());
+        Image image = Image.create(SampleGame.class.getResource(resourcePath).toString());
         heroSet.init(image);
 
 
         Collections.sort(gearList, LAYER_COMPARATOR);
         for (Gear gear : gearList) {
-            heroSet.merge(gear.getTileset());
+            heroSet.merge(getParent().getGraphicsContext(), gear.getTileset());
         }
     }
 

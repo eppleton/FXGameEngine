@@ -4,7 +4,7 @@
  */
 package de.eppleton.fx2d.samples.towerdefense;
 
-import de.eppleton.fx2d.GameCanvas;
+import de.eppleton.fx2d.Level;
 import de.eppleton.fx2d.Sprite;
 import de.eppleton.fx2d.action.SpriteBehavior;
 import de.eppleton.fx2d.collision.Collision;
@@ -30,7 +30,7 @@ public class CannonSprite extends Sprite {
     private float rate;
     private Sprite closest = null;
 
-    public CannonSprite(GameCanvas parent, Properties properties, TileSetAnimation animation, final TileSetAnimation shoot, String name, final double x, final double y, final int width, final int height) {
+    public CannonSprite(Level parent, Properties properties, TileSetAnimation animation, final TileSetAnimation shoot, String name, final double x, final double y, final int width, final int height) {
         super(parent, animation, name, x, y, width, height, Lookup.EMPTY);
 
         this.width = width;
