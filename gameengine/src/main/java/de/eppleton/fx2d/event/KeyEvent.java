@@ -11,16 +11,16 @@ package de.eppleton.fx2d.event;
 public class KeyEvent extends Event{
 
     public static final Event.Type<KeyEvent> ANY =
-            new Event.Type<KeyEvent>("KEY");
+            new Event.Type<KeyEvent>("KEY", Event.ANY);
 
     public static final Event.Type<KeyEvent> KEY_PRESSED =
-            new Event.Type<KeyEvent>("KEY_PRESSED");
+            new Event.Type<KeyEvent>("KEY_PRESSED",ANY);
 
     public static final Event.Type<KeyEvent> KEY_RELEASED =
-            new Event.Type<KeyEvent>( "KEY_RELEASED");
+            new Event.Type<KeyEvent>( "KEY_RELEASED",ANY);
 
     public static final Event.Type<KeyEvent> KEY_TYPED =
-            new Event.Type<KeyEvent>("KEY_TYPED");
+            new Event.Type<KeyEvent>("KEY_TYPED",ANY);
 
     
     private final KeyCode keyCode;

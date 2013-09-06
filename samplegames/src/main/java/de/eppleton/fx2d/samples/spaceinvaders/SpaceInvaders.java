@@ -75,13 +75,14 @@ public class SpaceInvaders extends Level {
                 int[] is = enemies[i];
                 for (int j = 0; j < is.length; j++) {
                     Points points = is[j] == 30 ? THIRTY : is[j] == 20 ? TWENTY : TEN;
-                    Sprite sprite = new Sprite(canvas, "" + ((j * 11) + i), 50 + (40 * j), 140 + (40 * i), 30, 20, Lookups.fixed(points));
+                    Sprite sprite = new Sprite(canvas, "" + ((j * 11) + i), 50 + (40 * j), 140 + (40 * i), 30, 20);
+                    sprite.setUserObject(points);
                     canvas.addSprite(sprite);
                     sprite.setAnimation(is[j] == 30 ? animation30 : is[j] == 20 ? animation20 : animation10);
                     sprite.setVelocityXProperty(invaderXVelocity);
                 }
             }
-            Sprite player = new Sprite(canvas, playerAnimation, "Player", 350, 620, 40, 30, Lookup.EMPTY);
+            Sprite player = new Sprite(canvas, playerAnimation, "Player", 350, 620, 40, 30);
             canvas.addSprite(player);
             player.setAnimation(playerAnimation);
             player.addAction(KeyCode.LEFT, ActionFactory.createMoveAction(playerAnimation, "left", -4, 0, 0, 0));
@@ -116,7 +117,7 @@ public class SpaceInvaders extends Level {
         
         @Override
         public Sprite getSprite(Level parent, double x, double y) {
-            final Sprite bullet = new Sprite(parent, "bullet", x, y + 10, 10, 20, Lookup.EMPTY);
+            final Sprite bullet = new Sprite(parent, "bullet", x, y + 10, 10, 20);
             parent.addSprite(bullet);
             return bullet;
         }
@@ -126,7 +127,7 @@ public class SpaceInvaders extends Level {
         
         @Override
         public void handleCollision(Collision collision) {
-            Points points = collision.getSpriteTwo().getLookup().lookup(Points.class);
+            Points points = (Points) collision.getSpriteTwo().getUserObject();
             if (points != null) {
                 score += points.getPoints();
                 invaderKilledSound.play();
@@ -144,7 +145,7 @@ public class SpaceInvaders extends Level {
             boolean stop = false;
             boolean win = true;
             for (Sprite sprite1 : sprites) {
-                if (sprite1.getLookup().lookup(Points.class) != null) {
+                if (sprite1.getUserObject() != null && sprite1.getUserObject() instanceof Points) {
                     win = false;
                     if (sprite1.getX() > 650 || sprite1.getX() < 50) {
                         invaderXVelocity.set(-invaderXVelocity.doubleValue() * (stop ? 0 : 1.3));
@@ -154,7 +155,7 @@ public class SpaceInvaders extends Level {
                             
                         }
                         for (Sprite sprite2 : sprites) {
-                            if (sprite2.getLookup().lookup(Points.class) != null) {
+                            if (sprite2.getUserObject() != null && sprite1.getUserObject() instanceof Points) {
                                 sprite2.setY(sprite2.getY() + (stop ? 0 : 20));
                             }
                         }

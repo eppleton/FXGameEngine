@@ -31,7 +31,7 @@ public class CannonSprite extends Sprite {
     private Sprite closest = null;
 
     public CannonSprite(Level parent, Properties properties, TileSetAnimation animation, final TileSetAnimation shoot, String name, final double x, final double y, final int width, final int height) {
-        super(parent, animation, name, x, y, width, height, Lookup.EMPTY);
+        super(parent, animation, name, x, y, width, height);
 
         this.width = width;
         this.height = height;
@@ -74,7 +74,7 @@ public class CannonSprite extends Sprite {
             double startX = centerX + (xVelocity * (width / 2)) - 4;
             double startY = centerY + (yVelocity * (height / 2)) - 4;
             Sprite bullet = new Sprite(getParent(), shoot, "bullet" + (bulletCounter++), startX, startY,
-                    8, 8, Lookup.EMPTY);
+                    8, 8);
             bullet.setVelocityX(xVelocity);
             bullet.setVelocityY(yVelocity);
             bullet.addBehaviour(new BulletBehavior());

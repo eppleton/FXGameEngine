@@ -97,7 +97,7 @@ public class Hero extends Sprite {
      * @param height
      */
     public Hero(Level field, TileSet base, String name, double x, double y, int width, int height) {
-        super(field, name, x, y, width, height, Lookup.EMPTY);
+        super(field, name, x, y, width, height);
         field.addSprite(this);
         heroSet = base;
         setMoveBox(new Rectangle2D(18, 42, 28, 20));

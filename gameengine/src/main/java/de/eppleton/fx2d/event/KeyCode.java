@@ -240,7 +240,6 @@ public enum KeyCode {
     final String name;
     private int mask;
 
-    // Need to bundle this in another class to avoid "forward reference" compiler error
     private static class KeyCodeClass {
 
         private KeyCodeClass() {
@@ -262,7 +261,6 @@ public enum KeyCode {
         this.code = code;
         this.name = name;
         this.mask = mask;
-        // ch = new String(Character.toChars(code));
         ch = String.valueOf((char) code);
     }
 
@@ -270,127 +268,55 @@ public enum KeyCode {
         this(code, name, 0);
     }
 
-    /**
-     * Function keys like F1, F2, etc...
-     *
-     * @return true if this key code corresponds to a functional key
-     * @since JavaFX 2.2
-     */
     public final boolean isFunctionKey() {
         return (mask & KeyCodeClass.FUNCTION) != 0;
     }
 
-    /**
-     * Navigation keys are arrow keys and Page Down, Page Up, Home, End
-     * (including keypad keys)
-     *
-     * @return true if this key code corresponds to a navigation key
-     * @since JavaFX 2.2
-     */
     public final boolean isNavigationKey() {
         return (mask & KeyCodeClass.NAVIGATION) != 0;
     }
 
-    /**
-     * Left, right, up, down keys (including the keypad arrows)
-     *
-     * @return true if this key code corresponds to an arrow key
-     * @since JavaFX 2.2
-     */
     public final boolean isArrowKey() {
         return (mask & KeyCodeClass.ARROW) != 0;
     }
 
-    /**
-     * Keys that could act as a modifier
-     *
-     * @return true if this key code corresponds to a modifier key
-     * @since JavaFX 2.2
-     */
     public final boolean isModifierKey() {
         return (mask & KeyCodeClass.MODIFIER) != 0;
     }
 
-    /**
-     * All keys with letters
-     *
-     * @return true if this key code corresponds to a letter key
-     * @since JavaFX 2.2
-     */
     public final boolean isLetterKey() {
         return (mask & KeyCodeClass.LETTER) != 0;
     }
 
-    /**
-     * All Digit keys (including the keypad digits)
-     *
-     * @return true if this key code corresponds to a digit key
-     * @since JavaFX 2.2
-     */
     public final boolean isDigitKey() {
         return (mask & KeyCodeClass.DIGIT) != 0;
     }
 
-    /**
-     * All keys on the keypad
-     *
-     * @return true if this key code corresponds to a keypad key
-     * @since JavaFX 2.2
-     */
     public final boolean isKeypadKey() {
         return (mask & KeyCodeClass.KEYPAD) != 0;
     }
 
-    /**
-     * Space, tab and enter
-     *
-     * @return true if this key code corresponds to a whitespace key
-     * @since JavaFX 2.2
-     */
     public final boolean isWhitespaceKey() {
         return (mask & KeyCodeClass.WHITESPACE) != 0;
     }
 
-    /**
-     * All multimedia keys (channel up/down, volume control, etc...)
-     *
-     * @return true if this key code corresponds to a media key
-     * @since JavaFX 2.2
-     */
     public final boolean isMediaKey() {
         return (mask & KeyCodeClass.MEDIA) != 0;
     }
 
-    /**
-     * Gets name of this key code.
-     *
-     * @return Name of this key code
-     */
     public final String getName() {
         return name;
     }
 
-    /**
-     * @treatAsPrivate implementation detail
-     * @deprecated This is an internal API that is not intended for use and will
-     * be removed in the next version
-     */
-    @Deprecated
     public String impl_getChar() {
         return ch;
     }
 
-    /**
-     * @treatAsPrivate implementation detail
-     * @deprecated This is an internal API that is not intended for use and will
-     * be removed in the next version
-     */
-    // SB-dependency: RT-22749 has been filed to track this
-    @Deprecated
-    public int impl_getCode() {
+    public int getCode() {
         return code;
     }
     private static final Map<String, KeyCode> nameMap;
+    private static final Map<Integer, KeyCode> codeMap;
 
     static {
 
@@ -398,16 +324,17 @@ public enum KeyCode {
         for (KeyCode c : KeyCode.values()) {
             nameMap.put(c.name, c);
         }
+        codeMap = new HashMap<Integer, KeyCode>(KeyCode.values().length);
+        for (KeyCode c : KeyCode.values()) {
+            codeMap.put(c.getCode(), c);
+        }
     }
 
-    /**
-     * Parses textual representation of a key.
-     *
-     * @param name Textual representation of the key
-     * @return KeyCode for the key with the given name, null if the string is
-     * unknown.
-     */
     public static KeyCode getKeyCode(String name) {
         return nameMap.get(name);
+    }
+
+    public static KeyCode getKeyCode(Integer ascii) {
+        return codeMap.get(ascii);
     }
 }

@@ -7,6 +7,8 @@ package de.eppleton.fx2d;
 import de.eppleton.fx2d.action.Behavior;
 import de.eppleton.fx2d.action.SpriteBehavior;
 import de.eppleton.fx2d.collision.Collision;
+import de.eppleton.fx2d.event.Event;
+import de.eppleton.fx2d.event.EventDispatcher;
 import de.eppleton.fx2d.event.EventHandler;
 import de.eppleton.fx2d.event.MouseEvent;
 import de.eppleton.fx2d.timer.Pulse;
@@ -18,7 +20,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 import net.java.html.canvas.GraphicsContext;
 
@@ -26,11 +27,11 @@ import net.java.html.canvas.GraphicsContext;
  *
  * @author antonepple
  */
-public class Level extends Screen implements Pulse.Handler{
+public abstract class Level extends Screen implements Pulse.Handler{
     
     private Camera camera;
     private float alpha = 1;
-    private ConcurrentHashMap<Behavior, Long> behaviours = new ConcurrentHashMap<>();
+    private HashMap<Behavior, Long> behaviours = new HashMap<>();
     private Updater updater = new DefaultUpdater();
     private Pulse timer;
     private static Comparator<Sprite> comparator = new Comparator<Sprite>() {
@@ -61,6 +62,7 @@ public class Level extends Screen implements Pulse.Handler{
     private int stutter;
     private long lastSlowness;
     private long maxTimePassed = 0;
+    private EventDispatcher eventDispatcher = new EventDispatcher() ;
     
      public Level(GraphicsContext graphicsContext, double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
         this.graphicsContext = graphicsContext;
@@ -69,9 +71,21 @@ public class Level extends Screen implements Pulse.Handler{
         this.cameraMaxX = playfieldWidth - viewPortWidth;
         this.cameraMaxY = playfieldHeight - viewPortHeight;
         this.layers = new ArrayList<>();
-
-        timer = Pulse.create(this);
         sprites = new HashMap<>();
+
+        addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+
+            @Override
+            public void handle(MouseEvent event) {
+                for (Sprite sprite : sprites.values()) {
+                    if (sprite.getMouseClickHandler()!=null && sprite.contains(event.getX(), event.getY())){
+                        sprite.getMouseClickHandler().handle(event);
+                    }
+                }
+            }
+        });
+        timer = Pulse.create(this);
+        initGame();
     }
 
     public void start() {
@@ -82,6 +96,18 @@ public class Level extends Screen implements Pulse.Handler{
         timer.stop();
     }
 
+    public void dispatchEvent(Event event){
+        eventDispatcher.dispatchEvent(event);
+    }
+    
+    public final <T extends Event> void addEventHandler(Event.Type<T> type, EventHandler<T> handler){
+        eventDispatcher.addEventHandler(type, handler);
+    }
+    
+    public final <T extends Event> void removeEventHandler(Event.Type<T> type, EventHandler<T> handler){
+        eventDispatcher.removeEventHandler(type, handler);
+    }
+    
     /**
      * add a {@link  SpriteBehavior}
      *
@@ -148,7 +174,6 @@ public class Level extends Screen implements Pulse.Handler{
             if (layer.isVisible()) {
                 layer.draw(graphicsContext, cameraX * layer.getParallaxFactor(), cameraY * layer.getParallaxFactor(), screenWidth, screenHeight);
             }
-            // @TODO Hallo
             if (layer.getName().equals("sprites")) {
 
                 List<Sprite> values = new ArrayList<>(sprites.values());
@@ -313,16 +338,9 @@ public class Level extends Screen implements Pulse.Handler{
 
     public void addSprite(Sprite sprite) {
         sprites.put(sprite.getName(), sprite);
-
     }
 
     public Sprite getSprite(String ball) {
-        Sprite get = sprites.get(ball);
-        if (get == null) {
-            for (String name : sprites.keySet()) {
-                System.out.println("> " + name);
-            }
-        }
         return sprites.get(ball);
     }
 
@@ -363,6 +381,7 @@ public class Level extends Screen implements Pulse.Handler{
         layers.remove(layer);
     }
 
+    protected abstract void initGame();
 
     /**
      * This can be used to plug in simple constraints or a physics engine
@@ -459,25 +478,6 @@ public class Level extends Screen implements Pulse.Handler{
         public abstract boolean isValidMove(double x, double y, double width, double height);
     }
     
-    private class MouseClickHandler implements EventHandler<MouseEvent> {
-
-        public MouseClickHandler() {
-        }
-
-        @Override
-        public void handle(MouseEvent t) {
-            Collection<Sprite> sprites1 = getSprites();
-            double x = t.getX();
-            double y = t.getY();
-            for (Sprite sprite : sprites1) {
-
-                if (sprite.getMouseClickHandler() != null && sprite.contains(x, y)) {
-                    sprite.getMouseClickHandler().handle(new de.eppleton.fx2d.event.MouseEvent(this,de.eppleton.fx2d.event.MouseEvent.ANY, x,y));
-                }
-
-            }
-        }
-    }
-
+    
    
 }

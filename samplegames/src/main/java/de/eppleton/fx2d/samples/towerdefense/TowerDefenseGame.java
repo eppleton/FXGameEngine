@@ -89,7 +89,7 @@ public class TowerDefenseGame extends Level {
 
            
 
-            final Sprite button = new Sprite(level, "button", tileMap.getWidthInPixels() - 30, 20, 20, 20, Lookup.EMPTY);
+            final Sprite button = new Sprite(level, "button", tileMap.getWidthInPixels() - 30, 20, 20, 20);
             button.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent click) {

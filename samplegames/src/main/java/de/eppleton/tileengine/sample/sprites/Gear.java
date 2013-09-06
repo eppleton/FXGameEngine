@@ -40,7 +40,7 @@ public class Gear extends Sprite {
     private int layer;
 
     public Gear(TileSet tileset, Properties properties, Level parent, String name, double x, double y, int width, int height, int layer) {
-        super(parent, name, x, y, width, height, Lookup.EMPTY);
+        super(parent, name, x, y, width, height);
         this.tileset = tileset;
         this.properties = properties;
         this.layer = layer;

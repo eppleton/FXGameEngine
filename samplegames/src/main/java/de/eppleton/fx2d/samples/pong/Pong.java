@@ -21,14 +21,15 @@
  */package de.eppleton.fx2d.samples.pong;
 
 import de.eppleton.fx2d.*;
-import de.eppleton.fx2d.action.*;
+import de.eppleton.fx2d.action.Behavior;
+import de.eppleton.fx2d.action.SpriteBehavior;
 import de.eppleton.fx2d.event.KeyCode;
-import de.eppleton.fx2d.physics.*;
+import de.eppleton.fx2d.physics.PhysicsEngine;
 import de.eppleton.fx2d.physics.action.PhysicsActionFactory;
 import net.java.html.canvas.GraphicsContext;
 import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.*;
-import org.openide.util.Lookup;
+import org.jbox2d.dynamics.Body;
+import org.jbox2d.dynamics.BodyType;
 
 public class Pong extends Level {
 
@@ -42,7 +43,6 @@ public class Pong extends Level {
     
     @Override
     protected void initGame() {
-       
         final PhysicsEngine physicsEngine = new PhysicsEngine(new Vec2(0, 0), new Vec2(0, 6), 100, this, true);
         this.addLayer(new Layer() {
             @Override
@@ -56,40 +56,40 @@ public class Pong extends Level {
         addBall(this, physicsEngine, 400, 300);
         this.addBehaviour(new Behavior() {
             
-            
+         
             @Override
             public boolean perform(Level canvas, long nanos) {
                 Sprite sprite1 = canvas.getSprite("ball");
                 if (sprite1 != null) {
-                    Body ball = sprite1.getLookup().lookup(Body.class);
+                    Body ball = (Body) sprite1.getUserObject();
                     if (ball.getPosition().x <= 0) {
                         scoreComputer++;
                         physicsEngine.remove(ball);
-                        addBall(sprite1.getParent(), physicsEngine, 400, 300);
+                        addBall(Pong.this, physicsEngine, 400, 300);
                     } else if (ball.getPosition().x >= 8) {
                         scorePlayer++;
                         physicsEngine.remove(ball);
-                        addBall(sprite1.getParent(), physicsEngine, 400, 300);
+                        addBall(Pong.this, physicsEngine, 400, 300);
                     }
                 }
                 return true;
             }
         });
-        Sprite bat = new Sprite(this, "Player", 10, 262, 30, 75, Lookup.EMPTY);
+        Sprite bat = new Sprite(this, "Player", 10, 262, 30, 75);
         this.addLayer(new SpriteLayer());
         physicsEngine.createDefaultBody(bat, BodyType.KINEMATIC, 1, .4f, 0);
         bat.addAction(KeyCode.A, PhysicsActionFactory.createLinearMoveAction(null, "up", new Vec2(0, 4), new Vec2(0, 0)));
         bat.addAction(KeyCode.Z, PhysicsActionFactory.createLinearMoveAction(null, "down", new Vec2(0, -4), new Vec2(0, 0)));
-        Sprite computer = new Sprite(this, "Computer", 750, 262, 30, 75, Lookup.EMPTY);
+        Sprite computer = new Sprite(this, "Computer", 750, 262, 30, 75);
         this.addSprite(computer);
         physicsEngine.createDefaultBody(computer, BodyType.KINEMATIC, 1, .3f, 0);
         computer.addBehaviour(new SpriteBehavior() {
             @Override
             public boolean perform(Sprite sprite) {
-                Body me = sprite.getLookup().lookup(Body.class);
+                Body me = (Body) sprite.getUserObject();
                 Sprite ball = sprite.getParent().getSprite("ball");
                 if (ball != null) {
-                    Body lookup = ball.getLookup().lookup(Body.class);
+                    Body lookup = (Body) ball.getUserObject();
                     me.setLinearVelocity(lookup.getPosition().y < me.getPosition().y
                             ? new Vec2(0, -1.5f) : new Vec2(0, 1.5f));
                 }
@@ -100,7 +100,7 @@ public class Pong extends Level {
     }
 
     private void addBall(Level canvas, PhysicsEngine physicsEngine, int x, int y) {
-        Sprite ball = new Sprite(canvas, "ball", x, y, 20, 20, Lookup.EMPTY);
+        Sprite ball = new Sprite(canvas, "ball", x, y, 20, 20);
         Body ballBody = physicsEngine.createDefaultBody(ball, BodyType.DYNAMIC, 1, .4f, .2f, false);
         ballBody.setLinearVelocity(new Vec2(4, 1));
         canvas.addSprite(ball);

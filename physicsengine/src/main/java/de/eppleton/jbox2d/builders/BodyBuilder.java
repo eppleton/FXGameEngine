@@ -45,6 +45,7 @@ public abstract class BodyBuilder<K extends BodyBuilder<K, T>, T extends Shape> 
     }
     
     public Body build() {
+       
         Body createdBody = world.createBody(bodyDef);
         createdBody.createFixture(fixtureDef);
         return createdBody;

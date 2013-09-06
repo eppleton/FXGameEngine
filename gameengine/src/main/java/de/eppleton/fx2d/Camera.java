@@ -21,6 +21,8 @@
  */
 package de.eppleton.fx2d;
 
+import de.eppleton.fx2d.beans.DoubleProperty;
+
 
 
 public class Camera {

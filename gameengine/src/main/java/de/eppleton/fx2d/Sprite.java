@@ -20,22 +20,19 @@
  */
 package de.eppleton.fx2d;
 
-import de.eppleton.fx2d.event.MouseEventHandler;
+import de.eppleton.fx2d.beans.DoubleProperty;
 import de.eppleton.fx2d.action.SpriteBehavior;
 import de.eppleton.fx2d.action.SpriteAction;
 import de.eppleton.fx2d.action.State;
 import de.eppleton.fx2d.event.EventHandler;
 import de.eppleton.fx2d.event.KeyCode;
 import de.eppleton.fx2d.event.KeyEvent;
+import de.eppleton.fx2d.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-
 import net.java.html.canvas.GraphicsContext;
-import org.openide.util.Lookup;
-import org.openide.util.lookup.AbstractLookup;
-import org.openide.util.lookup.InstanceContent;
+
 
 /**
  *
@@ -43,7 +40,7 @@ import org.openide.util.lookup.InstanceContent;
  */
 public class Sprite {
 
-    private ConcurrentHashMap<SpriteBehavior, Long> behaviours = new ConcurrentHashMap<>();
+    private HashMap<SpriteBehavior, Long> behaviours = new HashMap<>();
     private String name;
     private DoubleProperty xProperty;
     private DoubleProperty yProperty;
@@ -59,7 +56,8 @@ public class Sprite {
     private Rectangle2D moveBox;
     private Rectangle2D collisionBox;
     private Level parent;
-    private Lookup lookup = Lookup.EMPTY;
+    private Object userObject;
+    
     public static Renderer NO_ANIMATION = new Renderer() {
         @Override
         public void render(Sprite sprite, GraphicsContext context, float alpha, long delta) {
@@ -74,11 +72,10 @@ public class Sprite {
     };
     private KeyEventHandler keyEventHandler;
     private static State NO_STATE = new State(NO_ANIMATION, "No State");
-    private InstanceContent content;
     private double angle;
-    private MouseEventHandler mouseEventHandler;
+    private EventHandler<MouseEvent> mouseEventHandler;
 
-    public Sprite(Level parent, Renderer animation, String name, double x, double y, int width, int height, Lookup lookup) {
+    public Sprite(Level parent, Renderer animation, String name, double x, double y, int width, int height) {
         this.parent = parent;
         this.currentState = new State(animation, "default");
         this.currentAnimation = animation;
@@ -89,21 +86,20 @@ public class Sprite {
         this.velocityYProperty = new DoubleProperty(0d);
         this.width = width;
         this.height = height;
-        this.lookup = lookup;
- 
     }
 
-    public Sprite(Level canvas, String name, double x, double y, int width, int height, Lookup lookup) {
-        this(canvas, NO_ANIMATION, name, x, y, width, height, lookup);
+    public Sprite(Level canvas, String name, double x, double y, int width, int height) {
+        this(canvas, NO_ANIMATION, name, x, y, width, height);
     }
 
-    public void addToLookup(Object o) {
-        if (lookup == Lookup.EMPTY) {
-            content = new InstanceContent();
-            lookup = new AbstractLookup(content);
-        }
-        content.add(o);
+    public Object getUserObject() {
+        return userObject;
     }
+
+    public void setUserObject(Object userObject) {
+        this.userObject = userObject;
+    }
+
 
     public DoubleProperty getXProperty() {
         return xProperty;
@@ -117,10 +113,6 @@ public class Sprite {
         return parent;
     }
 
-    public Lookup getLookup() {
-        return lookup;
-    }
-
     public void setParent(Level parent) {
         this.parent = parent;
     }
@@ -128,7 +120,7 @@ public class Sprite {
     public void addAction(KeyCode code, SpriteAction action) {
         if (keyEventHandler == null) {
             keyEventHandler = new KeyEventHandler();
-//            parent.addEventHandler(KeyEvent.ANY, keyEventHandler);
+            parent.addEventHandler(KeyEvent.ANY, keyEventHandler);
         }
         keyEventHandler.actionMap.put(code, action);
     }
@@ -298,7 +290,7 @@ public class Sprite {
             }
         }
         if (currentAnimation.prepare(this, l)) {
-            dirty=true;
+            dirty = true;
         }
         return dirty;
     }
@@ -380,24 +372,28 @@ public class Sprite {
     public void setRotation(double angle) {
         this.angle = angle;
     }
-    
-    public double getRotation(){
+
+    public double getRotation() {
         return angle;
     }
 
     public void invalidMove() {
     }
-    
-    public void setOnMouseClicked(MouseEventHandler clickHandler){
+
+    boolean contains(double x1, double y1) {
+        return (x1 > getX() && x1 < (getX() + getWidth()) && y1 > getY() && y1 < getY() + getHeight());
+    }
+
+    public void setOnMouseClicked(EventHandler<MouseEvent> clickHandler) {
         this.mouseEventHandler = clickHandler;
     }
 
-    public MouseEventHandler getMouseClickHandler() {
-      return mouseEventHandler;
+    public EventHandler<MouseEvent> getMouseClickHandler() {
+        return mouseEventHandler;
     }
 
-    boolean contains(double x1, double y1) {
-       return (x1 > getX() && x1< (getX()+getWidth()) && y1 > getY() && y1 < getY() +getHeight());
+    public void setOnMouseClicked(javafx.event.EventHandler eventHandler) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private class KeyEventHandler implements EventHandler<KeyEvent> {

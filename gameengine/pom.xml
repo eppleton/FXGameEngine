@@ -34,12 +34,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.netbeans.api</groupId>
-            <artifactId>org-openide-util-lookup</artifactId>
-            <version>RELEASE721</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
             <groupId>net.java.html</groupId>
             <artifactId>canvas</artifactId>
             <version>0.8-SNAPSHOT</version>

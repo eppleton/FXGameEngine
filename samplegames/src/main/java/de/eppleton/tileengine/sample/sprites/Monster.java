@@ -41,7 +41,7 @@ public class Monster extends Sprite {
     private TileSetAnimation monsterRight;
 
     public Monster(final Level parent, String name, double x, double y, int width, int height, TileSet monster) {
-        super(parent, name, x, y, width, height, Lookup.EMPTY);
+        super(parent, name, x, y, width, height);
         parent.addSprite(this);
         monsterUp = new TileSetAnimation(monster, new int[]{1, 2, 3, 4, 5, 6, 7, 8}, 10f);
         monsterLeft = new TileSetAnimation(monster, new int[]{10, 11, 12, 13, 14, 15, 16, 17}, 10f);

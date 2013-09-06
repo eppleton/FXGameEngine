@@ -121,6 +121,8 @@ public class PhysicsEngine implements Level.Updater {
 //        this.camera = new WorldCam(new Vec2(targetX - centerX, max.y + (targetY - centerY)), scale);
 //    }
     public Body createDefaultBody(Sprite sprite, BodyType type, float restitution, float friction, float density, boolean fixedRotation) {
+         if(world.isLocked())
+            System.out.println("#####");
         double x = sprite.getX();
         double y = sprite.getY();
         Rectangle2D collisionBox = sprite.getCollisionBox();
@@ -139,7 +141,7 @@ public class PhysicsEngine implements Level.Updater {
                 .fixedRotation(fixedRotation)
                 .userData(sprite)
                 .build();
-        sprite.addToLookup(body);
+        sprite.setUserObject(body);
         return body;
     }
 

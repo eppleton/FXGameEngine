@@ -43,13 +43,13 @@ class LinearMoveAction extends SpriteAction {
 
     @Override
     public void started(Sprite sprite) {
-        Body lookup = sprite.getLookup().lookup(Body.class);
+        Body lookup = (Body) sprite.getUserObject();
         lookup.setLinearVelocity(force);
     }
 
     @Override
     public void finished(Sprite sprite) {
-        Body lookup = sprite.getLookup().lookup(Body.class);
+        Body lookup = (Body) sprite.getUserObject();
         lookup.setLinearVelocity(reset);
     }
     
