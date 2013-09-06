@@ -24,6 +24,7 @@ package de.eppleton.fx2d.physics;
 import de.eppleton.fx2d.Level;
 import de.eppleton.fx2d.Rectangle2D;
 import de.eppleton.fx2d.Sprite;
+import de.eppleton.fx2d.action.Behavior;
 import de.eppleton.jbox2d.builders.BoxBuilder;
 import java.util.ArrayList;
 import org.jbox2d.common.Vec2;
@@ -35,7 +36,7 @@ import org.jbox2d.dynamics.World;
  *
  * @author antonepple
  */
-public class PhysicsEngine implements Level.Updater {
+public class PhysicsEngine extends Behavior {
 
     private World world;
     private long lastPulse;
@@ -48,10 +49,12 @@ public class PhysicsEngine implements Level.Updater {
     public void setCamera(WorldCam camera) {
         this.camera = camera;
     }
+    
     ArrayList<Body> toKill;
 
     public PhysicsEngine(Vec2 gravity, Vec2 translate, float scale, Level canvas, boolean debug) {
-        canvas.setUpdater(this);
+        setEvaluationInterval(1);
+        canvas.addBehaviour(this);
         if (debug) canvas.addLayer(new DebugLayer(this));
         camera = new WorldCam(translate, scale);
         toKill = new ArrayList<>();
@@ -76,7 +79,7 @@ public class PhysicsEngine implements Level.Updater {
     }
 
     @Override
-    public boolean update(Level canvas, long l) {
+    public boolean perform(Level canvas, long l) {
         // timestep clamping
         float dt = (float) Math.min(((double) (l - lastPulse)) / 1_000_000_000, 1.0 / 15.0);
         world.step(dt, 8, 2);
@@ -121,8 +124,6 @@ public class PhysicsEngine implements Level.Updater {
 //        this.camera = new WorldCam(new Vec2(targetX - centerX, max.y + (targetY - centerY)), scale);
 //    }
     public Body createDefaultBody(Sprite sprite, BodyType type, float restitution, float friction, float density, boolean fixedRotation) {
-         if(world.isLocked())
-            System.out.println("#####");
         double x = sprite.getX();
         double y = sprite.getY();
         Rectangle2D collisionBox = sprite.getCollisionBox();

@@ -22,6 +22,7 @@
 package de.eppleton.tileengine.sample;
 
 import de.eppleton.fx2d.Level;
+import de.eppleton.fx2d.action.DefaultMoveBehavior;
 
 import de.eppleton.fx2d.tileengine.ObjectGroup;
 import de.eppleton.fx2d.tileengine.TileMap;
@@ -61,8 +62,8 @@ public class SampleGame extends Level {
             for (ObjectGroup objectGroup : objectGroups) {
                 monsterHandler.handle(objectGroup, this);
             }
-             
-            this.addMoveValidator(new SampleMoveValidator(tileMap));
+            DefaultMoveBehavior defaultMoveBehavior = new DefaultMoveBehavior();          
+            defaultMoveBehavior.addMoveValidator(new SampleMoveValidator(tileMap));
  
             this.start();
  
