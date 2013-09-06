@@ -44,7 +44,7 @@ import net.java.html.canvas.GraphicsContext;
  *
  * @author antonepple
  */
-public abstract class Level extends Screen implements Pulse.Handler{
+public class Level extends Screen implements Pulse.Handler{
     
     private Camera camera;
     private float alpha = 1;
@@ -398,7 +398,7 @@ public abstract class Level extends Screen implements Pulse.Handler{
         layers.remove(layer);
     }
 
-    protected abstract void initGame();
+    protected void initGame(){}
 
     /**
      * This can be used to plug in simple constraints or a physics engine
