@@ -28,11 +28,11 @@ import de.eppleton.fx2d.event.EventHandler;
 import de.eppleton.fx2d.event.KeyCode;
 import de.eppleton.fx2d.event.KeyEvent;
 import de.eppleton.fx2d.event.MouseEvent;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import net.java.html.canvas.GraphicsContext;
-
 
 /**
  *
@@ -40,6 +40,18 @@ import net.java.html.canvas.GraphicsContext;
  */
 public class Sprite {
 
+    public static Comparator<Sprite> COMPARATOR = new Comparator<Sprite>() {
+        @Override
+        public int compare(Sprite o1, Sprite o2) {
+            if (o1.getY() > o2.getY()) {
+                return 1;
+            } else if (o1.getY() == o2.getY()) {
+                return 0;
+            } else {
+                return -1;
+            }
+        }
+    };
     private HashMap<SpriteBehavior, Long> behaviours = new HashMap<>();
     private String name;
     private DoubleProperty xProperty;
@@ -57,7 +69,6 @@ public class Sprite {
     private Rectangle2D collisionBox;
     private Level parent;
     private Object userObject;
-    
     public static Renderer NO_ANIMATION = new Renderer() {
         @Override
         public void render(Sprite sprite, GraphicsContext context, float alpha, long delta) {
@@ -99,7 +110,6 @@ public class Sprite {
     public void setUserObject(Object userObject) {
         this.userObject = userObject;
     }
-
 
     public DoubleProperty getXProperty() {
         return xProperty;
