@@ -57,7 +57,7 @@ public class PhysicsEngine extends Behavior {
         canvas.addBehaviour(this);
         if (debug) canvas.addLayer(new DebugLayer(this));
         camera = new WorldCam(translate, scale);
-        toKill = new ArrayList<>();
+        toKill = new ArrayList<Body>();
         this.world = new World(gravity) {
             @Override
             public void step(float dt, int velocityIterations, int positionIterations) {
@@ -81,7 +81,7 @@ public class PhysicsEngine extends Behavior {
     @Override
     public boolean perform(Level canvas, long l) {
         // timestep clamping
-        float dt = (float) Math.min(((double) (l - lastPulse)) / 1_000_000_000, 1.0 / 15.0);
+        float dt = (float) Math.min(((double) (l - lastPulse)) / 1000000000, 1.0 / 15.0);
         world.step(dt, 8, 2);
         lastPulse = l;
         updateSprites();
