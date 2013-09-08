@@ -38,13 +38,13 @@ public class AStar {
             }
         }
 
-        PriorityQueue<PathNode> openList = new PriorityQueue<>();
-        List<PathNode> closedList = new ArrayList<>();
+        PriorityQueue<PathNode> openList = new PriorityQueue<PathNode>();
+        List<PathNode> closedList = new ArrayList<PathNode>();
         PathNode stn = new PathNode(null, 0, 0, start.x, start.y);
         openList.add(stn);
         while (!openList.isEmpty()) {
             PathNode q = openList.poll();
-            List<PathNode> successors = new ArrayList<>();
+            List<PathNode> successors = new ArrayList<PathNode>();
             int qx = q.getX();
             int qy = q.getY();
             addSuccessor(playField, qx - 1, qy, q, goal, successors);

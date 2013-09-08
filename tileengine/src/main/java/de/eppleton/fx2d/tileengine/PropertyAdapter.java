@@ -47,7 +47,7 @@ public class PropertyAdapter extends XmlAdapter<Properties, java.util.Properties
         
         Properties properties = new Properties();
             if (v==null)return properties;
-        ArrayList<Property> propertyList = new ArrayList<>();
+        ArrayList<Property> propertyList = new ArrayList<Property>();
         
         Set<Object> keySet = v.keySet();
         for (Object object : keySet) {

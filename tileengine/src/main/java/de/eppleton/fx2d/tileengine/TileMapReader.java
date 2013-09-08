@@ -148,11 +148,9 @@ public class TileMapReader {
         JAXBContext tileSetContext = JAXBContext.newInstance(TileSet.class);
         Unmarshaller tsum = tileSetContext.createUnmarshaller();
         TileSet tileSet = null;
-        try (InputStream resourceAsStream = TileSet.class.getResourceAsStream(url)) {
-            tileSet = (TileSet) tsum.unmarshal(resourceAsStream);
-        } catch (IOException iox) {
-            LOG.log(Level.ALL, "Unable to load tileset " + url, iox);
-        }
+        InputStream resourceAsStream = TileSet.class.getResourceAsStream(url);
+        tileSet = (TileSet) tsum.unmarshal(resourceAsStream);
+        
         tileSet.setBaseUrl(baseUrl);
         String source = tileSet.getImage().getSource();
         String resourcePath = resourcePath(source, baseUrl);
