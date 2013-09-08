@@ -70,7 +70,7 @@ public class SpaceInvaders extends Level {
             final TileSetAnimation animation30 = new TileSetAnimation(invaders, new int[]{0, 1}, 2);
             final TileSetAnimation animation10 = new TileSetAnimation(invaders, new int[]{4, 5}, 2);
             final TileSetAnimation animation20 = new TileSetAnimation(invaders, new int[]{2, 3}, 2);
-            final TileSetAnimation playerAnimation = new TileSetAnimation(playerTiles, new int[]{0}, 100_000);
+            final TileSetAnimation playerAnimation = new TileSetAnimation(playerTiles, new int[]{0}, 100000);
             for (int i = 0; i < enemies.length; i++) {
                 int[] is = enemies[i];
                 for (int j = 0; j < is.length; j++) {

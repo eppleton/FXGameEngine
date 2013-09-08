@@ -73,7 +73,7 @@ public class TowerDefenseGame extends Level {
     private double targetX;
     private double targetY;
     private Image backgroundImage;
-    private List<Wave> waves = new ArrayList<>();
+    private List<Wave> waves = new ArrayList<Wave>();
     private String message;
     private int currentWave;
     private int maxHits = 2;
@@ -298,7 +298,7 @@ public class TowerDefenseGame extends Level {
         public Wave(StackedRenderer stacked, long evaluationInterval, String[] waveProperties) {
             this.stacked = stacked;
             setEvaluationInterval(evaluationInterval);
-            enemySprites = new ArrayList<>();
+            enemySprites = new ArrayList<EnemySprite>();
             for (int i = 0; i < waveProperties.length; i++) {
                 int numEnemies = Integer.parseInt(waveProperties[i]);
                 for (int j = 0; j < numEnemies; j++) {

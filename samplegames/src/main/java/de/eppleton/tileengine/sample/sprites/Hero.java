@@ -117,7 +117,7 @@ public class Hero extends Sprite {
         addAction(KeyCode.D, moveRight);
 
 
-        HashMap<State, int[]> state2Index = new HashMap<>();
+        HashMap<State, int[]> state2Index = new HashMap<State,int[]>();
         state2Index.put(UP, new int[]{65, 66, 67, 68, 69});
         state2Index.put(LEFT, new int[]{81, 82, 83, 84, 85});
         state2Index.put(DOWN, new int[]{97, 98, 99, 100, 101});
@@ -127,7 +127,7 @@ public class Hero extends Sprite {
         attack = new SpriteActionImpl(
                 new StateAnimation(heroSet, new int[]{65, 66, 67, 68, 69}, state2Index, 50f), "attack");
         addAction(KeyCode.SPACE, attack);
-        gearList = new ArrayList<>();
+        gearList = new ArrayList<Gear>();
 
 
     }
