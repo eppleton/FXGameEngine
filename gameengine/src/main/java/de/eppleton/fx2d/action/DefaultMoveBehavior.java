@@ -37,7 +37,7 @@ public class DefaultMoveBehavior extends Behavior {
     private double factor;
 
     public DefaultMoveBehavior() {
-        this.moveValidators = new ArrayList<>();
+        this.moveValidators = new ArrayList<MoveValidator>();
     }
 
     @Override

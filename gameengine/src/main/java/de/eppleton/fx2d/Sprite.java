@@ -20,6 +20,7 @@
  */
 package de.eppleton.fx2d;
 
+import de.eppleton.fx2d.action.ShootBehavior;
 import de.eppleton.fx2d.beans.DoubleProperty;
 import de.eppleton.fx2d.action.SpriteBehavior;
 import de.eppleton.fx2d.action.SpriteAction;
@@ -52,7 +53,7 @@ public class Sprite {
             }
         }
     };
-    private HashMap<SpriteBehavior, Long> behaviours = new HashMap<>();
+    private HashMap<SpriteBehavior, Long> behaviours = new HashMap<SpriteBehavior, Long>();
     private String name;
     private DoubleProperty xProperty;
     private DoubleProperty yProperty;
@@ -61,7 +62,7 @@ public class Sprite {
     private final int width;
     private final int height;
     private double speed = 2;
-    private double energy = 1_000;
+    private double energy = 1000;
     private State currentState;
     private SpriteAction currentAction;
     private Renderer currentAnimation;
@@ -405,7 +406,7 @@ public class Sprite {
 
     private class KeyEventHandler implements EventHandler<KeyEvent> {
 
-        HashMap<KeyCode, SpriteAction> actionMap = new HashMap<>();
+        HashMap<KeyCode, SpriteAction> actionMap = new HashMap<KeyCode, SpriteAction>();
 
         @Override
         public void handle(KeyEvent t) {

@@ -36,7 +36,7 @@ public  class EventDispatcher {
 
     public EventDispatcher() {
         eventHandlerMap =
-                new HashMap<>();
+                new HashMap<Event.Type<? extends Event>,ProxyEventHandler<? extends Event>>();
     }
 
     public final <T extends Event> void addEventHandler(
@@ -120,7 +120,7 @@ public  class EventDispatcher {
 
         ProxyEventHandler<? extends Event> proxy = eventHandlerMap.get(eventType);
         if (proxy == null) {
-            proxy = new ProxyEventHandler<>();
+            proxy = new ProxyEventHandler<Event>();
             eventHandlerMap.put(eventType, proxy);
         }
         return (ProxyEventHandler<T>) proxy;

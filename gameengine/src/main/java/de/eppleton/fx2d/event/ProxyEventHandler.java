@@ -29,7 +29,7 @@ import java.util.List;
  * @author antonepple
  */
 public class ProxyEventHandler<T extends Event> {
-    List <EventHandler<T>> handlers = new ArrayList<>();
+    List <EventHandler<T>> handlers = new ArrayList<EventHandler<T>>();
     
     public void dispatchEvent(Event event){
         for (EventHandler<T> eventHandler : handlers) {

@@ -48,7 +48,7 @@ public class Level extends Screen implements Pulse.Handler {
     private final double screenWidth;
     private final double screenHeight;
     private final ArrayList<Layer> layers;
-    private final HashMap<Behavior, Long> behaviours = new HashMap<>();
+    private final HashMap<Behavior, Long> behaviours = new HashMap<Behavior, Long>();
     private final HashMap<String, Sprite> sprites;
     private final Pulse timer;
     private final double cameraMaxX;
@@ -77,8 +77,8 @@ public class Level extends Screen implements Pulse.Handler {
         this.screenHeight = viewPortHeight;
         this.cameraMaxX = playfieldWidth - viewPortWidth;
         this.cameraMaxY = playfieldHeight - viewPortHeight;
-        this.layers = new ArrayList<>();
-        this.sprites = new HashMap<>();
+        this.layers = new ArrayList<Layer>();
+        this.sprites = new HashMap<String, Sprite>();
 
         addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
@@ -157,7 +157,7 @@ public class Level extends Screen implements Pulse.Handler {
     }
 
     public final Collection<Sprite> getSprites() {
-        return new ArrayList<>(sprites.values());
+        return new ArrayList<Sprite>(sprites.values());
     }
 
     public final void addSprite(Sprite sprite) {
@@ -222,7 +222,7 @@ public class Level extends Screen implements Pulse.Handler {
                 layer.draw(graphicsContext, cameraX * layer.getParallaxFactor(), cameraY * layer.getParallaxFactor(), screenWidth, screenHeight);
             }
             if (layer.getName().equals("sprites")) {
-                List<Sprite> values = new ArrayList<>(sprites.values());
+                List<Sprite> values = new ArrayList<Sprite>(sprites.values());
                 Collections.sort(values, Sprite.COMPARATOR);
                 for (Sprite sprite : values) {
                     double x = sprite.getX();
@@ -269,7 +269,7 @@ public class Level extends Screen implements Pulse.Handler {
     private boolean update(long l) {
         boolean changed = false;
         // invoke Behaviours, Animation, etc.
-        List<Behavior> toRemove = new ArrayList<>();
+        List<Behavior> toRemove = new ArrayList<Behavior>();
         Set<Map.Entry<Behavior, Long>> entrySet = behaviours.entrySet();
         for (Map.Entry<Behavior, Long> entry : entrySet) {
             long evaluationInterval = entry.getKey().getEvaluationInterval();
@@ -287,7 +287,7 @@ public class Level extends Screen implements Pulse.Handler {
             behaviours.remove(done);
         }
         // let the Sprites invoke their Behaviors
-        ArrayList<Sprite> arrayList = new ArrayList<>(sprites.values());
+        ArrayList<Sprite> arrayList = new ArrayList<Sprite>(sprites.values());
         for (Sprite sprite : arrayList) {
             if (sprite.pulse(this, l)) {
                 changed = true;
@@ -321,8 +321,8 @@ public class Level extends Screen implements Pulse.Handler {
     }
 
     public final Collection<Collision> checkCollisions(Sprite sprite) {
-        ArrayList<Collision> collisions = new ArrayList<>();
-        ArrayList<Sprite> spriteList = new ArrayList<>(sprites.values());
+        ArrayList<Collision> collisions = new ArrayList<Collision>();
+        ArrayList<Sprite> spriteList = new ArrayList<Sprite>(sprites.values());
         for (Sprite sprite1 : spriteList) {
             if (sprite1 != sprite) {
                 if (isCollision(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight(),

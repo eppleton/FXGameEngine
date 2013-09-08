@@ -52,7 +52,7 @@ public class ShootAction extends SpriteAction {
         Sprite bullet = spriteProvider.getSprite(sprite.getParent(), sprite.getX(), sprite.getY());
         bullet.setVelocityY(-10);
         ShootBehavior behavior = new ShootBehavior(collisionHandler);
-        behavior.setEvaluationInterval(20_000_000);
+        behavior.setEvaluationInterval(20000000);
         bullet.addBehaviour(behavior);
     }
 }

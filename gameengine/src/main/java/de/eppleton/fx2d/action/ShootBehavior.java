@@ -35,7 +35,7 @@ public class ShootBehavior extends SpriteBehavior {
     Collection<CollisionHandler> listeners;
 
     public ShootBehavior(CollisionHandler listener) {
-        this.listeners = new ArrayList<>();
+        this.listeners = new ArrayList<CollisionHandler>();
         listeners.add(listener);
     }
      

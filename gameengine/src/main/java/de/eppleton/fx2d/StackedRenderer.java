@@ -33,7 +33,7 @@ import net.java.html.canvas.GraphicsContext;
  */
 public class StackedRenderer implements Renderer {
 
-    List<Renderer> renderers = new ArrayList<>();
+    List<Renderer> renderers = new ArrayList<Renderer>();
 
     public StackedRenderer(Renderer ... stack) {
         for (Renderer renderer : stack) {
