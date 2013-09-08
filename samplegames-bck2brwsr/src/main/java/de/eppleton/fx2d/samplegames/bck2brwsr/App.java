@@ -24,10 +24,12 @@ package de.eppleton.fx2d.samplegames.bck2brwsr;
 import de.eppleton.fx2d.event.KeyCode;
 import de.eppleton.fx2d.event.KeyEvent;
 import de.eppleton.fx2d.samples.pong.Pong;
+import java.util.ServiceLoader;
 import net.java.html.canvas.GraphicsContext;
 import org.apidesign.bck2brwsr.htmlpage.api.On;
 import org.apidesign.bck2brwsr.htmlpage.api.OnEvent;
 import org.apidesign.bck2brwsr.htmlpage.api.Page;
+import org.apidesign.html.sound.spi.AudioEnvironment;
 
 /**
  * This is the controller class for associated index.html page. The
@@ -36,11 +38,17 @@ import org.apidesign.bck2brwsr.htmlpage.api.Page;
  */
 @Page(xhtml = "index.html", className = "Index")
 public class App {
-
     static {
         Index model = new Index();
         GraphicsContext gc = model.canvas.getContext();
         gc.setFont("36pt Verdana");
+       
+        
+        Logger.log("Played sound");
+        ServiceLoader<AudioEnvironment> loaded = ServiceLoader.load(AudioEnvironment.class);
+         for (AudioEnvironment ae :loaded){
+            Logger.logObject(ae);
+        }
         pong = new Pong(gc, 800, 600, 800, 600);
     }
     private static Pong pong;

@@ -101,17 +101,6 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.apidesign.bck2brwsr</groupId>
-      <artifactId>emul</artifactId>
-      <version>0.8-SNAPSHOT</version>
-      <classifier>rt</classifier>
-    </dependency>
-    <dependency>
-      <groupId>org.apidesign.bck2brwsr</groupId>
-      <artifactId>javaquery.api</artifactId>
-      <version>0.8-SNAPSHOT</version>
-    </dependency>
-    <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
       <version>6.5.2</version>
@@ -142,16 +131,6 @@
       <version>0.5</version>
     </dependency>
     <dependency>
-      <artifactId>canvas</artifactId>
-      <groupId>net.java.html</groupId>
-      <version>0.8-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <artifactId>gameengine</artifactId>
-      <groupId>de.eppleton.fx2d</groupId>
-      <version>1.0-SNAPSHOT</version>
-    </dependency>
-    <dependency>
       <artifactId>physicsengine</artifactId>
       <groupId>de.eppleton.fx2d</groupId>
       <version>1.0-SNAPSHOT</version>
@@ -167,6 +146,18 @@
       <groupId>org.netbeans.api</groupId>
       <type>jar</type>
       <version>RELEASE721</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apidesign.bck2brwsr</groupId>
+      <artifactId>javaquery.api</artifactId>
+      <version>0.8-SNAPSHOT</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>net.java.html</groupId>
+      <artifactId>canvas</artifactId>
+      <version>0.8-SNAPSHOT</version>
+      <type>jar</type>
     </dependency>
   </dependencies>
 </project>

@@ -402,9 +402,6 @@ public class Sprite {
         return mouseEventHandler;
     }
 
-    public void setOnMouseClicked(javafx.event.EventHandler eventHandler) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     private class KeyEventHandler implements EventHandler<KeyEvent> {
 

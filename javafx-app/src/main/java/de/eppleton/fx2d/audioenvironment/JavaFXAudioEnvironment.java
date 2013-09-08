@@ -29,7 +29,14 @@ import javafx.scene.media.AudioClip;
 @ServiceProvider(service = AudioEnvironment.class, position = 50)
 public class JavaFXAudioEnvironment implements AudioEnvironment<AudioClip>{
 
+    public JavaFXAudioEnvironment() {
+        
+    }
+
+    
+    
     public AudioClip create(String src) {
+        
        return new AudioClip(src);
     }
 

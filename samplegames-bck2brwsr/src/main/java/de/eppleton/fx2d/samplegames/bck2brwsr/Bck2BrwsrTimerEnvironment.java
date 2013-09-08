@@ -1,3 +1,5 @@
+package de.eppleton.fx2d.samplegames.bck2brwsr;
+
 /**
  * This file is part of FXGameEngine 
  * A Game Engine written in JavaFX
@@ -19,7 +21,7 @@
  * For alternative licensing or use in closed source projects contact Anton Epple 
  * <info@eppleton.de>
  */
-package de.eppleton.fx2d.samplegames.bck2brwsr;
+
 
 import de.eppleton.fx2d.samplegames.bck2brwsr.Bck2BrwsrTimerEnvironment.BBTimer;
 import de.eppleton.fx2d.timer.Pulse;

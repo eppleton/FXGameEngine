@@ -63,6 +63,11 @@
             <version>RELEASE721</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>org.apidesign.bck2brwsr</groupId>
+            <artifactId>core</artifactId>
+            <version>0.8-SNAPSHOT</version>
+        </dependency>
     </dependencies>
     <repositories>
         <repository>

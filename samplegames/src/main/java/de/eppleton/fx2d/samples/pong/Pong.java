@@ -1,22 +1,22 @@
 /**
- * This file is part of FXGameEngine 
- * A Game Engine written in JavaFX
- * Copyright (C) 2012 Anton Epple <info@eppleton.de>
+ * This file is part of FXGameEngine A Game Engine written in JavaFX Copyright
+ * (C) 2012 Anton Epple <info@eppleton.de>
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 2 of the License.
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, version 2 of the License.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program. Look for COPYING file in the top folder.
- * If not, see http://opensource.org/licenses/GPL-2.0.
- * 
- * For alternative licensing or use in closed source projects contact Anton Epple 
+ * You should have received a copy of the GNU General Public License along with
+ * this program. Look for COPYING file in the top folder. If not, see
+ * http://opensource.org/licenses/GPL-2.0.
+ *
+ * For alternative licensing or use in closed source projects contact Anton
+ * Epple
  * <info@eppleton.de>
  */package de.eppleton.fx2d.samples.pong;
 
@@ -37,10 +37,9 @@ public class Pong extends Level {
 
     public Pong(GraphicsContext graphicsContext, double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
         super(graphicsContext, playfieldWidth, playfieldHeight, viewPortWidth, viewPortHeight);
+
     }
 
-    
-    
     @Override
     protected void initGame() {
         final PhysicsEngine physicsEngine = new PhysicsEngine(new Vec2(0, 0), new Vec2(0, 6), 100, this, true);
@@ -55,8 +54,6 @@ public class Pong extends Level {
         physicsEngine.createWall(0, 10, 800, 10);
         addBall(this, physicsEngine, 400, 300);
         this.addBehaviour(new Behavior() {
-            
-         
             @Override
             public boolean perform(Level canvas, long nanos) {
                 Sprite sprite1 = canvas.getSprite("ball");
@@ -101,9 +98,9 @@ public class Pong extends Level {
 
     private void addBall(Level canvas, PhysicsEngine physicsEngine, int x, int y) {
         Sprite ball = new Sprite(canvas, "ball", x, y, 20, 20);
+  
         Body ballBody = physicsEngine.createDefaultBody(ball, BodyType.DYNAMIC, 1, .4f, .2f, false);
         ballBody.setLinearVelocity(new Vec2(4, 1));
         canvas.addSprite(ball);
     }
-
 }
