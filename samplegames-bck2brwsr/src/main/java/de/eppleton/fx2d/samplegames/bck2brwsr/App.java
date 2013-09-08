@@ -26,6 +26,7 @@ import de.eppleton.fx2d.event.KeyEvent;
 import de.eppleton.fx2d.samples.pong.Pong;
 import java.util.ServiceLoader;
 import net.java.html.canvas.GraphicsContext;
+import org.apidesign.bck2brwsr.htmlpage.Logger;
 import org.apidesign.bck2brwsr.htmlpage.api.On;
 import org.apidesign.bck2brwsr.htmlpage.api.OnEvent;
 import org.apidesign.bck2brwsr.htmlpage.api.Page;
