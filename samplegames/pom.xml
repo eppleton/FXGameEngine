@@ -58,15 +58,15 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.netbeans.api</groupId>
-            <artifactId>org-openide-util-lookup</artifactId>
-            <version>RELEASE721</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
             <groupId>org.apidesign.bck2brwsr</groupId>
             <artifactId>core</artifactId>
             <version>0.8-SNAPSHOT</version>
+        </dependency>
+                <dependency>
+            <groupId>org.openide</groupId>
+            <artifactId>org.openide.util.lookup</artifactId>
+            <version>7.4-SNAPSHOT</version>
+            
         </dependency>
     </dependencies>
     <repositories>

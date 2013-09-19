@@ -61,7 +61,6 @@ public class ParallaxSample extends Level {
         player.addAction(KeyCode.DOWN, ActionFactory.createMoveAction(Sprite.NO_ANIMATION, "down", 0, 4, 0, 0));
         this.addSprite(player);
         this.setCamera(new Camera(player.getXProperty(), player.getYProperty()));
-        this.start();
     }
 
 

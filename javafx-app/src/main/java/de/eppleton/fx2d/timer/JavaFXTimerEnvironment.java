@@ -21,14 +21,15 @@
  */
 package de.eppleton.fx2d.timer;
 
-import de.eppleton.fx2d.timer.spi.TimerEnvironment;
+import de.eppleton.fx2d.timer.spi.GameTimerEnvironment;
 import javafx.animation.AnimationTimer;
 import org.openide.util.lookup.ServiceProvider;
 
-@ServiceProvider(service=TimerEnvironment.class)
-public class JavaFXTimerEnvironment implements TimerEnvironment<AnimationTimer> {
+@ServiceProvider(service=GameTimerEnvironment.class)
+public class JavaFXTimerEnvironment implements GameTimerEnvironment<AnimationTimer> {
 
-    public AnimationTimer create(final Pulse.Handler handler) {
+    @Override
+    public AnimationTimer create(final Handler handler) {
         return new AnimationTimer() {
             @Override
             public void handle(long l) {
@@ -37,10 +38,12 @@ public class JavaFXTimerEnvironment implements TimerEnvironment<AnimationTimer> 
         };
     }
 
+    @Override
     public void start(AnimationTimer timer) {
         timer.start();
     }
 
+    @Override
     public void stop(AnimationTimer timer) {
         timer.stop();
     }

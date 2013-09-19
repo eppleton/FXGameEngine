@@ -34,8 +34,6 @@ import javax.xml.bind.JAXBException;
 import net.java.html.canvas.GraphicsContext;
 import net.java.html.canvas.Style;
 import net.java.html.sound.AudioClip;
-import org.openide.util.Lookup;
-import org.openide.util.lookup.Lookups;
 
 public class SpaceInvaders extends Level {
     
@@ -47,13 +45,7 @@ public class SpaceInvaders extends Level {
     AudioClip invaderKilledSound = AudioClip.create(SpaceInvaders.class.getResource("/assets/sound/invaderkilled.wav").toString());
     int score = 0;
     String message;
-    int[][] enemies = new int[][]{
-        {30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30},
-        {20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20},
-        {20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20},
-        {10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10},
-        {10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10}
-    };
+    int[][] enemies ;
 
     public SpaceInvaders(GraphicsContext graphicsContext, double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
         super(graphicsContext, playfieldWidth, playfieldHeight, viewPortWidth, viewPortHeight);
@@ -64,6 +56,13 @@ public class SpaceInvaders extends Level {
     @Override
     protected void initGame() {
         final Level canvas = this;
+        enemies = new int[][]{
+        {30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30},
+        {20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20},
+        {20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20},
+        {10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10},
+        {10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10}
+    };
         try {
             TileSet invaders = TileMapReader.readSet("/assets/graphics/invaders1.tsx");
             TileSet playerTiles = TileMapReader.readSet("/assets/graphics/player.tsx");
@@ -72,6 +71,7 @@ public class SpaceInvaders extends Level {
             final TileSetAnimation animation20 = new TileSetAnimation(invaders, new int[]{2, 3}, 2);
             final TileSetAnimation playerAnimation = new TileSetAnimation(playerTiles, new int[]{0}, 100000);
             for (int i = 0; i < enemies.length; i++) {
+               
                 int[] is = enemies[i];
                 for (int j = 0; j < is.length; j++) {
                     Points points = is[j] == 30 ? THIRTY : is[j] == 20 ? TWENTY : TEN;
@@ -82,7 +82,7 @@ public class SpaceInvaders extends Level {
                     sprite.setVelocityXProperty(invaderXVelocity);
                 }
             }
-            Sprite player = new Sprite(canvas, playerAnimation, "Player", 350, 620, 40, 30);
+            Sprite player = new Sprite(canvas, playerAnimation, "Player", 350, 520, 40, 30);
             canvas.addSprite(player);
             player.setAnimation(playerAnimation);
             player.addAction(KeyCode.LEFT, ActionFactory.createMoveAction(playerAnimation, "left", -4, 0, 0, 0));
@@ -91,11 +91,10 @@ public class SpaceInvaders extends Level {
         } catch (JAXBException ex) {
             Logger.getLogger(SpaceInvaders.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        canvas.addLayer(new Background());
+//        canvas.addLayer(new Background());
         canvas.addBehaviour(new MoveInvadersBehavior());
-
+        canvas.addBehaviour(new DefaultMoveBehavior());
         canvas.addLayer(new SpriteLayer());
-        canvas.start();
     }
     
   

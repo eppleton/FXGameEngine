@@ -35,7 +35,7 @@ public class SpaceInvadersGame extends Game{
 
     @Override
     protected Level getLevel(GraphicsContext context) {
-        return new SpaceInvaders(context, 800, 600, 800, 600);
+        return new SpaceInvaders(context, 800, 800, 800, 800);
     }
     public static void main(String[] args) {
         launch(args);

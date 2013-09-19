@@ -42,7 +42,7 @@ public class DefaultMoveBehavior extends Behavior {
 
     @Override
     public boolean perform(Level canvas, long l) {
-        boolean dirty = false;
+//        boolean dirty;
         if (delay == -1) {
             delay = 16666667;
         } else {
@@ -51,11 +51,11 @@ public class DefaultMoveBehavior extends Behavior {
         Collection<Sprite> sprites1 = canvas.getSprites();
         for (Sprite sprite : sprites1) {
             if (updateSpritePosition(sprite)) {
-                dirty = true;
+//                dirty = true;
             }
         }
         lastUpdate = l;
-        return dirty;
+        return true;
     }
 
     private boolean updateSpritePosition(Sprite sprite) {

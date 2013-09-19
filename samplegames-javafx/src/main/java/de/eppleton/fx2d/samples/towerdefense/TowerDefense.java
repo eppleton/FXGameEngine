@@ -58,7 +58,7 @@ import org.openide.util.Lookup;
  *
  * @author antonepple
  */
-public class TowerDefenseGame extends Level {
+public class TowerDefense extends Level {
    private IntegerProperty score = new IntegerProperty(0);
     private IntegerProperty hits = new IntegerProperty(0);
     private TileMap tileMap;
@@ -79,7 +79,7 @@ public class TowerDefenseGame extends Level {
     private int maxHits = 2;
     private boolean levelLost;
 
-    public TowerDefenseGame(GraphicsContext graphicsContext, double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
+    public TowerDefense(GraphicsContext graphicsContext, double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
         super(graphicsContext, playfieldWidth, playfieldHeight, viewPortWidth, viewPortHeight);
     }
 
@@ -134,11 +134,8 @@ public class TowerDefenseGame extends Level {
             readObjectProperties();
             calculateAttackPath();
 
-
-            level.start();
-
         } catch (Exception ex) {
-            Logger.getLogger(TowerDefenseGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            Logger.getLogger(TowerDefense.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
 
@@ -178,9 +175,9 @@ public class TowerDefenseGame extends Level {
         try {
             TileMapReader.writeMap(tileMap, "LevelState.tmx");
         } catch (JAXBException ex) {
-            Logger.getLogger(TowerDefenseGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            Logger.getLogger(TowerDefense.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(TowerDefenseGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            Logger.getLogger(TowerDefense.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         // setup Enemy Spawning
         Wave current = waves.get(currentWave++);

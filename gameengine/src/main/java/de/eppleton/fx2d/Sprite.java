@@ -20,7 +20,6 @@
  */
 package de.eppleton.fx2d;
 
-import de.eppleton.fx2d.action.ShootBehavior;
 import de.eppleton.fx2d.beans.DoubleProperty;
 import de.eppleton.fx2d.action.SpriteBehavior;
 import de.eppleton.fx2d.action.SpriteAction;
@@ -34,6 +33,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import net.java.html.canvas.GraphicsContext;
+import org.openide.util.Lookup;
+import org.openide.util.lookup.AbstractLookup;
+import org.openide.util.lookup.InstanceContent;
 
 /**
  *
@@ -69,7 +71,7 @@ public class Sprite {
     private Rectangle2D moveBox;
     private Rectangle2D collisionBox;
     private Level parent;
-    private Object userObject;
+    private Lookup lookup = Lookup.EMPTY;
     public static Renderer NO_ANIMATION = new Renderer() {
         @Override
         public void render(Sprite sprite, GraphicsContext context, float alpha, long delta) {
@@ -84,8 +86,10 @@ public class Sprite {
     };
     private KeyEventHandler keyEventHandler;
     private static State NO_STATE = new State(NO_ANIMATION, "No State");
+    private InstanceContent content;
     private double angle;
     private EventHandler<MouseEvent> mouseEventHandler;
+    private Object userObject;
 
     public Sprite(Level parent, Renderer animation, String name, double x, double y, int width, int height) {
         this.parent = parent;
@@ -108,8 +112,12 @@ public class Sprite {
         return userObject;
     }
 
-    public void setUserObject(Object userObject) {
-        this.userObject = userObject;
+    public void addToLookup(Object o) {
+        if (lookup == Lookup.EMPTY) {
+            content = new InstanceContent();
+            lookup = new AbstractLookup(content);
+    }
+        content.add(o);
     }
 
     public DoubleProperty getXProperty() {
@@ -401,6 +409,14 @@ public class Sprite {
 
     public EventHandler<MouseEvent> getMouseClickHandler() {
         return mouseEventHandler;
+    }
+
+    public Lookup getLookup() {
+        return lookup;
+    }
+
+    public void setUserObject(Object object) {
+        this.userObject = object;
     }
 
 

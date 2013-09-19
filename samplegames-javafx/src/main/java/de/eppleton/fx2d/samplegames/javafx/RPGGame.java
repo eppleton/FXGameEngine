@@ -38,7 +38,7 @@ public class RPGGame extends Game
     protected Level getLevel(GraphicsContext context) {
     
 
-        return new SampleGame(context, 1000, 1000, 500, 500);
+        return new SampleGame(context, 1600,1600, 500, 500);
     }
     
     public static void main(String[] args) {

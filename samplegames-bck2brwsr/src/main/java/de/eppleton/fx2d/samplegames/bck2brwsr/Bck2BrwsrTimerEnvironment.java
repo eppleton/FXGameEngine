@@ -24,15 +24,16 @@ package de.eppleton.fx2d.samplegames.bck2brwsr;
 
 
 import de.eppleton.fx2d.samplegames.bck2brwsr.Bck2BrwsrTimerEnvironment.BBTimer;
-import de.eppleton.fx2d.timer.Pulse;
-import de.eppleton.fx2d.timer.spi.TimerEnvironment;
+import de.eppleton.fx2d.timer.Handler;
+import de.eppleton.fx2d.timer.spi.GameTimerEnvironment;
 import org.apidesign.bck2brwsr.htmlpage.api.Timer;
 import org.openide.util.lookup.ServiceProvider;
 
-@ServiceProvider(service = TimerEnvironment.class)
-public class Bck2BrwsrTimerEnvironment implements TimerEnvironment<BBTimer> {
+@ServiceProvider(service = GameTimerEnvironment.class)
+public class Bck2BrwsrTimerEnvironment implements GameTimerEnvironment<BBTimer> {
 
-    public BBTimer create(final Pulse.Handler handler) {
+    @Override
+    public BBTimer create(final Handler handler) {
 
         return new BBTimer(new Runnable() {
             @Override

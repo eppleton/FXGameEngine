@@ -38,10 +38,7 @@ import net.java.html.canvas.GraphicsContext;
  */
 public abstract class Game extends Application {
 
-    private double playfieldWidth = 800;
-    private double playfieldHeight = 600;
-    private double viewPortWidth = 800;
-    private double viewPortHeight = 600;
+ 
     private String title = "My Game";
     private Level level;
     private Canvas canvas;
@@ -49,25 +46,29 @@ public abstract class Game extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        canvas = new Canvas(getViewPortWidth(), getViewPortHeight());
+        canvas = new Canvas();
         level = getLevel(new GraphicsContext(new JavaFXGraphicsEnvironment(canvas)));
+        canvas.setHeight(level.getScreenHeight());
+        canvas.setWidth(level.getScreenWidth());
         pane = new BorderPane();
         pane.setCenter(canvas);
-        Scene scene = new Scene(pane, getViewPortWidth(), getViewPortHeight());
+        Scene scene = new Scene(pane, level.getScreenWidth(), level.getScreenHeight());
         primaryStage.setTitle(title);
         primaryStage.setScene(scene);
         canvas.requestFocus();
         canvas.addEventHandler(EventType.ROOT, new javafx.event.EventHandler<javafx.event.Event>() {
             @Override
             public void handle(javafx.event.Event t) {
-                
+
                 level.dispatchEvent(JavaFXEventConverter.copyForGame(t));
             }
         });
+        level.start();
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
-    protected abstract Level getLevel(GraphicsContext context) ;
+    protected abstract Level getLevel(GraphicsContext context);
 
     public void setBottom(Node bottom) {
         pane.setBottom(bottom);
@@ -87,42 +88,6 @@ public abstract class Game extends Application {
 
     }
 
-    /**
-     * override this to provide your own dimensions
-     *
-     * @return
-     */
-    protected double getPlayfieldWidth() {
-        return playfieldWidth;
-    }
-
-    /**
-     * override this to provide your own dimensions
-     *
-     * @return
-     */
-    protected double getPlayfieldHeight() {
-        return playfieldHeight;
-    }
-
-    /**
-     * override this to provide your own dimensions
-     *
-     * @return
-     */
-    protected double getViewPortWidth() {
-        return viewPortWidth;
-    }
-
-    /**
-     * override this to provide your own dimensions
-     *
-     * @return
-     */
-    protected double getViewPortHeight() {
-        return viewPortHeight;
-    }
-
     protected String getTitle() {
         return title;
     }
@@ -138,6 +103,4 @@ public abstract class Game extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
-
 }

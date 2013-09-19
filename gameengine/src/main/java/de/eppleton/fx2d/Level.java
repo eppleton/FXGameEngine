@@ -22,13 +22,13 @@
 package de.eppleton.fx2d;
 
 import de.eppleton.fx2d.action.Behavior;
-import de.eppleton.fx2d.action.SpriteBehavior;
 import de.eppleton.fx2d.collision.Collision;
 import de.eppleton.fx2d.event.Event;
 import de.eppleton.fx2d.event.EventDispatcher;
 import de.eppleton.fx2d.event.EventHandler;
 import de.eppleton.fx2d.event.MouseEvent;
-import de.eppleton.fx2d.timer.Pulse;
+import de.eppleton.fx2d.timer.Handler;
+import de.eppleton.fx2d.timer.GamePulse;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -43,19 +43,18 @@ import net.java.html.canvas.GraphicsContext;
  *
  * @author antonepple
  */
-public class Level extends Screen implements Pulse.Handler {
+public class Level extends Screen implements Handler {
 
-    private final double screenWidth;
-    private final double screenHeight;
-    private final ArrayList<Layer> layers;
+    final double screenWidth;
+    final double screenHeight;
+    final ArrayList<Layer> layers;
     private final HashMap<Behavior, Long> behaviours = new HashMap<Behavior, Long>();
-    private final HashMap<String, Sprite> sprites;
-    private final Pulse timer;
-    private final double cameraMaxX;
-    private final double cameraMaxY;
+    final HashMap<String, Sprite> sprites;
+    private GamePulse timer;
+    final double cameraMaxX;
+    final double cameraMaxY;
     private final EventDispatcher eventDispatcher = new EventDispatcher();
-    
-    private Camera camera;
+    Camera camera;
     // @TODO move to Camera
     private double cameraX;
     private double cameraY;
@@ -91,15 +90,16 @@ public class Level extends Screen implements Pulse.Handler {
             }
         });
 
-        timer = Pulse.create(this);
-        initGame();
     }
 
-    // @TODO maybe remove, everything can be done by adding Layers, Sprites, Behaviors
     protected void initGame() {
     }
 
     public final void start() {
+        if (timer == null) {
+            timer = GamePulse.create(this);
+        }
+        initGame();
         timer.start();
     }
 
@@ -114,6 +114,16 @@ public class Level extends Screen implements Pulse.Handler {
     /*
      * Getters and Setters 
      */
+    public double getScreenWidth() {
+        return screenWidth;
+    }
+
+    public double getScreenHeight() {
+        return screenHeight;
+    }
+    
+    
+    
     public void setCamera(Camera camera) {
         this.camera = camera;
     }
@@ -142,7 +152,7 @@ public class Level extends Screen implements Pulse.Handler {
     public final void addLayer(int index, Layer layer) {
         layers.add(index, layer);
     }
-    
+
     public final void removeLayer(Layer layer) {
         layers.remove(layer);
     }
@@ -227,7 +237,7 @@ public class Level extends Screen implements Pulse.Handler {
                 for (Sprite sprite : values) {
                     double x = sprite.getX();
                     double y = sprite.getY();
-
+                   
                     if (isOnScreen(sprite)) {
                         graphicsContext.save();
                         graphicsContext.translate(x - cameraX,
@@ -235,6 +245,7 @@ public class Level extends Screen implements Pulse.Handler {
                         sprite.drawSprite(graphicsContext, alpha, delta);
                         graphicsContext.restore();
                     }
+                    
                 }
 
             }
@@ -353,8 +364,6 @@ public class Level extends Screen implements Pulse.Handler {
         return 0;
     }
 
-    
-
     public boolean isOnScreen(Sprite sprite) {
         double x = sprite.getX();
         double y = sprite.getY();
@@ -386,6 +395,7 @@ public class Level extends Screen implements Pulse.Handler {
     }
 
     public interface MoveValidator {
+
         public abstract boolean isValidMove(double x, double y, double width, double height);
     }
 }

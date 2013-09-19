@@ -35,7 +35,6 @@ public class PongGame extends Game{
 
     @Override
     protected Level getLevel(GraphicsContext context) {
-  
         return new Pong(context, 800,600,800,600);
     }
       public static void main(String[] args) {

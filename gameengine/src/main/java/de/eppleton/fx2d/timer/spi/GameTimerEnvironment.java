@@ -21,13 +21,13 @@
  */
 package de.eppleton.fx2d.timer.spi;
 
-import de.eppleton.fx2d.timer.Pulse.Handler;
+import de.eppleton.fx2d.timer.Handler;
 
 /**
  *
  * @author antonepple
  */
-public interface TimerEnvironment<Timer> {
+public interface GameTimerEnvironment<Timer> {
     
     public Timer create(Handler handler);
     

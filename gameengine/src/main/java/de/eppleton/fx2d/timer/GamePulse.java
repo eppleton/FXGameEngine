@@ -21,17 +21,18 @@
  */
 package de.eppleton.fx2d.timer;
 
-import de.eppleton.fx2d.timer.spi.TimerEnvironment;
+import de.eppleton.fx2d.timer.spi.GameTimerEnvironment;
 import java.util.ServiceLoader;
 
 /**
  *
  * @author antonepple
  */
-public abstract class Pulse {
+public abstract class GamePulse {
 
-    public static Pulse create(Handler handler) {
-        for (TimerEnvironment<?> te : ServiceLoader.load(TimerEnvironment.class)) {
+    public static GamePulse create(Handler handler) {
+        for (GameTimerEnvironment<?> te : ServiceLoader.load(GameTimerEnvironment.class)) {
+            
             Impl handle = create(te, handler);
             if (handle != null) {
                 return handle;
@@ -44,7 +45,7 @@ public abstract class Pulse {
 
     public abstract void stop();
 
-    private static <Timer> Impl<Timer> create(TimerEnvironment<Timer> env, Handler handler) {
+    private static <Timer> Impl<Timer> create(GameTimerEnvironment<Timer> env, Handler handler) {
         Timer a = env.create(handler);
         if (a != null) {
             return new Impl<Timer>(env, a);
@@ -53,17 +54,12 @@ public abstract class Pulse {
         }
     }
 
-    public interface Handler {
-
-        public void pulse(long pulse);
-    }
-
-    private static final class Impl<Timer> extends Pulse {
+    private static final class Impl<Timer> extends GamePulse {
 
         private final Timer timer;
-        private final TimerEnvironment<Timer> env;
+        private final GameTimerEnvironment<Timer> env;
 
-        public Impl(TimerEnvironment<Timer> env, Timer timer) {
+        public Impl(GameTimerEnvironment<Timer> env, Timer timer) {
             this.timer = timer;
             this.env = env;
         }

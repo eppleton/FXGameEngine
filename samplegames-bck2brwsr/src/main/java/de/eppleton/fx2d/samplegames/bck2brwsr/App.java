@@ -1,22 +1,22 @@
 /**
- * This file is part of FXGameEngine 
- * A Game Engine written in JavaFX
- * Copyright (C) 2012 Anton Epple <info@eppleton.de>
+ * This file is part of FXGameEngine A Game Engine written in JavaFX Copyright
+ * (C) 2012 Anton Epple <info@eppleton.de>
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 2 of the License.
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, version 2 of the License.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program. Look for COPYING file in the top folder.
- * If not, see http://opensource.org/licenses/GPL-2.0.
- * 
- * For alternative licensing or use in closed source projects contact Anton Epple 
+ * You should have received a copy of the GNU General Public License along with
+ * this program. Look for COPYING file in the top folder. If not, see
+ * http://opensource.org/licenses/GPL-2.0.
+ *
+ * For alternative licensing or use in closed source projects contact Anton
+ * Epple
  * <info@eppleton.de>
  */
 package de.eppleton.fx2d.samplegames.bck2brwsr;
@@ -24,13 +24,16 @@ package de.eppleton.fx2d.samplegames.bck2brwsr;
 import de.eppleton.fx2d.event.KeyCode;
 import de.eppleton.fx2d.event.KeyEvent;
 import de.eppleton.fx2d.samples.pong.Pong;
-import java.util.ServiceLoader;
+import java.util.ArrayList;
 import net.java.html.canvas.GraphicsContext;
+import net.java.html.sound.AudioClip;
 import org.apidesign.bck2brwsr.htmlpage.Logger;
 import org.apidesign.bck2brwsr.htmlpage.api.On;
 import org.apidesign.bck2brwsr.htmlpage.api.OnEvent;
 import org.apidesign.bck2brwsr.htmlpage.api.Page;
-import org.apidesign.html.sound.spi.AudioEnvironment;
+import org.openide.util.Lookup;
+import org.openide.util.lookup.AbstractLookup;
+import org.openide.util.lookup.InstanceContent;
 
 /**
  * This is the controller class for associated index.html page. The
@@ -39,18 +42,15 @@ import org.apidesign.html.sound.spi.AudioEnvironment;
  */
 @Page(xhtml = "index.html", className = "Index")
 public class App {
+
     static {
         Index model = new Index();
         GraphicsContext gc = model.canvas.getContext();
         gc.setFont("36pt Verdana");
-       
-        
-        Logger.log("Played sound");
-        ServiceLoader<AudioEnvironment> loaded = ServiceLoader.load(AudioEnvironment.class);
-         for (AudioEnvironment ae :loaded){
-            Logger.logObject(ae);
-        }
+        AudioClip clip = AudioClip.create("beep-1.mp3");
+        clip.play();
         pong = new Pong(gc, 800, 600, 800, 600);
+  
     }
     private static Pong pong;
 

@@ -64,8 +64,7 @@ public class SampleGame extends Level {
             }
             DefaultMoveBehavior defaultMoveBehavior = new DefaultMoveBehavior();          
             defaultMoveBehavior.addMoveValidator(new SampleMoveValidator(tileMap));
- 
-            this.start();
+            addBehaviour(defaultMoveBehavior);
  
             
         } catch (Exception ex) {

@@ -55,7 +55,6 @@ public class HelloWorld extends Level {
             }
         });
         addSprite(sprite);
-        this.start();
 
     }
 }

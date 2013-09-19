@@ -26,10 +26,12 @@ import de.eppleton.fx2d.action.SpriteBehavior;
 import de.eppleton.fx2d.event.KeyCode;
 import de.eppleton.fx2d.physics.PhysicsEngine;
 import de.eppleton.fx2d.physics.action.PhysicsActionFactory;
+import java.util.ArrayList;
 import net.java.html.canvas.GraphicsContext;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.BodyType;
+import org.openide.util.Lookup;
 
 public class Pong extends Level {
 
@@ -93,12 +95,11 @@ public class Pong extends Level {
                 return true;
             }
         });
-        this.start();
     }
 
     private void addBall(Level canvas, PhysicsEngine physicsEngine, int x, int y) {
         Sprite ball = new Sprite(canvas, "ball", x, y, 20, 20);
-  
+        
         Body ballBody = physicsEngine.createDefaultBody(ball, BodyType.DYNAMIC, 1, .4f, .2f, false);
         ballBody.setLinearVelocity(new Vec2(4, 1));
         canvas.addSprite(ball);
