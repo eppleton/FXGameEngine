@@ -25,7 +25,7 @@ import de.eppleton.fx2d.Level;
 import de.eppleton.fx2d.graphicsenvironment.JavaFXGraphicsEnvironment;
 import de.eppleton.fx2d.tileengine.TileMap;
 import de.eppleton.fx2d.tileengine.TileMapLayer;
-import de.eppleton.fx2d.tileengine.TileMapReader;
+import de.eppleton.fx2d.javafx.app.TileMapSerializationEnvironmentJAXB;
 import de.eppleton.fx2d.tileengine.TileSet;
 //import de.eppleton.fx2d.tileengine.algorithms.AStar;
 //import de.eppleton.fx2d.tileengine.algorithms.AStar.PathNode;
@@ -84,7 +84,7 @@ public class TileMapEditor extends Application implements ListChangeListener<Til
             @Override
             public void handle(ActionEvent t) {
                 try {
-                    TileMapReader.writeMap(tileMap, fileURL);
+                    TileMapSerializationEnvironmentJAXB.writeMap(tileMap, fileURL);
                 } catch (JAXBException ex) {
                     Logger.getLogger(TileMapEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
                 } catch (FileNotFoundException ex) {
@@ -128,7 +128,7 @@ public class TileMapEditor extends Application implements ListChangeListener<Til
         SplitPane pane = new SplitPane();
         pane.setOrientation(Orientation.VERTICAL);
         layerList = new LayerList(tileMap);
-        ArrayList<TileSet> tileSetlist = tileMap.getTileSetlist();
+        List<TileSet> tileSetlist = tileMap.getTileSetlist();
         tileSets = new TileSetChooser(tileSetlist);
         pane.getItems().addAll(layerList, tileSets);
         return pane;
@@ -138,7 +138,7 @@ public class TileMapEditor extends Application implements ListChangeListener<Til
     public void start(Stage primaryStage) throws Exception {
         try {
             
-            tileMap = TileMapReader.readMapFromFile(fileURL);
+            tileMap = TileMapSerializationEnvironmentJAXB.readMapFromFile(fileURL);
             canvas = new Canvas(tileMap.getTilewidth() * tileMap.getWidth(), tileMap.getHeight() * tileMap.getTileheight());
             level = new Level(new GraphicsContext(new JavaFXGraphicsEnvironment(canvas)),tileMap.getTilewidth() * tileMap.getWidth(), tileMap.getHeight() * tileMap.getTileheight(), tileMap.getTilewidth() * tileMap.getWidth(), tileMap.getHeight() * tileMap.getTileheight());
             Node rightSide = initSplitPane();

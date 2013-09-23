@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>FXGames Hello World</title>
+        <style type="text/css">div#wrap {
+                background: url(./assets/graphics/invaders1.png) no-repeat -9999px -9999px;
+            }
+            div#jump {
+                background: url(./assets/graphics/player.png) no-repeat -9999px -9999px;
+            }
+            div#header {
+                background: url(./assets/graphics/invaders_explode.png) no-repeat -9999px -9999px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="images" />
+
+        <p>
+            <canvas id="canvas" width="800" height="600" tabindex="1">
+            </canvas>
+        </p>
+
+
+        <script src="bck2brwsr.js"></script>
+        <script type="text/javascript">
+            function preloadimages(arr) {
+                var newimages = [], loadedimages = 0
+                var postaction = function() {
+                }
+                var arr = (typeof arr != "object") ? [arr] : arr
+                function imageloadpost() {
+                    loadedimages++
+                    if (loadedimages == arr.length) {
+                        postaction(newimages) //call postaction and pass in newimages array as parameter
+                    }
+                }
+                var imageDiv = document.getElementById("images");
+                for (var i = 0; i < arr.length; i++) {
+                    newimages[i] = new Image()
+                    newimages[i].src = arr[i]
+                    newimages[i].id = arr[i].substring(1)
+                    imageDiv.appendChild(newimages[i]);
+                    newimages[i].onload = function() {
+                        imageloadpost()
+                    }
+                    newimages[i].onerror = function() {
+                        imageloadpost()
+                    }
+                }
+                return {//return blank object with done() method
+                    done: function(f) {
+                        postaction = f || postaction //remember user defined callback functions to be called when images load
+                    }
+                }
+            }
+            preloadimages(['./assets/graphics/invaders1.png', './assets/graphics/player.png', './assets/graphics/invaders_explode.png']).done(function(images) {
+                var vm = bck2brwsr('samplegames-bck2brwsr-1.0-SNAPSHOT.jar');
+                vm.loadClass('de.eppleton.fx2d.resourcetest.Main');
+            })
+        </script>
+    </body>
+</html>

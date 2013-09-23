@@ -22,7 +22,7 @@
 package de.eppleton.fx2d.tilemapeditor;
 
 import de.eppleton.fx2d.tileengine.TileSet;
-import java.util.ArrayList;
+import java.util.List;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -43,7 +43,7 @@ class TileSetChooser extends BorderPane {
     TileSetView view;
     public Button button;
 
-    TileSetChooser(ArrayList<TileSet> tileSetlist) {
+    TileSetChooser(List<TileSet> tileSetlist) {
         tilesets = FXCollections.observableArrayList(tileSetlist);
 
         ChoiceBox box = new ChoiceBox(tilesets);
