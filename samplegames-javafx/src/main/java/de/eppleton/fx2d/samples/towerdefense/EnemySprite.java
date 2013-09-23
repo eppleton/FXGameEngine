@@ -27,6 +27,7 @@ import de.eppleton.fx2d.Rectangle2D;
 import de.eppleton.fx2d.Sprite;
 import de.eppleton.fx2d.Renderer;
 import de.eppleton.fx2d.action.SpriteBehavior;
+import de.eppleton.fx2d.tileengine.TileMapException;
 import de.eppleton.fx2d.tileengine.TileMapReader;
 import de.eppleton.fx2d.tileengine.TileSet;
 import de.eppleton.fx2d.tileengine.action.AnimationEvent;
@@ -50,13 +51,13 @@ public class EnemySprite extends Sprite {
     private boolean reachedTarget = false; 
     static TileSet explosion;
 
-    static {
-        try {
-            explosion = TileMapReader.readSet("/de/eppleton/fx2d/towerdefense/explosion.tsx");
-        } catch (JAXBException ex) {
-            Logger.getLogger(EnemySprite.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-    }
+//    static {
+//        try {
+//            explosion = TileMapReader.readSet("/de/eppleton/fx2d/towerdefense/explosion.tsx");
+//        } catch (TileMapException ex) {
+//            Logger.getLogger(EnemySprite.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//    }
     private TileSetAnimation explosionAnimation;
 
     public EnemySprite(Level parent, IntegerProperty score,IntegerProperty hits, Properties properties, Renderer animation, String name, double x, double y, final int width, final int height) {

@@ -24,16 +24,11 @@ package de.eppleton.fx2d.samplegames.bck2brwsr;
 import de.eppleton.fx2d.event.KeyCode;
 import de.eppleton.fx2d.event.KeyEvent;
 import de.eppleton.fx2d.samples.pong.Pong;
-import java.util.ArrayList;
-import net.java.html.canvas.GraphicsContext;
-import net.java.html.sound.AudioClip;
-import org.apidesign.bck2brwsr.htmlpage.Logger;
+import de.eppleton.fx2d.samples.spaceinvaders.SpaceInvaders;
+import org.apidesign.bck2brwsr.core.JavaScriptBody;
 import org.apidesign.bck2brwsr.htmlpage.api.On;
 import org.apidesign.bck2brwsr.htmlpage.api.OnEvent;
 import org.apidesign.bck2brwsr.htmlpage.api.Page;
-import org.openide.util.Lookup;
-import org.openide.util.lookup.AbstractLookup;
-import org.openide.util.lookup.InstanceContent;
 
 /**
  * This is the controller class for associated index.html page. The
@@ -45,14 +40,26 @@ public class App {
 
     static {
         Index model = new Index();
-        GraphicsContext gc = model.canvas.getContext();
-        gc.setFont("36pt Verdana");
-        AudioClip clip = AudioClip.create("beep-1.mp3");
-        clip.play();
-        pong = new Pong(gc, 800, 600, 800, 600);
-  
+        createImage("TORSO_leather_armor_torso.png");
+//         DefaultTileMapSerializationEnvironment ts = new DefaultTileMapSerializationEnvironment();
+//        try {
+//            ts.readMap("/de/eppleton/tileengine/sample/resources/maps/sample.json");
+//        } catch (TileMapException ex) {
+//            java.util.logging.Logger.getLogger(DefaultTileMapSerializationEnvironment.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        GraphicsContext gc = model.canvas.getContext();
+//        gc.setFont("36pt Verdana");
+//        AudioClip clip = AudioClip.create("beep-1.mp3");
+//        clip.play();
+//        pong = new Pong(gc, 800, 600, 800, 600);
+//        spaceInvaders = new SpaceInvaders(gc, 800, 600, 800, 600);
     }
+    
+        @JavaScriptBody(args = {"src"}, body = "var image = new Image(); image.src = src; return image;")
+    private static native Object createImage(String src);
+
     private static Pong pong;
+    private static SpaceInvaders spaceInvaders;
 
     @On(event = OnEvent.KEY_DOWN, id = "canvas")
     static void keyPress(final Index m, int keyCode) {
@@ -65,4 +72,6 @@ public class App {
         KeyCode keyCode1 = KeyCode.getKeyCode(keyCode);
         pong.dispatchEvent(new KeyEvent(pong, KeyEvent.KEY_RELEASED, keyCode1));
     }
+    
+    
 }

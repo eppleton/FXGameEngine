@@ -21,8 +21,6 @@
  */
 package de.eppleton.fx2d.tileengine;
 
-import java.util.logging.Logger;
-import javax.xml.bind.annotation.XmlValue;
 
 /**
  *
@@ -30,7 +28,5 @@ import javax.xml.bind.annotation.XmlValue;
  */
 class PolyLine {
 
-    @XmlValue
     private String point;
-    private static final Logger LOG = Logger.getLogger(PolyLine.class.getName());
 }

@@ -6,7 +6,6 @@ package de.eppleton.fx2d.samplegames.javafx;
 
 import de.eppleton.fx2d.Level;
 import de.eppleton.fx2d.javafx.app.Game;
-import de.eppleton.fx2d.samples.spaceinvaders.SpaceInvaders;
 import de.eppleton.fx2d.samples.towerdefense.TowerDefense;
 import static javafx.application.Application.launch;
 import net.java.html.canvas.GraphicsContext;

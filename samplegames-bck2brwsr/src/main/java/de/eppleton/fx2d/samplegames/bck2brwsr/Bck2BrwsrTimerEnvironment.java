@@ -26,6 +26,7 @@ package de.eppleton.fx2d.samplegames.bck2brwsr;
 import de.eppleton.fx2d.samplegames.bck2brwsr.Bck2BrwsrTimerEnvironment.BBTimer;
 import de.eppleton.fx2d.timer.Handler;
 import de.eppleton.fx2d.timer.spi.GameTimerEnvironment;
+import java.util.logging.Logger;
 import org.apidesign.bck2brwsr.htmlpage.api.Timer;
 import org.openide.util.lookup.ServiceProvider;
 

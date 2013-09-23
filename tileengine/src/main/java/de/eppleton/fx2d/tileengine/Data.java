@@ -22,8 +22,7 @@
 package de.eppleton.fx2d.tileengine;
 
 import java.util.logging.Logger;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlValue;
+
 
 /**
  *
@@ -32,11 +31,10 @@ import javax.xml.bind.annotation.XmlValue;
 public class Data {
 
     private String content;
-    private String encoding;
+    private String encoding = "csv";
     private int[] gids;
     private boolean dirty = false;
 
-    @XmlAttribute
     public String getEncoding() {
         return encoding;
     }
@@ -45,7 +43,6 @@ public class Data {
         this.encoding = encoding;
     }
 
-    @XmlValue
     public String getContent() {
         if (dirty) {
             updateContent();

@@ -21,13 +21,10 @@
  */
 package de.eppleton.fx2d.tileengine;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 
 /**
  * ObjectGroup is similar to layer. Tiled uses it as a layer, but technically 
@@ -55,10 +52,9 @@ public class ObjectGroup {
     private String color;
     private double opacity;
     private boolean visible;
-    private ArrayList<TObject> objectLIst;
+    private List<TObject> objectLIst;
     private TileMap tileMap;
 
-    @XmlAttribute
     public String getName() {
         return name;
     }
@@ -67,7 +63,6 @@ public class ObjectGroup {
         this.name = name;
     }
 
-    @XmlAttribute
     public String getColor() {
         return color;
     }
@@ -76,7 +71,6 @@ public class ObjectGroup {
         this.color = color;
     }
 
-    @XmlAttribute
     public double getOpacity() {
         return opacity;
     }
@@ -85,7 +79,6 @@ public class ObjectGroup {
         this.opacity = opacity;
     }
 
-    @XmlAttribute
     public boolean isVisible() {
         return visible;
     }
@@ -94,18 +87,16 @@ public class ObjectGroup {
         this.visible = visible;
     }
 
-    @XmlElement(name = "object")
-    public ArrayList<TObject> getObjectLIst() {
+    public List<TObject> getObjectLIst() {
         return objectLIst;
     }
 
-    public void setObjectLIst(ArrayList<TObject> objectLIst) {
+    public void setObjectLIst(List<TObject> objectLIst) {
         this.objectLIst = objectLIst;
     }
 
     private Properties properties;
 
-    @XmlJavaTypeAdapter(PropertyAdapter.class)
     public Properties getProperties() {
         return properties;
     }
@@ -119,8 +110,9 @@ public class ObjectGroup {
     }
     
     
-     public void afterUnmarshal(Unmarshaller u, Object parent) {
+    public void afterUnmarshal( Object parent) {
         this.tileMap = (TileMap) parent;
     }
+    
     private static final Logger LOG = Logger.getLogger(ObjectGroup.class.getName());
 }

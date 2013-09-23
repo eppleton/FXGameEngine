@@ -1,0 +1,278 @@
+{ "height":9,
+ "layers":[
+        {
+         "data":[0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 7, 6, 7, 7, 4, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 7, 7, 0, 1, 0, 0, 0, 7, 7, 7, 7, 7, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 7, 7, 7, 7, 7, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "height":9,
+         "name":"terrain",
+         "opacity":123,
+         "type":"tilelayer",
+         "visible":true,
+         "width":10,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "height":9,
+         "name":"turret-bases",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":10,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "height":9,
+         "name":"sprites",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":10,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "height":9,
+         "name":"spawnpoints",
+         "objects":[
+                {
+                 "height":21,
+                 "name":"target",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":22,
+                 "x":415,
+                 "y":245
+                }, 
+                {
+                 "height":25,
+                 "name":"spawnpoint",
+                 "properties":
+                    {
+                     "wave0.delay":"1000000000",
+                     "wave0.monsters":"15,0,0,0,0,0,0"
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":23,
+                 "x":106,
+                 "y":15
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":10,
+         "x":0,
+         "y":0
+        }],
+ "orientation":"orthogonal",
+ "properties":
+    {
+
+    },
+ "tileheight":46,
+ "tilesets":[
+        {
+         "firstgid":1,
+         "image":"tower_defense_terrain.png",
+         "imageheight":322,
+         "imagewidth":46,
+         "margin":0,
+         "name":"terrain",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":46,
+         "tilewidth":46
+        }, 
+        {
+         "firstgid":8,
+         "image":"turrets_complete.png",
+         "imageheight":322,
+         "imagewidth":46,
+         "margin":0,
+         "name":"turrets",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":46,
+         "tilewidth":46
+        }, 
+        {
+         "firstgid":15,
+         "image":"background.jpg",
+         "imageheight":400,
+         "imagewidth":470,
+         "margin":0,
+         "name":"background",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":400,
+         "tilewidth":470
+        }, 
+        {
+         "firstgid":16,
+         "image":"enemy_1.png",
+         "imageheight":276,
+         "imagewidth":46,
+         "margin":0,
+         "name":"enemy1",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":46,
+         "tilewidth":46
+        }, 
+        {
+         "firstgid":22,
+         "image":"turret-cannons.png",
+         "imageheight":322,
+         "imagewidth":46,
+         "margin":0,
+         "name":"turret-cannons",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":46,
+         "tilewidth":46
+        }, 
+        {
+         "firstgid":29,
+         "image":"pellet.png",
+         "imageheight":64,
+         "imagewidth":8,
+         "margin":0,
+         "name":"pellet",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":8,
+         "tilewidth":8
+        }, 
+        {
+         "firstgid":37,
+         "image":"boom3_0.png",
+         "imageheight":1024,
+         "imagewidth":1024,
+         "margin":0,
+         "name":"explosion",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":128,
+         "tilewidth":128
+        }, 
+        {
+         "firstgid":101,
+         "image":"turret-bases.png",
+         "imageheight":322,
+         "imagewidth":46,
+         "margin":0,
+         "name":"turret-bases",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":46,
+         "tileproperties":
+            {
+             "0":
+                {
+                 "damage":"6",
+                 "description":"A simple, robust, pellet gun, that combines medium range with nice fire power",
+                 "firerate":"1",
+                 "name":"Pellet Gun",
+                 "price":"75",
+                 "range":"70",
+                 "type":"pellet"
+                },
+             "1":
+                {
+                 "damage":"3",
+                 "description":"A rapid fire pellet gun with a short range.",
+                 "firerate":".3",
+                 "name":"El Rapido",
+                 "price":"80",
+                 "range":"60",
+                 "type":"pellet"
+                },
+             "2":
+                {
+                 "damage":"20",
+                 "description":"This plasma cannon causes great damage with it's double shot, but takes a while to recover after each blast. ",
+                 "firerate":"2",
+                 "name":"Plasma Cannon",
+                 "price":"70",
+                 "range":"75",
+                 "type":"plasma"
+                },
+             "3":
+                {
+                 "damage":"0",
+                 "description":"This turret can slow down enemies via an electric shockwave.",
+                 "firerate":"1.2",
+                 "name":"Stun Gun",
+                 "price":"145",
+                 "range":"100",
+                 "slowdown":"0.3",
+                 "type":"electro"
+                },
+             "4":
+                {
+                 "damage":"30",
+                 "description":"A slow, double bullet pellet gun with a wide range, causing very high damage.",
+                 "firerate":"2",
+                 "name":"Twin Shot",
+                 "price":"160",
+                 "range":"100",
+                 "type":"doublepellet"
+                },
+             "5":
+                {
+                 "damage":"1",
+                 "description":"This tower melts Insectoids with it's powerful plasma beam.",
+                 "firerate":"0",
+                 "name":"The Beam",
+                 "price":"200",
+                 "range":"600",
+                 "type":"laser"
+                },
+             "6":
+                {
+                 "damage":"200",
+                 "description":"The anihilator features ultimate firepower.",
+                 "firerate":"1",
+                 "name":"The Anihilator",
+                 "price":"200",
+                 "range":"600",
+                 "type":"laser"
+                }
+            },
+         "tilewidth":46
+        }],
+ "tilewidth":46,
+ "version":1,
+ "width":10
+}

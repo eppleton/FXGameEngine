@@ -21,15 +21,11 @@
  */
 package de.eppleton.fx2d.tileengine;
 
-import java.util.logging.Logger;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
-
 /**
  *
  * @author antonepple
  */
-@XmlRootElement(name = "image")
+
 public class SourceImage {
 
     // The reference to the tileset image file (Tiled supports most common image formats).
@@ -41,7 +37,6 @@ public class SourceImage {
     // The image height in pixels (optional)
     private int height;
     
-    @XmlAttribute
     public String getSource() {
         return source;
     }
@@ -50,7 +45,6 @@ public class SourceImage {
         this.source = source;
     }
 
-    @XmlAttribute
     public String getTrans() {
         return trans;
     }
@@ -59,7 +53,6 @@ public class SourceImage {
         this.trans = trans;
     }
 
-    @XmlAttribute
     public int getWidth() {
         return width;
     }
@@ -68,7 +61,6 @@ public class SourceImage {
         this.width = width;
     }
 
-    @XmlAttribute
     public int getHeight() {
         return height;
     }
@@ -79,5 +71,4 @@ public class SourceImage {
 
     public SourceImage() {
     }
-    private static final Logger LOG = Logger.getLogger(SourceImage.class.getName());
 }

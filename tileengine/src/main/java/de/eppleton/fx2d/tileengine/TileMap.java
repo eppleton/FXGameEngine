@@ -21,20 +21,15 @@
  */
 package de.eppleton.fx2d.tileengine;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import net.java.html.canvas.GraphicsContext;
 
 /**
  *
  * @author antonepple
  */
-@XmlRootElement(name = "map")
 public class TileMap {
     //The TMX format version, generally 1.0.
 
@@ -49,17 +44,16 @@ public class TileMap {
     private int tilewidth;
     // The width of a tile.
     private int tileheight;
-    private ArrayList<TileSet> tilesets;
-    private ArrayList<TileMapLayer> layers;
-    private ArrayList<ObjectGroup> objectGroups;
+    private List<TileSet> tilesets;
+    private List<TileMapLayer> layers;
+    private List<ObjectGroup> objectGroups;
     private Properties properties;
 
     /**
      *
      * @return
      */
-    @XmlElement(name = "tileset")
-    public ArrayList<TileSet> getTileSetlist() {
+    public List<TileSet> getTileSetlist() {
         return tilesets;
     }
     
@@ -90,7 +84,7 @@ public class TileMap {
      *
      * @param tilesets
      */
-    public void setTileSetlist(ArrayList<TileSet> tilesets) {
+    public void setTileSetlist(List<TileSet> tilesets) {
         this.tilesets = tilesets;
     }
 
@@ -98,8 +92,7 @@ public class TileMap {
      *
      * @return
      */
-    @XmlElement(name = "layer")
-    public ArrayList<TileMapLayer> getLayers() {
+    public List<TileMapLayer> getLayers() {
         return layers;
     }
 
@@ -107,7 +100,7 @@ public class TileMap {
      *
      * @param layers
      */
-    public void setLayers(ArrayList<TileMapLayer> layers) {
+    public void setLayers(List<TileMapLayer> layers) {
         this.layers = layers;
     }
 
@@ -115,8 +108,7 @@ public class TileMap {
      *
      * @return
      */
-    @XmlElement(name = "objectgroup")
-    public ArrayList<ObjectGroup> getObjectGroups() {
+    public List<ObjectGroup> getObjectGroups() {
         return objectGroups;
     }
 
@@ -124,7 +116,7 @@ public class TileMap {
      *
      * @param objectGroups
      */
-    public void setObjectGroups(ArrayList<ObjectGroup> objectGroups) {
+    public void setObjectGroups(List<ObjectGroup> objectGroups) {
         this.objectGroups = objectGroups;
     }
 
@@ -132,7 +124,6 @@ public class TileMap {
      *
      * @return
      */
-    @XmlJavaTypeAdapter(PropertyAdapter.class)
     public Properties getProperties() {
         return properties;
     }
@@ -149,7 +140,7 @@ public class TileMap {
      *
      * @return
      */
-    @XmlAttribute
+    
     public String getVersion() {
         return version;
     }
@@ -166,7 +157,7 @@ public class TileMap {
      *
      * @return
      */
-    @XmlAttribute
+    
     public String getOrientation() {
         return orientation;
     }
@@ -183,7 +174,7 @@ public class TileMap {
      *
      * @return
      */
-    @XmlAttribute
+    
     public Integer getWidth() {
         return width;
     }
@@ -200,7 +191,7 @@ public class TileMap {
      *
      * @return
      */
-    @XmlAttribute
+    
     public Integer getHeight() {
         return height;
     }
@@ -217,7 +208,7 @@ public class TileMap {
      *
      * @return
      */
-    @XmlAttribute
+    
     public int getTilewidth() {
         return tilewidth;
     }
@@ -234,7 +225,7 @@ public class TileMap {
      *
      * @return
      */
-    @XmlAttribute
+    
     public int getTileheight() {
         return tileheight;
     }
@@ -282,7 +273,7 @@ public class TileMap {
             }
         }
         int tileIndex = gid - match.getFirstgid();
-        ArrayList<Tile> tileList = match.getTileList();
+        List<Tile> tileList = match.getTileList();
         if (tileList == null) {
             return null;
         }

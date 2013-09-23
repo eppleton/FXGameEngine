@@ -23,8 +23,6 @@ package de.eppleton.fx2d.tileengine;
 
 import java.util.Properties;
 import java.util.logging.Logger;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  *
@@ -35,7 +33,6 @@ public class Tile {
     private Properties properties;
     private int id;
 
-    @XmlAttribute
     public int getId() {
         return id;
     }
@@ -44,7 +41,6 @@ public class Tile {
         this.id = id;
     }
 
-    @XmlJavaTypeAdapter(PropertyAdapter.class)
     public Properties getProperties() {
         return properties;
     }

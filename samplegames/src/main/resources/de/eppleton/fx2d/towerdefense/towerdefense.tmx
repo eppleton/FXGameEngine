@@ -88,7 +88,7 @@
    </properties>
   </tile>
  </tileset>
- <layer name="terrain" width="10" height="9">
+ <layer name="terrain" width="10" height="9" opacity="123">
   <data encoding="csv">
 0,0,0,1,0,0,0,0,0,0,
 0,0,0,1,0,0,0,0,0,0,

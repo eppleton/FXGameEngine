@@ -25,7 +25,7 @@ import de.eppleton.fx2d.Level.MoveValidator;
 import de.eppleton.fx2d.tileengine.Tile;
 import de.eppleton.fx2d.tileengine.TileMap;
 import de.eppleton.fx2d.tileengine.TileMapLayer;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
 
@@ -43,8 +43,9 @@ public class SampleMoveValidator implements MoveValidator {
     
     public SampleMoveValidator(TileMap map) {
         this.tileMap = map;
-        ArrayList<TileMapLayer> layers = map.getLayers();
+        List<TileMapLayer> layers = map.getLayers();
         for (TileMapLayer tileMapLayer : layers) {
+            System.out.println("tileMapLayer "+tileMapLayer.getName());
             if (tileMapLayer.getName().equals("meta")) {
                 collision = tileMapLayer;
             }

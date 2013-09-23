@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<xml-bindings
+    xmlns="http://www.eclipse.org/eclipselink/xsds/persistence/oxm"
+    package-name="de.eppleton.fx2d">
+    <java-types>
+        <java-type name="Layer" xml-transient="true"/>
+    </java-types>
+</xml-bindings>

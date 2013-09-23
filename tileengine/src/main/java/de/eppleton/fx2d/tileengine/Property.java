@@ -21,8 +21,6 @@
  */
 package de.eppleton.fx2d.tileengine;
 
-import java.util.logging.Logger;
-import javax.xml.bind.annotation.XmlAttribute;
 
 /**
  *
@@ -32,7 +30,6 @@ public class Property {
      private String name;
     private String value;
 
-    @XmlAttribute
     public String getName() {
         return name;
     }
@@ -41,7 +38,6 @@ public class Property {
         this.name = name;
     }
 
-    @XmlAttribute
     public String getValue() {
         return value;
     }
@@ -49,5 +45,4 @@ public class Property {
     public void setValue(String value) {
         this.value = value;
     }
-    private static final Logger LOG = Logger.getLogger(Property.class.getName());
 }

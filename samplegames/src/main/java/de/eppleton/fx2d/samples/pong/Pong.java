@@ -26,12 +26,12 @@ import de.eppleton.fx2d.action.SpriteBehavior;
 import de.eppleton.fx2d.event.KeyCode;
 import de.eppleton.fx2d.physics.PhysicsEngine;
 import de.eppleton.fx2d.physics.action.PhysicsActionFactory;
-import java.util.ArrayList;
+import java.util.logging.Logger;
 import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.Style;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.BodyType;
-import org.openide.util.Lookup;
 
 public class Pong extends Level {
 
@@ -39,7 +39,7 @@ public class Pong extends Level {
 
     public Pong(GraphicsContext graphicsContext, double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
         super(graphicsContext, playfieldWidth, playfieldHeight, viewPortWidth, viewPortHeight);
-
+  
     }
 
     @Override

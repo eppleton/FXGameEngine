@@ -23,8 +23,6 @@ package de.eppleton.fx2d.tileengine;
 
 import java.util.Properties;
 import java.util.logging.Logger;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  *
@@ -45,7 +43,6 @@ public class TObject {
     private PolyLine polyline;
     private SourceImage image;
 
-    @XmlJavaTypeAdapter(PropertyAdapter.class)
     public Properties getProperties() {
         return properties;
     }
@@ -78,7 +75,6 @@ public class TObject {
         this.image = image;
     }
 
-    @XmlAttribute
     public String getName() {
         return name;
     }
@@ -87,7 +83,6 @@ public class TObject {
         this.name = name;
     }
 
-    @XmlAttribute
     public String getType() {
         return type;
     }
@@ -96,7 +91,6 @@ public class TObject {
         this.type = type;
     }
 
-    @XmlAttribute
     public double getX() {
         return x;
     }
@@ -105,7 +99,6 @@ public class TObject {
         this.x = x;
     }
 
-    @XmlAttribute
     public double getY() {
         return y;
     }
@@ -114,7 +107,6 @@ public class TObject {
         this.y = y;
     }
 
-    @XmlAttribute
     public double getWidth() {
         return width;
     }
@@ -123,7 +115,6 @@ public class TObject {
         this.width = width;
     }
 
-    @XmlAttribute
     public double getHeight() {
         return height;
     }
@@ -132,7 +123,6 @@ public class TObject {
         this.height = height;
     }
 
-    @XmlAttribute
     public double getGid() {
         return gid;
     }
@@ -141,7 +131,6 @@ public class TObject {
         this.gid = gid;
     }
 
-    @XmlAttribute
     public boolean isVisible() {
         return visible;
     }

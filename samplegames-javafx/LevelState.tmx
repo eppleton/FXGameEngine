@@ -1,8 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<map height="9" orientation="orthogonal" tileheight="46" tilewidth="46" version="1.0" width="10">
-    <layer name="terrain" opacity="0.0" visible="true">
-        <parallaxFactor>1.0</parallaxFactor>
-        <data encoding="csv">
+<?xml version="1.0" encoding="UTF-8"?>
+<height>9</height><layers>
+   <name>terrain</name>
+   <opacity>123.0</opacity>
+   <parallaxFactor>1.0</parallaxFactor>
+   <visible>true</visible>
+   <data>
+      <content>
 0,0,0,1,0,0,0,0,0,0,
 0,0,0,1,0,0,0,0,0,0,
 0,2,7,6,7,7,4,0,0,0,
@@ -12,15 +15,25 @@
 0,0,0,0,0,0,1,0,0,0,
 0,7,7,7,7,7,5,0,0,0,
 0,0,0,0,0,0,0,0,0,0
-</data>
-    </layer>
-    <layer name="turret-bases" opacity="0.0" visible="true">
-        <parallaxFactor>1.0</parallaxFactor>
-        <data encoding="csv">0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,101,0,101,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</data>
-    </layer>
-    <layer name="sprites" opacity="0.0" visible="true">
-        <parallaxFactor>1.0</parallaxFactor>
-        <data encoding="csv">
+</content>
+      <encoding>csv</encoding>
+   </data>
+</layers><layers>
+   <name>turret-bases</name>
+   <opacity>0.0</opacity>
+   <parallaxFactor>1.0</parallaxFactor>
+   <visible>true</visible>
+   <data>
+      <content>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,101,0,101,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</content>
+      <encoding>csv</encoding>
+   </data>
+</layers><layers>
+   <name>sprites</name>
+   <opacity>0.0</opacity>
+   <parallaxFactor>1.0</parallaxFactor>
+   <visible>true</visible>
+   <data>
+      <content>
 0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
@@ -30,128 +43,386 @@
 0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0
-</data>
-    </layer>
-    <objectgroup name="spawnpoints" opacity="0.0" visible="false">
-        <object gid="0.0" height="21.0" name="target" type="UNDEFINED" visible="false" width="22.0" x="415.0" y="245.0">
-            <properties/>
-        </object>
-        <object gid="0.0" height="25.0" name="spawnpoint" type="UNDEFINED" visible="false" width="23.0" x="106.0" y="15.0">
-            <properties>
-                <property name="wave0.monsters" value="15,0,0,0,0,0,0"/>
-                <property name="wave0.delay" value="1000000000"/>
-            </properties>
-        </object>
-        <properties/>
-    </objectgroup>
-    <properties/>
-    <tileset firstgid="1" margin="0" name="terrain" source="terrain.tsx" spacing="0" tileheight="46" tilewidth="46">
-        <baseUrl>/de/eppleton/fx2d/towerdefense</baseUrl>
-        <image height="322" source="tower_defense_terrain.png" width="46"/>
-    </tileset>
-    <tileset firstgid="8" margin="0" name="turrets" source="turrets.tsx" spacing="0" tileheight="46" tilewidth="46">
-        <baseUrl>/de/eppleton/fx2d/towerdefense</baseUrl>
-        <image height="322" source="turrets_complete.png" width="46"/>
-    </tileset>
-    <tileset firstgid="15" margin="0" name="background" source="background.tsx" spacing="0" tileheight="400" tilewidth="470">
-        <baseUrl>/de/eppleton/fx2d/towerdefense</baseUrl>
-        <image height="400" source="background.jpg" width="470"/>
-    </tileset>
-    <tileset firstgid="16" margin="0" name="enemy1" source="enemy1.tsx" spacing="0" tileheight="46" tilewidth="46">
-        <baseUrl>/de/eppleton/fx2d/towerdefense</baseUrl>
-        <image height="276" source="enemy_1.png" width="46"/>
-    </tileset>
-    <tileset firstgid="22" margin="0" name="turret-cannons" source="turret-cannons.tsx" spacing="0" tileheight="46" tilewidth="46">
-        <baseUrl>/de/eppleton/fx2d/towerdefense</baseUrl>
-        <image height="322" source="turret-cannons.png" width="46"/>
-    </tileset>
-    <tileset firstgid="29" margin="0" name="pellet" source="pellet.tsx" spacing="0" tileheight="8" tilewidth="8">
-        <baseUrl>/de/eppleton/fx2d/towerdefense</baseUrl>
-        <image height="64" source="pellet.png" width="8"/>
-    </tileset>
-    <tileset firstgid="37" margin="0" name="explosion" source="explosion.tsx" spacing="0" tileheight="128" tilewidth="128">
-        <baseUrl>/de/eppleton/fx2d/towerdefense</baseUrl>
-        <image height="1024" source="boom3_0.png" width="1024"/>
-    </tileset>
-    <tileset firstgid="101" margin="0" name="turret-bases" spacing="0" tileheight="46" tilewidth="46">
-        <image height="322" source="turret-bases.png" width="46"/>
-        <tile id="0">
-            <properties>
-                <property name="range" value="70"/>
-                <property name="name" value="Pellet Gun"/>
-                <property name="type" value="pellet"/>
-                <property name="damage" value="6"/>
-                <property name="price" value="75"/>
-                <property name="description" value="A simple, robust, pellet gun, that combines medium range with nice fire power"/>
-                <property name="firerate" value="1"/>
-            </properties>
-        </tile>
-        <tile id="1">
-            <properties>
-                <property name="range" value="60"/>
-                <property name="name" value="El Rapido"/>
-                <property name="type" value="pellet"/>
-                <property name="damage" value="3"/>
-                <property name="price" value="80"/>
-                <property name="description" value="A rapid fire pellet gun with a short range."/>
-                <property name="firerate" value=".3"/>
-            </properties>
-        </tile>
-        <tile id="2">
-            <properties>
-                <property name="range" value="75"/>
-                <property name="name" value="Plasma Cannon"/>
-                <property name="type" value="plasma"/>
-                <property name="damage" value="20"/>
-                <property name="price" value="70"/>
-                <property name="description" value="This plasma cannon causes great damage with it's double shot, but takes a while to recover after each blast. "/>
-                <property name="firerate" value="2"/>
-            </properties>
-        </tile>
-        <tile id="3">
-            <properties>
-                <property name="range" value="100"/>
-                <property name="name" value="Stun Gun"/>
-                <property name="type" value="electro"/>
-                <property name="damage" value="0"/>
-                <property name="price" value="145"/>
-                <property name="description" value="This turret can slow down enemies via an electric shockwave."/>
-                <property name="slowdown" value="0.3"/>
-                <property name="firerate" value="1.2"/>
-            </properties>
-        </tile>
-        <tile id="4">
-            <properties>
-                <property name="range" value="100"/>
-                <property name="name" value="Twin Shot"/>
-                <property name="type" value="doublepellet"/>
-                <property name="damage" value="30"/>
-                <property name="price" value="160"/>
-                <property name="description" value="A slow, double bullet pellet gun with a wide range, causing very high damage."/>
-                <property name="firerate" value="2"/>
-            </properties>
-        </tile>
-        <tile id="5">
-            <properties>
-                <property name="range" value="600"/>
-                <property name="name" value="The Beam"/>
-                <property name="type" value="laser"/>
-                <property name="damage" value="1"/>
-                <property name="price" value="200"/>
-                <property name="description" value="This tower melts Insectoids with it's powerful plasma beam."/>
-                <property name="firerate" value="0"/>
-            </properties>
-        </tile>
-        <tile id="6">
-            <properties>
-                <property name="range" value="600"/>
-                <property name="name" value="The Anihilator"/>
-                <property name="type" value="laser"/>
-                <property name="damage" value="200"/>
-                <property name="price" value="200"/>
-                <property name="description" value="The anihilator features ultimate firepower."/>
-                <property name="firerate" value="1"/>
-            </properties>
-        </tile>
-    </tileset>
-</map>
+</content>
+      <encoding>csv</encoding>
+   </data>
+</layers><objectGroups>
+   <name>spawnpoints</name>
+   <objectLIst>
+      <gid>0.0</gid>
+      <height>0.0</height>
+      <name>target</name>
+      <type>UNDEFINED</type>
+      <visible>false</visible>
+      <width>0.0</width>
+      <x>415.0</x>
+      <y>245.0</y>
+   </objectLIst>
+   <objectLIst>
+      <gid>0.0</gid>
+      <height>0.0</height>
+      <name>spawnpoint</name>
+      <properties>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">wave0.monsters</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">15,0,0,0,0,0,0</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">wave0.delay</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">1000000000</value>
+         </entry>
+      </properties>
+      <type>UNDEFINED</type>
+      <visible>false</visible>
+      <width>0.0</width>
+      <x>106.0</x>
+      <y>15.0</y>
+   </objectLIst>
+   <opacity>0.0</opacity>
+   <visible>false</visible>
+</objectGroups><orientation>orthogonal</orientation><tileSetlist>
+   <baseUrl>/de/eppleton/fx2d/towerdefense</baseUrl>
+   <firstgid>1</firstgid>
+   <image>
+      <height>322</height>
+      <source>tower_defense_terrain.png</source>
+      <width>46</width>
+   </image>
+   <margin>0</margin>
+   <name>terrain</name>
+   <source>terrain.tsx</source>
+   <spacing>0</spacing>
+   <tileheight>46</tileheight>
+   <tilewidth>46</tilewidth>
+</tileSetlist><tileSetlist>
+   <baseUrl>/de/eppleton/fx2d/towerdefense</baseUrl>
+   <firstgid>8</firstgid>
+   <image>
+      <height>322</height>
+      <source>turrets_complete.png</source>
+      <width>46</width>
+   </image>
+   <margin>0</margin>
+   <name>turrets</name>
+   <source>turrets.tsx</source>
+   <spacing>0</spacing>
+   <tileheight>46</tileheight>
+   <tilewidth>46</tilewidth>
+</tileSetlist><tileSetlist>
+   <baseUrl>/de/eppleton/fx2d/towerdefense</baseUrl>
+   <firstgid>15</firstgid>
+   <image>
+      <height>400</height>
+      <source>background.jpg</source>
+      <width>470</width>
+   </image>
+   <margin>0</margin>
+   <name>background</name>
+   <source>background.tsx</source>
+   <spacing>0</spacing>
+   <tileheight>400</tileheight>
+   <tilewidth>470</tilewidth>
+</tileSetlist><tileSetlist>
+   <baseUrl>/de/eppleton/fx2d/towerdefense</baseUrl>
+   <firstgid>16</firstgid>
+   <image>
+      <height>276</height>
+      <source>enemy_1.png</source>
+      <width>46</width>
+   </image>
+   <margin>0</margin>
+   <name>enemy1</name>
+   <source>enemy1.tsx</source>
+   <spacing>0</spacing>
+   <tileheight>46</tileheight>
+   <tilewidth>46</tilewidth>
+</tileSetlist><tileSetlist>
+   <baseUrl>/de/eppleton/fx2d/towerdefense</baseUrl>
+   <firstgid>22</firstgid>
+   <image>
+      <height>322</height>
+      <source>turret-cannons.png</source>
+      <width>46</width>
+   </image>
+   <margin>0</margin>
+   <name>turret-cannons</name>
+   <source>turret-cannons.tsx</source>
+   <spacing>0</spacing>
+   <tileheight>46</tileheight>
+   <tilewidth>46</tilewidth>
+</tileSetlist><tileSetlist>
+   <baseUrl>/de/eppleton/fx2d/towerdefense</baseUrl>
+   <firstgid>29</firstgid>
+   <image>
+      <height>64</height>
+      <source>pellet.png</source>
+      <width>8</width>
+   </image>
+   <margin>0</margin>
+   <name>pellet</name>
+   <source>pellet.tsx</source>
+   <spacing>0</spacing>
+   <tileheight>8</tileheight>
+   <tilewidth>8</tilewidth>
+</tileSetlist><tileSetlist>
+   <baseUrl>/de/eppleton/fx2d/towerdefense</baseUrl>
+   <firstgid>37</firstgid>
+   <image>
+      <height>1024</height>
+      <source>boom3_0.png</source>
+      <width>1024</width>
+   </image>
+   <margin>0</margin>
+   <name>explosion</name>
+   <source>explosion.tsx</source>
+   <spacing>0</spacing>
+   <tileheight>128</tileheight>
+   <tilewidth>128</tilewidth>
+</tileSetlist><tileSetlist>
+   <firstgid>101</firstgid>
+   <image>
+      <height>322</height>
+      <source>turret-bases.png</source>
+      <width>46</width>
+   </image>
+   <margin>0</margin>
+   <name>turret-bases</name>
+   <spacing>0</spacing>
+   <tileList>
+      <id>0</id>
+      <properties>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">range</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">70</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">name</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">Pellet Gun</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">type</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">pellet</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">damage</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">6</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">price</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">75</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">description</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">A simple, robust, pellet gun, that combines medium range with nice fire power</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">firerate</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">1</value>
+         </entry>
+      </properties>
+   </tileList>
+   <tileList>
+      <id>1</id>
+      <properties>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">range</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">60</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">name</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">El Rapido</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">type</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">pellet</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">damage</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">3</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">price</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">80</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">description</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">A rapid fire pellet gun with a short range.</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">firerate</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">.3</value>
+         </entry>
+      </properties>
+   </tileList>
+   <tileList>
+      <id>2</id>
+      <properties>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">range</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">75</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">name</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">Plasma Cannon</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">type</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">plasma</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">damage</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">20</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">price</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">70</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">description</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">This plasma cannon causes great damage with it's double shot, but takes a while to recover after each blast. </value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">firerate</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">2</value>
+         </entry>
+      </properties>
+   </tileList>
+   <tileList>
+      <id>3</id>
+      <properties>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">range</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">100</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">name</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">Stun Gun</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">type</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">electro</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">damage</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">0</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">price</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">145</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">description</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">This turret can slow down enemies via an electric shockwave.</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">slowdown</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">0.3</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">firerate</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">1.2</value>
+         </entry>
+      </properties>
+   </tileList>
+   <tileList>
+      <id>4</id>
+      <properties>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">range</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">100</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">name</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">Twin Shot</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">type</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">doublepellet</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">damage</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">30</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">price</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">160</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">description</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">A slow, double bullet pellet gun with a wide range, causing very high damage.</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">firerate</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">2</value>
+         </entry>
+      </properties>
+   </tileList>
+   <tileList>
+      <id>5</id>
+      <properties>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">range</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">600</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">name</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">The Beam</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">type</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">laser</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">damage</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">1</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">price</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">200</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">description</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">This tower melts Insectoids with it's powerful plasma beam.</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">firerate</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">0</value>
+         </entry>
+      </properties>
+   </tileList>
+   <tileList>
+      <id>6</id>
+      <properties>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">range</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">600</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">name</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">The Anihilator</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">type</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">laser</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">damage</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">200</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">price</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">200</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">description</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">The anihilator features ultimate firepower.</value>
+         </entry>
+         <entry>
+            <key xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">firerate</key>
+            <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">1</value>
+         </entry>
+      </properties>
+   </tileList>
+   <tileheight>46</tileheight>
+   <tilewidth>46</tilewidth>
+</tileSetlist><tileheight>46</tileheight><tilewidth>46</tilewidth><version>1.0</version><width>10</width>

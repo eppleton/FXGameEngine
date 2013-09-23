@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<xml-bindings
+    xmlns="http://www.eclipse.org/eclipselink/xsds/persistence/oxm"
+    package-name="de.eppleton.fx2d.tileengine">
+   
+    <java-types>
+        <java-type name="TileMap">
+            <xml-root-element name="map"/>
+            <java-attributes>
+                <xml-element java-attribute="tileSetlist" name="tileset"/>
+                <xml-element java-attribute="layers" name="layer" type="de.eppleton.fx2d.tileengine.TileMapLayer"/>
+                <xml-element java-attribute="objectGroups" name="objectgroup"/>
+                <xml-element java-attribute="properties">     
+                    <xml-java-type-adapter value="de.eppleton.fx2d.javafx.app.PropertyAdapter   " type="java.util.Properties"/>
+                </xml-element>
+                <xml-attribute java-attribute="version"/>
+                <xml-attribute java-attribute="height"/>
+                <xml-attribute java-attribute="width"/>
+                <xml-attribute java-attribute="tilewidth"/>
+                <xml-attribute java-attribute="tileheight"/>
+                <xml-attribute java-attribute="orientation"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="TileMapLayer">     
+            <java-attributes>
+                <xml-element java-attribute="data"/>
+                <xml-attribute java-attribute="name" />
+                <xml-attribute java-attribute="visible"/>
+                <xml-attribute java-attribute="opacity" />
+            </java-attributes>
+        </java-type>
+        <java-type name="Data">
+            <java-attributes>                    
+                <xml-attribute java-attribute="encoding"/>
+                <xml-value java-attribute="content"/>               
+            </java-attributes>
+        </java-type>
+        <java-type name="ObjectGroup">
+            <java-attributes>
+                <xml-element java-attribute="properties">     
+                    <xml-java-type-adapter value="de.eppleton.fx2d.javafx.app.PropertyAdapter" type="java.util.Properties"/>
+                </xml-element>
+    
+                <xml-attribute java-attribute="name"/>
+                <xml-attribute java-attribute="color"/>
+                <xml-attribute java-attribute="opacity"/>
+                <xml-attribute java-attribute="visible"/>
+                <xml-element java-attribute="objectLIst" name="object"/>                   
+            </java-attributes>
+        </java-type>
+        <java-type name="TObject">
+            <java-attributes>
+                <xml-element java-attribute="properties">     
+                    <xml-java-type-adapter value="de.eppleton.fx2d.javafx.app.PropertyAdapter" type="java.util.Properties"/>
+                </xml-element>
+    
+                <xml-attribute java-attribute="name"/>
+                <xml-attribute java-attribute="type"/>
+                <xml-attribute java-attribute="x"/>
+                <xml-attribute java-attribute="y"/>
+                <xml-element java-attribute="width"/>                   
+                <xml-element java-attribute="height"/>                   
+                <xml-element java-attribute="gid"/>                   
+                <xml-element java-attribute="visible"/>                   
+            </java-attributes>
+        </java-type>
+        <java-type name="Property">
+            <java-attributes>     
+                <xml-attribute java-attribute="name"/>
+                <xml-attribute java-attribute="value"/>                         
+            </java-attributes>
+        </java-type>
+        <java-type name="Tile">
+            <java-attributes>
+                <xml-element java-attribute="properties">     
+                    <xml-java-type-adapter value="de.eppleton.fx2d.javafx.app.PropertyAdapter" type="java.util.Properties"/>
+                </xml-element>
+    
+                <xml-attribute java-attribute="id"/>
+                              
+            </java-attributes>
+        </java-type>
+        <java-type name="TileSet"> 
+            <xml-root-element name="tileset"/>
+            <java-attributes>
+                <xml-element java-attribute="tileList" name="tile"/>
+                <xml-attribute java-attribute="firstgid"/>
+                <xml-attribute java-attribute="source"/>
+                <xml-attribute java-attribute="name"/>
+                <xml-attribute java-attribute="tilewidth"/>
+                <xml-attribute java-attribute="tileheight"/>
+                <xml-attribute java-attribute="tileheight"/>
+                <xml-attribute java-attribute="spacing"/>
+                <xml-attribute java-attribute="margin"/>
+                <xml-attribute java-attribute="margin"/>
+
+            </java-attributes>
+        </java-type>
+        <java-type name="SourceImage"> 
+            <xml-root-element name="image"/>
+            <java-attributes>     
+                <xml-attribute java-attribute="source"/>
+                <xml-attribute java-attribute="trans"/>                               
+                <xml-attribute java-attribute="width"/>                               
+                <xml-attribute java-attribute="height"/>                               
+            </java-attributes>
+        </java-type>
+    </java-types>
+</xml-bindings>

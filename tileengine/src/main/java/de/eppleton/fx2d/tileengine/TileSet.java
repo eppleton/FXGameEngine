@@ -23,9 +23,7 @@ package de.eppleton.fx2d.tileengine;
 
 import java.util.ArrayList;
 import java.util.logging.Logger;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+
 import net.java.html.canvas.GraphicsContext;
 import net.java.html.canvas.Image;
 
@@ -33,7 +31,6 @@ import net.java.html.canvas.Image;
  *
  * @author antonepple
  */
-@XmlRootElement(name = "tileset")
 public class TileSet {
     // The first global tile ID of this tileset (this global ID maps to the first tile in this tileset).
 
@@ -70,7 +67,6 @@ public class TileSet {
         this.baseUrl = baseUrl;
     }
 
-    @XmlElement(name = "tile")
     public ArrayList<Tile> getTileList() {
        
         return tileList;
@@ -101,7 +97,6 @@ public class TileSet {
 
     }
 
-    @XmlAttribute
     public int getFirstgid() {
         return firstgid;
     }
@@ -110,7 +105,6 @@ public class TileSet {
         this.firstgid = firstgid;
     }
 
-    @XmlAttribute
     public String getSource() {
         return source;
     }
@@ -120,7 +114,6 @@ public class TileSet {
 
     }
 
-    @XmlAttribute
     public String getName() {
         return name;
     }
@@ -129,7 +122,6 @@ public class TileSet {
         this.name = name;
     }
 
-    @XmlAttribute
     public int getTilewidth() {
         return tilewidth;
     }
@@ -138,7 +130,6 @@ public class TileSet {
         this.tilewidth = tilewidth;
     }
 
-    @XmlAttribute
     public int getTileheight() {
         return tileheight;
     }
@@ -147,7 +138,6 @@ public class TileSet {
         this.tileheight = tileheight;
     }
 
-    @XmlAttribute
     public int getSpacing() {
         return spacing;
     }
@@ -156,7 +146,6 @@ public class TileSet {
         this.spacing = spacing;
     }
 
-    @XmlAttribute
     public int getMargin() {
         return margin;
     }
@@ -180,15 +169,20 @@ public class TileSet {
     }
     
     
-    public void init(Image tileSet) {
-        this.tileImage = tileSet;
-        cols = (int) (tileSet.getWidth() / tilewidth);
-        rows = (int) (tileSet.getHeight() / tileheight);
+    public void init(Image image) {
+        LOG.info("image width "+image.getWidth());
+        LOG.info("image height "+image.getHeight());
+        this.tileImage = image;
+        cols = (int) (image.getWidth() / tilewidth);
+        rows = (int) (image.getHeight() / tileheight);
         numTiles = rows * cols;
+        LOG.info("init  cols "+cols+" rows "+rows);
     }
 
    public void drawTile(GraphicsContext graphicsContext2D, int tileIndex) {
-        int x = tileIndex % cols;
+       LOG.info("draw Tile "+tileIndex+" cols "+cols);
+       int x = tileIndex % cols;
+        
         int y = tileIndex / cols;
         graphicsContext2D.drawImage(tileImage, x * tilewidth, y* tileheight, tilewidth, tileheight, 0, 0, tilewidth, tileheight);
     }

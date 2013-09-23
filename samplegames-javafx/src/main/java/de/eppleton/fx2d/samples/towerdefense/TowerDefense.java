@@ -36,6 +36,7 @@ import de.eppleton.fx2d.tileengine.TObject;
 import de.eppleton.fx2d.tileengine.TileMap;
 import de.eppleton.fx2d.tileengine.TileMapException;
 import de.eppleton.fx2d.tileengine.TileMapLayer;
+import de.eppleton.fx2d.javafx.app.TileMapSerializationEnvironmentJAXB;
 import de.eppleton.fx2d.tileengine.TileMapReader;
 import de.eppleton.fx2d.tileengine.TileSet;
 import de.eppleton.fx2d.tileengine.action.TileSetAnimation;
@@ -52,7 +53,6 @@ import javax.xml.bind.JAXBException;
 import net.java.html.canvas.GraphicsContext;
 import net.java.html.canvas.Image;
 import net.java.html.canvas.Style.Color;
-import org.openide.util.Lookup;
 
 /**
  *
@@ -63,7 +63,7 @@ public class TowerDefense extends Level {
     private IntegerProperty hits = new IntegerProperty(0);
     private TileMap tileMap;
     private Level level;
-    private String fileURL = "/de/eppleton/fx2d/towerdefense/towerdefense.tmx";
+    private String fileURL = "/de/eppleton/fx2d/towerdefense/towerdefense.json";
     private AStar.PathNode attackPath;
     private Palette palette;
     private TileMapLayer turretBaseLayer;
@@ -98,9 +98,12 @@ public class TowerDefense extends Level {
             level = this;
             // add all the layers
             level.addLayer(new ImageLayer(backgroundImage));
-            ArrayList<TileMapLayer> layers = tileMap.getLayers();
+            System.out.println("tilemap orientation "+tileMap.getOrientation());
+            List<TileMapLayer> layers = tileMap.getLayers();
             for (TileMapLayer tileMapLayer : layers) {
                 level.addLayer(tileMapLayer);
+                System.out.println("data "+tileMapLayer.getData().getEncoding());
+                System.out.println("Adding layer "+tileMapLayer.getName()+" "+tileMapLayer.getOpacity());
             }
             level.addLayer(new HUD());
 
@@ -118,7 +121,6 @@ public class TowerDefense extends Level {
 
             turretBaseLayer = (TileMapLayer) level.getLayer("turret-bases");
             platformLayer = (TileMapLayer) level.getLayer("terrain");
-
             // initialize the Palette
             TileSet bullets = tileMap.getTileSet("pellet");
             final TileSetAnimation shoot = new TileSetAnimation(bullets, new int[]{0}, .00000001f);
@@ -146,7 +148,7 @@ public class TowerDefense extends Level {
         final TileSetAnimation tileSetAnimation = new TileSetAnimation(enemy1, new int[]{0, 1, 2, 3, 4, 5}, 10f);
         final StackedRenderer stacked = new StackedRenderer(tileSetAnimation, new HealthBarRenderer());
         // handle the Objects
-        ArrayList<ObjectGroup> objectGroups = tileMap.getObjectGroups();
+        List<ObjectGroup> objectGroups = tileMap.getObjectGroups();
         for (ObjectGroup objectGroup : objectGroups) {
             for (final TObject tObject : objectGroup.getObjectLIst()) {
                 if (tObject.getName().equals("spawnpoint")) {
@@ -173,7 +175,7 @@ public class TowerDefense extends Level {
 
     private void startWave() {
         try {
-            TileMapReader.writeMap(tileMap, "LevelState.tmx");
+            TileMapSerializationEnvironmentJAXB.writeMap(tileMap, "LevelState.tmx");
         } catch (JAXBException ex) {
             Logger.getLogger(TowerDefense.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (FileNotFoundException ex) {
