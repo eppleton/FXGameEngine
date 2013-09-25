@@ -1,22 +1,22 @@
 /**
- * This file is part of FXGameEngine 
- * A Game Engine written in JavaFX
- * Copyright (C) 2012 Anton Epple <info@eppleton.de>
+ * This file is part of FXGameEngine A Game Engine written in JavaFX Copyright
+ * (C) 2012 Anton Epple <info@eppleton.de>
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 2 of the License.
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, version 2 of the License.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program. Look for COPYING file in the top folder.
- * If not, see http://opensource.org/licenses/GPL-2.0.
- * 
- * For alternative licensing or use in closed source projects contact Anton Epple 
+ * You should have received a copy of the GNU General Public License along with
+ * this program. Look for COPYING file in the top folder. If not, see
+ * http://opensource.org/licenses/GPL-2.0.
+ *
+ * For alternative licensing or use in closed source projects contact Anton
+ * Epple
  * <info@eppleton.de>
  */
 package de.eppleton.fx2d.samples.towerdefense;
@@ -48,9 +48,8 @@ public class EnemySprite extends Sprite {
     private int killPoints = 50;
     private IntegerProperty score;
     private IntegerProperty hits;
-    private boolean reachedTarget = false; 
+    private boolean reachedTarget = false;
     static TileSet explosion;
-
 //    static {
 //        try {
 //            explosion = TileMapReader.readSet("/de/eppleton/fx2d/towerdefense/explosion.tsx");
@@ -60,8 +59,9 @@ public class EnemySprite extends Sprite {
 //    }
     private TileSetAnimation explosionAnimation;
 
-    public EnemySprite(Level parent, IntegerProperty score,IntegerProperty hits, Properties properties, Renderer animation, String name, double x, double y, final int width, final int height) {
+    public EnemySprite(Level parent, IntegerProperty score, IntegerProperty hits, Properties properties, Renderer animation, String name, double x, double y, final int width, final int height, TileSet explosion) {
         super(parent, animation, name, x, y, width, height);
+        explosion = explosion;
         this.score = score;
         this.hits = hits;
         setCollisionBox(new Rectangle2D(10, 10, 26, 26));
@@ -80,7 +80,7 @@ public class EnemySprite extends Sprite {
 
     }
 
-    public void setAttackPath(final  AStar.PathNode attackPath) {
+    public void setAttackPath(final AStar.PathNode attackPath) {
         addBehaviour(new SpriteBehavior() {
             AStar.PathNode start = attackPath;
 
@@ -125,8 +125,11 @@ public class EnemySprite extends Sprite {
     public void die() {
         super.die(); //To change body of generated methods, choose Tools | Templates.
         getParent().addSprite(new Sprite(getParent(), explosionAnimation, "explosion", getX() - 30, getY() - 80, 128, 128));
-        if (! reachedTarget)score.set(score.integerValue() + killPoints);
-        else hits.set(hits.integerValue()+1);
+        if (!reachedTarget) {
+            score.set(score.integerValue() + killPoints);
+        } else {
+            hits.set(hits.integerValue() + 1);
+        }
     }
 
     public double getMaxHealth() {

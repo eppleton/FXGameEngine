@@ -32,7 +32,8 @@ public class ImageLayer extends Layer {
 
     private Image image;
 
-    public ImageLayer(Image image) {
+    public ImageLayer(String name, Image image) {
+        super(name);
         this.image = image;
     }
 

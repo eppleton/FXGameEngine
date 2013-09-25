@@ -35,6 +35,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.shape.StrokeLineJoin;
@@ -390,7 +391,10 @@ public class JavaFXGraphicsEnvironment implements GraphicsEnvironment {
                 gc.setFill((Paint) nativeStyle);
             } else if (style instanceof Style.Pattern) {
                 Style.Pattern original = (Style.Pattern) style;
-
+                Image imageResource = original.getImageResource();
+                javafx.scene.image.Image image = new javafx.scene.image.Image(imageResource.getSrc());
+                ImagePattern pattern = new ImagePattern(image, 0, 0, image.getWidth(), image.getHeight(), false);
+                gc.setFill(pattern);
             }
         }
 

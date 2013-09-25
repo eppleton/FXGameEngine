@@ -22,7 +22,6 @@
 package de.eppleton.fx2d.tileengine;
 
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
 import net.java.html.canvas.GraphicsContext;
 import net.java.html.canvas.Image;
@@ -170,17 +169,13 @@ public class TileSet {
     
     
     public void init(Image image) {
-        LOG.info("image width "+image.getWidth());
-        LOG.info("image height "+image.getHeight());
         this.tileImage = image;
         cols = (int) (image.getWidth() / tilewidth);
         rows = (int) (image.getHeight() / tileheight);
         numTiles = rows * cols;
-        LOG.info("init  cols "+cols+" rows "+rows);
     }
 
    public void drawTile(GraphicsContext graphicsContext2D, int tileIndex) {
-       LOG.info("draw Tile "+tileIndex+" cols "+cols);
        int x = tileIndex % cols;
         
         int y = tileIndex / cols;
@@ -190,5 +185,4 @@ public class TileSet {
    public int getNumTiles() {
         return numTiles;
     }
-    private static final Logger LOG = Logger.getLogger(TileSet.class.getName());
 }

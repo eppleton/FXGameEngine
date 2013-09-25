@@ -57,6 +57,7 @@ class FadeBehaviour extends Behavior {
     private static class FadeLayer extends Layer {
 
         public FadeLayer() {
+            super("fade");
             setOpacity(0);
         }
 

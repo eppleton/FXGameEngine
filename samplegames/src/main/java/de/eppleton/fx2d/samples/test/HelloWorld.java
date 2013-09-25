@@ -43,7 +43,7 @@ public class HelloWorld extends Level {
 
         final Sprite sprite = new Sprite(this, "Test", 100, 100, 42, 42);
         sprite.setVelocityX(1);
-        addLayer(new Layer() {
+        addLayer(new Layer("") {
             int i = 1;
 
             @Override
@@ -51,7 +51,6 @@ public class HelloWorld extends Level {
                 graphicsContext.setFillStyle(graphicsContext.getWebColor("#ffffff"));
                 getGraphicsContext().setFont("italic 40 Calibri");
                 getGraphicsContext().fillText("I=" + (i++), 100, 100);
-//                sprite.setX(sprite.getX() + 1);
             }
         });
         addSprite(sprite);

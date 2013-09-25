@@ -34,6 +34,13 @@ public class TileMapLayer extends Layer {
     private Data data;
     private TileMap tileMap;
 
+    public TileMapLayer() {
+    }
+
+    public TileMapLayer(String asString) {
+       super(asString);
+    }
+
     public Data getData() {
         return data;
     }
@@ -43,6 +50,7 @@ public class TileMapLayer extends Layer {
     }
    
     public int getGid(int idx) {
+        
         return data.getGid(idx);
     }
 
@@ -64,17 +72,19 @@ public class TileMapLayer extends Layer {
        
         for (int y = 0; y < screenHeightInTiles
                 // render an extra row to make up for the offset
-                + (startY >= (int) (cameraMaxY / tileMap.getTileheight()) ? 0 : 1); y++) {
+                + (startY >= (int) (cameraMaxY / tileMap.getTileheight()) ? 1 : 2); y++) {
             for (int x = 0; x < screenWidthInTiles
                     // render an extra row to make up for the offset
-                    + (startX >= (int) (cameraMaxX / tileMap.getTilewidth()) ? 0 : 1); x++) {
-                int gid = getGid((x + startX) + ((y + startY) * tileMap.getWidth()));
+                    + (startX >= (int) (cameraMaxX / tileMap.getTilewidth()) ? 1 : 2); x++) {
+                int idx = (x + startX) + ((y + startY) * tileMap.getWidth());
+                if (idx < data.getMaxGid()){
+                int gid = getGid(idx);
 
                 graphicsContext.save();
                 graphicsContext.translate((x * tileMap.getTilewidth()) - offX,
                         (y * tileMap.getTileheight()) - offY);
                 tileMap.drawTile(graphicsContext, gid);
-                graphicsContext.restore();
+                graphicsContext.restore();}
             }
         }
     }

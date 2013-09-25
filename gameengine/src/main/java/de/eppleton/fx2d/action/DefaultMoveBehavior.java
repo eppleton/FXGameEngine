@@ -38,6 +38,7 @@ public class DefaultMoveBehavior extends Behavior {
 
     public DefaultMoveBehavior() {
         this.moveValidators = new ArrayList<MoveValidator>();
+        setEvaluationInterval(1);
     }
 
     @Override

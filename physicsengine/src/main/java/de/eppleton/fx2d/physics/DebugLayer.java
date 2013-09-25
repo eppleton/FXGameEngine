@@ -40,8 +40,8 @@ public class DebugLayer extends Layer {
     private PhysicsEngine engine;
 
     public DebugLayer(PhysicsEngine engine) {
+        super("physics-debug");
         this.engine = engine;
-        setName("debug");
         setVisible(true);
     }
 

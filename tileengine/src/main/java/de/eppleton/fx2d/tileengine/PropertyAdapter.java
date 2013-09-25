@@ -19,7 +19,7 @@
  * For alternative licensing or use in closed source projects contact Anton Epple 
  * <info@eppleton.de>
  */
-package de.eppleton.fx2d.javafx.app;
+package de.eppleton.fx2d.tileengine;
 
 import de.eppleton.fx2d.tileengine.Property;
 import java.util.ArrayList;

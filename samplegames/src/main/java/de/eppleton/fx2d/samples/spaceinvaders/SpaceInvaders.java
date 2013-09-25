@@ -43,7 +43,7 @@ public class SpaceInvaders extends Level {
     AudioClip shootSound = AudioClip.create(SpaceInvaders.class.getResource("/assets/sound/shoot.wav").toString());
     AudioClip invaderKilledSound = AudioClip.create(SpaceInvaders.class.getResource("/assets/sound/invaderkilled.wav").toString());
     int score = 0;
-    String message;
+    String message ="";
     int[][] enemies;
 
     public SpaceInvaders(GraphicsContext graphicsContext, double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
@@ -64,6 +64,7 @@ public class SpaceInvaders extends Level {
             TileMap map = TileMapReader.readMap("/assets/graphics/spaceinvaders.json");
             TileSet invaders = map.getTileSet("invaders1");//TileMapReader.readSet("/assets/graphics/invaders1.tsx");
             TileSet playerTiles = map.getTileSet("player");//TileMapReader.readSet("/assets/graphics/player.tsx");
+            
             final TileSetAnimation animation30 = new TileSetAnimation(invaders, new int[]{0, 1}, 2);
             final TileSetAnimation animation10 = new TileSetAnimation(invaders, new int[]{4, 5}, 2);
             final TileSetAnimation animation20 = new TileSetAnimation(invaders, new int[]{2, 3}, 2);
@@ -89,7 +90,7 @@ public class SpaceInvaders extends Level {
         } catch (TileMapException ex) {
             Logger.getLogger(SpaceInvaders.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-//        canvas.addLayer(new Background());
+        canvas.addLayer(new Background("background"));
         canvas.addBehaviour(new MoveInvadersBehavior());
         canvas.addBehaviour(new DefaultMoveBehavior());
         canvas.addLayer(new SpriteLayer());
@@ -167,6 +168,10 @@ public class SpaceInvaders extends Level {
     }
 
     class Background extends Layer {
+
+        public Background(String name) {
+            super(name);
+        }
 
         @Override
         public void draw(GraphicsContext graphicsContext, double x, double y, double width, double height) {

@@ -29,6 +29,7 @@ import de.eppleton.fx2d.Layer;
 import de.eppleton.fx2d.Sprite;
 import de.eppleton.fx2d.StackedRenderer;
 import de.eppleton.fx2d.action.Behavior;
+import de.eppleton.fx2d.action.DefaultMoveBehavior;
 import de.eppleton.fx2d.event.EventHandler;
 import de.eppleton.fx2d.event.MouseEvent;
 import de.eppleton.fx2d.tileengine.ObjectGroup;
@@ -36,7 +37,7 @@ import de.eppleton.fx2d.tileengine.TObject;
 import de.eppleton.fx2d.tileengine.TileMap;
 import de.eppleton.fx2d.tileengine.TileMapException;
 import de.eppleton.fx2d.tileengine.TileMapLayer;
-import de.eppleton.fx2d.javafx.app.TileMapSerializationEnvironmentJAXB;
+import de.eppleton.fx2d.tileengine.TileMapSerializationEnvironmentJAXB;
 import de.eppleton.fx2d.tileengine.TileMapReader;
 import de.eppleton.fx2d.tileengine.TileSet;
 import de.eppleton.fx2d.tileengine.action.TileSetAnimation;
@@ -47,6 +48,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
+import javafx.scene.Node;
 import javax.xml.bind.JAXBException;
 
 
@@ -92,12 +94,10 @@ public class TowerDefense extends Level {
             tileMap = TileMapReader.readMap(fileURL);
             backgroundImage = tileMap.getTileSet("background").getTileImage();
 
-            // create the level
-//            canvas = new Canvas(tileMap.getTilewidth() * tileMap.getWidth(), tileMap.getHeight() * tileMap.getTileheight());
-//            level = new Level(new GraphicsContext(new JavaFXGraphicsEnvironment(canvas)), tileMap.getTilewidth() * tileMap.getWidth(), tileMap.getHeight() * tileMap.getTileheight(), tileMap.getTilewidth() * tileMap.getWidth(), tileMap.getHeight() * tileMap.getTileheight());
+          
             level = this;
             // add all the layers
-            level.addLayer(new ImageLayer(backgroundImage));
+            level.addLayer(new ImageLayer("background",backgroundImage));
             System.out.println("tilemap orientation "+tileMap.getOrientation());
             List<TileMapLayer> layers = tileMap.getLayers();
             for (TileMapLayer tileMapLayer : layers) {
@@ -136,6 +136,10 @@ public class TowerDefense extends Level {
             readObjectProperties();
             calculateAttackPath();
 
+            // make the Sprites move according to their speed
+            addBehaviour(new DefaultMoveBehavior());
+
+            
         } catch (Exception ex) {
             Logger.getLogger(TowerDefense.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
@@ -208,6 +212,10 @@ public class TowerDefense extends Level {
         attackPath = AStar.getPath(tileMap, platformLayer, end, start);
     }
 
+    public Node getPalette() {
+        return palette;
+    }
+
     private class CheckHitsBehavior extends Behavior {
 
         private final IntegerProperty hits;
@@ -250,6 +258,12 @@ public class TowerDefense extends Level {
 
     private class HUD extends Layer {
 
+        public HUD() {
+            super("HUD");
+        }
+
+        
+        
         @Override
         public void draw(GraphicsContext graphicsContext, double x, double y, double width, double height) {
             graphicsContext.setFillStyle(new Color("#ff0000"));
@@ -301,7 +315,7 @@ public class TowerDefense extends Level {
             for (int i = 0; i < waveProperties.length; i++) {
                 int numEnemies = Integer.parseInt(waveProperties[i]);
                 for (int j = 0; j < numEnemies; j++) {
-                    enemySprites.add(new EnemySprite(level, score, hits, new Properties(), stacked, "enemy" + (enemyCount++), ((int) spawnpointTileX) * tileMap.getTilewidth(), ((int) spawnpointTileY) * tileMap.getTileheight(), 46, 46));
+                    enemySprites.add(new EnemySprite(level, score, hits, new Properties(), stacked, "enemy" + (enemyCount++), ((int) spawnpointTileX) * tileMap.getTilewidth(), ((int) spawnpointTileY) * tileMap.getTileheight(), 46, 46, tileMap.getTileSet("explosion")));
                 }
             }
         }

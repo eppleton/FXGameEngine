@@ -19,15 +19,8 @@
  * Epple
  * <info@eppleton.de>
  */
-package de.eppleton.fx2d.javafx.app;
+package de.eppleton.fx2d.tileengine;
 
-import de.eppleton.fx2d.tileengine.ObjectGroup;
-import de.eppleton.fx2d.tileengine.TileMap;
-import de.eppleton.fx2d.tileengine.TileMapException;
-import de.eppleton.fx2d.tileengine.TileMapLayer;
-import de.eppleton.fx2d.tileengine.TileMapReader;
-import de.eppleton.fx2d.tileengine.TileMapSerializationEnvironment;
-import de.eppleton.fx2d.tileengine.TileSet;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -44,7 +37,6 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import net.java.html.canvas.Image;
 import org.eclipse.persistence.jaxb.JAXBContextFactory;
-import org.openide.util.lookup.ServiceProvider;
 
 /**
  * Factory for TileMaps and TileSets to Unmarshal them from Files and initialize
@@ -65,33 +57,48 @@ public class TileMapSerializationEnvironmentJAXB implements TileMapSerialization
      * @return the initialized TileMap
      * @throws JAXBException
      */
-    public TileMap readMapFromFile(String url) throws JAXBException, FileNotFoundException {
-        String baseUrl = url.substring(0, url.lastIndexOf('/'));
-        JAXBContext context = JAXBContext.newInstance(TileMap.class);
-        Unmarshaller um = context.createUnmarshaller();
-        TileMap map = (TileMap) um.unmarshal(new FileInputStream(url));
-        List<TileSet> tileSetlist = map.getTileSetlist();
-        JAXBContext tileSetContext = JAXBContext.newInstance(TileSet.class);
-        Unmarshaller tsum = tileSetContext.createUnmarshaller();
-        for (TileSet tileSet : tileSetlist) {
-            if (tileSet.getSource() != null) {
-                String resourcePath = TileMapReader.resourcePath(tileSet.getSource(), baseUrl);
-                TileSet set = (TileSet) tsum.unmarshal(new FileInputStream(resourcePath));
-                tileSet.setBaseUrl(baseUrl);
-                tileSet.setImage(set.getImage());
-                tileSet.setMargin(set.getMargin());
-                tileSet.setName(set.getName());
-                tileSet.setSpacing(set.getSpacing());
-                tileSet.setTileheight(set.getTileheight());
-                tileSet.setTilewidth(set.getTilewidth());
-            }
-            String source = TileMapReader.resourcePath(tileSet.getImage().getSource(), baseUrl);
+    public TileMap readMapFromFile(String url) throws JAXBException, FileNotFoundException, TileMapException {
+        try {
+            String baseUrl = url.substring(0, url.lastIndexOf('/'));
+            Map<String, Object> properties = new HashMap<String, Object>(1);
+            List<String> metadata = new ArrayList<String>(2);
+            metadata.add("de/eppleton/fx2d/tileengine/binding.xml");
+            metadata.add("de/eppleton/fx2d/tileengine/binding2.xml");
+            properties.put(JAXBContextFactory.ECLIPSELINK_OXM_XML_KEY, metadata);
+            JAXBContext context = JAXBContext.newInstance(new Class[]{TileMap.class}, properties);
+
+            Unmarshaller um = context.createUnmarshaller();
+            TileMap map = (TileMap) um.unmarshal(new FileInputStream(url));
+
+            List<TileSet> tileSetlist = map.getTileSetlist();
+            JAXBContext tileSetContext = JAXBContext.newInstance(new Class[]{TileSet.class}, properties);
+            Unmarshaller tsum = tileSetContext.createUnmarshaller();
+            for (TileSet tileSet : tileSetlist) {
+                if (tileSet.getSource() != null) {
+                    String resourcePath = TileMapReader.resourcePath(tileSet.getSource(), baseUrl);
+//                    TileSet set = (TileSet) tsum.unmarshal(TileMapSerializationEnvironmentJAXB.class.getResourceAsStream(resourcePath));
+                   TileSet set = (TileSet) tsum.unmarshal(new FileInputStream(resourcePath));
+                    tileSet.setBaseUrl(baseUrl);
+                    tileSet.setImage(set.getImage());
+                    tileSet.setMargin(set.getMargin());
+                    tileSet.setName(set.getName());
+                    tileSet.setSpacing(set.getSpacing());
+                    tileSet.setTileheight(set.getTileheight());
+                    tileSet.setTilewidth(set.getTilewidth());
+                }
+               String source = resourcePath(tileSet.getImage().getSource(), baseUrl);
             LOG.log(Level.INFO, "loading image " + source);
             Image image = Image.create(source);
-            tileSet.init(image);
+                tileSet.init(image);
+            }
+            afterUnMarshal(map);
+            return map;
+        } catch (JAXBException ex) {
+            Logger.getLogger(TileMapSerializationEnvironmentJAXB.class.getName()).log(Level.SEVERE, null, ex);
+            throw new TileMapException("Could not deserialize " + url, ex);
         }
-        return map;
     }
+    
 
     /**
      *
@@ -194,5 +201,26 @@ public class TileMapSerializationEnvironmentJAXB implements TileMapSerialization
             tileMapLayer.afterUnmarshal(map);
         }
     }
+    
+    /**
+     * only resolves relative path in the same dir or one dir up like they're
+     * usually defined by Tiled.
+     *
+     * @param relativePath
+     * @param baseURL
+     * @return the path formatted to use for class.getResource...
+     */
+    public static String resourcePath(String relativePath, String baseURL) {
+        String parentDir = baseURL.substring(0, baseURL.lastIndexOf('/'));
+        String result;
+        if (relativePath.indexOf("./") == -1) {
+            result = baseURL + "/" + relativePath;
+        } else {
+            result = relativePath.replaceAll("\\.\\./", parentDir + "/");
+            result = result.replaceAll("\\./", baseURL + "/");
+        }
+        return result;
+    }
+
     private static final Logger LOG = Logger.getLogger(TileMapSerializationEnvironmentJAXB.class.getName());
 }

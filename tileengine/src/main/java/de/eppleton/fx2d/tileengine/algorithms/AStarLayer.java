@@ -36,6 +36,7 @@ class AStarLayer extends Layer {
     private final TileMap tileMap;
 
     public AStarLayer(TileMap tileMap, AStar.PathNode attackPath) {
+        super("astar");
         this.attackPath = attackPath;
         this.tileMap = tileMap;
 

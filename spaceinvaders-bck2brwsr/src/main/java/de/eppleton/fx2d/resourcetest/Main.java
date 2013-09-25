@@ -2,8 +2,7 @@ package de.eppleton.fx2d.resourcetest;
 
 import de.eppleton.fx2d.event.KeyCode;
 import de.eppleton.fx2d.event.KeyEvent;
-import de.eppleton.fx2d.samples.spaceinvaders.SpaceInvaders;
-import org.apidesign.bck2brwsr.htmlpage.Logger;
+import de.eppleton.fx2d.samples.pong.Pong;
 import org.apidesign.bck2brwsr.htmlpage.api.On;
 import org.apidesign.bck2brwsr.htmlpage.api.OnEvent;
 import org.apidesign.bck2brwsr.htmlpage.api.Page;
@@ -11,7 +10,7 @@ import org.apidesign.bck2brwsr.htmlpage.api.Page;
 @Page(xhtml = "index.html", className = "Index")
 public final class Main {
 
-    private static SpaceInvaders rpg;
+    private static Pong rpg;
 
     private Main() {
     }
@@ -22,7 +21,7 @@ public final class Main {
     static {
         Index model = new Index();
         net.java.html.canvas.GraphicsContext gc = model.canvas.getContext();
-        rpg = new SpaceInvaders(gc, 800   , 600, 800, 600);
+        rpg = new Pong(gc, 800   , 600, 800, 600);
         rpg.start();
     }
     

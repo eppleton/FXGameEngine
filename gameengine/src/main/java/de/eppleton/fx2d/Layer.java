@@ -28,30 +28,38 @@ import net.java.html.canvas.GraphicsContext;
  *
  * @author antonepple
  */
-public class Layer {
+public abstract class Layer {
 
-    private String name = "";
+    private String name ;
     private double opacity;
     private boolean visible = true;
     private float parallaxFactor = 1;
 
-    public void draw(GraphicsContext graphicsContext, double x, double y, double width, double height) {
+    // required for serializytion
+    public Layer(){
+       this.name="";
     }
+    
+    public Layer(String name) {
+        this.name = name;
+    }
+    
+    public abstract void draw(GraphicsContext graphicsContext, double x, double y, double width, double height);
 
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+    
     public double getOpacity() {
         return opacity;
     }
 
     public boolean isVisible() {
         return visible;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public void setOpacity(double opacity) {

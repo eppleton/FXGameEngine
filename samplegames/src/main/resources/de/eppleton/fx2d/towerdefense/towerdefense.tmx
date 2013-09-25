@@ -128,7 +128,6 @@
 </data>
  </layer>
  <objectgroup name="spawnpoints" width="10" height="9">
- 
   <object name="target" x="415" y="245" width="22" height="21"/>
   <object name="spawnpoint" x="106" y="15" width="23" height="25">
    <properties>

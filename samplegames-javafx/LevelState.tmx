@@ -5,62 +5,42 @@
    <parallaxFactor>1.0</parallaxFactor>
    <visible>true</visible>
    <data>
-      <content>
-0,0,0,1,0,0,0,0,0,0,
-0,0,0,1,0,0,0,0,0,0,
-0,2,7,6,7,7,4,0,0,0,
-0,1,0,0,0,0,1,0,0,0,
-0,0,0,7,7,0,1,0,0,0,
-7,7,7,7,7,0,1,0,0,0,
-0,0,0,0,0,0,1,0,0,0,
-0,7,7,7,7,7,5,0,0,0,
-0,0,0,0,0,0,0,0,0,0
-</content>
+      <content>0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,2,7,6,7,7,4,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,7,7,0,1,0,0,0,7,7,7,7,7,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,7,7,7,7,7,5,0,0,0,0,0,0,0,0,0,0,0,0,0</content>
       <encoding>csv</encoding>
    </data>
 </layers><layers>
    <name>turret-bases</name>
-   <opacity>0.0</opacity>
+   <opacity>1.0</opacity>
    <parallaxFactor>1.0</parallaxFactor>
    <visible>true</visible>
    <data>
-      <content>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,101,0,101,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</content>
+      <content>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,102,101,0,0,0,0,0,0,0,103,0,0,0,0,0,0,0,0,0,0,0,104,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</content>
       <encoding>csv</encoding>
    </data>
 </layers><layers>
    <name>sprites</name>
-   <opacity>0.0</opacity>
+   <opacity>1.0</opacity>
    <parallaxFactor>1.0</parallaxFactor>
    <visible>true</visible>
    <data>
-      <content>
-0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0
-</content>
+      <content>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</content>
       <encoding>csv</encoding>
    </data>
 </layers><objectGroups>
    <name>spawnpoints</name>
    <objectLIst>
       <gid>0.0</gid>
-      <height>0.0</height>
+      <height>21.0</height>
       <name>target</name>
-      <type>UNDEFINED</type>
-      <visible>false</visible>
-      <width>0.0</width>
+      <type></type>
+      <visible>true</visible>
+      <width>22.0</width>
       <x>415.0</x>
       <y>245.0</y>
    </objectLIst>
    <objectLIst>
       <gid>0.0</gid>
-      <height>0.0</height>
+      <height>25.0</height>
       <name>spawnpoint</name>
       <properties>
          <entry>
@@ -72,15 +52,15 @@
             <value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">1000000000</value>
          </entry>
       </properties>
-      <type>UNDEFINED</type>
-      <visible>false</visible>
-      <width>0.0</width>
+      <type></type>
+      <visible>true</visible>
+      <width>23.0</width>
       <x>106.0</x>
       <y>15.0</y>
    </objectLIst>
-   <opacity>0.0</opacity>
-   <visible>false</visible>
-</objectGroups><orientation>orthogonal</orientation><tileSetlist>
+   <opacity>1.0</opacity>
+   <visible>true</visible>
+</objectGroups><tileSetlist>
    <baseUrl>/de/eppleton/fx2d/towerdefense</baseUrl>
    <firstgid>1</firstgid>
    <image>
@@ -90,7 +70,6 @@
    </image>
    <margin>0</margin>
    <name>terrain</name>
-   <source>terrain.tsx</source>
    <spacing>0</spacing>
    <tileheight>46</tileheight>
    <tilewidth>46</tilewidth>
@@ -104,7 +83,6 @@
    </image>
    <margin>0</margin>
    <name>turrets</name>
-   <source>turrets.tsx</source>
    <spacing>0</spacing>
    <tileheight>46</tileheight>
    <tilewidth>46</tilewidth>
@@ -118,7 +96,6 @@
    </image>
    <margin>0</margin>
    <name>background</name>
-   <source>background.tsx</source>
    <spacing>0</spacing>
    <tileheight>400</tileheight>
    <tilewidth>470</tilewidth>
@@ -132,7 +109,6 @@
    </image>
    <margin>0</margin>
    <name>enemy1</name>
-   <source>enemy1.tsx</source>
    <spacing>0</spacing>
    <tileheight>46</tileheight>
    <tilewidth>46</tilewidth>
@@ -146,7 +122,6 @@
    </image>
    <margin>0</margin>
    <name>turret-cannons</name>
-   <source>turret-cannons.tsx</source>
    <spacing>0</spacing>
    <tileheight>46</tileheight>
    <tilewidth>46</tilewidth>
@@ -160,7 +135,6 @@
    </image>
    <margin>0</margin>
    <name>pellet</name>
-   <source>pellet.tsx</source>
    <spacing>0</spacing>
    <tileheight>8</tileheight>
    <tilewidth>8</tilewidth>
@@ -174,11 +148,11 @@
    </image>
    <margin>0</margin>
    <name>explosion</name>
-   <source>explosion.tsx</source>
    <spacing>0</spacing>
    <tileheight>128</tileheight>
    <tilewidth>128</tilewidth>
 </tileSetlist><tileSetlist>
+   <baseUrl>/de/eppleton/fx2d/towerdefense</baseUrl>
    <firstgid>101</firstgid>
    <image>
       <height>322</height>
@@ -425,4 +399,4 @@
    </tileList>
    <tileheight>46</tileheight>
    <tilewidth>46</tilewidth>
-</tileSetlist><tileheight>46</tileheight><tilewidth>46</tilewidth><version>1.0</version><width>10</width>
+</tileSetlist><tileheight>46</tileheight><tilewidth>46</tilewidth><version>1</version><width>10</width>

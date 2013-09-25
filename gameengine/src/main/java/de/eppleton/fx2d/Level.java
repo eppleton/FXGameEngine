@@ -249,7 +249,6 @@ public class Level extends Screen implements Handler {
                 }
 
             }
-
         }
     }
 

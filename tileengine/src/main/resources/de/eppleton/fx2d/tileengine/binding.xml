@@ -11,7 +11,7 @@
                 <xml-element java-attribute="layers" name="layer" type="de.eppleton.fx2d.tileengine.TileMapLayer"/>
                 <xml-element java-attribute="objectGroups" name="objectgroup"/>
                 <xml-element java-attribute="properties">     
-                    <xml-java-type-adapter value="de.eppleton.fx2d.javafx.app.PropertyAdapter   " type="java.util.Properties"/>
+                    <xml-java-type-adapter value="de.eppleton.fx2d.tileengine.PropertyAdapter" type="java.util.Properties"/>
                 </xml-element>
                 <xml-attribute java-attribute="version"/>
                 <xml-attribute java-attribute="height"/>
@@ -38,7 +38,7 @@
         <java-type name="ObjectGroup">
             <java-attributes>
                 <xml-element java-attribute="properties">     
-                    <xml-java-type-adapter value="de.eppleton.fx2d.javafx.app.PropertyAdapter" type="java.util.Properties"/>
+                    <xml-java-type-adapter value="de.eppleton.fx2d.tileengine.PropertyAdapter" type="java.util.Properties"/>
                 </xml-element>
     
                 <xml-attribute java-attribute="name"/>
@@ -51,7 +51,7 @@
         <java-type name="TObject">
             <java-attributes>
                 <xml-element java-attribute="properties">     
-                    <xml-java-type-adapter value="de.eppleton.fx2d.javafx.app.PropertyAdapter" type="java.util.Properties"/>
+                    <xml-java-type-adapter value="de.eppleton.fx2d.tileengine.PropertyAdapter" type="java.util.Properties"/>
                 </xml-element>
     
                 <xml-attribute java-attribute="name"/>
@@ -73,7 +73,7 @@
         <java-type name="Tile">
             <java-attributes>
                 <xml-element java-attribute="properties">     
-                    <xml-java-type-adapter value="de.eppleton.fx2d.javafx.app.PropertyAdapter" type="java.util.Properties"/>
+                    <xml-java-type-adapter value="de.eppleton.fx2d.tileengine.PropertyAdapter" type="java.util.Properties"/>
                 </xml-element>
     
                 <xml-attribute java-attribute="id"/>

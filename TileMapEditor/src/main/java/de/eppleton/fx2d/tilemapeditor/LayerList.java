@@ -26,6 +26,7 @@ import de.eppleton.fx2d.tileengine.TileMap;
 import de.eppleton.fx2d.tileengine.TileMapLayer;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -70,9 +71,16 @@ class LayerList extends BorderPane {
         }
         Callback<TileMapLayer, ObservableValue<Boolean>> getProperty = new Callback<TileMapLayer, ObservableValue<Boolean>>() {
             @Override
-            public BooleanProperty call(TileMapLayer layer) {
+            public BooleanProperty call(final TileMapLayer layer) {
                 // @TODO: this is broken...
-                return new SimpleBooleanProperty(layer.getVisibleProperty().getValue());
+                SimpleBooleanProperty simpleBooleanProperty = new SimpleBooleanProperty(layer.isVisible());
+                simpleBooleanProperty.addListener(new ChangeListener<Boolean>() {
+
+                    public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
+                        layer.setVisible(t1);
+                    }
+                });
+                return simpleBooleanProperty;
 
             }
         };
@@ -150,12 +158,13 @@ class LayerList extends BorderPane {
 
             @Override
             public void handle(ActionEvent t) {
-                TileMapLayer newLayer = new TileMapLayer();
-                init(newLayer);
                 while (!testName("new Layer " + i)) {
                     i++;
                 };
-                newLayer.setName("new Layer " + i);
+                TileMapLayer newLayer = new TileMapLayer("new Layer " + i);
+                init(newLayer);
+                
+               
                 tileMap.getLayers().add(newLayer);
                 layerList.add(newLayer);
             }
@@ -182,8 +191,7 @@ class LayerList extends BorderPane {
     }
 
     private TileMapLayer copy(TileMapLayer tileMapLayer) {
-        TileMapLayer copy = new TileMapLayer();
-        copy.setName("copy of " + tileMapLayer.getName());
+        TileMapLayer copy = new TileMapLayer("copy of " + tileMapLayer.getName());
         copy.setOpacity(tileMapLayer.getOpacity());
         copy.setVisible(tileMapLayer.isVisible());
         copy.setTileMap(tileMap);

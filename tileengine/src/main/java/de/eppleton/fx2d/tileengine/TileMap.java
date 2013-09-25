@@ -238,9 +238,6 @@ public class TileMap {
         this.tileheight = tileheight;
     }
 
-    /**
-     *
-     */
     public TileMap() {
     }
 

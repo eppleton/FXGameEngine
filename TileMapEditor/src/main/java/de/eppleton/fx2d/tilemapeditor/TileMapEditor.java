@@ -25,12 +25,11 @@ import de.eppleton.fx2d.Level;
 import de.eppleton.fx2d.graphicsenvironment.JavaFXGraphicsEnvironment;
 import de.eppleton.fx2d.tileengine.TileMap;
 import de.eppleton.fx2d.tileengine.TileMapLayer;
-import de.eppleton.fx2d.javafx.app.TileMapSerializationEnvironmentJAXB;
+import de.eppleton.fx2d.tileengine.TileMapSerializationEnvironmentJAXB;
 import de.eppleton.fx2d.tileengine.TileSet;
 //import de.eppleton.fx2d.tileengine.algorithms.AStar;
 //import de.eppleton.fx2d.tileengine.algorithms.AStar.PathNode;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -137,8 +136,8 @@ public class TileMapEditor extends Application implements ListChangeListener<Til
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
-            
-            tileMap = TileMapSerializationEnvironmentJAXB.readMapFromFile(fileURL);
+            TileMapSerializationEnvironmentJAXB serializer = new TileMapSerializationEnvironmentJAXB();
+            tileMap = serializer.readMapFromFile(fileURL);
             canvas = new Canvas(tileMap.getTilewidth() * tileMap.getWidth(), tileMap.getHeight() * tileMap.getTileheight());
             level = new Level(new GraphicsContext(new JavaFXGraphicsEnvironment(canvas)),tileMap.getTilewidth() * tileMap.getWidth(), tileMap.getHeight() * tileMap.getTileheight(), tileMap.getTilewidth() * tileMap.getWidth(), tileMap.getHeight() * tileMap.getTileheight());
             Node rightSide = initSplitPane();

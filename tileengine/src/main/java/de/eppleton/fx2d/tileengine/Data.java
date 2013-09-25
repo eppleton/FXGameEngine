@@ -59,6 +59,11 @@ public class Data {
         return gids[idx];
     }
 
+    public int getMaxGid(){
+        initGids();
+        return gids.length;
+    }
+    
     public void setGid(int i, int gid) {
         initGids();
         gids[i] = gid;

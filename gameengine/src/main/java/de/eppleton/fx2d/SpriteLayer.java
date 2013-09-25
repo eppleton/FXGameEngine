@@ -31,16 +31,14 @@ import net.java.html.canvas.GraphicsContext;
  */
 public class SpriteLayer extends Layer{
 
-    @Override
-    public void draw(GraphicsContext graphicsContext, double x, double y, double width, double height) {    
+    public SpriteLayer() {
+        super("sprites");
     }
 
     @Override
-    public String getName() {
-        return "sprites";
+    public void draw(GraphicsContext graphicsContext, double x, double y, double width, double height) {
+        // do nothing
     }
-
-
-    
+  
     
 }

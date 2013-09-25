@@ -64,4 +64,8 @@ public class TileMapReader {
         }
         return READER;
     }
+
+    public static TileMap readMapFromFile(String fileURL) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

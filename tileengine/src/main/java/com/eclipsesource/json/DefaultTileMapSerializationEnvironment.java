@@ -5,6 +5,7 @@ import de.eppleton.fx2d.tileengine.Data;
 import de.eppleton.fx2d.tileengine.ObjectGroup;
 import de.eppleton.fx2d.tileengine.SourceImage;
 import de.eppleton.fx2d.tileengine.TObject;
+import de.eppleton.fx2d.tileengine.Tile;
 import de.eppleton.fx2d.tileengine.TileMap;
 import de.eppleton.fx2d.tileengine.TileMapException;
 import de.eppleton.fx2d.tileengine.TileMapLayer;
@@ -87,7 +88,6 @@ public class DefaultTileMapSerializationEnvironment implements TileMapSerializat
         return map;
     }
 
-
     private String readFile(String path) throws IOException {
         StringBuilder sb = new StringBuilder();
         BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(path)));
@@ -100,8 +100,8 @@ public class DefaultTileMapSerializationEnvironment implements TileMapSerializat
     }
 
     private TileMapLayer parselayer(TileMap parent, JsonObject layer) {
-        TileMapLayer tileMapLayer = new TileMapLayer();
-        tileMapLayer.setName(layer.get("name").asString());
+        TileMapLayer tileMapLayer = new TileMapLayer(layer.get("name").asString());
+        
         tileMapLayer.setOpacity(layer.get("opacity").asDouble());
         tileMapLayer.setVisible(layer.get("visible").asBoolean());
 
@@ -169,25 +169,18 @@ public class DefaultTileMapSerializationEnvironment implements TileMapSerializat
         tileSet.setTileheight(asObject.get("tileheight").asInt());
         tileSet.setTilewidth(asObject.get("tilewidth").asInt());
         tileSet.setName(asObject.get("name").asString());
+        if (asObject.get("tileproperties") != null) {
+
+
+            tileSet.setTileList(parseTileProperties(asObject.get("tileproperties").asObject()));
+        }
+
         tileSet.setImage(parseImage(asObject));
         String source = TileMapReader.resourcePath(tileSet.getImage().getSource(), baseUrl);
         Image image = Image.create(source);
         tileSet.init(image);
         return tileSet;
-        /* {
-         "firstgid":1,
-         "image":"..\/graphics\/tilesets\/tiles\/base_out_atlas.png",
-         "imageheight":1024,
-         "imagewidth":1024,
-         "margin":0,
-         "name":"Outside",
-         "properties":
-         {
-         },
-         "spacing":0,
-         "tileheight":32,
-         "tilewidth":32
-         }*/
+
     }
 
     private SourceImage parseImage(JsonObject asObject) {
@@ -198,5 +191,20 @@ public class DefaultTileMapSerializationEnvironment implements TileMapSerializat
 
         return sourceImage;
 
+    }
+
+    private ArrayList<Tile> parseTileProperties(JsonObject object) {
+        ArrayList<Tile> tileList = new ArrayList<Tile>();
+
+
+        for (Member member : object) {
+            String name = member.getName();
+            int id = Integer.parseInt(name);
+            Tile tile = new Tile();
+            tile.setId(id);
+            tile.setProperties(parseProperties(member.getValue().asObject()));
+            tileList.add(tile);
+        }
+        return tileList;
     }
 }

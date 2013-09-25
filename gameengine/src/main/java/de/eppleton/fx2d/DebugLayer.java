@@ -35,6 +35,7 @@ public class DebugLayer extends Layer{
 //    private final PerformanceTracker perfTracker;
 
     public DebugLayer(Color textFill, Level canvas) {
+        super("debug");
         this.fill = textFill;
         this.canvas = canvas;
 //        Scene scene = canvas.getScene();

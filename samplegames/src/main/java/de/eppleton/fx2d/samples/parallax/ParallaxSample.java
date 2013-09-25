@@ -31,7 +31,6 @@ import de.eppleton.fx2d.event.KeyCode;
 import net.java.html.canvas.GraphicsContext;
 import net.java.html.canvas.Image;
 import net.java.html.canvas.Style;
-import org.openide.util.Lookup;
 
 /**
  *
@@ -42,10 +41,7 @@ public class ParallaxSample extends Level {
     public ParallaxSample(GraphicsContext graphicsContext, double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
         super(graphicsContext, playfieldWidth, playfieldHeight, viewPortWidth, viewPortHeight);
     }
-  
-    
-    
-    
+
     @Override
     protected void initGame() {
   
@@ -69,8 +65,8 @@ public class ParallaxSample extends Level {
         Image image;
 
         public ImageLayer(Image image, float parallaxFactor, String name) {
+            super(name);
             this.image = image;
-            setName(name);
             setParallaxFactor(parallaxFactor);
         }
 

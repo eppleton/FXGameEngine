@@ -45,14 +45,20 @@ public class SampleMoveValidator implements MoveValidator {
         this.tileMap = map;
         List<TileMapLayer> layers = map.getLayers();
         for (TileMapLayer tileMapLayer : layers) {
-            System.out.println("tileMapLayer "+tileMapLayer.getName());
             if (tileMapLayer.getName().equals("meta")) {
                 collision = tileMapLayer;
             }
         }
         this.tileHeight = tileMap.getTileheight();
         this.tileWidth = tileMap.getTilewidth();
-       
+        for (int i = 0; i < tileHeight; i++) {
+            for (int j = 0; j < tileWidth; j++) {
+                
+                System.out.println("ti "+tileIndex(j, i)+" gid "+collision.getGid(tileIndex(j, i))+" tile "+tileMap.getTile(collision.getGid(tileIndex(j, i))));
+                
+            }
+            
+        }
     }
 
     @Override
@@ -89,6 +95,7 @@ public class SampleMoveValidator implements MoveValidator {
     }
 
     public boolean isBlocked(int tileIndex) {
+
         if (collision == null) {
             return false;
         }
@@ -101,6 +108,7 @@ public class SampleMoveValidator implements MoveValidator {
             return false;
         }
         String collidable = tile.getProperties().getProperty("collidable", "false");
+
         if (collidable.equals("true")) {
             return true;
         }

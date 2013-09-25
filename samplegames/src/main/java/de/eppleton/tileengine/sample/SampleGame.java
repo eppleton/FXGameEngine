@@ -26,12 +26,13 @@ import de.eppleton.fx2d.action.DefaultMoveBehavior;
 
 import de.eppleton.fx2d.tileengine.ObjectGroup;
 import de.eppleton.fx2d.tileengine.TileMap;
+import de.eppleton.fx2d.tileengine.TileMapException;
 import de.eppleton.fx2d.tileengine.TileMapLayer;
 import de.eppleton.fx2d.tileengine.TileMapReader;
 import de.eppleton.tileengine.sample.sprites.SpriteHandler;
 import java.util.List;
+import java.util.logging.Logger;
 import net.java.html.canvas.GraphicsContext;
-import org.apidesign.bck2brwsr.htmlpage.Logger;
 
 /**
  *
@@ -45,39 +46,34 @@ public class SampleGame extends Level {
     
     @Override
     public void initGame() {
-        Logger.log("initializing...");
-        try {
+        try {        
             // create the world 
             // initialize the TileMapCanvas
            TileMap tileMap = TileMapReader.readMap("/de/eppleton/tileengine/sample/resources/maps/sample.json");
-        Logger.log("1");
 
-//            final Level playingField = new Level(new GraphicsContext(new JavaFXGraphicsEnvironment(canvas)), tileMap.getTilewidth() * tileMap.getWidth(), tileMap.getHeight() * tileMap.getTileheight(), 500, 500);
+
             List<TileMapLayer> layers = tileMap.getLayers();
-                    Logger.log("2");
 
             for (TileMapLayer tileMapLayer : layers) {
                 this.addLayer(tileMapLayer);
-            }        Logger.log("3");
-
+            }      
 
             // add Handlers
-            SpriteHandler monsterHandler = new SpriteHandler();
+            SpriteHandler spriteHandler = new SpriteHandler();
             List<ObjectGroup> objectGroups = tileMap.getObjectGroups();
             for (ObjectGroup objectGroup : objectGroups) {
-                monsterHandler.handle(objectGroup, this);
+                spriteHandler.handle(objectGroup, this);
             }
-                    Logger.log("4");
 
-            DefaultMoveBehavior defaultMoveBehavior = new DefaultMoveBehavior();          
+            DefaultMoveBehavior defaultMoveBehavior = new DefaultMoveBehavior();
             defaultMoveBehavior.addMoveValidator(new SampleMoveValidator(tileMap));
             addBehaviour(defaultMoveBehavior);
- 
-            
-        } catch (Exception ex) {
-           Logger.log(ex.getMessage());
+        } catch (TileMapException ex) {
+            Logger.getLogger(SampleGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-                Logger.log("game initialized");
+
+            
+        
 
     }
 
