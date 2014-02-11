@@ -7,7 +7,6 @@ package de.eppleton.fx2d.samplegames.javafx;
 import de.eppleton.fx2d.Layer;
 import de.eppleton.fx2d.Level;
 import de.eppleton.fx2d.javafx.app.Game;
-import de.eppleton.fx2d.samples.parallax.ParallaxSample;
 import static javafx.application.Application.launch;
 import net.java.html.canvas.GraphicsContext;
 import net.java.html.canvas.Style;

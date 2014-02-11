@@ -150,8 +150,8 @@ public class TowerDefense extends Level {
     private void readObjectProperties() throws NumberFormatException, TileMapException {
         final TileSet enemy1 = tileMap.getTileSet("enemy1");
         final TileSetAnimation tileSetAnimation = new TileSetAnimation(enemy1, new int[]{0, 1, 2, 3, 4, 5}, 10f);
-        final StackedRenderer stacked = new StackedRenderer(tileSetAnimation, new HealthBarRenderer());
-        // handle the Objects
+            final StackedRenderer stacked = new StackedRenderer(tileSetAnimation, new HealthBarRenderer());
+            // handle the Objects
         List<ObjectGroup> objectGroups = tileMap.getObjectGroups();
         for (ObjectGroup objectGroup : objectGroups) {
             for (final TObject tObject : objectGroup.getObjectLIst()) {
