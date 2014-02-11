@@ -22,6 +22,7 @@
 package de.eppleton.fx2d;
 
 import de.eppleton.fx2d.action.Behavior;
+import de.eppleton.fx2d.action.SpriteBehavior;
 import de.eppleton.fx2d.collision.Collision;
 import de.eppleton.fx2d.event.Event;
 import de.eppleton.fx2d.event.EventDispatcher;
@@ -36,6 +37,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import net.java.html.canvas.GraphicsContext;
 
@@ -82,7 +84,9 @@ public class Level extends Screen implements Handler {
         addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                for (Sprite sprite : sprites.values()) {
+                Collection<Sprite> sprites1 = getSprites();
+
+                for (Sprite sprite : sprites1) {
                     if (sprite.getMouseClickHandler() != null && sprite.contains(event.getX(), event.getY())) {
                         sprite.getMouseClickHandler().handle(event);
                     }
@@ -93,9 +97,12 @@ public class Level extends Screen implements Handler {
     }
 
     protected void initGame() {
+        Logger.getLogger("test").log(java.util.logging.Level.SEVERE, "falscher quatsch");
+
     }
 
     public final void start() {
+
         if (timer == null) {
             timer = GamePulse.create(this);
         }
@@ -121,9 +128,7 @@ public class Level extends Screen implements Handler {
     public double getScreenHeight() {
         return screenHeight;
     }
-    
-    
-    
+
     public void setCamera(Camera camera) {
         this.camera = camera;
     }
@@ -136,13 +141,17 @@ public class Level extends Screen implements Handler {
         eventDispatcher.removeEventHandler(type, handler);
     }
 
+    List<Behavior> addBehavior;
+
     /**
      * add a {@link  SpriteBehavior}
      *
      * @param spriteBehaviour
      */
-    public final void addBehaviour(Behavior behaviour) {
-        behaviours.put(behaviour, System.nanoTime());
+    public final void addBehaviour(final Behavior behaviour) {
+        synchronized (behaviours) {
+            behaviours.put(behaviour, System.nanoTime());
+        }
     }
 
     public final void addLayer(Layer layer) {
@@ -171,13 +180,18 @@ public class Level extends Screen implements Handler {
     }
 
     public final void addSprite(Sprite sprite) {
-        sprites.put(sprite.getName(), sprite);
+        synchronized (sprites) {
+            sprites.put(sprite.getName(), sprite);
+        }
     }
 
     public void removeSprite(final Sprite sprite) {
         Sprite get = sprites.get(sprite.getName());
         if (get == sprite) {
-            sprites.remove(sprite.getName());
+            synchronized (sprites) {
+                sprites.remove(sprite.getName());
+
+            }
         }
     }
 
@@ -194,7 +208,7 @@ public class Level extends Screen implements Handler {
      * Game Loop 
      */
     @Override
-    //@TODO make private
+    //TODO make private
     public final void pulse(long l) {
         // performance measurement
         pulses++;
@@ -237,7 +251,7 @@ public class Level extends Screen implements Handler {
                 for (Sprite sprite : values) {
                     double x = sprite.getX();
                     double y = sprite.getY();
-                   
+
                     if (isOnScreen(sprite)) {
                         graphicsContext.save();
                         graphicsContext.translate(x - cameraX,
@@ -245,7 +259,7 @@ public class Level extends Screen implements Handler {
                         sprite.drawSprite(graphicsContext, alpha, delta);
                         graphicsContext.restore();
                     }
-                    
+
                 }
 
             }
@@ -297,7 +311,7 @@ public class Level extends Screen implements Handler {
             behaviours.remove(done);
         }
         // let the Sprites invoke their Behaviors
-        ArrayList<Sprite> arrayList = new ArrayList<Sprite>(sprites.values());
+        Collection<Sprite> arrayList = getSprites();
         for (Sprite sprite : arrayList) {
             if (sprite.pulse(this, l)) {
                 changed = true;
