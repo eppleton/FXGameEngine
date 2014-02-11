@@ -25,6 +25,9 @@ import de.eppleton.fx2d.event.KeyCode;
 import de.eppleton.fx2d.event.KeyEvent;
 import de.eppleton.fx2d.samples.pong.Pong;
 import de.eppleton.fx2d.samples.spaceinvaders.SpaceInvaders;
+import net.java.html.boot.BrowserBuilder;
+import net.java.html.canvas.GraphicsContext;
+import net.java.html.sound.AudioClip;
 import org.apidesign.bck2brwsr.core.JavaScriptBody;
 import org.apidesign.bck2brwsr.htmlpage.api.On;
 import org.apidesign.bck2brwsr.htmlpage.api.OnEvent;
@@ -36,26 +39,42 @@ import org.apidesign.bck2brwsr.htmlpage.api.Page;
  * represent individual elements annotated by "id" in the page.
  */
 @Page(xhtml = "index.html", className = "Index")
-public class App {
+public final class Main {
 
-    static {
+    private org.apidesign.bck2brwsr.htmlpage.Knockout ko;
+
+   
+    /**
+     * Launches the browser
+     */
+    public static void main(String... args) throws Exception {
+        BrowserBuilder.newBrowser().
+                loadPage("de/eppleton/fx2d/samplegames/bck2brwsr/index.html").
+                loadClass(Main.class).
+                invoke("onPageLoad", args).
+                showAndWait();
+        System.exit(0);
+    }
+
+    public static void onPageLoad(String... args) throws Exception {
+
+//        Logger.getLogger("test").log(Level.SEVERE, "So'n Quatsch");
         Index model = new Index();
-        createImage("TORSO_leather_armor_torso.png");
+//        createImage("TORSO_leather_armor_torso.png");
 //         DefaultTileMapSerializationEnvironment ts = new DefaultTileMapSerializationEnvironment();
 //        try {
 //            ts.readMap("/de/eppleton/tileengine/sample/resources/maps/sample.json");
 //        } catch (TileMapException ex) {
 //            java.util.logging.Logger.getLogger(DefaultTileMapSerializationEnvironment.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-//        GraphicsContext gc = model.canvas.getContext();
-//        gc.setFont("36pt Verdana");
-//        AudioClip clip = AudioClip.create("beep-1.mp3");
-//        clip.play();
-//        pong = new Pong(gc, 800, 600, 800, 600);
-//        spaceInvaders = new SpaceInvaders(gc, 800, 600, 800, 600);
-    }
+        GraphicsContext gc = model.canvas.getContext();
     
-        @JavaScriptBody(args = {"src"}, body = "var image = new Image(); image.src = src; return image;")
+        pong = new Pong(gc, 800, 600, 800, 600);
+        pong.start();
+
+    }
+
+    @JavaScriptBody(args = {"src"}, body = "var image = new Image(); image.src = src; return image;")
     private static native Object createImage(String src);
 
     private static Pong pong;
@@ -72,6 +91,5 @@ public class App {
         KeyCode keyCode1 = KeyCode.getKeyCode(keyCode);
         pong.dispatchEvent(new KeyEvent(pong, KeyEvent.KEY_RELEASED, keyCode1));
     }
-    
-    
+
 }

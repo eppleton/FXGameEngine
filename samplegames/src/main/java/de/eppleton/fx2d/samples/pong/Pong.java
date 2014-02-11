@@ -25,6 +25,7 @@ import de.eppleton.fx2d.action.*;
 import de.eppleton.fx2d.event.KeyCode;
 import de.eppleton.fx2d.physics.PhysicsEngine;
 import de.eppleton.fx2d.physics.action.PhysicsActionFactory;
+import java.util.logging.Logger;
 import net.java.html.canvas.GraphicsContext;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.*;
@@ -39,8 +40,8 @@ public class Pong extends Level {
 
     @Override
     protected void initGame() {
-        final PhysicsEngine physicsEngine = new PhysicsEngine(new Vec2(0, 0), new Vec2(0, 6), 100, this, true);
-        
+        final PhysicsEngine physicsEngine = new PhysicsEngine(new Vec2(0, -4), new Vec2(0, 6), 100, this, true);
+
         this.addLayer(new Layer("dummy") {
             @Override
             public void draw(GraphicsContext graphicsContext, double x, double y, double width, double height) {

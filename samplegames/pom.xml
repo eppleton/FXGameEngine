@@ -38,9 +38,9 @@
     <dependencies>
     
         <dependency>
-            <groupId>org.apidesign.html</groupId>
+            <groupId>org.netbeans.html</groupId>
             <artifactId>net.java.html.sound</artifactId>
-            <version>0.5</version>
+            <version>0.7.5</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -60,7 +60,7 @@
         <dependency>
             <groupId>org.apidesign.bck2brwsr</groupId>
             <artifactId>core</artifactId>
-            <version>0.8-SNAPSHOT</version>
+            <version>0.9-SNAPSHOT</version>
         </dependency>
                 <dependency>
             <groupId>org.openide</groupId>
@@ -74,6 +74,7 @@
             <version>0.9-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
+
     </dependencies>
     <repositories>
         <repository>
