@@ -1,22 +1,22 @@
 /**
- * This file is part of FXGameEngine 
- * A Game Engine written in JavaFX
- * Copyright (C) 2012 Anton Epple <info@eppleton.de>
+ * This file is part of FXGameEngine A Game Engine written in JavaFX Copyright
+ * (C) 2012 Anton Epple <info@eppleton.de>
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 2 of the License.
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, version 2 of the License.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program. Look for COPYING file in the top folder.
- * If not, see http://opensource.org/licenses/GPL-2.0.
- * 
- * For alternative licensing or use in closed source projects contact Anton Epple 
+ * You should have received a copy of the GNU General Public License along with
+ * this program. Look for COPYING file in the top folder. If not, see
+ * http://opensource.org/licenses/GPL-2.0.
+ *
+ * For alternative licensing or use in closed source projects contact Anton
+ * Epple
  * <info@eppleton.de>
  */
 package de.eppleton.fx2d.graphicsenvironment;
@@ -43,9 +43,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import net.java.html.canvas.Dimension;
 import net.java.html.canvas.Image;
-import net.java.html.canvas.ImageData;
 import net.java.html.canvas.Style;
 import net.java.html.canvas.spi.GraphicsEnvironment;
+import net.java.html.canvas.spi.GraphicsUtils;
+import org.apidesign.html.canvas.impl.CnvsAccssr;
 import org.openide.util.lookup.ServiceProvider;
 
 /**
@@ -63,6 +64,7 @@ public class JavaFXGraphicsEnvironment implements GraphicsEnvironment {
     }
 
     public JavaFXGraphicsEnvironment(Canvas canvas) {
+        
         gc = canvas.getGraphicsContext2D();
         cnvs = canvas;
     }
@@ -158,26 +160,6 @@ public class JavaFXGraphicsEnvironment implements GraphicsEnvironment {
     }
 
     @Override
-    public double getShadowBlur() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String getShadowColor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public double getShadowOffsetX() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public double getShadowOffsetY() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public String getTextAlign() {
         return gc.getTextAlign().name();
     }
@@ -268,26 +250,6 @@ public class JavaFXGraphicsEnvironment implements GraphicsEnvironment {
     }
 
     @Override
-    public void setShadowBlur(double blur) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setShadowColor(String color) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setShadowOffsetX(double x) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setShadowOffsetY(double y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public void setTextAlign(String textAlign) {
         gc.setTextAlign(TextAlignment.valueOf(textAlign));
     }
@@ -350,7 +312,7 @@ public class JavaFXGraphicsEnvironment implements GraphicsEnvironment {
 
     public Object drawImage(Image image, double x, double y, double width, double height, Object nativeImage) {
         if (nativeImage == null) {
-             try {
+            try {
                 nativeImage = new javafx.scene.image.Image(image.getSrc());
             } catch (IllegalArgumentException iax) {
                 try {
@@ -405,26 +367,25 @@ public class JavaFXGraphicsEnvironment implements GraphicsEnvironment {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public ImageData createPixelMap(double x, double y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public ImageData createPixelMap(ImageData imageData) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public ImageData getPixelMap(double x, double y, double width, double height) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void putPixelMap(ImageData imageData, double x, double y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void putPixelMap(ImageData imageData, double x, double y, double dirtyx, double dirtyy, double dirtywidth, double dirtyheight) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+//    public ImageData createPixelMap(double x, double y) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+//
+//    public ImageData createPixelMap(ImageData imageData) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+//
+//    public ImageData getPixelMap(double x, double y, double width, double height) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+//
+//    public void putPixelMap(ImageData imageData, double x, double y) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+//
+//    public void putPixelMap(ImageData imageData, double x, double y, double dirtyx, double dirtyy, double dirtywidth, double dirtyheight) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
     public int getHeight() {
         return (int) cnvs.getHeight();
     }
@@ -477,5 +438,10 @@ public class JavaFXGraphicsEnvironment implements GraphicsEnvironment {
             cachedB = drawImage(b, 0, 0, cachedB);
         }
         return ImageUtilities.merge((javafx.scene.image.Image) cachedA, (javafx.scene.image.Image) cachedB);
+    }
+
+    // TODO move somewhere else
+    public static net.java.html.canvas.GraphicsContext createGraphicsContext(Canvas canvas) {
+        return GraphicsUtils.create(new JavaFXGraphicsEnvironment(canvas));
     }
 }

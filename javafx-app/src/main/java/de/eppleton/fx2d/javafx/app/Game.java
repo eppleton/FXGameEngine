@@ -47,7 +47,7 @@ public abstract class Game extends Application {
     @Override
     public void start(Stage primaryStage) {
         canvas = new Canvas();
-        level = getLevel(new GraphicsContext(new JavaFXGraphicsEnvironment(canvas)));
+        level = getLevel(JavaFXGraphicsEnvironment.createGraphicsContext(canvas));
         canvas.setHeight(level.getScreenHeight());
         canvas.setWidth(level.getScreenWidth());
         pane = new BorderPane();
