@@ -24,7 +24,15 @@
     </scm>
     <name>FXGameEngine</name>
     <modules>
-       
+        <module>gameengine</module>
+        <module>javafx-app</module>
+        <module>physicsengine</module>
+        <module>samplegames</module>
+        <module>samplegames-bck2brwsr</module>
+        <module>samplegames-javafx</module>
+        <module>spaceinvaders-bck2brwsr</module>
+        <module>tileengine</module>
+        <module>TileMapEditor</module>
     </modules>
     <build>
         <plugins>
