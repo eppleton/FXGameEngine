@@ -36,10 +36,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ServiceLoader;
 import java.util.Set;
-import java.util.logging.Logger;
 
 import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.spi.GraphicsEnvironment;
+import net.java.html.canvas.spi.GraphicsUtils;
 
 /**
  *
@@ -69,18 +71,22 @@ public class Level extends Screen implements Handler {
     private int stutter;
     private long lastSlowness;
     private long maxTimePassed = 0;
-    // @todo not Used
+    private boolean lookupSet = false;
+    // TODO not Used
     private float alpha = 1;
 
-    public Level(GraphicsContext graphicsContext, double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
-        this.graphicsContext = graphicsContext;
+    public Level(double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
+        ServiceLoader<GraphicsEnvironment> ge = ServiceLoader.load(GraphicsEnvironment.class);
+        for (GraphicsEnvironment graphicsEnvironment : ge) {
+            this.graphicsContext = GraphicsUtils.create(graphicsEnvironment);
+            break;
+        }
         this.screenWidth = viewPortWidth;
         this.screenHeight = viewPortHeight;
         this.cameraMaxX = playfieldWidth - viewPortWidth;
         this.cameraMaxY = playfieldHeight - viewPortHeight;
         this.layers = new ArrayList<Layer>();
         this.sprites = new HashMap<String, Sprite>();
-
         addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -96,9 +102,8 @@ public class Level extends Screen implements Handler {
 
     }
 
+  
     protected void initGame() {
-        Logger.getLogger("test").log(java.util.logging.Level.SEVERE, "falscher quatsch");
-
     }
 
     public final void start() {
