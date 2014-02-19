@@ -21,8 +21,9 @@
  */
 package de.eppleton.fx2d.javafx.app;
 
+import de.eppleton.canvas.javafx.JavaFXGraphicsEnvironment;
+import de.eppleton.fx2d.Game;
 import de.eppleton.fx2d.Level;
-import de.eppleton.fx2d.graphicsenvironment.JavaFXGraphicsEnvironment;
 import javafx.application.Application;
 import javafx.event.EventType;
 import javafx.scene.Node;
@@ -31,14 +32,14 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import net.java.html.canvas.GraphicsContext;
+import org.openide.util.Lookup;
 
 /**
  *
  * @author antonepple
  */
-public abstract class Game extends Application {
+public class JavaFXGame extends Application {
 
- 
     private String title = "My Game";
     private Level level;
     private Canvas canvas;
@@ -47,6 +48,7 @@ public abstract class Game extends Application {
     @Override
     public void start(Stage primaryStage) {
         canvas = new Canvas();
+
         level = getLevel(JavaFXGraphicsEnvironment.createGraphicsContext(canvas));
         canvas.setHeight(level.getScreenHeight());
         canvas.setWidth(level.getScreenWidth());
@@ -68,7 +70,10 @@ public abstract class Game extends Application {
         primaryStage.show();
     }
 
-    protected abstract Level getLevel(GraphicsContext context);
+    protected Level getLevel(GraphicsContext context) {
+       Game game =  Lookup.getDefault().lookup(Game.class);
+       return game.getCurrentLevel();
+    }
 
     public void setBottom(Node bottom) {
         pane.setBottom(bottom);
