@@ -23,7 +23,7 @@
                 <version>1.2</version>
                 <configuration>
 
-                    <mainClass>de.eppleton.fx2d.samplegames.javafx.PongGame</mainClass>
+                    <mainClass>de.eppleton.fx2d.javafx.app.JavaFXGame</mainClass>
 
                     <!-- optionally override settings (such as jar file name, html file, etc) -->
                     <jarFileName>my-example-app.jar</jarFileName>

@@ -22,7 +22,7 @@
 package de.eppleton.fx2d.samplegames.javafx;
 
 import de.eppleton.fx2d.Level;
-import de.eppleton.fx2d.javafx.app.Game;
+import de.eppleton.fx2d.javafx.app.JavaFXGame;
 import de.eppleton.tileengine.sample.SampleGame;
 import static javafx.application.Application.launch;
 import net.java.html.canvas.GraphicsContext;
@@ -31,7 +31,7 @@ import net.java.html.canvas.GraphicsContext;
  *
  * @author antonepple
  */
-public class RPGGame extends Game
+public class RPGGame extends JavaFXGame
 {
 
     @Override

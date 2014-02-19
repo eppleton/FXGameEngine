@@ -6,7 +6,7 @@ package de.eppleton.fx2d.samplegames.javafx;
 
 import de.eppleton.fx2d.Layer;
 import de.eppleton.fx2d.Level;
-import de.eppleton.fx2d.javafx.app.Game;
+import de.eppleton.fx2d.javafx.app.JavaFXGame;
 import static javafx.application.Application.launch;
 import net.java.html.canvas.GraphicsContext;
 import net.java.html.canvas.Style;
@@ -15,7 +15,7 @@ import net.java.html.canvas.Style;
  *
  * @author antonepple
  */
-public class HelloWorld extends Game {
+public class HelloWorld extends JavaFXGame {
 
     @Override
     protected Level getLevel(GraphicsContext context) {

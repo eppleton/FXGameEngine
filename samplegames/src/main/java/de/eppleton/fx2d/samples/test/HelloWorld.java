@@ -18,7 +18,7 @@ import org.openide.util.lookup.ServiceProvider;
 public class HelloWorld extends AbstractGame{
 
     public HelloWorld() {
-        addLevel(new HelloWorldLevel( 100,100,100,100));
+        addLevel(new HelloWorldLevel( 1000,1000,1000,1000));
     }
     
     

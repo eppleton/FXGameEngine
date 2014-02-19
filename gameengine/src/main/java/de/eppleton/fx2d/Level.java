@@ -38,6 +38,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ServiceLoader;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import net.java.html.canvas.GraphicsContext;
 import net.java.html.canvas.spi.GraphicsEnvironment;
@@ -71,7 +72,6 @@ public class Level extends Screen implements Handler {
     private int stutter;
     private long lastSlowness;
     private long maxTimePassed = 0;
-    private boolean lookupSet = false;
     // TODO not Used
     private float alpha = 1;
 
@@ -81,6 +81,7 @@ public class Level extends Screen implements Handler {
             this.graphicsContext = GraphicsUtils.create(graphicsEnvironment);
             break;
         }
+        this.graphicsContext.fillText("Hallo", 0,0);
         this.screenWidth = viewPortWidth;
         this.screenHeight = viewPortHeight;
         this.cameraMaxX = playfieldWidth - viewPortWidth;

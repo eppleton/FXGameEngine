@@ -22,7 +22,7 @@
 package de.eppleton.fx2d.samplegames.javafx;
 
 import de.eppleton.fx2d.Level;
-import de.eppleton.fx2d.javafx.app.Game;
+import de.eppleton.fx2d.javafx.app.JavaFXGame;
 import de.eppleton.fx2d.samples.spaceinvaders.SpaceInvaders;
 import static javafx.application.Application.launch;
 import net.java.html.canvas.GraphicsContext;
@@ -31,7 +31,7 @@ import net.java.html.canvas.GraphicsContext;
  *
  * @author antonepple
  */
-public class SpaceInvadersGame extends Game{
+public class SpaceInvadersGame extends JavaFXGame{
 
     @Override
     protected Level getLevel(GraphicsContext context) {

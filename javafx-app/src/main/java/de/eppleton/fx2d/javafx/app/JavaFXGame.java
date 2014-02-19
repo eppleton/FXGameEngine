@@ -21,6 +21,7 @@
  */
 package de.eppleton.fx2d.javafx.app;
 
+import de.eppleton.canvas.javafx.CanvasProvider;
 import de.eppleton.canvas.javafx.JavaFXGraphicsEnvironment;
 import de.eppleton.fx2d.Game;
 import de.eppleton.fx2d.Level;
@@ -31,7 +32,6 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import net.java.html.canvas.GraphicsContext;
 import org.openide.util.Lookup;
 
 /**
@@ -42,16 +42,16 @@ public class JavaFXGame extends Application {
 
     private String title = "My Game";
     private Level level;
-    private Canvas canvas;
     public BorderPane pane;
 
     @Override
     public void start(Stage primaryStage) {
-        canvas = new Canvas();
-
-        level = getLevel(JavaFXGraphicsEnvironment.createGraphicsContext(canvas));
+        level = getLevel();         
+        Canvas canvas = Lookup.getDefault().lookup(CanvasProvider.class).getCanvas();
         canvas.setHeight(level.getScreenHeight());
         canvas.setWidth(level.getScreenWidth());
+        level.getGraphicsContext().fillText("Level", 200,200);
+        canvas.getGraphicsContext2D().fillText("javafx", 100,100);
         pane = new BorderPane();
         pane.setCenter(canvas);
         Scene scene = new Scene(pane, level.getScreenWidth(), level.getScreenHeight());
@@ -61,7 +61,6 @@ public class JavaFXGame extends Application {
         canvas.addEventHandler(EventType.ROOT, new javafx.event.EventHandler<javafx.event.Event>() {
             @Override
             public void handle(javafx.event.Event t) {
-
                 level.dispatchEvent(JavaFXEventConverter.copyForGame(t));
             }
         });
@@ -70,7 +69,7 @@ public class JavaFXGame extends Application {
         primaryStage.show();
     }
 
-    protected Level getLevel(GraphicsContext context) {
+    protected Level getLevel() {
        Game game =  Lookup.getDefault().lookup(Game.class);
        return game.getCurrentLevel();
     }
