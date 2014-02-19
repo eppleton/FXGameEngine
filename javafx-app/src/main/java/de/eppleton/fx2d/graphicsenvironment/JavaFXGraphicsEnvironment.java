@@ -24,8 +24,8 @@ package de.eppleton.fx2d.graphicsenvironment;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -43,10 +43,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import net.java.html.canvas.Dimension;
 import net.java.html.canvas.Image;
+import net.java.html.canvas.ImageData;
 import net.java.html.canvas.Style;
 import net.java.html.canvas.spi.GraphicsEnvironment;
 import net.java.html.canvas.spi.GraphicsUtils;
-import org.apidesign.html.canvas.impl.CnvsAccssr;
 import org.openide.util.lookup.ServiceProvider;
 
 /**
@@ -346,7 +346,7 @@ public class JavaFXGraphicsEnvironment implements GraphicsEnvironment {
         if (nativeStyle == null) {
             if (style instanceof Style.LinearGradient) {
                 Style.LinearGradient orig = (Style.LinearGradient) style;
-                HashMap<Double, String> stops = orig.getStops();
+                Map<Double, String> stops = orig.getStops();
             } else if (style instanceof Style.Color) {
                 Style.Color originalColor = (Style.Color) style;
                 nativeStyle = Color.web(originalColor.getAsString());
@@ -367,25 +367,25 @@ public class JavaFXGraphicsEnvironment implements GraphicsEnvironment {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-//    public ImageData createPixelMap(double x, double y) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-//
-//    public ImageData createPixelMap(ImageData imageData) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-//
-//    public ImageData getPixelMap(double x, double y, double width, double height) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-//
-//    public void putPixelMap(ImageData imageData, double x, double y) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-//
-//    public void putPixelMap(ImageData imageData, double x, double y, double dirtyx, double dirtyy, double dirtywidth, double dirtyheight) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
+    public ImageData createPixelMap(double x, double y) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public ImageData createPixelMap(ImageData imageData) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public ImageData getPixelMap(double x, double y, double width, double height) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void putPixelMap(ImageData imageData, double x, double y) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void putPixelMap(ImageData imageData, double x, double y, double dirtyx, double dirtyy, double dirtywidth, double dirtyheight) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     public int getHeight() {
         return (int) cnvs.getHeight();
     }

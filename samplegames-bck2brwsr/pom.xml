@@ -82,12 +82,6 @@
             <version>2.3.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>org.apidesign.bck2brwsr</groupId>
-            <artifactId>javaquery.api</artifactId>
-            <version>0.9-SNAPSHOT</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
             <groupId>net.java.html</groupId>
             <artifactId>canvas</artifactId>
             <version>0.9-SNAPSHOT</version>

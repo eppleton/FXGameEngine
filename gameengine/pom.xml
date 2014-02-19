@@ -32,11 +32,6 @@
     </build>
     <dependencies>
         <dependency>
-            <groupId>net.java.html</groupId>
-            <artifactId>canvas</artifactId>
-            <version>0.9-SNAPSHOT</version>
-        </dependency>
-        <dependency>
             <groupId>org.netbeans.html</groupId>
             <artifactId>net.java.html.sound</artifactId>
             <version>0.7.5</version>
@@ -50,6 +45,12 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>timer</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apidesign.html</groupId>
+            <artifactId>javafx-canvas</artifactId>
+            <version>0.9-SNAPSHOT</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
     <repositories>

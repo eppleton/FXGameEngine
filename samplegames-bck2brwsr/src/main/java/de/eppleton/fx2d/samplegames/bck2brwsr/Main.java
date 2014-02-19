@@ -21,13 +21,13 @@
  */
 package de.eppleton.fx2d.samplegames.bck2brwsr;
 
+import de.eppleton.fx2d.Level;
 import de.eppleton.fx2d.event.KeyCode;
 import de.eppleton.fx2d.event.KeyEvent;
 import de.eppleton.fx2d.samples.pong.Pong;
 import de.eppleton.fx2d.samples.spaceinvaders.SpaceInvaders;
 import net.java.html.boot.BrowserBuilder;
 import net.java.html.canvas.GraphicsContext;
-import net.java.html.sound.AudioClip;
 import org.apidesign.bck2brwsr.core.JavaScriptBody;
 import org.apidesign.bck2brwsr.htmlpage.api.On;
 import org.apidesign.bck2brwsr.htmlpage.api.OnEvent;
@@ -69,27 +69,26 @@ public final class Main {
 //        }
         GraphicsContext gc = model.canvas.getContext();
     
-        pong = new Pong(gc, 800, 600, 800, 600);
-        pong.start();
+        game = new Pong(gc, 800, 600, 800, 600);
+        game.start();
 
     }
 
     @JavaScriptBody(args = {"src"}, body = "var image = new Image(); image.src = src; return image;")
     private static native Object createImage(String src);
 
-    private static Pong pong;
-    private static SpaceInvaders spaceInvaders;
+    private static Level game;
 
     @On(event = OnEvent.KEY_DOWN, id = "canvas")
     static void keyPress(final Index m, int keyCode) {
         KeyCode keyCode1 = KeyCode.getKeyCode(keyCode);
-        pong.dispatchEvent(new KeyEvent(pong, KeyEvent.KEY_PRESSED, keyCode1));
+        game.dispatchEvent(new KeyEvent(game, KeyEvent.KEY_PRESSED, keyCode1));
     }
 
     @On(event = OnEvent.KEY_UP, id = "canvas")
     static void keyRealeased(final Index m, int keyCode) {
         KeyCode keyCode1 = KeyCode.getKeyCode(keyCode);
-        pong.dispatchEvent(new KeyEvent(pong, KeyEvent.KEY_RELEASED, keyCode1));
+        game.dispatchEvent(new KeyEvent(game, KeyEvent.KEY_RELEASED, keyCode1));
     }
 
 }
