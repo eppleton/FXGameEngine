@@ -62,7 +62,7 @@
             <artifactId>core</artifactId>
             <version>0.9-SNAPSHOT</version>
         </dependency>
-                <dependency>
+        <dependency>
             <groupId>org.openide</groupId>
             <artifactId>org.openide.util.lookup</artifactId>
             <version>7.4-SNAPSHOT</version>
@@ -77,4 +77,59 @@
             <url>http://bits.netbeans.org/maven2/</url>
         </repository>
     </repositories>
+    <profiles>
+        <profile>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <id>JavaFX</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.zenjava</groupId>
+                        <artifactId>javafx-maven-plugin</artifactId>
+                        <version>1.2</version>
+                        <configuration>
+                            <mainClass>de.eppleton.fx2d.javafx.app.JavaFXGame</mainClass>
+                            <!-- optionally override settings (such as jar file name, html file, etc) -->
+                            <jarFileName>my-example-app.jar</jarFileName>
+
+                            <!-- optionally sign the jar file if security is needed -->
+                            <!--
+                                to create keystore use command line:
+                                    keytool -genkey -alias example-user -keystore keystore.jks
+                            -->
+                            <signJar>
+                                <alias>example-user</alias>
+                                <storePassword>example-password</storePassword>
+                            </signJar>
+
+                            <!-- optionally build webstart bundle -->
+                            <webstart>
+                                <requiresAllPermissions>true</requiresAllPermissions>
+                            </webstart>
+
+                            <!-- optionally build native installers -->
+                            <nativeInstallers />
+
+                        </configuration>
+                    </plugin>
+
+                </plugins>
+            </build>
+            <dependencies>
+                <dependency>
+                    <groupId>${project.groupId}</groupId>
+                    <artifactId>javafx-app</artifactId>
+                    <version>${project.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apidesign.html</groupId>
+                    <artifactId>javafx-canvas</artifactId>
+                    <version>0.8-SNAPSHOT</version>
+                    <type>jar</type>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
 </project>

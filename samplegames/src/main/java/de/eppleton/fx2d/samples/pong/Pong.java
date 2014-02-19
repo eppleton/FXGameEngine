@@ -34,8 +34,8 @@ public class Pong extends Level {
 
     int scorePlayer, scoreComputer = 0;
 
-    public Pong(GraphicsContext graphicsContext, double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
-        super(graphicsContext, playfieldWidth, playfieldHeight, viewPortWidth, viewPortHeight);
+    public Pong(double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
+        super(playfieldWidth, playfieldHeight, viewPortWidth, viewPortHeight);
     }
 
     @Override

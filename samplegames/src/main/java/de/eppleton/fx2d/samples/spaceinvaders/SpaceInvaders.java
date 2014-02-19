@@ -46,8 +46,8 @@ public class SpaceInvaders extends Level {
     String message ="";
     int[][] enemies;
 
-    public SpaceInvaders(GraphicsContext graphicsContext, double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
-        super(graphicsContext, playfieldWidth, playfieldHeight, viewPortWidth, viewPortHeight);
+    public SpaceInvaders( double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
+        super( playfieldWidth, playfieldHeight, viewPortWidth, viewPortHeight);
     }
 
     @Override

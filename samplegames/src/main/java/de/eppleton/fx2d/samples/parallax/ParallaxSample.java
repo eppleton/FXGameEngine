@@ -38,8 +38,8 @@ import net.java.html.canvas.Style;
  */
 public class ParallaxSample extends Level {
 
-    public ParallaxSample(GraphicsContext graphicsContext, double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
-        super(graphicsContext, playfieldWidth, playfieldHeight, viewPortWidth, viewPortHeight);
+    public ParallaxSample(double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
+        super( playfieldWidth, playfieldHeight, viewPortWidth, viewPortHeight);
     }
 
     @Override

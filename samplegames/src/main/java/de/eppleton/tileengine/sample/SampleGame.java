@@ -40,8 +40,8 @@ import net.java.html.canvas.GraphicsContext;
  */
 public class SampleGame extends Level {
 
-    public SampleGame(GraphicsContext graphicsContext, double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
-        super(graphicsContext, playfieldWidth, playfieldHeight, viewPortWidth, viewPortHeight);
+    public SampleGame(double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
+        super( playfieldWidth, playfieldHeight, viewPortWidth, viewPortHeight);
     }
     
     @Override
