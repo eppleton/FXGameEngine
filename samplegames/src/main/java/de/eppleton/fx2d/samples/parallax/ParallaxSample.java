@@ -28,7 +28,7 @@ import de.eppleton.fx2d.Sprite;
 import de.eppleton.fx2d.SpriteLayer;
 import de.eppleton.fx2d.action.ActionFactory;
 import de.eppleton.fx2d.event.KeyCode;
-import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.GraphicsContext2D;
 import net.java.html.canvas.Image;
 import net.java.html.canvas.Style;
 
@@ -38,8 +38,8 @@ import net.java.html.canvas.Style;
  */
 public class ParallaxSample extends Level {
 
-    public ParallaxSample(double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
-        super( playfieldWidth, playfieldHeight, viewPortWidth, viewPortHeight);
+    public ParallaxSample(GraphicsContext2D gcd, double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
+        super( gcd, playfieldWidth, playfieldHeight, viewPortWidth, viewPortHeight);
     }
 
     @Override
@@ -71,7 +71,7 @@ public class ParallaxSample extends Level {
         }
 
         @Override
-        public void draw(GraphicsContext graphicsContext, double x, double y, double width, double height) {
+        public void draw(GraphicsContext2D graphicsContext, double x, double y, double width, double height) {
             Style pattern = new Style.Pattern(image, "repeat-x");
 //            ImagePattern pattern = new ImagePattern(image, x, y, image.getWidth(), image.getHeight(), false);
             graphicsContext.setFillStyle(pattern);

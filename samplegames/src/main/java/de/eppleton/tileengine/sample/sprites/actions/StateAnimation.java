@@ -26,7 +26,7 @@ import de.eppleton.fx2d.action.State;
 import de.eppleton.fx2d.tileengine.TileSet;
 import de.eppleton.fx2d.tileengine.action.TileSetAnimation;
 import java.util.HashMap;
-import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.GraphicsContext2D;
 
 /**
  *
@@ -42,7 +42,7 @@ public class StateAnimation extends TileSetAnimation {
     }
 
     @Override
-    public void render(Sprite sprite, GraphicsContext context, float alpha, long delta) {
+    public void render(Sprite sprite, GraphicsContext2D context, float alpha, long delta) {
         State state = sprite.getState();
         indices = state2Indices.get(state);
         super.render(sprite, context, alpha, delta);

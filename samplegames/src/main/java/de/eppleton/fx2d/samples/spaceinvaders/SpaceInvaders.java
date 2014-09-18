@@ -30,7 +30,7 @@ import de.eppleton.fx2d.event.KeyCode;
 import de.eppleton.fx2d.tileengine.*;
 import java.util.Collection;
 import java.util.logging.*;
-import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.GraphicsContext2D;
 import net.java.html.canvas.Style;
 import net.java.html.sound.AudioClip;
 
@@ -46,8 +46,8 @@ public class SpaceInvaders extends Level {
     String message ="";
     int[][] enemies;
 
-    public SpaceInvaders( double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
-        super( playfieldWidth, playfieldHeight, viewPortWidth, viewPortHeight);
+    public SpaceInvaders( GraphicsContext2D gcd, double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
+        super( gcd, playfieldWidth, playfieldHeight, viewPortWidth, viewPortHeight);
     }
 
     @Override
@@ -174,7 +174,7 @@ public class SpaceInvaders extends Level {
         }
 
         @Override
-        public void draw(GraphicsContext graphicsContext, double x, double y, double width, double height) {
+        public void draw(GraphicsContext2D graphicsContext, double x, double y, double width, double height) {
             graphicsContext.setFillStyle(new Style.Color("#000000"));
             graphicsContext.fillRect(0, 0, width, height);
             graphicsContext.setFillStyle(new Style.Color("#ffffff"));

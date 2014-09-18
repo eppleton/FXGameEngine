@@ -25,7 +25,7 @@ import de.eppleton.fx2d.Layer;
 import de.eppleton.fx2d.Level;
 import de.eppleton.fx2d.Sprite;
 import de.eppleton.fx2d.SpriteLayer;
-import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.GraphicsContext2D;
 
 /**
  *
@@ -33,8 +33,8 @@ import net.java.html.canvas.GraphicsContext;
  */
 public class HelloWorldLevel extends Level {
 
-    public HelloWorldLevel(double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
-        super(playfieldWidth, playfieldHeight, viewPortWidth, viewPortHeight);
+    public HelloWorldLevel(GraphicsContext2D gcd, double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
+        super(gcd, playfieldWidth, playfieldHeight, viewPortWidth, viewPortHeight);
     }
 
     @Override
@@ -47,10 +47,10 @@ public class HelloWorldLevel extends Level {
             int i = 1;
 
             @Override
-            public void draw(GraphicsContext graphicsContext, double x, double y, double width, double height) {
+            public void draw(GraphicsContext2D graphicsContext, double x, double y, double width, double height) {
                 graphicsContext.setFillStyle(graphicsContext.getWebColor("#ffffff"));
-                getGraphicsContext().setFont("italic 40 Calibri");
-                getGraphicsContext().fillText("I=" + (i++), 100, 100);
+                getGraphicsContext2D().setFont("italic 40 Calibri");
+                getGraphicsContext2D().fillText("I=" + (i++), 100, 100);
             }
         });
         addSprite(sprite);

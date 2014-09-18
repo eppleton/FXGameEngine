@@ -26,7 +26,7 @@ import de.eppleton.fx2d.event.KeyCode;
 import de.eppleton.fx2d.physics.PhysicsEngine;
 import de.eppleton.fx2d.physics.action.PhysicsActionFactory;
 import java.util.logging.Logger;
-import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.GraphicsContext2D;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.*;
 
@@ -34,8 +34,8 @@ public class Pong extends Level {
 
     int scorePlayer, scoreComputer = 0;
 
-    public Pong(double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
-        super(playfieldWidth, playfieldHeight, viewPortWidth, viewPortHeight);
+    public Pong(GraphicsContext2D gcd, double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
+        super(gcd, playfieldWidth, playfieldHeight, viewPortWidth, viewPortHeight);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class Pong extends Level {
 
         this.addLayer(new Layer("dummy") {
             @Override
-            public void draw(GraphicsContext graphicsContext, double x, double y, double width, double height) {
+            public void draw(GraphicsContext2D graphicsContext, double x, double y, double width, double height) {
                 graphicsContext.setFont("36 Verdana");
                 graphicsContext.fillText("" + scorePlayer + "   " + scoreComputer, 380, 60);
             }

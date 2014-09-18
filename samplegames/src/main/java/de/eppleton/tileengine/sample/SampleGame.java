@@ -32,7 +32,7 @@ import de.eppleton.fx2d.tileengine.TileMapReader;
 import de.eppleton.tileengine.sample.sprites.SpriteHandler;
 import java.util.List;
 import java.util.logging.Logger;
-import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.GraphicsContext2D;
 
 /**
  *
@@ -40,8 +40,8 @@ import net.java.html.canvas.GraphicsContext;
  */
 public class SampleGame extends Level {
 
-    public SampleGame(double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
-        super( playfieldWidth, playfieldHeight, viewPortWidth, viewPortHeight);
+    public SampleGame(GraphicsContext2D gcd, double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
+        super( gcd, playfieldWidth, playfieldHeight, viewPortWidth, viewPortHeight);
     }
     
     @Override
@@ -64,16 +64,12 @@ public class SampleGame extends Level {
             for (ObjectGroup objectGroup : objectGroups) {
                 spriteHandler.handle(objectGroup, this);
             }
-
             DefaultMoveBehavior defaultMoveBehavior = new DefaultMoveBehavior();
             defaultMoveBehavior.addMoveValidator(new SampleMoveValidator(tileMap));
             addBehaviour(defaultMoveBehavior);
         } catch (TileMapException ex) {
             Logger.getLogger(SampleGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-
-            
-        
 
     }
 

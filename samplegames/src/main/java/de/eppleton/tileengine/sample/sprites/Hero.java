@@ -140,7 +140,7 @@ public class Hero extends Sprite {
         
         Collections.sort(gearList, LAYER_COMPARATOR);
         for (Gear gear : gearList) {
-            heroSet.merge(getParent().getGraphicsContext(), gear.getTileset());
+            heroSet.merge(getParent().getGraphicsContext2D(), gear.getTileset());
         }
     }
     
