@@ -23,7 +23,7 @@ package de.eppleton.fx2d;
 
 import java.util.ArrayList;
 import java.util.List;
-import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.GraphicsContext2D;
 
 /**
  * A Renderer that allows you to stack renderers on top of each others. 
@@ -53,7 +53,7 @@ public class StackedRenderer implements Renderer {
     }
 
     @Override
-    public void render(Sprite sprite, GraphicsContext context, float alpha, long time) {
+    public void render(Sprite sprite, GraphicsContext2D context, float alpha, long time) {
         for (Renderer renderer : renderers) {
             renderer.render(sprite, context, alpha, time);
         }

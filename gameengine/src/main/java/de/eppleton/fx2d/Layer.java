@@ -21,7 +21,7 @@
  */
 package de.eppleton.fx2d;
 
-import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.GraphicsContext2D;
 
 
 /**
@@ -44,7 +44,7 @@ public abstract class Layer {
         this.name = name;
     }
     
-    public abstract void draw(GraphicsContext graphicsContext, double x, double y, double width, double height);
+    public abstract void draw(GraphicsContext2D graphicsContext, double x, double y, double width, double height);
 
     public String getName() {
         return name;

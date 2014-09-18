@@ -21,7 +21,7 @@
  */
 package de.eppleton.fx2d;
 
-import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.GraphicsContext2D;
 
 
 
@@ -36,7 +36,7 @@ public class SpriteLayer extends Layer{
     }
 
     @Override
-    public void draw(GraphicsContext graphicsContext, double x, double y, double width, double height) {
+    public void draw(GraphicsContext2D graphicsContext, double x, double y, double width, double height) {
         // do nothing
     }
   

@@ -48,11 +48,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
-import javafx.scene.Node;
 import javax.xml.bind.JAXBException;
 
 
-import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.GraphicsContext2D;
 import net.java.html.canvas.Image;
 import net.java.html.canvas.Style.Color;
 
@@ -81,7 +80,7 @@ public class TowerDefense extends Level {
     private int maxHits = 2;
     private boolean levelLost;
 
-    public TowerDefense(GraphicsContext graphicsContext, double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
+    public TowerDefense(GraphicsContext2D graphicsContext, double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
         super(graphicsContext, playfieldWidth, playfieldHeight, viewPortWidth, viewPortHeight);
     }
 
@@ -212,9 +211,7 @@ public class TowerDefense extends Level {
         attackPath = AStar.getPath(tileMap, platformLayer, end, start);
     }
 
-    public Node getPalette() {
-        return palette;
-    }
+
 
     private class CheckHitsBehavior extends Behavior {
 
@@ -265,7 +262,7 @@ public class TowerDefense extends Level {
         
         
         @Override
-        public void draw(GraphicsContext graphicsContext, double x, double y, double width, double height) {
+        public void draw(GraphicsContext2D graphicsContext, double x, double y, double width, double height) {
             graphicsContext.setFillStyle(new Color("#ff0000"));
             graphicsContext.setFont("Bold 24 OricNeo");
             graphicsContext.fillText("Score: " + score, 10, 28);

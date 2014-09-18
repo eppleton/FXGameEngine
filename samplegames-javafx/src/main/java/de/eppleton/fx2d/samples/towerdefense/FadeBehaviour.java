@@ -26,7 +26,7 @@ import de.eppleton.fx2d.Layer;
 import de.eppleton.fx2d.Sprite;
 import de.eppleton.fx2d.action.Behavior;
 import java.util.Collection;
-import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.GraphicsContext2D;
 import net.java.html.canvas.Style.Color;
 
 /**
@@ -67,7 +67,7 @@ class FadeBehaviour extends Behavior {
         }
 
         @Override
-        public void draw(GraphicsContext graphicsContext, double x, double y, double width, double height) {
+        public void draw(GraphicsContext2D graphicsContext, double x, double y, double width, double height) {
             graphicsContext.setFillStyle(new Color("rgba(0,0,0,"+getOpacity()+")"));
             graphicsContext.fillRect(x, y, width, height);
         }

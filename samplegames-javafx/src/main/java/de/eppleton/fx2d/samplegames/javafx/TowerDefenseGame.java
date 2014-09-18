@@ -15,7 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.GraphicsContext2D;
 import net.java.html.canvas.spi.GraphicsUtils;
 
 /**
@@ -28,14 +28,14 @@ public class TowerDefenseGame extends Application {
     private TowerDefense level;
     private Canvas canvas;
     public BorderPane pane;
-    static GraphicsContext gc;
+    static GraphicsContext2D gc;
 
     @Override
     public void start(Stage primaryStage) {
         canvas = new Canvas();
 
         JavaFXGraphicsEnvironment javaFXGraphicsEnvironment = new JavaFXGraphicsEnvironment(canvas);
-        GraphicsContext graphicsContext = GraphicsUtils.create(javaFXGraphicsEnvironment);
+        GraphicsContext2D graphicsContext = GraphicsUtils.create(javaFXGraphicsEnvironment);
         level = new TowerDefense(graphicsContext, 460, 414, 460, 414);
         canvas.setHeight(level.getScreenHeight());
         canvas.setWidth(level.getScreenWidth());

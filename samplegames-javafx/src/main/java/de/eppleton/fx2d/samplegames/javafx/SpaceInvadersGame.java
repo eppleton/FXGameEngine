@@ -25,7 +25,7 @@ import de.eppleton.fx2d.Level;
 import de.eppleton.fx2d.javafx.app.JavaFXGame;
 import de.eppleton.fx2d.samples.spaceinvaders.SpaceInvaders;
 import static javafx.application.Application.launch;
-import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.GraphicsContext2D;
 
 /**
  *
@@ -34,7 +34,7 @@ import net.java.html.canvas.GraphicsContext;
 public class SpaceInvadersGame extends JavaFXGame{
 
     @Override
-    protected Level getLevel(GraphicsContext context) {
+    protected Level getLevel(GraphicsContext2D context) {
         return new SpaceInvaders(context, 800, 800, 800, 800);
     }
     public static void main(String[] args) {

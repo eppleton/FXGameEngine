@@ -5,6 +5,7 @@
 package de.eppleton.fx2d.tileengine;
 
 import java.util.ServiceLoader;
+import net.java.html.canvas.GraphicsContext2D;
 
 /**
  *
@@ -20,8 +21,8 @@ public class TileMapReader {
      * @return the initialized TileMap
      * @throws JAXBException
      */
-    public static TileMap readMap(String url) throws TileMapException {
-        return getReader().readMap(url);
+    public static TileMap readMap(GraphicsContext2D g2d, String url) throws TileMapException {
+        return getReader().readMap(g2d, url);
     }
 
      /**

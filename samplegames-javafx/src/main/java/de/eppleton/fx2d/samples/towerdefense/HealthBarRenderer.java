@@ -23,7 +23,7 @@ package de.eppleton.fx2d.samples.towerdefense;
 
 import de.eppleton.fx2d.Renderer;
 import de.eppleton.fx2d.Sprite;
-import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.GraphicsContext2D;
 import net.java.html.canvas.Style.Color;
 
 /**
@@ -38,7 +38,7 @@ public class HealthBarRenderer implements Renderer {
     }
 
     @Override
-    public void render(Sprite sprite, GraphicsContext context, float alpha, long time) {
+    public void render(Sprite sprite, GraphicsContext2D context, float alpha, long time) {
         context.translate(sprite.getWidth() / 2, sprite.getHeight() / 2);
         context.rotate(-sprite.getRotation());
         context.translate(-sprite.getWidth() / 2, -sprite.getHeight() / 2);

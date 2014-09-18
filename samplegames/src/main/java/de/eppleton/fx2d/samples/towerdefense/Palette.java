@@ -25,18 +25,11 @@ import de.eppleton.fx2d.tileengine.Tile;
 import de.eppleton.fx2d.tileengine.TileSet;
 import java.util.ArrayList;
 import java.util.Properties;
-import javafx.event.EventHandler;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext2D;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 
-final class Palette extends StackPane {
+import net.java.html.canvas.GraphicsContext2D;
 
-    private final Canvas canvas;
+final class Palette  {
+
     private final TileSet cannons;
     private final TileSet bases;
     private final Color selected = Color.rgb(100, 100, 255, .2);

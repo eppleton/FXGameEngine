@@ -4,13 +4,15 @@
  */
 package de.eppleton.fx2d.tileengine;
 
+import net.java.html.canvas.GraphicsContext2D;
+
 /**
  *
  * @author antonepple
  */
 public interface TileMapSerializationEnvironment {
 
-    public TileMap readMap(String url) throws TileMapException;
+    public TileMap readMap(GraphicsContext2D g2d, String url) throws TileMapException;
 
 //    public TileSet readSet(String url) throws TileMapException;
 

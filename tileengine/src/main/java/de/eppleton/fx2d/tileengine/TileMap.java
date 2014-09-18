@@ -24,7 +24,7 @@ package de.eppleton.fx2d.tileengine;
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
-import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.GraphicsContext2D;
 
 /**
  *
@@ -305,7 +305,7 @@ public class TileMap {
      * @param graphicsContext2D
      * @param gid
      */
-    public void drawTile(GraphicsContext graphicsContext2D, int gid) {
+    public void drawTile(GraphicsContext2D graphicsContext2D, int gid) {
         if (gid == 0) {
             return;
         }

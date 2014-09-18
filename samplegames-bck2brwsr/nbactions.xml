@@ -17,4 +17,43 @@
             <jpda.listen>maven</jpda.listen>
         </properties>
     </action>
+    <action>
+        <actionName>CUSTOM-bck2brwsr-show</actionName>
+        <displayName>Run in a Browser</displayName>
+        <goals>
+            <goal>clean</goal>
+            <goal>package</goal>
+            <goal>bck2brwsr:show</goal>
+        </goals>
+        <activatedProfiles>
+            <activatedProfile>bck2brwsr</activatedProfile>
+        </activatedProfiles>
+        <properties>
+            <skipTests>true</skipTests>
+            <bck2brwsr.obfuscationlevel>NONE</bck2brwsr.obfuscationlevel>
+        </properties>
+    </action>
+    <profiles>
+        <profile>
+            <id>bck2brwsr</id>
+            <actions>
+                <action>
+                    <actionName>run</actionName>
+                    <displayName>Run in a Browser</displayName>
+                    <goals>
+                        <goal>clean</goal>
+                        <goal>package</goal>
+                        <goal>bck2brwsr:show</goal>
+                    </goals>
+                    <activatedProfiles>
+                        <activatedProfile>bck2brwsr</activatedProfile>
+                    </activatedProfiles>
+                    <properties>
+                        <skipTests>true</skipTests>
+                        <bck2brwsr.obfuscationlevel>NONE</bck2brwsr.obfuscationlevel>
+                    </properties>
+                </action>
+            </actions>
+        </profile>
+    </profiles>
 </actions>

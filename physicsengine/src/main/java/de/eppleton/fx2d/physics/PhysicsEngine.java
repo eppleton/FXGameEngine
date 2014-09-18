@@ -38,7 +38,7 @@ import org.jbox2d.dynamics.World;
  */
 public class PhysicsEngine extends Behavior {
 
-    private World world;
+    private final World world;
     private long lastPulse;
     private WorldCam camera;
 

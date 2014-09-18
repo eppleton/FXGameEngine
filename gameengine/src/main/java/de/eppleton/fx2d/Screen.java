@@ -21,16 +21,16 @@
  */
 package de.eppleton.fx2d;
 
-import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.GraphicsContext2D;
 
 /**
  *
  * @author antonepple
  */
 public class Screen {
-    GraphicsContext graphicsContext;
+    GraphicsContext2D graphicsContext;
 
-    public void setGraphicsContext(GraphicsContext graphicsContext) {
+    public void setGraphicsContext2D(GraphicsContext2D graphicsContext) {
         this.graphicsContext = graphicsContext;
     }
     

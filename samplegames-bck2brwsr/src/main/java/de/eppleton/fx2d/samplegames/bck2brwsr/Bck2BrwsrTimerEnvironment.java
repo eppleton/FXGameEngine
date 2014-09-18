@@ -25,8 +25,8 @@ package de.eppleton.fx2d.samplegames.bck2brwsr;
 
 import de.eppleton.fx2d.samplegames.bck2brwsr.Bck2BrwsrTimerEnvironment.BBTimer;
 import de.eppleton.fx2d.timer.Handler;
-import de.eppleton.fx2d.timer.spi.GameTimerEnvironment;
 import org.openide.util.lookup.ServiceProvider;
+import de.eppleton.fx2d.timer.spi.GameTimerEnvironment;
 
 @ServiceProvider(service = GameTimerEnvironment.class)
 public class Bck2BrwsrTimerEnvironment implements GameTimerEnvironment<BBTimer> {
@@ -52,6 +52,8 @@ public class Bck2BrwsrTimerEnvironment implements GameTimerEnvironment<BBTimer> 
     public void stop(BBTimer timer) {
         timer.stop();
     }
+
+
 
     public static class BBTimer {
 

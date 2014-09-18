@@ -23,7 +23,7 @@ package de.eppleton.fx2d.tileengine;
 
 import java.util.ArrayList;
 
-import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.GraphicsContext2D;
 import net.java.html.canvas.Image;
 
 /**
@@ -93,7 +93,6 @@ public class TileSet {
 
     public void setImage(SourceImage image) {
         this.image = image;
-
     }
 
     public int getFirstgid() {
@@ -162,20 +161,20 @@ public class TileSet {
         return rows;
     }
     
-    public void merge(GraphicsContext gc, TileSet other){
+    public void merge(GraphicsContext2D gc, TileSet other){
         Image merge = gc.merge(this.getTileImage(), other.getTileImage());
-        init(merge);
+        init(gc,merge);
     }
     
     
-    public void init(Image image) {
+    public void init(GraphicsContext2D g2d, Image image) {
         this.tileImage = image;
-        cols = (int) (image.getWidth() / tilewidth);
-        rows = (int) (image.getHeight() / tileheight);
+        cols = (int) (g2d.getDimension(image).getWidth() / tilewidth);
+        rows = (int) (g2d.getDimension(image).getHeight() / tileheight);
         numTiles = rows * cols;
     }
 
-   public void drawTile(GraphicsContext graphicsContext2D, int tileIndex) {
+   public void drawTile(GraphicsContext2D graphicsContext2D, int tileIndex) {
        int x = tileIndex % cols;
         
         int y = tileIndex / cols;

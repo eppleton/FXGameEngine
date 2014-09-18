@@ -35,6 +35,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import net.java.html.canvas.GraphicsContext2D;
 import net.java.html.canvas.Image;
 import org.eclipse.persistence.jaxb.JAXBContextFactory;
 
@@ -57,7 +58,7 @@ public class TileMapSerializationEnvironmentJAXB implements TileMapSerialization
      * @return the initialized TileMap
      * @throws JAXBException
      */
-    public TileMap readMapFromFile(String url) throws JAXBException, FileNotFoundException, TileMapException {
+    public TileMap readMapFromFile(GraphicsContext2D g2d,String url) throws JAXBException, FileNotFoundException, TileMapException {
         try {
             String baseUrl = url.substring(0, url.lastIndexOf('/'));
             Map<String, Object> properties = new HashMap<String, Object>(1);
@@ -89,7 +90,7 @@ public class TileMapSerializationEnvironmentJAXB implements TileMapSerialization
                String source = resourcePath(tileSet.getImage().getSource(), baseUrl);
             LOG.log(Level.INFO, "loading image " + source);
             Image image = Image.create(source);
-                tileSet.init(image);
+                tileSet.init(g2d,image);
             }
             afterUnMarshal(map);
             return map;
@@ -107,7 +108,7 @@ public class TileMapSerializationEnvironmentJAXB implements TileMapSerialization
      * @throws JAXBException
      */
     @Override
-    public TileMap readMap(String url) throws TileMapException {
+    public TileMap readMap(GraphicsContext2D g2d,String url) throws TileMapException {
         try {
             String baseUrl = url.substring(0, url.lastIndexOf('/'));
             Map<String, Object> properties = new HashMap<String, Object>(1);
@@ -139,7 +140,7 @@ public class TileMapSerializationEnvironmentJAXB implements TileMapSerialization
                 String source = TileMapReader.resourcePath(tileSet.getImage().getSource(), baseUrl);
                 LOG.log(Level.INFO, "loading image " + source);
                 Image image = Image.create(TileMapSerializationEnvironmentJAXB.class.getResource(source).toExternalForm());
-                tileSet.init(image);
+                tileSet.init(g2d, image);
             }
             afterUnMarshal(map);
             return map;
@@ -156,7 +157,7 @@ public class TileMapSerializationEnvironmentJAXB implements TileMapSerialization
      * @return the Initialized TileSet.
      * @throws JAXBException
      */
-    public TileSet readSet(String url) throws TileMapException {
+    public TileSet readSet(GraphicsContext2D g2d, String url) throws TileMapException {
         try {
             String baseUrl = url.substring(0, url.lastIndexOf('/'));
             Map<String, Object> properties = new HashMap<String, Object>(1);
@@ -174,7 +175,7 @@ public class TileMapSerializationEnvironmentJAXB implements TileMapSerialization
             String source = tileSet.getImage().getSource();
             String resourcePath = TileMapReader.resourcePath(source, baseUrl);
             Image image = Image.create(TileMapSerializationEnvironmentJAXB.class.getResource(resourcePath).toExternalForm());
-            tileSet.init(image);
+            tileSet.init(g2d, image);
             return tileSet;
         } catch (JAXBException ex) {
             Logger.getLogger(TileMapSerializationEnvironmentJAXB.class.getName()).log(Level.SEVERE, null, ex);

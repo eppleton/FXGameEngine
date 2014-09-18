@@ -28,14 +28,15 @@ import de.eppleton.fx2d.event.EventHandler;
 import de.eppleton.fx2d.event.KeyCode;
 import de.eppleton.fx2d.event.KeyEvent;
 import de.eppleton.fx2d.event.MouseEvent;
+import java.lang.invoke.MethodHandles.Lookup;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import net.java.html.canvas.GraphicsContext;
-import org.openide.util.Lookup;
-import org.openide.util.lookup.AbstractLookup;
-import org.openide.util.lookup.InstanceContent;
+import net.java.html.canvas.GraphicsContext2D;
+//import org.openide.util.Lookup;
+//import org.openide.util.lookup.AbstractLookup;
+//import org.openide.util.lookup.InstanceContent;
 
 /**
  *
@@ -71,10 +72,10 @@ public class Sprite {
     private Rectangle2D moveBox;
     private Rectangle2D collisionBox;
     private Level parent;
-    private Lookup lookup = Lookup.EMPTY;
+//    private Lookup lookup = Lookup.EMPTY;
     public static Renderer NO_ANIMATION = new Renderer() {
         @Override
-        public void render(Sprite sprite, GraphicsContext context, float alpha, long delta) {
+        public void render(Sprite sprite, GraphicsContext2D context, float alpha, long delta) {
             context.setFillStyle(context.getWebColor("#ff0000"));
             context.fillRect(0, 0, sprite.getWidth(), sprite.getHeight());
         }
@@ -86,7 +87,7 @@ public class Sprite {
     };
     private KeyEventHandler keyEventHandler;
     private static State NO_STATE = new State(NO_ANIMATION, "No State");
-    private InstanceContent content;
+//    private InstanceContent content;
     private double angle;
     private EventHandler<MouseEvent> mouseEventHandler;
     private Object userObject;
@@ -112,13 +113,13 @@ public class Sprite {
         return userObject;
     }
 
-    public void addToLookup(Object o) {
-        if (lookup == Lookup.EMPTY) {
-            content = new InstanceContent();
-            lookup = new AbstractLookup(content);
-    }
-        content.add(o);
-    }
+//    public void addToLookup(Object o) {
+//        if (lookup == Lookup.EMPTY) {
+//            content = new InstanceContent();
+//            lookup = new AbstractLookup(content);
+//    }
+//        content.add(o);
+//    }
 
     public DoubleProperty getXProperty() {
         return xProperty;
@@ -249,7 +250,7 @@ public class Sprite {
         this.currentAnimation = animation;
     }
 
-    public void drawSprite(GraphicsContext context, float alpha, long delta) {
+    public void drawSprite(GraphicsContext2D context, float alpha, long delta) {
         context.save();
         context.translate(getWidth() / 2, getHeight() / 2);
         context.rotate(angle);
@@ -411,9 +412,9 @@ public class Sprite {
         return mouseEventHandler;
     }
 
-    public Lookup getLookup() {
-        return lookup;
-    }
+//    public Lookup getLookup() {
+//        return lookup;
+//    }
 
     public void setUserObject(Object object) {
         this.userObject = object;

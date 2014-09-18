@@ -1,24 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
+    <parent>    
+        <groupId>de.eppleton.fx2d</groupId>
+        <artifactId>fxgameengine</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+     
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>de.eppleton.fx2d</groupId>
     <artifactId>gameengine</artifactId>
     <name>gameengine</name>
-
     <packaging>jar</packaging>
-    <version>1.0-SNAPSHOT</version>
     
-    <organization>
-        <!-- Used as the 'Vendor' for JNLP generation -->
-        <name>Eppleton IT Consulting</name>
-    </organization>
-
-
     <build>
         <plugins>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -34,41 +28,13 @@
         <dependency>
             <groupId>org.netbeans.html</groupId>
             <artifactId>net.java.html.sound</artifactId>
-            <version>0.7.5</version>
+            <version>${org.netbeans.html.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.openide</groupId>
-            <artifactId>org.openide.util.lookup</artifactId>
-            <version>7.4-SNAPSHOT</version>       
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>timer</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apidesign.html</groupId>
-            <artifactId>javafx-canvas</artifactId>
-            <version>0.9-SNAPSHOT</version>
-            <type>jar</type>
+            <groupId>org.apidesign.canvas</groupId>
+            <artifactId>canvas-api</artifactId>
+            <version>${org.apidesign.canvas.version}</version>
         </dependency>
     </dependencies>
-    <repositories>
-      <repository>
-            <id>netbeans</id>
-            <name>NetBeans</name>
-            <url>http://bits.netbeans.org/maven2/</url>
-        </repository>
-<!--        <repository>
-            <id>java.net-Public</id>
-            <name>Maven Java Net Snapshots and Releases</name>
-            <url>https://maven.java.net/content/repositories/snapshots/</url>
-        </repository>-->
-<!--        <repository>
-            <id>org.apidesign.html</id>
-            <name>Maven Repository for apidesign.org</name>
-            <url>https://maven.java.net/</url>
-        </repository>-->
-
-    </repositories>  
+   
 </project>

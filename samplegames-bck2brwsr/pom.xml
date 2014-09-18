@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>    
+        <groupId>de.eppleton.fx2d</groupId>
+        <artifactId>fxgameengine</artifactId>
+        <version>0.7-SNAPSHOT</version>
+    </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>de.eppleton.fx2d</groupId>
     <artifactId>java</artifactId>
-    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>samplegames-bck2brwsr</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <net.java.html.version>0.7.5</net.java.html.version>
-        <bck2brwsr.version>0.9-SNAPSHOT</bck2brwsr.version>
+        <net.java.html.version>1.0</net.java.html.version>
+        <bck2brwsr.version>1.0-SNAPSHOT</bck2brwsr.version>
         <brwsr.startpage>de/eppleton/fx2d/samplegames/bck2brwsr/index.html</brwsr.startpage>
         <project.mainclass>de.eppleton.fx2d.samplegames.bck2brwsr.Main</project.mainclass>
         <netbeans.compile.on.save>none</netbeans.compile.on.save>
@@ -61,9 +64,9 @@
     <dependencies>
           
         <dependency>
-            <groupId>de.eppleton.fx2d</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>samplegames</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <artifactId>net.java.html.sound</artifactId>
@@ -71,28 +74,10 @@
             <version>0.7.5</version>
         </dependency>
         <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>physicsengine</artifactId>
-            <groupId>de.eppleton.fx2d</groupId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <artifactId>jbox2d-library</artifactId>
-            <groupId>org.jbox2d</groupId>
-            <type>jar</type>
-            <version>2.3.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>net.java.html</groupId>
-            <artifactId>canvas</artifactId>
-            <version>0.9-SNAPSHOT</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <artifactId>org.openide.util.lookup</artifactId>
-            <groupId>org.openide</groupId>
-            <version>7.4-SNAPSHOT</version>
-        </dependency>
- 
         <dependency>
             <groupId>org.netbeans.html</groupId>
             <artifactId>net.java.html.json</artifactId>
@@ -101,14 +86,16 @@
         <dependency>
             <groupId>org.netbeans.html</groupId>
             <artifactId>net.java.html.boot</artifactId>
-            <version>${net.java.html.version}</version>
+            <version>1.0</version>
         </dependency>
+       
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>6.7</version>
             <scope>test</scope>
         </dependency>
+   
     </dependencies>
     <profiles>
         <profile>

@@ -25,7 +25,7 @@ import de.eppleton.fx2d.Level;
 import de.eppleton.fx2d.javafx.app.JavaFXGame;
 import de.eppleton.tileengine.sample.SampleGame;
 import static javafx.application.Application.launch;
-import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.GraphicsContext2D;
 
 /**
  *
@@ -35,7 +35,7 @@ public class RPGGame extends JavaFXGame
 {
 
     @Override
-    protected Level getLevel(GraphicsContext context) {
+    protected Level getLevel(GraphicsContext2D context) {
     
 
         return new SampleGame(context, 1600,1600, 500, 500);

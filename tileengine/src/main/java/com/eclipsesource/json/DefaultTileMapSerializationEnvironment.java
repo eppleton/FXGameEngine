@@ -19,8 +19,8 @@ import java.util.ArrayList;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import net.java.html.canvas.GraphicsContext2D;
 import net.java.html.canvas.Image;
-import org.openide.util.lookup.ServiceProvider;
 
 /*
  * To change this template, choose Tools | Templates
@@ -30,7 +30,6 @@ import org.openide.util.lookup.ServiceProvider;
  *
  * @author antonepple
  */
-@ServiceProvider(service = TileMapSerializationEnvironment.class)
 public class DefaultTileMapSerializationEnvironment implements TileMapSerializationEnvironment {
 
     private static Logger LOGGER = Logger.getLogger(DefaultTileMapSerializationEnvironment.class.getName());
@@ -40,7 +39,7 @@ public class DefaultTileMapSerializationEnvironment implements TileMapSerializat
     }
 
     @Override
-    public TileMap readMap(String url) throws TileMapException {
+    public TileMap readMap(GraphicsContext2D g2d, String url) throws TileMapException {
         baseUrl = url.substring(0, url.lastIndexOf('/'));
         TileMap map = new TileMap();
         String toParse;
@@ -80,7 +79,7 @@ public class DefaultTileMapSerializationEnvironment implements TileMapSerializat
 
         for (int i = 0; i < tilesetArray.size(); i++) {
             JsonObject asObject = tilesetArray.get(i).asObject();
-            TileSet tileset = parseTileSet(asObject);
+            TileSet tileset = parseTileSet(g2d, asObject);
             tilesets.add(tileset);
         }
         map.setTileSetlist(tilesets);
@@ -159,7 +158,7 @@ public class DefaultTileMapSerializationEnvironment implements TileMapSerializat
         return properties;
     }
 
-    private TileSet parseTileSet(JsonObject asObject) {
+    private TileSet parseTileSet(GraphicsContext2D g2d, JsonObject asObject) {
         TileSet tileSet = new TileSet();
         tileSet.setBaseUrl(baseUrl);
 
@@ -178,7 +177,7 @@ public class DefaultTileMapSerializationEnvironment implements TileMapSerializat
         tileSet.setImage(parseImage(asObject));
         String source = TileMapReader.resourcePath(tileSet.getImage().getSource(), baseUrl);
         Image image = Image.create(source);
-        tileSet.init(image);
+        tileSet.init(g2d, image);
         return tileSet;
 
     }

@@ -36,13 +36,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.ServiceLoader;
 import java.util.Set;
-import java.util.logging.Logger;
 
-import net.java.html.canvas.GraphicsContext;
-import net.java.html.canvas.spi.GraphicsEnvironment;
-import net.java.html.canvas.spi.GraphicsUtils;
+import net.java.html.canvas.GraphicsContext2D;
 
 /**
  *
@@ -75,12 +71,13 @@ public class Level extends Screen implements Handler {
     // TODO not Used
     private float alpha = 1;
 
-    public Level(double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
-        ServiceLoader<GraphicsEnvironment> ge = ServiceLoader.load(GraphicsEnvironment.class);
-        for (GraphicsEnvironment graphicsEnvironment : ge) {
-            this.graphicsContext = GraphicsUtils.create(graphicsEnvironment);
-            break;
-        }
+    public Level(GraphicsContext2D graphicsContext2D, double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
+        this.graphicsContext = graphicsContext2D;
+//        ServiceLoader<GraphicsEnvironment> ge = ServiceLoader.load(GraphicsEnvironment.class);
+//        for (GraphicsEnvironment graphicsEnvironment : ge) {
+//            this.graphicsContext = GraphicsUtils.getOrCreate(graphicsEnvironment,"canvas");
+//            break;
+//        }
         this.graphicsContext.fillText("Hallo", 0,0);
         this.screenWidth = viewPortWidth;
         this.screenHeight = viewPortHeight;
@@ -206,7 +203,7 @@ public class Level extends Screen implements Handler {
     }
 
     // @TODO make private? 
-    public GraphicsContext getGraphicsContext() {
+    public GraphicsContext2D getGraphicsContext2D() {
         return graphicsContext;
     }
 

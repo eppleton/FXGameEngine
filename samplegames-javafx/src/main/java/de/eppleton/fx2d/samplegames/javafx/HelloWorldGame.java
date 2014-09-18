@@ -25,7 +25,7 @@ import de.eppleton.fx2d.Level;
 import de.eppleton.fx2d.javafx.app.JavaFXGame;
 import de.eppleton.fx2d.samples.test.HelloWorldLevel;
 import static javafx.application.Application.launch;
-import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.GraphicsContext2D;
 
 /**
  *
@@ -34,7 +34,7 @@ import net.java.html.canvas.GraphicsContext;
 public class HelloWorldGame extends JavaFXGame {
 
     @Override
-    protected Level getLevel(GraphicsContext context) {
+    protected Level getLevel(GraphicsContext2D context) {
         return new HelloWorldLevel(context, 800, 600, 800, 600);
     }
 

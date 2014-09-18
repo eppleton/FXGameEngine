@@ -23,7 +23,7 @@ package de.eppleton.fx2d.tileengine.algorithms;
 
 import de.eppleton.fx2d.Layer;
 import de.eppleton.fx2d.tileengine.TileMap;
-import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.GraphicsContext2D;
 import net.java.html.canvas.Style.Color;
 
 /**
@@ -44,7 +44,7 @@ class AStarLayer extends Layer {
     Color pathColor = new Color("rgb(255, 100, 100, .3");
 
     @Override
-    public void draw(GraphicsContext graphicsContext, double x, double y, double width, double height) {
+    public void draw(GraphicsContext2D graphicsContext, double x, double y, double width, double height) {
         AStar.PathNode start = attackPath;
         if (start != null) {
             graphicsContext.setFillStyle(pathColor);

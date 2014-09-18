@@ -21,7 +21,7 @@
  */
 package de.eppleton.fx2d;
 
-import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.GraphicsContext2D;
 
 /**
  * A class used to render a Sprite.
@@ -41,5 +41,5 @@ public interface Renderer {
      * if framerate is faster than update rate. not supported yet, currently always 1
      * @param time the nano time delivered by the pulse 
      */
-    public void render(Sprite sprite, GraphicsContext context, float alpha, long time);
+    public void render(Sprite sprite, GraphicsContext2D context, float alpha, long time);
 }

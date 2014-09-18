@@ -22,7 +22,7 @@
 package de.eppleton.fx2d.physics;
 
 import de.eppleton.fx2d.Layer;
-import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.GraphicsContext2D;
 import org.jbox2d.collision.shapes.CircleShape;
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Transform;
@@ -46,7 +46,7 @@ public class DebugLayer extends Layer {
     }
 
     @Override
-    public void draw(GraphicsContext graphicsContext, double x, double y, double width, double height) {
+    public void draw(GraphicsContext2D graphicsContext, double x, double y, double width, double height) {
         WorldCam camera = engine.getCamera();
         World world = engine.getWorld();
         Body nextBody = world.getBodyList();

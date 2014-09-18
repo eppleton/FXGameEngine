@@ -25,7 +25,7 @@ import de.eppleton.fx2d.Sprite;
 import de.eppleton.fx2d.Renderer;
 import de.eppleton.fx2d.tileengine.TileSet;
 import java.util.Arrays;
-import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.GraphicsContext2D;
 
 /**
  *
@@ -151,7 +151,7 @@ public class TileSetAnimation implements Renderer {
     }
     
     @Override
-    public void render(Sprite sprite, GraphicsContext context, float alpha, long delta) {
+    public void render(Sprite sprite, GraphicsContext2D context, float alpha, long delta) {
         tileSet.drawTile(context, tile);
     }
 }
