@@ -16,5 +16,6 @@ Any value defined here will override the pom.xml file value but is only applicab
         <netbeans.hint.jdkPlatform>JDK_1.7</netbeans.hint.jdkPlatform>
         <netbeans.checkstyle.format>true</netbeans.checkstyle.format>
         <netbeans.hint.license>gpl20</netbeans.hint.license>
+        <netbeans.compile.on.save>none</netbeans.compile.on.save>
     </properties>
 </project-shared-configuration>

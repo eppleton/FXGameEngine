@@ -4,6 +4,7 @@
  */
 package de.eppleton.fx2d.tileengine;
 
+import com.eclipsesource.json.DefaultTileMapSerializationEnvironment;
 import java.util.ServiceLoader;
 import net.java.html.canvas.GraphicsContext2D;
 
@@ -57,16 +58,12 @@ public class TileMapReader {
 
     private static TileMapSerializationEnvironment getReader() {
         if (READER == null) {
-            ServiceLoader<TileMapSerializationEnvironment> load = ServiceLoader.load(TileMapSerializationEnvironment.class);
-            for (TileMapSerializationEnvironment tileMapSerializationEnvironment : load) {
-                READER = tileMapSerializationEnvironment;
-                return READER;
-            }
+            READER = new DefaultTileMapSerializationEnvironment();
         }
         return READER;
     }
 
-    public static TileMap readMapFromFile(String fileURL) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    public static TileMap readMapFromFile(String fileURL) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 }

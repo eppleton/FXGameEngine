@@ -32,7 +32,6 @@ public abstract class GamePulse {
 
     public static GamePulse create(Handler handler) {
         for (GameTimerEnvironment<?> te : ServiceLoader.load(GameTimerEnvironment.class)) {
-            
             Impl handle = create(te, handler);
             if (handle != null) {
                 return handle;

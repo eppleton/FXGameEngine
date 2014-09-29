@@ -1,22 +1,22 @@
 /**
- * This file is part of FXGameEngine 
- * A Game Engine written in JavaFX
- * Copyright (C) 2012 Anton Epple <info@eppleton.de>
+ * This file is part of FXGameEngine A Game Engine written in JavaFX Copyright
+ * (C) 2012 Anton Epple <info@eppleton.de>
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 2 of the License.
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, version 2 of the License.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program. Look for COPYING file in the top folder.
- * If not, see http://opensource.org/licenses/GPL-2.0.
- * 
- * For alternative licensing or use in closed source projects contact Anton Epple 
+ * You should have received a copy of the GNU General Public License along with
+ * this program. Look for COPYING file in the top folder. If not, see
+ * http://opensource.org/licenses/GPL-2.0.
+ *
+ * For alternative licensing or use in closed source projects contact Anton
+ * Epple
  * <info@eppleton.de>
  */
 package de.eppleton.fx2d.tileengine;
@@ -57,6 +57,8 @@ public class TileSet {
     private int rows;
     private int numTiles;
     private String baseUrl;
+    private int imageWidth;
+    private int imageHeight;
 
     public String getBaseUrl() {
         return baseUrl;
@@ -67,7 +69,7 @@ public class TileSet {
     }
 
     public ArrayList<Tile> getTileList() {
-       
+
         return tileList;
     }
 
@@ -82,11 +84,9 @@ public class TileSet {
 //    public HashMap<Integer, Image> getTiles() {
 //        return tiles;
 //    }
-
 //    public void setTiles(HashMap<Integer, Image> tiles) {
 //        this.tiles = tiles;
 //    }
-
     public SourceImage getImage() {
         return image;
     }
@@ -153,35 +153,52 @@ public class TileSet {
     }
 //    HashMap<Integer, Image> tiles;
 
-    public int getNumColumns(){
+    public int getNumColumns() {
         return cols;
     }
-    
-        public int getNumRows(){
+
+    public int getNumRows() {
         return rows;
     }
-    
-    public void merge(GraphicsContext2D gc, TileSet other){
+
+    public void merge(GraphicsContext2D gc, TileSet other) {
         Image merge = gc.merge(this.getTileImage(), other.getTileImage());
-        init(gc,merge);
+        init(gc, merge);
     }
-    
-    
+
     public void init(GraphicsContext2D g2d, Image image) {
         this.tileImage = image;
-        cols = (int) (g2d.getDimension(image).getWidth() / tilewidth);
-        rows = (int) (g2d.getDimension(image).getHeight() / tileheight);
+        cols = (int) (imageWidth / tilewidth);
+        rows = (int) (imageHeight / tileheight);
         numTiles = rows * cols;
     }
 
-   public void drawTile(GraphicsContext2D graphicsContext2D, int tileIndex) {
-       int x = tileIndex % cols;
-        
+    public void drawTile(GraphicsContext2D graphicsContext2D, int tileIndex) {
+        int x = tileIndex % cols;
+
         int y = tileIndex / cols;
-        graphicsContext2D.drawImage(tileImage, x * tilewidth, y* tileheight, tilewidth, tileheight, 0, 0, tilewidth, tileheight);
+        graphicsContext2D.drawImage(tileImage, x * tilewidth, y * tileheight, tilewidth, tileheight, 0, 0, tilewidth, tileheight);
     }
-   
-   public int getNumTiles() {
+
+    public int getNumTiles() {
         return numTiles;
     }
+
+    public void setImageHeight(int asInt) {
+        this.imageHeight = asInt;
+    }
+
+    public void setImageWidth(int asInt) {
+        this.imageWidth = asInt;
+    }
+
+    public int getImageHeight() {
+        return imageHeight;
+    }
+
+    public int getImageWidth() {
+        return imageWidth;
+    }
+
+    
 }

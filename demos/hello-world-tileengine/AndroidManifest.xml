@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="de.eppleton.fx2d.hello.world.tileengine"
+    android:versionCode="1"
+    android:versionName="1.0-SNAPSHOT" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="16" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="hello-world-tileengine"
+        android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+        <activity android:name="org.apidesign.brwsr.DlvkBrwsr" 
+                  android:configChanges="orientation|screenSize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <!-- Configuration section. Defines: 
+           - the HTML page to load on start
+           - the class that contains the main initialization method
+           - name of the initialization method in the given class
+        -->
+        <meta-data android:name="loadPage" android:value="file:///android_asset/pages/index.html" />
+        <meta-data android:name="loadClass" android:value="de.eppleton.fx2d.hello.world.tileengine.Main" />
+        <meta-data android:name="invoke" android:value="onPageLoad" />
+    </application>
+
+    <!-- allows use of internet and also 'call-home' feature. See 
+      licensing section in Javadoc
+    -->    
+    <uses-permission android:name="android.permission.INTERNET" />
+</manifest>

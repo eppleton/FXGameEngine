@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>de.eppleton.fx2d</groupId>
+        <artifactId>fxgameengine</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>jbox2d-2.1.1.1-osgi</artifactId>
+    <packaging>bundle</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>org.jbox2d</groupId>
+            <artifactId>jbox2d</artifactId>
+            <version>2.2.1.1</version>
+        </dependency>
+    </dependencies>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <export.packages>org.jbox2d.**</export.packages>
+    </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>1.2.0</version>
+                <configuration>
+                    <unpackBundle>true</unpackBundle>
+                    <instructions>
+                        <Bundle-Name>${project.artifactId}</Bundle-Name>
+                        <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
+                        <Bundle-Description>OSGI version of ${project.name}</Bundle-Description>
+                        <Export-Package>${export.packages}</Export-Package>
+                    </instructions>
+                </configuration>
+                <extensions>true</extensions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

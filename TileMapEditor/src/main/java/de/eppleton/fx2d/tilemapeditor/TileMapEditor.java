@@ -22,7 +22,6 @@
 package de.eppleton.fx2d.tilemapeditor;
 
 import de.eppleton.fx2d.Level;
-import de.eppleton.fx2d.graphicsenvironment.JavaFXGraphicsEnvironment;
 import de.eppleton.fx2d.tileengine.TileMap;
 import de.eppleton.fx2d.tileengine.TileMapLayer;
 import de.eppleton.fx2d.tileengine.TileMapSerializationEnvironmentJAXB;
@@ -54,7 +53,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javax.xml.bind.JAXBException;
-import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.GraphicsContext2D;
 
 /**
  *

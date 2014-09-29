@@ -9,3 +9,12 @@
 /physicsengine/target/
 /tileengine/target/
 /samplegames/target/
+/demos/hello-world/target/
+/demos/mavenproject1/target/
+/bck2brwsr-support/target/
+/dukescript-support/target/
+/demos/hello-world-physics/target/
+/jbox2d-2.1.1.1-osgi/target/
+/demos/parallax-demo/target/
+/demos/spaceinvaders-demo/target/
+/demos/hello-world-tileengine/target/

@@ -21,7 +21,6 @@
  */
 package de.eppleton.fx2d.tilemapeditor;
 
-import de.eppleton.fx2d.graphicsenvironment.JavaFXGraphicsEnvironment;
 import de.eppleton.fx2d.tileengine.TileSet;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -33,7 +32,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
-import net.java.html.canvas.GraphicsContext;
+import net.java.html.canvas.GraphicsContext2D;
 import net.java.html.canvas.Style.Color;
 
 class TileSetView extends StackPane {
@@ -89,7 +88,7 @@ class TileSetView extends StackPane {
     }
 
     public void updateCanvas() {
-        GraphicsContext graphicsContext2D = new GraphicsContext(new JavaFXGraphicsEnvironment(canvas));
+        GraphicsContext2D graphicsContext2D = new GraphicsContext2D(new JavaFXGraphicsEnvironment(canvas));
         graphicsContext2D.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         for (int i = 0; i < set.getNumRows(); i++) {
             for (int j = 0; j < set.getNumColumns(); j++) {

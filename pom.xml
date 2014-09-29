@@ -1,5 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.eppleton.fx2d</groupId>
     <artifactId>fxgameengine</artifactId>
@@ -14,8 +14,11 @@
     </licenses>
     <properties>
         <org.apidesign.canvas.version>1.0-SNAPSHOT</org.apidesign.canvas.version>
-        <org.netbeans.html.version>1.0</org.netbeans.html.version>
-        <org.apidesign.bck2brwsr.version>0.10</org.apidesign.bck2brwsr.version>
+        <net.java.html.version>1.0</net.java.html.version>
+        <bck2brwsr.version>0.11</bck2brwsr.version>
+        <maven.compiler.source>1.6</maven.compiler.source>
+        <maven.compiler.target>1.6</maven.compiler.target>
+        <nb.html.version>1.0</nb.html.version>
     </properties>
     <organization>
         <name>Eppleton IT Consulting</name>
@@ -35,6 +38,9 @@
         <module>samplegames-bck2brwsr</module>
         <module>tileengine</module>
         <module>TileMapEditor</module>
+        <module>demos</module>
+        <module>dukescript-support</module>
+        <module>jbox2d-2.1.1.1-osgi</module>
     </modules>
     <build>
         <plugins>
@@ -56,11 +62,11 @@
             <name>NetBeans</name>
             <url>http://bits.netbeans.org/maven2/</url>
         </repository>
-        <!--        <repository>
+        <repository>
             <id>java.net-Public</id>
             <name>Maven Java Net Snapshots and Releases</name>
             <url>https://maven.java.net/content/repositories/snapshots/</url>
-        </repository>-->
+        </repository>
         <!--        <repository>
             <id>org.apidesign.html</id>
             <name>Maven Repository for apidesign.org</name>

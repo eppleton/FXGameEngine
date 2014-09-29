@@ -9,10 +9,38 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>gameengine</artifactId>
     <name>gameengine</name>
-    <packaging>jar</packaging>
+    <packaging>bundle</packaging>
+    
+    <properties>
+        <publicPackages>de.eppleton.fx2d.**</publicPackages>
+    </properties>
     
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.netbeans.html</groupId>
+                <artifactId>html4j-maven-plugin</artifactId>
+                <version>1.0</version>
+                <executions>
+                    <execution>
+                        <id>js-classes</id>
+                        <goals>
+                            <goal>process-js-annotations</goal>
+                        </goals>
+                    </execution>
+                </executions>            
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+
+                <configuration>
+                    <instructions>
+                        <Eclipse-BuddyPolicy>dependent</Eclipse-BuddyPolicy>
+                    </instructions>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

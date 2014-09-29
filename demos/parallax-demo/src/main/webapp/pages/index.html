@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    </head>
+    <body>
+        <h1>Canvas Demo</h1>
+        <canvas id="canvas" width="600" height="600" > </canvas>
+
+
+                <!-- boot bck2brwsr -->
+        <script type="text/javascript" src="bck2brwsr.js"></script>
+        <script>
+            var vm = bck2brwsr('parallax-demo.js');
+            var c = vm.loadClass('de.eppleton.fx2d.parallax.demo.Main');
+            c.invoke('onPageLoad');
+        </script>
+            </body>
+</html>

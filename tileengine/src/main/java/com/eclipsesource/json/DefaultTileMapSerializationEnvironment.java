@@ -167,6 +167,8 @@ public class DefaultTileMapSerializationEnvironment implements TileMapSerializat
         tileSet.setSpacing(asObject.get("spacing").asInt());
         tileSet.setTileheight(asObject.get("tileheight").asInt());
         tileSet.setTilewidth(asObject.get("tilewidth").asInt());
+        tileSet.setImageHeight(asObject.get("imageheight").asInt());
+        tileSet.setImageWidth(asObject.get("imagewidth").asInt());
         tileSet.setName(asObject.get("name").asString());
         if (asObject.get("tileproperties") != null) {
 
@@ -175,7 +177,8 @@ public class DefaultTileMapSerializationEnvironment implements TileMapSerializat
         }
 
         tileSet.setImage(parseImage(asObject));
-        String source = TileMapReader.resourcePath(tileSet.getImage().getSource(), baseUrl);
+        String source = Image.class.getResource(TileMapReader.resourcePath(tileSet.getImage().getSource(), baseUrl)).toString();
+           System.out.println("source "+source);
         Image image = Image.create(source);
         tileSet.init(g2d, image);
         return tileSet;
