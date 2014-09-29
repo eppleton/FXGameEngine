@@ -11,7 +11,7 @@
     <dependencies>
         <dependency>
             <groupId>org.jbox2d</groupId>
-            <artifactId>jbox2d</artifactId>
+            <artifactId>jbox2d-library</artifactId>
             <version>2.2.1.1</version>
         </dependency>
     </dependencies>
