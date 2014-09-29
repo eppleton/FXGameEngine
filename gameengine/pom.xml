@@ -56,7 +56,7 @@
         <dependency>
             <groupId>org.netbeans.html</groupId>
             <artifactId>net.java.html.sound</artifactId>
-            <version>${org.netbeans.html.version}</version>
+            <version>${net.java.html.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apidesign.canvas</groupId>

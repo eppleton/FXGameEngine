@@ -34,10 +34,8 @@
     <modules>
         <module>gameengine</module>
         <module>physicsengine</module>
-        <module>samplegames</module>
         <module>samplegames-bck2brwsr</module>
         <module>tileengine</module>
-        <module>TileMapEditor</module>
         <module>demos</module>
         <module>dukescript-support</module>
         <module>jbox2d-2.1.1.1-osgi</module>
