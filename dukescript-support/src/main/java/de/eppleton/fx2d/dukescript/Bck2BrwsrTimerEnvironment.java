@@ -27,8 +27,7 @@ import java.util.logging.Logger;
  * Epple
  * <info@eppleton.de>
  */
-public class Bck2BrwsrTimerEnvironment implements GameTimerEnvironment<Bck2BrwsrTimerEnvironment.BBTimer> 
-{
+public class Bck2BrwsrTimerEnvironment implements GameTimerEnvironment<Bck2BrwsrTimerEnvironment.BBTimer> {
 
     @Override
     public BBTimer create(final Handler handler) {
@@ -47,15 +46,22 @@ public class Bck2BrwsrTimerEnvironment implements GameTimerEnvironment<Bck2Brwsr
     }
 
     public static class BBTimer {
+
         private static Logger LOGGER = Logger.getLogger(BBTimer.class.getName());
         private final Handler handler;
         private Timer timer;
+        private boolean running;
 
         BBTimer(final Handler handler) {
             this.handler = handler;
         }
 
         private void start() {
+//            running = true;
+//            while (running) {
+//                
+//
+//            }
             timer = new Timer();
             timer.schedule(new TimerTask() {
 
@@ -70,10 +76,11 @@ public class Bck2BrwsrTimerEnvironment implements GameTimerEnvironment<Bck2Brwsr
                         }
                     });
                 }
-            },30);
+            },16);
         }
 
         private void stop() {
+//            running = false;
             timer.cancel();
             timer = null;
         }

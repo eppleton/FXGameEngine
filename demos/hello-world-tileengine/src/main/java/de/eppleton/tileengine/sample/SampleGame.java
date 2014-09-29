@@ -22,6 +22,7 @@
 package de.eppleton.tileengine.sample;
 
 import de.eppleton.canvas.html.HTML5Graphics;
+import de.eppleton.fx2d.DebugLayer;
 import de.eppleton.fx2d.Level;
 import de.eppleton.fx2d.action.DefaultMoveBehavior;
 
@@ -33,6 +34,7 @@ import de.eppleton.fx2d.tileengine.TileMapReader;
 import de.eppleton.tileengine.sample.sprites.SpriteHandler;
 import java.util.List;
 import java.util.logging.Logger;
+import net.java.html.canvas.Style.Color;
 import org.openide.util.lookup.ServiceProvider;
 
 /**
@@ -52,14 +54,12 @@ public class SampleGame extends Level {
             // create the world 
             // initialize the TileMapCanvas
            TileMap tileMap = TileMapReader.readMap(getGraphicsContext2D(), "/de/eppleton/tileengine/sample/resources/maps/sample.json");
-
-
             List<TileMapLayer> layers = tileMap.getLayers();
 
             for (TileMapLayer tileMapLayer : layers) {
                 this.addLayer(tileMapLayer);
             }      
-
+//            this.addLayer(new DebugLayer(new Color("#ffffff"), this));
             // add Handlers
             SpriteHandler spriteHandler = new SpriteHandler();
             List<ObjectGroup> objectGroups = tileMap.getObjectGroups();

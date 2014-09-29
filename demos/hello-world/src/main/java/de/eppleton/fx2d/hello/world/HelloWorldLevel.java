@@ -22,11 +22,13 @@
 package de.eppleton.fx2d.hello.world;
 
 import de.eppleton.canvas.html.HTML5Graphics;
+import de.eppleton.fx2d.DebugLayer;
 import de.eppleton.fx2d.Layer;
 import de.eppleton.fx2d.Level;
 import de.eppleton.fx2d.Sprite;
 import de.eppleton.fx2d.SpriteLayer;
 import net.java.html.canvas.GraphicsContext2D;
+import net.java.html.canvas.Style;
 import org.openide.util.lookup.ServiceProvider;
 
 /**
@@ -45,19 +47,19 @@ public class HelloWorldLevel extends Level {
     protected void initGame() {
         addLayer(new SpriteLayer());
 
-        final Sprite sprite = new Sprite(this, "Test", 100, 100, 42, 42);
-        sprite.setVelocityX(1);
-        addLayer(new Layer("") {
-            int i = 1;
-
-            @Override
-            public void draw(GraphicsContext2D graphicsContext, double x, double y, double width, double height) {
-                graphicsContext.setFillStyle(graphicsContext.getWebColor("#ffffff"));
-                getGraphicsContext2D().setFont("italic 40 Calibri");
-                getGraphicsContext2D().fillText("I=" + (i++), 100, 100);
-            }
-        });
-        addSprite(sprite);
-
+//        final Sprite sprite = new Sprite(this, "Test", 100, 100, 42, 42);
+//        sprite.setVelocityX(1);
+//        addLayer(new Layer("") {
+//            int i = 1;
+//
+//            @Override
+//            public void draw(GraphicsContext2D graphicsContext, double x, double y, double width, double height) {
+//                graphicsContext.setFillStyle(graphicsContext.getWebColor("#ffffff"));
+//                getGraphicsContext2D().setFont("italic 40 Calibri");
+//                getGraphicsContext2D().fillText("I=" + (i++), 100, 100);
+//            }
+//        });
+//        addSprite(sprite);
+        addLayer(new DebugLayer(new Style.Color("#0000ff"), this));
     }
 }

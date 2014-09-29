@@ -8,5 +8,11 @@
     </head>
     <body>
         <canvas tabindex="1" id="canvas" width="800" height="600" data-bind=" keyPress : onKeyDown" ></canvas>
+              <script type="text/javascript" src="bck2brwsr.js"></script>
+        <script>
+            var vm = bck2brwsr('hello-world-physics.js');
+            var c = vm.loadClass('de.eppleton.fx2d.dukescript.Main');
+            c.invoke('onPageLoad');
+        </script>
     </body>
 </html>

@@ -27,6 +27,7 @@ import de.eppleton.fx2d.event.KeyCode;
 import de.eppleton.fx2d.physics.PhysicsEngine;
 import de.eppleton.fx2d.physics.action.PhysicsActionFactory;
 import net.java.html.canvas.GraphicsContext2D;
+import net.java.html.canvas.Style;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.*;
 import org.openide.util.lookup.ServiceProvider;
@@ -58,7 +59,7 @@ public class Pong extends Level {
         
         // 
         this.addLayer(new de.eppleton.fx2d.physics.DebugLayer(physicsEngine));
-        
+        this.addLayer(new DebugLayer(new Style.Color("#ffffff"), this));
         
         this.addBehaviour(new Behavior() {
             @Override

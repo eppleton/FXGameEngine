@@ -49,7 +49,7 @@ public class SpaceInvaders extends Level {
     int[][] enemies;
 
     public SpaceInvaders( ) {
-        super(HTML5Graphics.getOrCreate("canvas"), 600, 800, 600, 800);
+        super(HTML5Graphics.getOrCreate("canvas"), 800, 800, 800, 800);
     }
 
     @Override
