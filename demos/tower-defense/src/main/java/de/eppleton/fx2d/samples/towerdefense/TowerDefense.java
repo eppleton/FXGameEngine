@@ -88,93 +88,93 @@ public class TowerDefense extends Level {
     
     @Override
     public void initGame() {
-        try {
+//        try {
             // read the Map
-            tileMap = TileMapReader.readMap(fileURL);
-            backgroundImage = tileMap.getTileSet("background").getTileImage();
-
-          
-            level = this;
-            // add all the layers
-            level.addLayer(new ImageLayer("background",backgroundImage));
-            System.out.println("tilemap orientation "+tileMap.getOrientation());
-            List<TileMapLayer> layers = tileMap.getLayers();
-            for (TileMapLayer tileMapLayer : layers) {
-                level.addLayer(tileMapLayer);
-                System.out.println("data "+tileMapLayer.getData().getEncoding());
-                System.out.println("Adding layer "+tileMapLayer.getName()+" "+tileMapLayer.getOpacity());
-            }
-            level.addLayer(new HUD());
-
-           
-
-            final Sprite button = new Sprite(level, "button", tileMap.getWidthInPixels() - 30, 20, 20, 20);
-            button.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent click) {
-                    startWave();
-                    button.die();
-                }
-            });
-            level.addSprite(button);
-
-            turretBaseLayer = (TileMapLayer) level.getLayer("turret-bases");
-            platformLayer = (TileMapLayer) level.getLayer("terrain");
-            // initialize the Palette
-            TileSet bullets = tileMap.getTileSet("pellet");
-            final TileSetAnimation shoot = new TileSetAnimation(bullets, new int[]{0}, .00000001f);
-            final TileSet cannons = tileMap.getTileSet("turret-cannons");
-            TileSet bases = tileMap.getTileSet("turret-bases");
-            palette = new Palette(bases, cannons);
-
-            // add Handler for placing Turrets
-            level.addEventHandler(MouseEvent.MOUSE_PRESSED, new TurretHandler(cannons, shoot));
-
-
-            // read spawnpoints, target, turret-properties,...
-            readObjectProperties();
-            calculateAttackPath();
-
-            // make the Sprites move according to their speed
-            addBehaviour(new DefaultMoveBehavior());
-
-            
-        } catch (Exception ex) {
-            Logger.getLogger(TowerDefense.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+//            tileMap = TileMapReader.readMap(fileURL);
+//            backgroundImage = tileMap.getTileSet("background").getTileImage();
+//
+//          
+//            level = this;
+//            // add all the layers
+//            level.addLayer(new ImageLayer("background",backgroundImage));
+//            System.out.println("tilemap orientation "+tileMap.getOrientation());
+//            List<TileMapLayer> layers = tileMap.getLayers();
+//            for (TileMapLayer tileMapLayer : layers) {
+//                level.addLayer(tileMapLayer);
+//                System.out.println("data "+tileMapLayer.getData().getEncoding());
+//                System.out.println("Adding layer "+tileMapLayer.getName()+" "+tileMapLayer.getOpacity());
+//            }
+//            level.addLayer(new HUD());
+//
+//           
+//
+//            final Sprite button = new Sprite(level, "button", tileMap.getWidthInPixels() - 30, 20, 20, 20);
+//            button.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//                @Override
+//                public void handle(MouseEvent click) {
+//                    startWave();
+//                    button.die();
+//                }
+//            });
+//            level.addSprite(button);
+//
+//            turretBaseLayer = (TileMapLayer) level.getLayer("turret-bases");
+//            platformLayer = (TileMapLayer) level.getLayer("terrain");
+//            // initialize the Palette
+//            TileSet bullets = tileMap.getTileSet("pellet");
+//            final TileSetAnimation shoot = new TileSetAnimation(bullets, new int[]{0}, .00000001f);
+//            final TileSet cannons = tileMap.getTileSet("turret-cannons");
+//            TileSet bases = tileMap.getTileSet("turret-bases");
+//            palette = new Palette(bases, cannons);
+//
+//            // add Handler for placing Turrets
+//            level.addEventHandler(MouseEvent.MOUSE_PRESSED, new TurretHandler(cannons, shoot));
+//
+//
+//            // read spawnpoints, target, turret-properties,...
+//            readObjectProperties();
+//            calculateAttackPath();
+//
+//            // make the Sprites move according to their speed
+//            addBehaviour(new DefaultMoveBehavior());
+//
+//            
+//        } catch (Exception ex) {
+//            Logger.getLogger(TowerDefense.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
     }
 
 
 
-    private void readObjectProperties() throws NumberFormatException, TileMapException {
-        final TileSet enemy1 = tileMap.getTileSet("enemy1");
-        final TileSetAnimation tileSetAnimation = new TileSetAnimation(enemy1, new int[]{0, 1, 2, 3, 4, 5}, 10f);
-            final StackedRenderer stacked = new StackedRenderer(tileSetAnimation, new HealthBarRenderer());
-            // handle the Objects
-        List<ObjectGroup> objectGroups = tileMap.getObjectGroups();
-        for (ObjectGroup objectGroup : objectGroups) {
-            for (final TObject tObject : objectGroup.getObjectLIst()) {
-                if (tObject.getName().equals("spawnpoint")) {
-                    Properties properties = tObject.getProperties();
-                    spawnpointTileX = tObject.getX() / tileMap.getTilewidth();
-                    spawnpointTileY = tObject.getY() / tileMap.getTilewidth();
-                    for (int i = 0; i < properties.size() / 2; i++) {
-                        long evaluationInterval = Long.parseLong(properties.getProperty("wave" + i + "."
-                                + "delay"));
-                        System.out.println("Spawn monsters every " + evaluationInterval + " nanos");
-
-                        waves.add(new Wave(stacked, evaluationInterval, properties.getProperty("wave" + i + "."
-                                + "monsters").split(",")));
-                    }
-
-                }
-                if (tObject.getName().equals("target")) {
-                    targetX = tObject.getX() / tileMap.getTilewidth();
-                    targetY = tObject.getY() / tileMap.getTileheight();
-                }
-            }
-        }
-    }
+//    private void readObjectProperties() throws NumberFormatException, TileMapException {
+//        final TileSet enemy1 = tileMap.getTileSet("enemy1");
+//        final TileSetAnimation tileSetAnimation = new TileSetAnimation(enemy1, new int[]{0, 1, 2, 3, 4, 5}, 10f);
+//            final StackedRenderer stacked = new StackedRenderer(tileSetAnimation, new HealthBarRenderer());
+//            // handle the Objects
+//        List<ObjectGroup> objectGroups = tileMap.getObjectGroups();
+//        for (ObjectGroup objectGroup : objectGroups) {
+//            for (final TObject tObject : objectGroup.getObjectLIst()) {
+//                if (tObject.getName().equals("spawnpoint")) {
+//                    Properties properties = tObject.getProperties();
+//                    spawnpointTileX = tObject.getX() / tileMap.getTilewidth();
+//                    spawnpointTileY = tObject.getY() / tileMap.getTilewidth();
+//                    for (int i = 0; i < properties.size() / 2; i++) {
+//                        long evaluationInterval = Long.parseLong(properties.getProperty("wave" + i + "."
+//                                + "delay"));
+//                        System.out.println("Spawn monsters every " + evaluationInterval + " nanos");
+//
+//                        waves.add(new Wave(stacked, evaluationInterval, properties.getProperty("wave" + i + "."
+//                                + "monsters").split(",")));
+//                    }
+//
+//                }
+//                if (tObject.getName().equals("target")) {
+//                    targetX = tObject.getX() / tileMap.getTilewidth();
+//                    targetY = tObject.getY() / tileMap.getTileheight();
+//                }
+//            }
+//        }
+//    }
 
     private void startWave() {
         try {
@@ -291,10 +291,10 @@ public class TowerDefense extends Level {
             int tileGridX = (int) x / tileMap.getTilewidth();
             int tileGridY = (int) y / tileMap.getTileheight();
             int idx = (tileGridX + (tileGridY * tileMap.getWidth()));
-            if (platformLayer.getGid(idx) != 0 && turretBaseLayer.getGid(idx) == 0) {
-                turretBaseLayer.getData().setGid(idx, palette.getSelectedGid());
-                new CannonSprite(level, palette.getSelectedProperties(), new TileSetAnimation(cannons, new int[]{palette.getSelectedIndex()}, .1f), shoot, "cannon " + (cannoncount++), tileGridX * tileMap.getTilewidth(), tileGridY * tileMap.getTileheight(), 46, 46);
-            }
+//            if (platformLayer.getGid(idx) != 0 && turretBaseLayer.getGid(idx) == 0) {
+//                turretBaseLayer.getData().setGid(idx, palette.getSelectedGid());
+//                new CannonSprite(level, palette.getSelectedProperties(), new TileSetAnimation(cannons, new int[]{palette.getSelectedIndex()}, .1f), shoot, "cannon " + (cannoncount++), tileGridX * tileMap.getTilewidth(), tileGridY * tileMap.getTileheight(), 46, 46);
+//            }
         }
     }
 

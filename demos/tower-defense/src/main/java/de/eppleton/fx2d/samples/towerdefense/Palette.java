@@ -30,62 +30,62 @@ import net.java.html.canvas.GraphicsContext2D;
 
 final class Palette  {
 
-    private final TileSet cannons;
-    private final TileSet bases;
-    private final Color selected = Color.rgb(100, 100, 255, .2);
-    private int selectedIndex = 0;
+//    private final TileSet cannons;
+//    private final TileSet bases;
+//    private final Color selected = Color.rgb(100, 100, 255, .2);
+//    private int selectedIndex = 0;
 
     Palette(final TileSet bases, final TileSet cannons) {
-        this.cannons = cannons;
-        this.bases = bases;
-        ArrayList<Tile> tileList = bases.getTileList();
-        for (Tile tile : tileList) {
-            System.out.println("tile "+tile.getId());
-        }
-        getChildren().clear();
-        ImageView turretBases = new ImageView();
-        turretBases.setImage(new Image(bases.getTileImage().getSrc()));
-        ImageView turretCannons = new ImageView();
-        turretCannons.setImage(new Image(cannons.getTileImage().getSrc()));
-        getChildren().addAll(turretBases, turretCannons);
-
-        canvas = new Canvas(cannons.getTileImage().getWidth(), cannons.getTileImage().getHeight());
-        getChildren().add(canvas);
-        canvas.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent t) {
-                double x = t.getX();
-                double y = t.getY();
-                selectedIndex = (int) ((int) x / cannons.getTilewidth() + (((int) y / cannons.getTileheight()) * cannons.getNumColumns()));
-                updateCanvas();
-            }
-        });
-        updateCanvas();
+//        this.cannons = cannons;
+//        this.bases = bases;
+//        ArrayList<Tile> tileList = bases.getTileList();
+//        for (Tile tile : tileList) {
+//            System.out.println("tile "+tile.getId());
+//        }
+//        getChildren().clear();
+//        ImageView turretBases = new ImageView();
+//        turretBases.setImage(new Image(bases.getTileImage().getSrc()));
+//        ImageView turretCannons = new ImageView();
+//        turretCannons.setImage(new Image(cannons.getTileImage().getSrc()));
+//        getChildren().addAll(turretBases, turretCannons);
+//
+//        canvas = new Canvas(cannons.getTileImage().getWidth(), cannons.getTileImage().getHeight());
+//        getChildren().add(canvas);
+//        canvas.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle(MouseEvent t) {
+//                double x = t.getX();
+//                double y = t.getY();
+//                selectedIndex = (int) ((int) x / cannons.getTilewidth() + (((int) y / cannons.getTileheight()) * cannons.getNumColumns()));
+//                updateCanvas();
+//            }
+//        });
+//        updateCanvas();
     }
 
-    public Properties getSelectedProperties(){
-        return bases.getTileList().get(selectedIndex).getProperties();
-    }
-    
-    public int getSelectedGid() {
-        if (bases == null) {
-            return -1;
-        }
-        return bases.getFirstgid() + selectedIndex;
-    }
-
-    public int getSelectedIndex() {
-        return selectedIndex;
-    }
+//    public Properties getSelectedProperties(){
+//        return bases.getTileList().get(selectedIndex).getProperties();
+//    }
+//    
+//    public int getSelectedGid() {
+//        if (bases == null) {
+//            return -1;
+//        }
+//        return bases.getFirstgid() + selectedIndex;
+//    }
+//
+//    public int getSelectedIndex() {
+//        return selectedIndex;
+//    }
 
     public void updateCanvas() {
-        GraphicsContext2D graphicsContext2D = canvas.getGraphicsContext2D2D();
-        graphicsContext2D.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        if (selectedIndex >= 0) {
-            graphicsContext2D.setFill(selected);
-            int x = selectedIndex % cannons.getNumColumns();
-            int y = selectedIndex / cannons.getNumColumns();
-            graphicsContext2D.fillRect(x * cannons.getTilewidth(), y * cannons.getTileheight(), cannons.getTilewidth(), cannons.getTileheight());
-        }
+//        GraphicsContext2D graphicsContext2D = canvas.getGraphicsContext2D2D();
+//        graphicsContext2D.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+//        if (selectedIndex >= 0) {
+//            graphicsContext2D.setFill(selected);
+//            int x = selectedIndex % cannons.getNumColumns();
+//            int y = selectedIndex / cannons.getNumColumns();
+//            graphicsContext2D.fillRect(x * cannons.getTilewidth(), y * cannons.getTileheight(), cannons.getTilewidth(), cannons.getTileheight());
+//        }
     }
 }
