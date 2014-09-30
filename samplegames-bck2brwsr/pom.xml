@@ -3,7 +3,7 @@
     <parent>    
         <groupId>de.eppleton.fx2d</groupId>
         <artifactId>fxgameengine</artifactId>
-        <version>0.7-SNAPSHOT</version>
+        <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -71,7 +71,7 @@
         <dependency>
             <artifactId>net.java.html.sound</artifactId>
             <groupId>org.netbeans.html</groupId>
-            <version>0.7.5</version>
+            <version>${net.java.html.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -86,7 +86,7 @@
         <dependency>
             <groupId>org.netbeans.html</groupId>
             <artifactId>net.java.html.boot</artifactId>
-            <version>1.0</version>
+            <version>${net.java.html.version}</version>
         </dependency>
        
         <dependency>
