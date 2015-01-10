@@ -105,10 +105,10 @@ public class Hero extends Sprite {
         DOWN = new State(new TileSetAnimation(heroSet, new int[]{32}, 10f), "down");
         RIGHT = new State(new TileSetAnimation(heroSet, new int[]{48}, 10f), "right");
         
-        moveUp = new MoveAction(new TileSetAnimation(heroSet, new int[]{1, 2, 3, 4, 5, 6, 7, 8}, 10f), "move up", 0, -2, UP);
-        moveLeft = new MoveAction(new TileSetAnimation(heroSet, new int[]{17, 18, 19, 20, 21, 22, 23, 24}, 10f), "move left", -2, 0, LEFT);
-        moveDown = new MoveAction(new TileSetAnimation(heroSet, new int[]{33, 34, 35, 36, 37, 38, 39, 40}, 10f), "move down", 0, 2, DOWN);
-        moveRight = new MoveAction(new TileSetAnimation(heroSet, new int[]{49, 50, 51, 52, 53, 54, 55, 56}, 10f), "move right", 2, 0, RIGHT);
+        moveUp = new MoveAction(new TileSetAnimation(heroSet, new int[]{1, 2, 3, 4, 5, 6, 7, 8}, 10f), "move up", 0, -1, UP);
+        moveLeft = new MoveAction(new TileSetAnimation(heroSet, new int[]{17, 18, 19, 20, 21, 22, 23, 24}, 10f), "move left", -1, 0, LEFT);
+        moveDown = new MoveAction(new TileSetAnimation(heroSet, new int[]{33, 34, 35, 36, 37, 38, 39, 40}, 10f), "move down", 0, 1, DOWN);
+        moveRight = new MoveAction(new TileSetAnimation(heroSet, new int[]{49, 50, 51, 52, 53, 54, 55, 56}, 10f), "move right", 1, 0, RIGHT);
         
         
         

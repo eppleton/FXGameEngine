@@ -2,8 +2,6 @@ package de.eppleton.fx2d.dukescript;
 
 import de.eppleton.fx2d.timer.Handler;
 import de.eppleton.fx2d.timer.spi.GameTimerEnvironment;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.logging.Logger;
 
 /**
@@ -57,26 +55,16 @@ public class Bck2BrwsrTimerEnvironment implements GameTimerEnvironment<Bck2Brwsr
         }
 
         private void start() {
-//            running = true;
-//            while (running) {
-//                
-//
-//            }
-            timer = new Timer();
-            timer.schedule(new TimerTask() {
+
+            timer = new Timer() {
 
                 @Override
                 public void run() {
-                    Main.brwsrctx.execute(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            handler.pulse(System.nanoTime());
-                            start();
-                        }
-                    });
+                    handler.pulse(System.nanoTime());
+                    timer.schedule(16);
                 }
-            },16);
+            };
+            timer.schedule(16);
         }
 
         private void stop() {

@@ -61,25 +61,25 @@ public class Monster extends Sprite {
                 if (Math.abs(dx) < Math.abs(dy)) {
                     if (dy > 0) {
                         sprite.setVelocityX(0);
-                        sprite.setVelocityY(1.5);
+                        sprite.setVelocityY(.8);
                         sprite.setAnimation(monsterDown);
                         //                                            sprite.setDirection(AnimatedSprite.Direction.SOUTH);
                     } else {
                         sprite.setVelocityX(0);
-                        sprite.setVelocityY(-1.5);
+                        sprite.setVelocityY(-.8);
                         sprite.setAnimation(monsterUp);
 
                         //                                            sprite.setDirection(AnimatedSprite.Direction.NORTH);
                     }
                 } else {
                     if (dx > 0) {
-                        sprite.setVelocityX(1.5);
+                        sprite.setVelocityX(.8);
                         sprite.setVelocityY(0);
                         sprite.setAnimation(monsterRight);
 
                         //                                            sprite.setDirection(AnimatedSprite.Direction.EAST);
                     } else {
-                        sprite.setVelocityX(-1.5);
+                        sprite.setVelocityX(-.8);
                         sprite.setVelocityY(0);
                         sprite.setAnimation(monsterLeft);
 

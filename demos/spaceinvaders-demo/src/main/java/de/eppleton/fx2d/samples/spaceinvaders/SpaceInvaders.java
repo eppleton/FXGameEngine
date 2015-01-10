@@ -18,7 +18,8 @@
  * For alternative licensing or use in closed source projects contact Anton
  * Epple
  * <info@eppleton.de>
- */package de.eppleton.fx2d.samples.spaceinvaders;
+ */
+package de.eppleton.fx2d.samples.spaceinvaders;
 
 import de.eppleton.canvas.html.HTML5Graphics;
 import de.eppleton.fx2d.beans.DoubleProperty;
