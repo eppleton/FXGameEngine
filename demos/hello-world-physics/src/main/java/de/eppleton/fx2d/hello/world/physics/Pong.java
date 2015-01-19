@@ -64,7 +64,7 @@ public class Pong extends Level {
 
         // 
 //        this.addLayer(new de.eppleton.fx2d.physics.DebugLayer(physicsEngine));
-        this.addLayer(new DebugLayer(new Style.Color("#000000"), this));
+//        this.addLayer(new DebugLayer(new Style.Color("#ffffff"), this));
         this.addBehaviour(new Behavior() {
             @Override
             public boolean perform(Level canvas, long nanos) {
@@ -86,20 +86,20 @@ public class Pong extends Level {
                 return true;
             }
         });
-//
-//        // Our Hero
+
+        // Our Hero
         Sprite bat = new Sprite(this, "Player", 10, 262, 30, 75);
         physicsEngine.createDefaultBody(bat, BodyType.KINEMATIC, 1, .4f, 0);
-//        // movement
+        // movement
         bat.addAction(KeyCode.S, PhysicsActionFactory.createLinearMoveAction(null, "up", new Vec2(0, 4), new Vec2(0, 0)));
         bat.addAction(KeyCode.X, PhysicsActionFactory.createLinearMoveAction(null, "down", new Vec2(0, -4), new Vec2(0, 0)));
-//
-//        // the enemy
+
+        // the enemy
         Sprite computer = new Sprite(this, "Computer", 750, 262, 30, 75);
         this.addSprite(computer);
         physicsEngine.createDefaultBody(computer, BodyType.KINEMATIC, 1, .3f, 0);
 
-//        // Enemy "AI" 
+        // Enemy "AI" 
         computer.addBehaviour(new SpriteBehavior() {
             @Override
             public boolean perform(Sprite sprite) {
@@ -113,8 +113,8 @@ public class Pong extends Level {
                 return true;
             }
         });
-//
-//        // let the game begin
+
+        // let the game begin
         addBall(this, physicsEngine, 400, 300);
     }
 

@@ -50,7 +50,7 @@ public class SpaceInvaders extends Level {
     int[][] enemies;
 
     public SpaceInvaders( ) {
-        super(HTML5Graphics.getOrCreate("canvas"), 800, 800, 800, 800);
+        super( 800, 800, 800, 800);
     }
 
     @Override
@@ -63,8 +63,8 @@ public class SpaceInvaders extends Level {
             {10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10},
             {10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10}
         };
-        try {
-            TileMap map = TileMapReader.readMap(getGraphicsContext2D(),"/assets/graphics/spaceinvaders.json");
+//        try {
+            TileMap map = null;//TileMapReader.readMap(getGraphicsContext2D(),"/assets/graphics/spaceinvaders.json");
             TileSet invaders = map.getTileSet("invaders1");//TileMapReader.readSet("/assets/graphics/invaders1.tsx");
             TileSet playerTiles = map.getTileSet("player");//TileMapReader.readSet("/assets/graphics/player.tsx");
             
@@ -90,9 +90,9 @@ public class SpaceInvaders extends Level {
             player.addAction(KeyCode.A, ActionFactory.createMoveAction(playerAnimation, "left", -4, 0, 0, 0));
             player.addAction(KeyCode.D, ActionFactory.createMoveAction(playerAnimation, "right", 4, 0, 0, 0));
             player.addAction(KeyCode.S, new ShootAction(playerAnimation, "fire", new BulletProvider(), new HitHandler(), shootSound));
-        } catch (TileMapException ex) {
-            Logger.getLogger(SpaceInvaders.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+//        } catch (TileMapException ex) {
+//            Logger.getLogger(SpaceInvaders.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
         canvas.addLayer(new Background("background"));
         canvas.addBehaviour(new MoveInvadersBehavior());
         canvas.addBehaviour(new DefaultMoveBehavior());
@@ -177,7 +177,7 @@ public class SpaceInvaders extends Level {
         }
 
         @Override
-        public void draw(GraphicsContext2D graphicsContext, double x, double y, double width, double height) {
+        public void draw(double x, double y, double width, double height) {
             graphicsContext.setFillStyle(new Style.Color("#000000"));
             graphicsContext.fillRect(0, 0, width, height);
             graphicsContext.setFillStyle(new Style.Color("#ffffff"));
