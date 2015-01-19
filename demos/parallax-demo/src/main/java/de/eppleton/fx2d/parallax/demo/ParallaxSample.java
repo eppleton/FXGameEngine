@@ -42,7 +42,7 @@ import org.openide.util.lookup.ServiceProvider;
 public class ParallaxSample extends Level {
 
     public ParallaxSample() {
-        super(HTML5Graphics.getOrCreate("canvas"), 600, 800, 600, 800);
+        super(600, 800, 600, 800);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class ParallaxSample extends Level {
         }
 
         @Override
-        public void draw(GraphicsContext2D graphicsContext, double x, double y, double width, double height) {
+        public void draw( double x, double y, double width, double height) {
             Style pattern = new Style.Pattern(image, "repeat-x");
 //            ImagePattern pattern = new ImagePattern(image, x, y, image.getWidth(), image.getHeight(), false);
             graphicsContext.setFillStyle(pattern);
