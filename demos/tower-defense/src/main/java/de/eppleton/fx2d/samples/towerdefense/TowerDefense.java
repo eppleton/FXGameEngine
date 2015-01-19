@@ -80,8 +80,8 @@ public class TowerDefense extends Level {
     private int maxHits = 2;
     private boolean levelLost;
 
-    public TowerDefense(GraphicsContext2D graphicsContext, double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
-        super(graphicsContext, playfieldWidth, playfieldHeight, viewPortWidth, viewPortHeight);
+    public TowerDefense( double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
+        super( playfieldWidth, playfieldHeight, viewPortWidth, viewPortHeight);
     }
 
     
@@ -262,7 +262,7 @@ public class TowerDefense extends Level {
         
         
         @Override
-        public void draw(GraphicsContext2D graphicsContext, double x, double y, double width, double height) {
+        public void draw(double x, double y, double width, double height) {
             graphicsContext.setFillStyle(new Color("#ff0000"));
             graphicsContext.setFont("Bold 24 OricNeo");
             graphicsContext.fillText("Score: " + score, 10, 28);

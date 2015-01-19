@@ -81,7 +81,7 @@ public class PhysicsEngine extends Behavior {
     @Override
     public boolean perform(Level canvas, long l) {
         // timestep clamping
-        float dt = (float) Math.min(((double) (l - lastPulse)) / 1000000000, 1.0 / 15.0);
+        float dt = (float) Math.min(((double) (l - lastPulse)) / 1000, 1.0 / 15.0);
         world.step(dt, 8, 2);
         lastPulse = l;
         updateSprites();

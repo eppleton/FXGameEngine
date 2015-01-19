@@ -3,6 +3,8 @@ package de.eppleton.fx2d.dukescript;
 import de.eppleton.fx2d.timer.Handler;
 import de.eppleton.fx2d.timer.spi.GameTimerEnvironment;
 import java.util.logging.Logger;
+import net.java.html.js.JavaScriptBody;
+import net.java.html.js.JavaScriptResource;
 
 /**
  * This file is part of FXGameEngine A Game Engine written in JavaFX Copyright
@@ -43,6 +45,7 @@ public class Bck2BrwsrTimerEnvironment implements GameTimerEnvironment<Bck2Brwsr
         timer.stop();
     }
 
+    @JavaScriptResource(value = "GameLoop.js")
     public static class BBTimer {
 
         private static Logger LOGGER = Logger.getLogger(BBTimer.class.getName());
@@ -55,23 +58,27 @@ public class Bck2BrwsrTimerEnvironment implements GameTimerEnvironment<Bck2Brwsr
         }
 
         private void start() {
-
-            timer = new Timer() {
-
-                @Override
-                public void run() {
-                    handler.pulse(System.nanoTime());
-                    timer.schedule(16);
-                }
-            };
-            timer.schedule(16);
+            startAnimation(handler);
         }
 
         private void stop() {
-//            running = false;
-            timer.cancel();
-            timer = null;
+
         }
+
+        
+        
+        
+        
+        @JavaScriptBody(args = {"handl"}, javacall = true,
+                body = "Game_Singleton.prototype.mainLoop = function () {\n"
+                + "    var date = new Date();\n"
+                        + "var time = date.getTime();"
+                + "    handl.@de.eppleton.fx2d.timer.Handler::pulse(J)(time);\n"
+                + "    requestAnimationFrame(Game.mainLoop);\n"
+                + "};"
+                        + "Game.start();")
+        public static native void startAnimation(Handler handl);
+
     }
 
 }

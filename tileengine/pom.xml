@@ -9,14 +9,28 @@
 
     <artifactId>tileengine</artifactId>
     <name>tileengine</name>
-    <packaging>jar</packaging>
+    <packaging>bundle</packaging>
 
     <properties>
         <slf4j.version>1.6.1</slf4j.version>
+        <publicPackages>
+            *</publicPackages>
     </properties>
 
     <build>
         <plugins>
+ 
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+
+                <configuration>
+                    <instructions>
+                        <Eclipse-BuddyPolicy>dependent</Eclipse-BuddyPolicy>
+                    </instructions>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -25,6 +39,18 @@
                     <source>1.6</source>
                     <target>1.6</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apidesign.bck2brwsr</groupId>
+                <artifactId>bck2brwsr-maven-plugin</artifactId>
+                <version>${bck2brwsr.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>library</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

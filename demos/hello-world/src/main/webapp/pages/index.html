@@ -3,19 +3,21 @@
     <head>
         <title></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+        <link rel="stylesheet" type="text/css" href="css/game.css"/>
     </head>
     <body>
-        <h1>Canvas Demo</h1>
-        <canvas id="canvas" width="600" height="600"  tabindex="1" onkeypress=""> </canvas>
+        <div id="game-canvas"> </div>
 
 
-                <!-- boot bck2brwsr -->
+        <!-- boot bck2brwsr -->
         <script type="text/javascript" src="bck2brwsr.js"></script>
         <script>
-            var vm = bck2brwsr('hello-world.js');
-            var c = vm.loadClass('de.eppleton.fx2d.dukescript.Main');
-            c.invoke('onPageLoad');
+            var vm = bck2brwsr(
+                    'hello-world.js');
+            var c = vm.loadClass(
+                    'de.eppleton.fx2d.dukescript.Main');
+            c.invoke(
+                    'onPageLoad');
         </script>
-            </body>
+    </body>
 </html>

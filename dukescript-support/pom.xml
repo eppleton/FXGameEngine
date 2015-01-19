@@ -2,10 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-    <artifactId>fxgameengine</artifactId>
-    <groupId>de.eppleton.fx2d</groupId>
-    <version>1.0-SNAPSHOT</version>
-  </parent>
+        <artifactId>fxgameengine</artifactId>
+        <groupId>de.eppleton.fx2d</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
 
     <artifactId>dukescript-support</artifactId>
     <packaging>bundle</packaging>
@@ -76,6 +76,18 @@
                     <source>1.6</source>
                     <target>1.6</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apidesign.bck2brwsr</groupId>
+                <artifactId>bck2brwsr-maven-plugin</artifactId>
+                <version>${bck2brwsr.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>library</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

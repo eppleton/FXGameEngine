@@ -3,16 +3,21 @@
     <head>
         <title></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <script type="text/javascript"></script>
-
+        <link rel="stylesheet" type="text/css" href="css/game.css"/>
     </head>
-    <body>
-        <canvas tabindex="1" id="canvas" width="800" height="600" data-bind=" keyPress : onKeyDown" ></canvas>
-              <script type="text/javascript" src="bck2brwsr.js"></script>
+    <body data-bind=" keyPress : onKeyDown">
+        <div id="game-canvas"> </div>
+
+
+        <!-- boot bck2brwsr -->
+        <script type="text/javascript" src="bck2brwsr.js"></script>
         <script>
-            var vm = bck2brwsr('hello-world-physics.js');
-            var c = vm.loadClass('de.eppleton.fx2d.dukescript.Main');
-            c.invoke('onPageLoad');
+            var vm = bck2brwsr(
+                    'hello-world-physics.js');
+            var c = vm.loadClass(
+                    'de.eppleton.fx2d.dukescript.Main');
+            c.invoke(
+                    'onPageLoad');
         </script>
     </body>
 </html>

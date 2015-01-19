@@ -2,10 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-    <artifactId>demos</artifactId>
-    <groupId>de.eppleton.fx2d</groupId>
-    <version>1.0-SNAPSHOT</version>
-  </parent>
+        <artifactId>demos</artifactId>
+        <groupId>de.eppleton.fx2d</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
 
     <groupId>de.eppleton.fx2d</groupId>
     <artifactId>hello-world</artifactId>
@@ -43,13 +43,10 @@
         <net.java.html.version>1.0</net.java.html.version>
         <netbeans.compile.on.save>none</netbeans.compile.on.save>
         <project.mainclass>de.eppleton.fx2d.dukescript.Main</project.mainclass>
-        <org.apidesign.canvas.version>1.0-SNAPSHOT</org.apidesign.canvas.version>
-                <bck2brwsr.version>0.10</bck2brwsr.version>
         <bck2brwsr.obfuscationlevel>FULL</bck2brwsr.obfuscationlevel>
-                        <nb.html.version>1.0</nb.html.version>
         <nb.pages>index.html</nb.pages>
         <nb.cp>true</nb.cp>
-            </properties>
+    </properties>
     <build>
         <plugins>
             <plugin>
@@ -82,8 +79,8 @@
                     <archive>
                         <manifest>
                             <mainClass>${project.mainclass}</mainClass>
-                                                        <addClasspath>${nb.cp}</addClasspath>
-                                                        <classpathPrefix>lib/</classpathPrefix>
+                            <addClasspath>${nb.cp}</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
                         </manifest>
                     </archive>
                 </configuration>
@@ -120,7 +117,7 @@
                     </execution>
                 </executions>                
             </plugin>      
-                        <plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>2.6</version>
@@ -146,7 +143,7 @@
                     </execution>
                 </executions>
             </plugin>
-                    </plugins>
+        </plugins>
     </build>
     <dependencies>
         <dependency>
@@ -178,6 +175,7 @@
             <groupId>org.apidesign.canvas</groupId>
             <artifactId>html5-canvas</artifactId>
             <version>${org.apidesign.canvas.version}</version>
+
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>
@@ -192,7 +190,7 @@
             <scope>test</scope>
             <type>jar</type>
         </dependency>
-                <dependency>
+        <dependency>
             <groupId>org.netbeans.html</groupId>
             <artifactId>nbrwsr</artifactId>
             <version>${nb.html.version}</version>
@@ -201,6 +199,10 @@
                 <exclusion>
                     <groupId>com.oracle</groupId>
                     <artifactId>javafx</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.netbeans.api</groupId>
+                    <artifactId>org-openide-util-lookup</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -236,7 +238,7 @@
                 </dependency>
             </dependencies>
         </profile>      
-                <profile>
+        <profile>
             <id>ibrwsr</id>
             <dependencies>
                 <dependency>
@@ -327,7 +329,7 @@
                 </plugins>
             </build>
         </profile>      
-                        <profile>
+        <profile>
             <id>dlvkbrwsr</id>
             <properties>
                 <platform.version>4.1.1.4</platform.version>
@@ -460,7 +462,7 @@
                 </plugins>
             </build>
         </profile>
-                        <profile>
+        <profile>
             <id>bck2brwsr</id>
             <activation>
                 <property>
@@ -556,13 +558,21 @@
                 </dependency>
                 <dependency>
                     <groupId>org.apidesign.bck2brwsr</groupId>
+                    <artifactId>emul</artifactId>
+                    <version>${bck2brwsr.version}</version>
+                    <classifier>bck2brwsr</classifier>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.apidesign.bck2brwsr</groupId>
                     <artifactId>ko-bck2brwsr</artifactId>
                     <version>${bck2brwsr.version}</version>
-                    <scope>runtime</scope>
+                    <classifier>bck2brwsr</classifier>
+                    <scope>provided</scope>
                 </dependency>
             </dependencies>
         </profile>
-                        <profile>
+        <profile>
             <id>nbrwsr</id>
             <dependencies>
                 <dependency>
@@ -656,5 +666,5 @@
                 </plugins>
             </build>
         </profile>      
-            </profiles>  
+    </profiles>  
 </project>

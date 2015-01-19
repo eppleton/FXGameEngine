@@ -8,7 +8,7 @@ import de.eppleton.fx2d.Level;
  * @author antonepple
  */
 public class Behavior {
-    protected long evaluationInterval = 100000000;
+    protected long evaluationInterval = 1000;
 
     /**
      *

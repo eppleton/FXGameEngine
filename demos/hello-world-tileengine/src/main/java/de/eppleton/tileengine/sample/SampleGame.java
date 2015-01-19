@@ -45,15 +45,15 @@ import org.openide.util.lookup.ServiceProvider;
 public class SampleGame extends Level {
 
     public SampleGame() {
-        super(HTML5Graphics.getOrCreate("canvas"), 1600,1600, 500, 500);
+        super( 1600,1600, 500, 500);
     }
     
     @Override
     public void initGame() {
-        try {        
+//        try {        
             // create the world 
             // initialize the TileMapCanvas
-           TileMap tileMap = TileMapReader.readMap(getGraphicsContext2D(), "/de/eppleton/tileengine/sample/resources/maps/sample.json");
+           TileMap tileMap = null;//= TileMapReader.readMap( "/de/eppleton/tileengine/sample/resources/maps/sample.json");
             List<TileMapLayer> layers = tileMap.getLayers();
 
             for (TileMapLayer tileMapLayer : layers) {
@@ -69,9 +69,9 @@ public class SampleGame extends Level {
             DefaultMoveBehavior defaultMoveBehavior = new DefaultMoveBehavior();
             defaultMoveBehavior.addMoveValidator(new SampleMoveValidator(tileMap));
             addBehaviour(defaultMoveBehavior);
-        } catch (TileMapException ex) {
-            Logger.getLogger(SampleGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+//        } catch (TileMapException ex) {
+//            Logger.getLogger(SampleGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
 
     }
 

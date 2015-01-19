@@ -21,13 +21,9 @@
  */
 package de.eppleton.fx2d.hello.world;
 
-import de.eppleton.canvas.html.HTML5Graphics;
 import de.eppleton.fx2d.DebugLayer;
-import de.eppleton.fx2d.Layer;
 import de.eppleton.fx2d.Level;
-import de.eppleton.fx2d.Sprite;
 import de.eppleton.fx2d.SpriteLayer;
-import net.java.html.canvas.GraphicsContext2D;
 import net.java.html.canvas.Style;
 import org.openide.util.lookup.ServiceProvider;
 
@@ -39,7 +35,7 @@ import org.openide.util.lookup.ServiceProvider;
 public class HelloWorldLevel extends Level {
 
     public HelloWorldLevel() {
-        super(HTML5Graphics.getOrCreate("canvas"), 600, 800, 600, 800);
+        super( 600, 800, 600, 800);
     }
 
 

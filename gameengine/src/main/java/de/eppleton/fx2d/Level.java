@@ -38,7 +38,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import net.java.html.canvas.GraphicsContext2D;
 
 /**
  *
@@ -71,14 +70,7 @@ public class Level extends Screen implements Handler {
     // TODO not Used
     private float alpha = 1;
 
-    public Level(GraphicsContext2D graphicsContext2D, double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
-        this.graphicsContext = graphicsContext2D;
-//        ServiceLoader<GraphicsEnvironment> ge = ServiceLoader.load(GraphicsEnvironment.class);
-//        for (GraphicsEnvironment graphicsEnvironment : ge) {
-//            this.graphicsContext = GraphicsUtils.getOrCreate(graphicsEnvironment,"canvas");
-//            break;
-//        }
-        this.graphicsContext.fillText("Hallo", 0,0);
+    public Level(double playfieldWidth, double playfieldHeight, double viewPortWidth, double viewPortHeight) {
         this.screenWidth = viewPortWidth;
         this.screenHeight = viewPortHeight;
         this.cameraMaxX = playfieldWidth - viewPortWidth;
@@ -153,7 +145,7 @@ public class Level extends Screen implements Handler {
      */
     public final void addBehaviour(final Behavior behaviour) {
         synchronized (behaviours) {
-            behaviours.put(behaviour, System.nanoTime());
+            behaviours.put(behaviour, System.currentTimeMillis());
         }
     }
 
@@ -202,10 +194,7 @@ public class Level extends Screen implements Handler {
         return sprites.get(ball);
     }
 
-    // @TODO make private? 
-    public GraphicsContext2D getGraphicsContext2D() {
-        return graphicsContext;
-    }
+
 
     /*
      * Game Loop 
@@ -239,14 +228,11 @@ public class Level extends Screen implements Handler {
     }
 
     private void render(long delta) {
-        // clear the background
-        graphicsContext.clearRect(0, 0, screenWidth, screenHeight);
-        graphicsContext.setFillStyle(graphicsContext.getWebColor("#000000"));
-        graphicsContext.fillRect(0, 0, screenWidth, screenHeight);
+   
         // draw each individual layer
         for (Layer layer : layers) {
             if (layer.isVisible()) {
-                layer.draw(graphicsContext, cameraX * layer.getParallaxFactor(), cameraY * layer.getParallaxFactor(), screenWidth, screenHeight);
+                layer.draw( cameraX * layer.getParallaxFactor(), cameraY * layer.getParallaxFactor(), screenWidth, screenHeight);
             }
             if (layer.getName().equals("sprites")) {
                 List<Sprite> values = new ArrayList<Sprite>(sprites.values());
@@ -256,11 +242,11 @@ public class Level extends Screen implements Handler {
                     double y = sprite.getY();
 
                     if (isOnScreen(sprite)) {
-                        graphicsContext.save();
-                        graphicsContext.translate(x - cameraX,
-                                y - cameraY);
-                        sprite.drawSprite(graphicsContext, alpha, delta);
-                        graphicsContext.restore();
+//                        graphicsContext.save();
+//                        graphicsContext.translate(x - cameraX,
+//                                y - cameraY);
+//                        sprite.drawSprite(graphicsContext, alpha, delta);
+//                        graphicsContext.restore();
                     }
 
                 }

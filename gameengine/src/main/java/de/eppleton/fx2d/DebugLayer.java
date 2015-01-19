@@ -43,9 +43,9 @@ public class DebugLayer extends Layer{
     }
 
     @Override
-    public void draw(GraphicsContext2D graphicsContext, double x, double y, double width, double height) {
+    public void draw( double x, double y, double width, double height) {
         
-        
+        graphicsContext.clearRect(0, 0, width, height);
 //        graphicsContext.setFont(Font.font("Monospaced", FontWeight.BOLD, 10));
         graphicsContext.setFillStyle(fill);
         graphicsContext.fillText("#pulses "+canvas.getPulses() , x, y+12);

@@ -456,7 +456,7 @@
                 </plugins>
             </build>
         </profile>
-                        <profile>
+            <profile>
             <id>bck2brwsr</id>
             <activation>
                 <property>
@@ -497,7 +497,7 @@
                             <directory>${project.build.directory}/${project.build.finalName}-bck2brwsr/public_html/</directory>
                             <startpage>index.html</startpage>
                             <classPathPrefix>lib</classPathPrefix>
-                            <mainJavaScript>${project.build.directory}/tower-defense.js</mainJavaScript>
+                            <mainJavaScript>${project.build.directory}/hello-world.js</mainJavaScript>
                             <exports>
                                 <export>${project.mainclass}</export>
                             </exports>
@@ -552,9 +552,17 @@
                 </dependency>
                 <dependency>
                     <groupId>org.apidesign.bck2brwsr</groupId>
+                    <artifactId>emul</artifactId>
+                    <version>${bck2brwsr.version}</version>
+                    <classifier>bck2brwsr</classifier>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.apidesign.bck2brwsr</groupId>
                     <artifactId>ko-bck2brwsr</artifactId>
                     <version>${bck2brwsr.version}</version>
-                    <scope>runtime</scope>
+                    <classifier>bck2brwsr</classifier>
+                    <scope>provided</scope>
                 </dependency>
             </dependencies>
         </profile>

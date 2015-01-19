@@ -55,7 +55,7 @@ public class TileMapLayer extends Layer {
     }
 
     @Override
-    public void draw(GraphicsContext2D graphicsContext, double cameraX, double cameraY, double screenWidth, double screenHeight) {
+    public void draw(double cameraX, double cameraY, double screenWidth, double screenHeight) {
         // x,y index of first tile to be shown
         int startX = (int) (cameraX / tileMap.getTilewidth());
         int startY = (int) (cameraY / tileMap.getTileheight());

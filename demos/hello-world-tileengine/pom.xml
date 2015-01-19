@@ -457,7 +457,7 @@
                 </plugins>
             </build>
         </profile>
-        <profile>
+     <profile>
             <id>bck2brwsr</id>
             <activation>
                 <property>
@@ -553,9 +553,17 @@
                 </dependency>
                 <dependency>
                     <groupId>org.apidesign.bck2brwsr</groupId>
+                    <artifactId>emul</artifactId>
+                    <version>${bck2brwsr.version}</version>
+                    <classifier>bck2brwsr</classifier>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.apidesign.bck2brwsr</groupId>
                     <artifactId>ko-bck2brwsr</artifactId>
                     <version>${bck2brwsr.version}</version>
-                    <scope>runtime</scope>
+                    <classifier>bck2brwsr</classifier>
+                    <scope>provided</scope>
                 </dependency>
             </dependencies>
         </profile>

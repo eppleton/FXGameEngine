@@ -40,11 +40,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <net.java.html.version>1.0</net.java.html.version>
         <netbeans.compile.on.save>none</netbeans.compile.on.save>
         <project.mainclass>de.eppleton.fx2d.dukescript.Main</project.mainclass>
-        <org.apidesign.canvas.version>1.0-SNAPSHOT</org.apidesign.canvas.version>
-        <bck2brwsr.version>0.10</bck2brwsr.version>
         <bck2brwsr.obfuscationlevel>FULL</bck2brwsr.obfuscationlevel>
         <nb.html.version>1.0</nb.html.version>
         <nb.pages>index.html</nb.pages>
@@ -215,12 +212,6 @@
             <artifactId>physicsengine</artifactId>
             <version>1.0-SNAPSHOT</version>
             <type>jar</type>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.jbox2d</groupId>
-                    <artifactId>jbox2d-library</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -232,11 +223,6 @@
             <artifactId>ko4j</artifactId>
             <version>1.0</version>
             <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>jbox2d-2.1.1.1-osgi</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
     <profiles>
@@ -478,7 +464,7 @@
                 </plugins>
             </build>
         </profile>
-        <profile>
+     <profile>
             <id>bck2brwsr</id>
             <activation>
                 <property>
@@ -574,9 +560,17 @@
                 </dependency>
                 <dependency>
                     <groupId>org.apidesign.bck2brwsr</groupId>
+                    <artifactId>emul</artifactId>
+                    <version>${bck2brwsr.version}</version>
+                    <classifier>bck2brwsr</classifier>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.apidesign.bck2brwsr</groupId>
                     <artifactId>ko-bck2brwsr</artifactId>
                     <version>${bck2brwsr.version}</version>
-                    <scope>runtime</scope>
+                    <classifier>bck2brwsr</classifier>
+                    <scope>provided</scope>
                 </dependency>
             </dependencies>
         </profile>

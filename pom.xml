@@ -15,7 +15,7 @@
     <properties>
         <org.apidesign.canvas.version>1.0-SNAPSHOT</org.apidesign.canvas.version>
         <net.java.html.version>1.0</net.java.html.version>
-        <bck2brwsr.version>0.11</bck2brwsr.version>
+        <bck2brwsr.version>0.13</bck2brwsr.version>
         <maven.compiler.source>1.6</maven.compiler.source>
         <maven.compiler.target>1.6</maven.compiler.target>
         <nb.html.version>1.0</nb.html.version>
@@ -34,7 +34,6 @@
     <modules>
         <module>gameengine</module>
         <module>physicsengine</module>
-        <module>samplegames-bck2brwsr</module>
         <module>tileengine</module>
         <module>demos</module>
         <module>dukescript-support</module>
@@ -54,7 +53,7 @@
             </plugin>
         </plugins>
     </build>
-     <repositories>
+    <repositories>
         <repository>
             <id>netbeans</id>
             <name>NetBeans</name>
@@ -66,11 +65,18 @@
             <url>https://maven.java.net/content/repositories/snapshots/</url>
         </repository>
  
-        <!--        <repository>
-            <id>org.apidesign.html</id>
+        <repository>
+            <id>org.apidesign</id>
             <name>Maven Repository for apidesign.org</name>
-            <url>https://maven.java.net/</url>
-        </repository>-->
+            <url>https://maven.java.net/content/repositories/orgapidesign-1028/</url>
+        </repository>
 
     </repositories>  
+    <pluginRepositories>    
+        <pluginRepository>
+            <id>org.apidesign.html</id>
+            <name>Maven Repository for apidesign.org</name>
+            <url>https://maven.java.net/content/repositories/orgapidesign-1028/</url>
+        </pluginRepository>
+    </pluginRepositories>
 </project>

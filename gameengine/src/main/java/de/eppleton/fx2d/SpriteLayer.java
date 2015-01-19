@@ -36,7 +36,7 @@ public class SpriteLayer extends Layer{
     }
 
     @Override
-    public void draw(GraphicsContext2D graphicsContext, double x, double y, double width, double height) {
+    public void draw(double x, double y, double width, double height) {
         // do nothing
     }
   

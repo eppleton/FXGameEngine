@@ -27,10 +27,10 @@ import java.util.List;
 /**
  * A base implementation of Game. Subclass this and add
  *
- * @ServiceProvider(servcie = Game.class) Annotation to register as game
+ * @ServiceProvider(service = Game.class) Annotation to register as game
  * @author antonepple
  */
-public abstract class AbstractGame implements Game {
+public class AbstractGame implements Game {
 
     private List<Level> levels = new ArrayList<Level>();
     private int index = 0;

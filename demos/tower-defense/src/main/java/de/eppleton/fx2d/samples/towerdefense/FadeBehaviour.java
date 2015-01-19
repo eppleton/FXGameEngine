@@ -67,7 +67,7 @@ class FadeBehaviour extends Behavior {
         }
 
         @Override
-        public void draw(GraphicsContext2D graphicsContext, double x, double y, double width, double height) {
+        public void draw(double x, double y, double width, double height) {
             graphicsContext.setFillStyle(new Color("rgba(0,0,0,"+getOpacity()+")"));
             graphicsContext.fillRect(x, y, width, height);
         }

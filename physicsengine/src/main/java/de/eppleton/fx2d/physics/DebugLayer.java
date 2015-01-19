@@ -46,7 +46,8 @@ public class DebugLayer extends Layer {
     }
 
     @Override
-    public void draw(GraphicsContext2D graphicsContext, double x, double y, double width, double height) {
+    public void draw(double x, double y, double width, double height) {
+        graphicsContext.clearRect(0,0, width, height);
         WorldCam camera = engine.getCamera();
         World world = engine.getWorld();
         Body nextBody = world.getBodyList();

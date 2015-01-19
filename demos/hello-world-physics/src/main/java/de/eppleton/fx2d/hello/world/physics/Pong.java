@@ -32,35 +32,39 @@ import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.*;
 import org.openide.util.lookup.ServiceProvider;
 
- @ServiceProvider(service = Level.class)
+@ServiceProvider(service = Level.class)
 public class Pong extends Level {
 
     int scorePlayer, scoreComputer = 0;
+    boolean updateScore = true;
 
-    public Pong(){
-        super(HTML5Graphics.getOrCreate("canvas"),800,600,800,600);
+    public Pong() {
+        super(800, 600, 800, 600);
     }
-    
-   
+
     @Override
     protected void initGame() {
         final PhysicsEngine physicsEngine = new PhysicsEngine(new Vec2(0, -4), new Vec2(0, 6), 100, this, true);
 
         this.addLayer(new Layer("dummy") {
+
             @Override
-            public void draw(GraphicsContext2D graphicsContext, double x, double y, double width, double height) {
-                graphicsContext.setFont("36 Verdana");
-                graphicsContext.fillText("" + scorePlayer + "   " + scoreComputer, 380, 60);
+            public void draw(double x, double y, double width, double height) {
+                if (updateScore) {
+                    graphicsContext.clearRect(0, 0, width, height);
+                    graphicsContext.setFont("36 Verdana");
+                    graphicsContext.fillText("" + scorePlayer + "   " + scoreComputer, 380, 60);
+                    updateScore = false;
+                }
             }
         });
         // convenience methods
         physicsEngine.createWall(0, 580, 800, 10);
         physicsEngine.createWall(0, 10, 800, 10);
-        
+
         // 
-        this.addLayer(new de.eppleton.fx2d.physics.DebugLayer(physicsEngine));
-        this.addLayer(new DebugLayer(new Style.Color("#ffffff"), this));
-        
+//        this.addLayer(new de.eppleton.fx2d.physics.DebugLayer(physicsEngine));
+        this.addLayer(new DebugLayer(new Style.Color("#000000"), this));
         this.addBehaviour(new Behavior() {
             @Override
             public boolean perform(Level canvas, long nanos) {
@@ -69,10 +73,12 @@ public class Pong extends Level {
                     Body ball = (Body) sprite1.getUserObject();
                     if (ball.getPosition().x <= 0) {
                         scoreComputer++;
+                        updateScore = true;
                         physicsEngine.remove(ball);
                         addBall(Pong.this, physicsEngine, 400, 300);
                     } else if (ball.getPosition().x >= 8) {
                         scorePlayer++;
+                        updateScore = true;
                         physicsEngine.remove(ball);
                         addBall(Pong.this, physicsEngine, 400, 300);
                     }
@@ -80,20 +86,20 @@ public class Pong extends Level {
                 return true;
             }
         });
-        
-        // Our Hero
-        Sprite bat = new Sprite(this, "Player", 10, 262, 30, 75);       
+//
+//        // Our Hero
+        Sprite bat = new Sprite(this, "Player", 10, 262, 30, 75);
         physicsEngine.createDefaultBody(bat, BodyType.KINEMATIC, 1, .4f, 0);
-        // movement
+//        // movement
         bat.addAction(KeyCode.S, PhysicsActionFactory.createLinearMoveAction(null, "up", new Vec2(0, 4), new Vec2(0, 0)));
         bat.addAction(KeyCode.X, PhysicsActionFactory.createLinearMoveAction(null, "down", new Vec2(0, -4), new Vec2(0, 0)));
-        
-        // the enemy
+//
+//        // the enemy
         Sprite computer = new Sprite(this, "Computer", 750, 262, 30, 75);
         this.addSprite(computer);
         physicsEngine.createDefaultBody(computer, BodyType.KINEMATIC, 1, .3f, 0);
-        
-        // Enemy "AI" 
+
+//        // Enemy "AI" 
         computer.addBehaviour(new SpriteBehavior() {
             @Override
             public boolean perform(Sprite sprite) {
@@ -107,13 +113,13 @@ public class Pong extends Level {
                 return true;
             }
         });
-        
-        // let the game begin
+//
+//        // let the game begin
         addBall(this, physicsEngine, 400, 300);
     }
 
     private void addBall(Level canvas, PhysicsEngine physicsEngine, int x, int y) {
-        Sprite ball = new Sprite(canvas, "ball", x, y, 20, 20);  
+        Sprite ball = new Sprite(canvas, "ball", x, y, 20, 20);
         Body ballBody = physicsEngine.createDefaultBody(ball, BodyType.DYNAMIC, 1, .4f, .2f, true);
         ballBody.setLinearVelocity(new Vec2(4, 1));
         canvas.addSprite(ball);
