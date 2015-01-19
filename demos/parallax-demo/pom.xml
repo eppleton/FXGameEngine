@@ -43,7 +43,6 @@
         <net.java.html.version>1.0</net.java.html.version>
         <netbeans.compile.on.save>none</netbeans.compile.on.save>
         <project.mainclass>de.eppleton.fx2d.dukescript.Main</project.mainclass>
-        <org.apidesign.canvas.version>1.0-SNAPSHOT</org.apidesign.canvas.version>
                 <bck2brwsr.version>0.10</bck2brwsr.version>
         <bck2brwsr.obfuscationlevel>FULL</bck2brwsr.obfuscationlevel>
                         <nb.html.version>1.0</nb.html.version>

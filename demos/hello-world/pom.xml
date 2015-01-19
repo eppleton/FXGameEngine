@@ -222,6 +222,12 @@
             <version>1.0</version>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-openide-util-lookup</artifactId>
+            <version>RELEASE80</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
     <profiles>
         <profile>

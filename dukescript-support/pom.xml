@@ -114,7 +114,7 @@
         <dependency>
             <groupId>org.apidesign.canvas</groupId>
             <artifactId>html5-canvas</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${org.apidesign.canvas.version}</version>
             <type>jar</type>
         </dependency>
     </dependencies>

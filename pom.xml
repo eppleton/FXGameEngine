@@ -13,7 +13,7 @@
         </license>
     </licenses>
     <properties>
-        <org.apidesign.canvas.version>1.0-SNAPSHOT</org.apidesign.canvas.version>
+        <org.apidesign.canvas.version>0.5.2</org.apidesign.canvas.version>
         <net.java.html.version>1.0</net.java.html.version>
         <bck2brwsr.version>0.13</bck2brwsr.version>
         <maven.compiler.source>1.6</maven.compiler.source>
