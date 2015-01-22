@@ -188,18 +188,6 @@
             <scope>test</scope>
             <type>jar</type>
         </dependency>
-                <dependency>
-            <groupId>org.netbeans.html</groupId>
-            <artifactId>nbrwsr</artifactId>
-            <version>${nb.html.version}</version>
-            <scope>provided</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.oracle</groupId>
-                    <artifactId>javafx</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
         <dependency>
             <groupId>de.eppleton.fx2d</groupId>
             <artifactId>gameengine</artifactId>
@@ -220,7 +208,7 @@
         <dependency>
             <groupId>org.netbeans.html</groupId>
             <artifactId>ko4j</artifactId>
-            <version>1.0</version>
+            <version>${net.java.html.version}</version>
             <scope>runtime</scope>
         </dependency>
     </dependencies>
@@ -575,14 +563,6 @@
         </profile>
                         <profile>
             <id>nbrwsr</id>
-            <dependencies>
-                <dependency>
-                    <groupId>org.netbeans.html</groupId>
-                    <artifactId>nbrwsr</artifactId>
-                    <version>${nb.html.version}</version>
-                    <scope>compile</scope>
-                </dependency>
-            </dependencies>
             <properties>
                 <nb.pages>**/*</nb.pages>
                 <nb.cp>false</nb.cp>

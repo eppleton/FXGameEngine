@@ -20,7 +20,7 @@
             <plugin>
                 <groupId>org.netbeans.html</groupId>
                 <artifactId>html4j-maven-plugin</artifactId>
-                <version>1.0</version>
+                <version>${net.java.html.version}</version>
                 <executions>
                     <execution>
                         <id>js-classes</id>

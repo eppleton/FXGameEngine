@@ -9,6 +9,7 @@ import net.java.html.boot.BrowserBuilder;
 import net.java.html.js.JavaScriptBody;
 import net.java.html.json.Function;
 import net.java.html.json.Model;
+import net.java.html.json.Models;
 @Model(className = "Data", properties={
 })
 public final class Main {
@@ -34,14 +35,14 @@ public final class Main {
     public static void onPageLoad() throws Exception {
         brwsrctx = BrwsrCtx.findDefault(Main.class);
         JQuery.init();
+        Data data = new Data();
+        Models.applyBindings(data);
         registerKeyEvents();
         ServiceLoader<Level> load = ServiceLoader.load(Level.class);
         for (Level level : load) {
             running = level;
             level.start();
         }
-        Data data = new Data();
-        data.applyBindings();
     }
     
  @JavaScriptBody(args = {}, body = "ko.bindingHandlers['keyPress'] = {\n"
