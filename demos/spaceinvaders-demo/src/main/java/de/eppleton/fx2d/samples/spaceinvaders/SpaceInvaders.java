@@ -21,7 +21,7 @@
  */
 package de.eppleton.fx2d.samples.spaceinvaders;
 
-import de.eppleton.canvas.html.HTML5Graphics;
+import com.dukescript.api.canvas.Style;
 import de.eppleton.fx2d.beans.DoubleProperty;
 import de.eppleton.fx2d.tileengine.action.TileSetAnimation;
 import de.eppleton.fx2d.collision.*;
@@ -31,9 +31,6 @@ import de.eppleton.fx2d.action.*;
 import de.eppleton.fx2d.event.KeyCode;
 import de.eppleton.fx2d.tileengine.*;
 import java.util.Collection;
-import java.util.logging.*;
-import net.java.html.canvas.GraphicsContext2D;
-import net.java.html.canvas.Style;
 import net.java.html.sound.AudioClip;
 import org.openide.util.lookup.ServiceProvider;
 @ServiceProvider(service = Level.class)

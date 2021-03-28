@@ -65,19 +65,15 @@ public class Bck2BrwsrTimerEnvironment implements GameTimerEnvironment<Bck2Brwsr
 
         }
 
-        
-        
-        
-        
-        @JavaScriptBody(args = {"handl"}, javacall = true,
+        @JavaScriptBody(args = {"handl"},  javacall = true,
                 body = "Game_Singleton.prototype.mainLoop = function () {\n"
                 + "    var date = new Date();\n"
-                        + "var time = date.getTime();"
+                + "    var time = date.getTime();"
                 + "    @de.eppleton.fx2d.dukescript.Bck2BrwsrTimerEnvironment::pulse(Lde/eppleton/fx2d/timer/Handler;J)(time);\n"
                 + "    requestAnimationFrame(Game.mainLoop);\n"
                 + "};"
-                        + "Game.start();")
-        public static native void startAnimation(Handler handl);
+               + "Game.start();")
+ public static native void startAnimation(Handler handl);
 
     }
     

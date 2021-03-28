@@ -2,10 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-    <artifactId>demos</artifactId>
-    <groupId>de.eppleton.fx2d</groupId>
-    <version>1.0-SNAPSHOT</version>
-  </parent>
+        <artifactId>demos</artifactId>
+        <groupId>de.eppleton.fx2d</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
 
     <groupId>de.eppleton.fx2d</groupId>
     <artifactId>tower-defense</artifactId>
@@ -46,7 +46,7 @@
         <nb.html.version>1.0</nb.html.version>
         <nb.pages>index.html</nb.pages>
         <nb.cp>true</nb.cp>
-            </properties>
+    </properties>
     <build>
         <plugins>
             <plugin>
@@ -79,8 +79,8 @@
                     <archive>
                         <manifest>
                             <mainClass>${project.mainclass}</mainClass>
-                                                        <addClasspath>${nb.cp}</addClasspath>
-                                                        <classpathPrefix>lib/</classpathPrefix>
+                            <addClasspath>${nb.cp}</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
                         </manifest>
                     </archive>
                 </configuration>
@@ -117,7 +117,7 @@
                     </execution>
                 </executions>                
             </plugin>      
-                        <plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>2.6</version>
@@ -143,7 +143,7 @@
                     </execution>
                 </executions>
             </plugin>
-                    </plugins>
+        </plugins>
     </build>
     <dependencies>
         <dependency>
@@ -167,14 +167,9 @@
             <version>${net.java.html.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apidesign.canvas</groupId>
+            <groupId>com.dukescript.canvas</groupId>
             <artifactId>canvas-api</artifactId>
-            <version>${org.apidesign.canvas.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apidesign.canvas</groupId>
-            <artifactId>html5-canvas</artifactId>
-            <version>${org.apidesign.canvas.version}</version>
+            <version>${dukescript.canvas.version}</version>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>
@@ -217,7 +212,7 @@
                 </dependency>
             </dependencies>
         </profile>      
-                <profile>
+        <profile>
             <id>ibrwsr</id>
             <dependencies>
                 <dependency>
@@ -308,7 +303,7 @@
                 </plugins>
             </build>
         </profile>      
-                        <profile>
+        <profile>
             <id>dlvkbrwsr</id>
             <properties>
                 <platform.version>4.1.1.4</platform.version>
@@ -441,7 +436,7 @@
                 </plugins>
             </build>
         </profile>
-            <profile>
+        <profile>
             <id>bck2brwsr</id>
             <activation>
                 <property>
@@ -551,7 +546,7 @@
                 </dependency>
             </dependencies>
         </profile>
-                        <profile>
+        <profile>
             <id>nbrwsr</id>
             <properties>
                 <nb.pages>**/*</nb.pages>
@@ -637,5 +632,5 @@
                 </plugins>
             </build>
         </profile>      
-            </profiles>  
+    </profiles>  
 </project>

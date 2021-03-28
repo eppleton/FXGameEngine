@@ -21,11 +21,11 @@
  */
 package de.eppleton.fx2d.tileengine.action;
 
+import com.dukescript.api.canvas.GraphicsContext2D;
 import de.eppleton.fx2d.Sprite;
 import de.eppleton.fx2d.Renderer;
 import de.eppleton.fx2d.tileengine.TileSet;
 import java.util.Arrays;
-import net.java.html.canvas.GraphicsContext2D;
 
 /**
  *

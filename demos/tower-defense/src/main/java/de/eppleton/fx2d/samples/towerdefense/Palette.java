@@ -21,12 +21,7 @@
  */
 package de.eppleton.fx2d.samples.towerdefense;
 
-import de.eppleton.fx2d.tileengine.Tile;
 import de.eppleton.fx2d.tileengine.TileSet;
-import java.util.ArrayList;
-import java.util.Properties;
-
-import net.java.html.canvas.GraphicsContext2D;
 
 final class Palette  {
 

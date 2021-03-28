@@ -27,7 +27,6 @@ import de.eppleton.fx2d.action.SpriteBehavior;
 import de.eppleton.fx2d.tileengine.TileSet;
 import java.util.Properties;
 import java.util.logging.Logger;
-import org.openide.util.Lookup;
 
 /**
  *

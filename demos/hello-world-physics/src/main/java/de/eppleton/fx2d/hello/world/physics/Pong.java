@@ -20,14 +20,11 @@
  * <info@eppleton.de>
  */package de.eppleton.fx2d.hello.world.physics;
 
-import de.eppleton.canvas.html.HTML5Graphics;
 import de.eppleton.fx2d.*;
 import de.eppleton.fx2d.action.*;
 import de.eppleton.fx2d.event.KeyCode;
 import de.eppleton.fx2d.physics.PhysicsEngine;
 import de.eppleton.fx2d.physics.action.PhysicsActionFactory;
-import net.java.html.canvas.GraphicsContext2D;
-import net.java.html.canvas.Style;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.*;
 import org.openide.util.lookup.ServiceProvider;

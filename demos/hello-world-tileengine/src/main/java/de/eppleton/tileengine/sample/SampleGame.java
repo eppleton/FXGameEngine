@@ -21,20 +21,15 @@
  */
 package de.eppleton.tileengine.sample;
 
-import de.eppleton.canvas.html.HTML5Graphics;
-import de.eppleton.fx2d.DebugLayer;
 import de.eppleton.fx2d.Level;
 import de.eppleton.fx2d.action.DefaultMoveBehavior;
 
 import de.eppleton.fx2d.tileengine.ObjectGroup;
 import de.eppleton.fx2d.tileengine.TileMap;
-import de.eppleton.fx2d.tileengine.TileMapException;
 import de.eppleton.fx2d.tileengine.TileMapLayer;
 import de.eppleton.fx2d.tileengine.TileMapReader;
 import de.eppleton.tileengine.sample.sprites.SpriteHandler;
 import java.util.List;
-import java.util.logging.Logger;
-import net.java.html.canvas.Style.Color;
 import org.openide.util.lookup.ServiceProvider;
 
 /**
@@ -53,7 +48,7 @@ public class SampleGame extends Level {
 //        try {        
             // create the world 
             // initialize the TileMapCanvas
-           TileMap tileMap = null;//= TileMapReader.readMap( "/de/eppleton/tileengine/sample/resources/maps/sample.json");
+           TileMap tileMap= TileMapReader.readMap( "/de/eppleton/tileengine/sample/resources/maps/sample.json");
             List<TileMapLayer> layers = tileMap.getLayers();
 
             for (TileMapLayer tileMapLayer : layers) {

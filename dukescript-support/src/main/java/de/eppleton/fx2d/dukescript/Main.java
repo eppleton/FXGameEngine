@@ -48,7 +48,7 @@ public final class Main {
  @JavaScriptBody(args = {}, body = "ko.bindingHandlers['keyPress'] = {\n"
             + "    init: function (element, valueAccessor, allBindingsAccessor, viewModel) {\n"
             + "        var allBindings = allBindingsAccessor();\n"
-            + "        $(element).keypress(function (event) {\n"
+            + "        element.onkeypressed(function (event) {\n"
             + "            allBindings['keyPress'].call(viewModel,null, event);\n"
             + "            return false;\n"
             + "        });\n"

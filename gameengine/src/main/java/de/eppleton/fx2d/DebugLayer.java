@@ -21,8 +21,10 @@
  */
 package de.eppleton.fx2d;
 
-import net.java.html.canvas.GraphicsContext2D;
-import net.java.html.canvas.Style.Color;
+import com.dukescript.api.canvas.Style.Color;
+
+
+
 
 /**
  *

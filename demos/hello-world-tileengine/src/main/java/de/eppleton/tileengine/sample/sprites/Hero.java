@@ -28,18 +28,14 @@ import de.eppleton.fx2d.Renderer;
 import de.eppleton.fx2d.action.SpriteAction;
 import de.eppleton.fx2d.action.State;
 import de.eppleton.fx2d.event.KeyCode;
-import de.eppleton.fx2d.tileengine.TileMapReader;
 import de.eppleton.fx2d.tileengine.TileSet;
 import de.eppleton.fx2d.tileengine.action.TileSetAnimation;
-import de.eppleton.tileengine.sample.SampleGame;
 import de.eppleton.tileengine.sample.sprites.actions.MoveAction;
 import de.eppleton.tileengine.sample.sprites.actions.StateAnimation;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.logging.Logger;
-import net.java.html.canvas.Image;
 
 /**
  *

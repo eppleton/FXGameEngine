@@ -21,10 +21,10 @@
  */
 package de.eppleton.fx2d.tileengine;
 
+import com.dukescript.api.canvas.GraphicsContext2D;
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
-import net.java.html.canvas.GraphicsContext2D;
 
 /**
  *

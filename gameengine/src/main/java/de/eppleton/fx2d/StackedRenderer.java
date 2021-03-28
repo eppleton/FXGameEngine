@@ -21,9 +21,9 @@
  */
 package de.eppleton.fx2d;
 
+import com.dukescript.api.canvas.GraphicsContext2D;
 import java.util.ArrayList;
 import java.util.List;
-import net.java.html.canvas.GraphicsContext2D;
 
 /**
  * A Renderer that allows you to stack renderers on top of each others. 

@@ -21,10 +21,11 @@
  */
 package de.eppleton.fx2d;
 
+import com.dukescript.api.canvas.GraphicsContext2D;
+import com.dukescript.spi.canvas.GraphicsEnvironment;
+import com.dukescript.spi.canvas.GraphicsUtils;
 import java.util.ServiceLoader;
-import net.java.html.canvas.GraphicsContext2D;
-import net.java.html.canvas.spi.GraphicsEnvironment;
-import net.java.html.canvas.spi.GraphicsUtils;
+
 import net.java.html.js.JavaScriptBody;
 
 /**
@@ -47,9 +48,8 @@ public abstract class Layer {
     public Layer(String name) {
         this.name = name;
         createCanvas(name);
-        ServiceLoader<GraphicsEnvironment> loader = ServiceLoader.load(GraphicsEnvironment.class);
-        GraphicsEnvironment next = loader.iterator().next();
-        graphicsContext = GraphicsUtils.getOrCreate(next, name);
+        graphicsContext = GraphicsContext2D.getOrCreate(name);
+
     }
 
     public abstract void draw(double x, double y, double width, double height);

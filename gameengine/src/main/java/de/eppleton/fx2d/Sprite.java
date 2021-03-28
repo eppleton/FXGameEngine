@@ -20,6 +20,7 @@
  */
 package de.eppleton.fx2d;
 
+import com.dukescript.api.canvas.GraphicsContext2D;
 import de.eppleton.fx2d.beans.DoubleProperty;
 import de.eppleton.fx2d.action.SpriteBehavior;
 import de.eppleton.fx2d.action.SpriteAction;
@@ -28,12 +29,10 @@ import de.eppleton.fx2d.event.EventHandler;
 import de.eppleton.fx2d.event.KeyCode;
 import de.eppleton.fx2d.event.KeyEvent;
 import de.eppleton.fx2d.event.MouseEvent;
-import java.lang.invoke.MethodHandles.Lookup;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import net.java.html.canvas.GraphicsContext2D;
 //import org.openide.util.Lookup;
 //import org.openide.util.lookup.AbstractLookup;
 //import org.openide.util.lookup.InstanceContent;

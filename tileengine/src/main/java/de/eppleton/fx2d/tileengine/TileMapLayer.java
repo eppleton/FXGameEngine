@@ -24,7 +24,6 @@ package de.eppleton.fx2d.tileengine;
 import de.eppleton.fx2d.Layer;
 import java.util.logging.Logger;
 
-import net.java.html.canvas.GraphicsContext2D;
 
 /**
  *

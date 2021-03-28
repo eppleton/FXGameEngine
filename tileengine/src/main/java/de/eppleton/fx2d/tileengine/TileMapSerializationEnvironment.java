@@ -4,7 +4,7 @@
  */
 package de.eppleton.fx2d.tileengine;
 
-import net.java.html.canvas.GraphicsContext2D;
+import com.dukescript.api.canvas.GraphicsContext2D;
 
 /**
  *

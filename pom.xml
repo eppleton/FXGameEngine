@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.eppleton.fx2d</groupId>
     <artifactId>fxgameengine</artifactId>
@@ -13,12 +14,12 @@
         </license>
     </licenses>
     <properties>
-        <org.apidesign.canvas.version>1.0-SNAPSHOT</org.apidesign.canvas.version>
-        <net.java.html.version>1.0</net.java.html.version>
-        <bck2brwsr.version>1.0-SNAPSHOT</bck2brwsr.version>
+        <net.java.html.version>1.7.1</net.java.html.version>
+        <bck2brwsr.version>0.32</bck2brwsr.version>
         <maven.compiler.source>1.6</maven.compiler.source>
         <maven.compiler.target>1.6</maven.compiler.target>
         <nb.html.version>1.0</nb.html.version>
+        <dukescript.canvas.version>0.12</dukescript.canvas.version>
     </properties>
     <organization>
         <name>Eppleton IT Consulting</name>
@@ -37,7 +38,7 @@
         <module>tileengine</module>
         <module>demos</module>
         <module>dukescript-support</module>
-        <module>jbox2d-2.1.1.1-osgi</module>
+        <!--<module>jbox2d-2.1.1.1-osgi</module>-->
     </modules>
     <build>
         <plugins>

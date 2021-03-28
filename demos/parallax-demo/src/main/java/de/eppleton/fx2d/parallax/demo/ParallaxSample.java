@@ -21,7 +21,8 @@
  */
 package de.eppleton.fx2d.parallax.demo;
 
-import de.eppleton.canvas.html.HTML5Graphics;
+import com.dukescript.api.canvas.Image;
+import com.dukescript.api.canvas.Style;
 import de.eppleton.fx2d.Camera;
 import de.eppleton.fx2d.Level;
 import de.eppleton.fx2d.Layer;
@@ -29,10 +30,8 @@ import de.eppleton.fx2d.Sprite;
 import de.eppleton.fx2d.SpriteLayer;
 import de.eppleton.fx2d.action.ActionFactory;
 import de.eppleton.fx2d.event.KeyCode;
-import net.java.html.canvas.GraphicsContext2D;
-import net.java.html.canvas.Image;
-import net.java.html.canvas.Style;
 import org.openide.util.lookup.ServiceProvider;
+
 
 /**
  *

@@ -21,13 +21,12 @@
  */
 package de.eppleton.fx2d.samples.towerdefense;
 
+import com.dukescript.api.canvas.Style.Color;
 import de.eppleton.fx2d.Level;
 import de.eppleton.fx2d.Layer;
 import de.eppleton.fx2d.Sprite;
 import de.eppleton.fx2d.action.Behavior;
 import java.util.Collection;
-import net.java.html.canvas.GraphicsContext2D;
-import net.java.html.canvas.Style.Color;
 
 /**
  *

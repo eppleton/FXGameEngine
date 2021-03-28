@@ -21,8 +21,6 @@
  */
 package de.eppleton.fx2d;
 
-import net.java.html.canvas.GraphicsContext2D;
-
 
 
 /**

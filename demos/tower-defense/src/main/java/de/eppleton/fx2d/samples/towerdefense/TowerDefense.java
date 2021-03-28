@@ -21,24 +21,20 @@
  */
 package de.eppleton.fx2d.samples.towerdefense;
 
+import com.dukescript.api.canvas.Image;
+import com.dukescript.api.canvas.Style.Color;
 import de.eppleton.fx2d.Level;
-import de.eppleton.fx2d.ImageLayer;
 import de.eppleton.fx2d.beans.IntegerProperty;
 import de.eppleton.fx2d.Layer;
 
 import de.eppleton.fx2d.Sprite;
 import de.eppleton.fx2d.StackedRenderer;
 import de.eppleton.fx2d.action.Behavior;
-import de.eppleton.fx2d.action.DefaultMoveBehavior;
 import de.eppleton.fx2d.event.EventHandler;
 import de.eppleton.fx2d.event.MouseEvent;
-import de.eppleton.fx2d.tileengine.ObjectGroup;
-import de.eppleton.fx2d.tileengine.TObject;
 import de.eppleton.fx2d.tileengine.TileMap;
-import de.eppleton.fx2d.tileengine.TileMapException;
 import de.eppleton.fx2d.tileengine.TileMapLayer;
 import de.eppleton.fx2d.tileengine.TileMapSerializationEnvironmentJAXB;
-import de.eppleton.fx2d.tileengine.TileMapReader;
 import de.eppleton.fx2d.tileengine.TileSet;
 import de.eppleton.fx2d.tileengine.action.TileSetAnimation;
 import de.eppleton.fx2d.tileengine.algorithms.AStar;
@@ -51,9 +47,6 @@ import java.util.logging.Logger;
 import javax.xml.bind.JAXBException;
 
 
-import net.java.html.canvas.GraphicsContext2D;
-import net.java.html.canvas.Image;
-import net.java.html.canvas.Style.Color;
 
 /**
  *

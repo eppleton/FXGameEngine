@@ -167,15 +167,10 @@
             <artifactId>net.java.html.sound</artifactId>
             <version>${net.java.html.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.apidesign.canvas</groupId>
+         <dependency>
+            <groupId>com.dukescript.canvas</groupId>
             <artifactId>canvas-api</artifactId>
-            <version>${org.apidesign.canvas.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apidesign.canvas</groupId>
-            <artifactId>html5-canvas</artifactId>
-            <version>${org.apidesign.canvas.version}</version>
+            <version>${dukescript.canvas.version}</version>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>
@@ -206,6 +201,12 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>dukescript-support</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-openide-util-lookup</artifactId>
+            <version>RELEASE82</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
     <profiles>

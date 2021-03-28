@@ -1,5 +1,7 @@
 package com.eclipsesource.json;
 
+import com.dukescript.api.canvas.GraphicsContext2D;
+import com.dukescript.api.canvas.Image;
 import com.eclipsesource.json.JsonObject.Member;
 import de.eppleton.fx2d.tileengine.Data;
 import de.eppleton.fx2d.tileengine.ObjectGroup;
@@ -19,8 +21,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import net.java.html.canvas.GraphicsContext2D;
-import net.java.html.canvas.Image;
+
 
 /*
  * To change this template, choose Tools | Templates

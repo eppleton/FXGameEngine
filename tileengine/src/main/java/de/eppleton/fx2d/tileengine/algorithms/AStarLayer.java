@@ -1,3 +1,4 @@
+
 /**
  * This file is part of FXGameEngine 
  * A Game Engine written in JavaFX
@@ -21,10 +22,9 @@
  */
 package de.eppleton.fx2d.tileengine.algorithms;
 
+import com.dukescript.api.canvas.Style.Color;
 import de.eppleton.fx2d.Layer;
 import de.eppleton.fx2d.tileengine.TileMap;
-import net.java.html.canvas.GraphicsContext2D;
-import net.java.html.canvas.Style.Color;
 
 /**
  *

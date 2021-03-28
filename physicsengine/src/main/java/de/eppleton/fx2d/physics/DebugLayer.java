@@ -22,7 +22,6 @@
 package de.eppleton.fx2d.physics;
 
 import de.eppleton.fx2d.Layer;
-import net.java.html.canvas.GraphicsContext2D;
 import org.jbox2d.collision.shapes.CircleShape;
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Transform;
