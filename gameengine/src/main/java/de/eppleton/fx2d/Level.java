@@ -24,10 +24,10 @@ package de.eppleton.fx2d;
 import de.eppleton.fx2d.action.Behavior;
 import de.eppleton.fx2d.action.SpriteBehavior;
 import de.eppleton.fx2d.collision.Collision;
-import de.eppleton.fx2d.event.Event;
-import de.eppleton.fx2d.event.EventDispatcher;
-import de.eppleton.fx2d.event.EventHandler;
-import de.eppleton.fx2d.event.MouseEvent;
+import com.dukescript.api.events.Event;
+import com.dukescript.api.events.EventHandler;
+import com.dukescript.api.events.EventSource;
+import com.dukescript.api.events.MouseEvent;
 import de.eppleton.fx2d.timer.Handler;
 import de.eppleton.fx2d.timer.GamePulse;
 import java.util.ArrayList;
@@ -53,7 +53,7 @@ public class Level extends Screen implements Handler {
     private GamePulse timer;
     final double cameraMaxX;
     final double cameraMaxY;
-    private final EventDispatcher eventDispatcher = new EventDispatcher();
+    private final EventSource eventSource;
     Camera camera;
     // @TODO move to Camera
     private double cameraX;
@@ -77,6 +77,7 @@ public class Level extends Screen implements Handler {
         this.cameraMaxY = playfieldHeight - viewPortHeight;
         this.layers = new ArrayList<Layer>();
         this.sprites = new HashMap<String, Sprite>();
+        eventSource = EventSource.create(this, "game-canvas",true);
         addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -109,10 +110,6 @@ public class Level extends Screen implements Handler {
         timer.stop();
     }
 
-    public final void dispatchEvent(Event event) {
-        eventDispatcher.dispatchEvent(event);
-    }
-
     /*
      * Getters and Setters 
      */
@@ -129,11 +126,11 @@ public class Level extends Screen implements Handler {
     }
 
     public final <T extends Event> void addEventHandler(Event.Type<T> type, EventHandler<T> handler) {
-        eventDispatcher.addEventHandler(type, handler);
+        eventSource.addEventHandler(type, handler);
     }
 
     public final <T extends Event> void removeEventHandler(Event.Type<T> type, EventHandler<T> handler) {
-        eventDispatcher.removeEventHandler(type, handler);
+        eventSource.removeEventHandler(type, handler);
     }
 
     List<Behavior> addBehavior;

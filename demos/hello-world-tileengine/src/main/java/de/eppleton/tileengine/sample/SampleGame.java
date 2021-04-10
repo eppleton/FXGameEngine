@@ -21,15 +21,18 @@
  */
 package de.eppleton.tileengine.sample;
 
+import com.dukescript.api.canvas.GraphicsContext2D;
 import de.eppleton.fx2d.Level;
 import de.eppleton.fx2d.action.DefaultMoveBehavior;
 
 import de.eppleton.fx2d.tileengine.ObjectGroup;
 import de.eppleton.fx2d.tileengine.TileMap;
+import de.eppleton.fx2d.tileengine.TileMapException;
 import de.eppleton.fx2d.tileengine.TileMapLayer;
 import de.eppleton.fx2d.tileengine.TileMapReader;
 import de.eppleton.tileengine.sample.sprites.SpriteHandler;
 import java.util.List;
+import java.util.logging.Logger;
 import org.openide.util.lookup.ServiceProvider;
 
 /**
@@ -45,28 +48,32 @@ public class SampleGame extends Level {
     
     @Override
     public void initGame() {
-//        try {        
-            // create the world 
+        try {
+            //        try {
+            // create the world
             // initialize the TileMapCanvas
-           TileMap tileMap= TileMapReader.readMap( "/de/eppleton/tileengine/sample/resources/maps/sample.json");
+            TileMap tileMap= TileMapReader.readMap( GraphicsContext2D.getOrCreate("todo_add_offscreen_canvas"), "/de/eppleton/tileengine/sample/resources/maps/sample.json");
             List<TileMapLayer> layers = tileMap.getLayers();
 
             for (TileMapLayer tileMapLayer : layers) {
                 this.addLayer(tileMapLayer);
-            }      
-//            this.addLayer(new DebugLayer(new Color("#ffffff"), this));
-            // add Handlers
-            SpriteHandler spriteHandler = new SpriteHandler();
-            List<ObjectGroup> objectGroups = tileMap.getObjectGroups();
-            for (ObjectGroup objectGroup : objectGroups) {
-                spriteHandler.handle(objectGroup, this);
             }
-            DefaultMoveBehavior defaultMoveBehavior = new DefaultMoveBehavior();
-            defaultMoveBehavior.addMoveValidator(new SampleMoveValidator(tileMap));
-            addBehaviour(defaultMoveBehavior);
+//            this.addLayer(new DebugLayer(new Color("#ffffff"), this));
+// add Handlers
+SpriteHandler spriteHandler = new SpriteHandler();
+List<ObjectGroup> objectGroups = tileMap.getObjectGroups();
+for (ObjectGroup objectGroup : objectGroups) {
+    spriteHandler.handle(objectGroup, this);
+}
+DefaultMoveBehavior defaultMoveBehavior = new DefaultMoveBehavior();
+defaultMoveBehavior.addMoveValidator(new SampleMoveValidator(tileMap));
+addBehaviour(defaultMoveBehavior);
 //        } catch (TileMapException ex) {
 //            Logger.getLogger(SampleGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
+        } catch (TileMapException ex) {
+            Logger.getLogger(SampleGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
 
     }
 

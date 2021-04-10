@@ -18,7 +18,9 @@ public class TileMapReader {
 
     /**
      *
-     * @param url the url as used for laoding resources from a jar
+     * @param g2d
+     * @param url the url as used for loading resources from a jar
+     * 
      * @return the initialized TileMap
      * @throws JAXBException
      */

@@ -29,7 +29,7 @@ import de.eppleton.fx2d.Layer;
 import de.eppleton.fx2d.Sprite;
 import de.eppleton.fx2d.SpriteLayer;
 import de.eppleton.fx2d.action.ActionFactory;
-import de.eppleton.fx2d.event.KeyCode;
+import com.dukescript.api.events.KeyCode;
 import org.openide.util.lookup.ServiceProvider;
 
 

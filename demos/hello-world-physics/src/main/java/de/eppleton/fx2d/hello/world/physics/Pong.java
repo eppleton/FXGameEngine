@@ -20,9 +20,10 @@
  * <info@eppleton.de>
  */package de.eppleton.fx2d.hello.world.physics;
 
+import com.dukescript.api.canvas.Style;
 import de.eppleton.fx2d.*;
 import de.eppleton.fx2d.action.*;
-import de.eppleton.fx2d.event.KeyCode;
+import com.dukescript.api.events.KeyCode;
 import de.eppleton.fx2d.physics.PhysicsEngine;
 import de.eppleton.fx2d.physics.action.PhysicsActionFactory;
 import org.jbox2d.common.Vec2;
@@ -49,7 +50,8 @@ public class Pong extends Level {
             public void draw(double x, double y, double width, double height) {
                 if (updateScore) {
                     graphicsContext.clearRect(0, 0, width, height);
-                    graphicsContext.setFont("36 Verdana");
+                    graphicsContext.setFillStyle(Style.Color.GREEN);
+                    graphicsContext.setFont("36px Verdana");
                     graphicsContext.fillText("" + scorePlayer + "   " + scoreComputer, 380, 60);
                     updateScore = false;
                 }

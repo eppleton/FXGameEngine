@@ -27,7 +27,7 @@ import de.eppleton.fx2d.Sprite;
 import de.eppleton.fx2d.Renderer;
 import de.eppleton.fx2d.action.SpriteAction;
 import de.eppleton.fx2d.action.State;
-import de.eppleton.fx2d.event.KeyCode;
+import com.dukescript.api.events.KeyCode;
 import de.eppleton.fx2d.tileengine.TileSet;
 import de.eppleton.fx2d.tileengine.action.TileSetAnimation;
 import de.eppleton.tileengine.sample.sprites.actions.MoveAction;

@@ -28,7 +28,7 @@ import de.eppleton.fx2d.collision.*;
 import de.eppleton.fx2d.*;
 import de.eppleton.fx2d.Level;
 import de.eppleton.fx2d.action.*;
-import de.eppleton.fx2d.event.KeyCode;
+import com.dukescript.api.events.KeyCode;
 import de.eppleton.fx2d.tileengine.*;
 import java.util.Collection;
 import net.java.html.sound.AudioClip;

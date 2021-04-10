@@ -23,6 +23,8 @@ package de.eppleton.fx2d.samples.towerdefense;
 
 import com.dukescript.api.canvas.Image;
 import com.dukescript.api.canvas.Style.Color;
+import com.dukescript.api.events.EventHandler;
+import com.dukescript.api.events.MouseEvent;
 import de.eppleton.fx2d.Level;
 import de.eppleton.fx2d.beans.IntegerProperty;
 import de.eppleton.fx2d.Layer;
@@ -30,8 +32,7 @@ import de.eppleton.fx2d.Layer;
 import de.eppleton.fx2d.Sprite;
 import de.eppleton.fx2d.StackedRenderer;
 import de.eppleton.fx2d.action.Behavior;
-import de.eppleton.fx2d.event.EventHandler;
-import de.eppleton.fx2d.event.MouseEvent;
+
 import de.eppleton.fx2d.tileengine.TileMap;
 import de.eppleton.fx2d.tileengine.TileMapLayer;
 import de.eppleton.fx2d.tileengine.TileMapSerializationEnvironmentJAXB;
