@@ -3,18 +3,20 @@
     <head>
         <title></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+        <style>.layer {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+}</style>
     </head>
     <body>
-        <h1>Canvas Demo</h1>
-        <canvas id="canvas" width="600" height="600" > </canvas>
-
+        <div id="game-canvas"></div>
 
                 <!-- boot bck2brwsr -->
         <script type="text/javascript" src="bck2brwsr.js"></script>
         <script>
-            var vm = bck2brwsr('parallax-demo.js');
-            var c = vm.loadClass('de.eppleton.fx2d.parallax.demo.Main');
+            var vm = bck2brwsr('hello-world.js');
+            var c = vm.loadClass('de.eppleton.fx2d.dukescript.Main');
             c.invoke('onPageLoad');
         </script>
             </body>

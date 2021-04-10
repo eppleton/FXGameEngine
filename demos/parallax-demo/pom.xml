@@ -42,8 +42,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <netbeans.compile.on.save>none</netbeans.compile.on.save>
         <project.mainclass>de.eppleton.fx2d.dukescript.Main</project.mainclass>
-                <bck2brwsr.version>0.10</bck2brwsr.version>
-        <bck2brwsr.obfuscationlevel>FULL</bck2brwsr.obfuscationlevel>
+                <bck2brwsr.version>0.32</bck2brwsr.version>
+        <bck2brwsr.obfuscationlevel>NONE</bck2brwsr.obfuscationlevel>
                         <nb.html.version>1.0</nb.html.version>
         <nb.pages>index.html</nb.pages>
         <nb.cp>true</nb.cp>

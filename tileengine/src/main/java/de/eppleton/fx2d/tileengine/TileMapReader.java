@@ -22,7 +22,7 @@ public class TileMapReader {
      * @param url the url as used for loading resources from a jar
      * 
      * @return the initialized TileMap
-     * @throws JAXBException
+     * @throws TileMapException
      */
     public static TileMap readMap(GraphicsContext2D g2d, String url) throws TileMapException {
         return getReader().readMap(g2d, url);

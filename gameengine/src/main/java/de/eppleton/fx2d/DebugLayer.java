@@ -60,6 +60,7 @@ public class DebugLayer extends Layer{
         graphicsContext.fillText("StutterPulses "+canvas.getStutter() , x, y+84);
         graphicsContext.fillText("LastSlowness "+canvas.getLastSlowness(), x, y+96);
         graphicsContext.fillText("Maxdelta "+canvas.getMaxTimePassed(), x, y+108);
+//        graphicsContext.fillText("FPS "+canvas.getFPS(), x, y+120);
         
     }
     

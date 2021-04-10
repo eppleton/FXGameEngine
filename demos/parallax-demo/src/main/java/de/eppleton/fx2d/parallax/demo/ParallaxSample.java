@@ -50,13 +50,13 @@ public class ParallaxSample extends Level {
         this.addLayer(
                 new ImageLayer(Image.create(ParallaxSample.class.getResource("/assets/graphics/back.png").toExternalForm()), 0.2f, "back"));
         this.addLayer(new ImageLayer(Image.create(ParallaxSample.class.getResource("/assets/graphics/middle.png").toExternalForm()), 0.5f, "mid"));
-        this.addLayer(new SpriteLayer());
+//        this.addLayer(new SpriteLayer());
         this.addLayer(new ImageLayer( Image.create(ParallaxSample.class.getResource("/assets/graphics/front.png").toExternalForm()), 1.1f, "front"));
         Sprite player = new Sprite(this, Sprite.NO_ANIMATION, "Player", 1050, 240, 40, 30);
-        player.addAction(KeyCode.LEFT, ActionFactory.createMoveAction(Sprite.NO_ANIMATION, "left", -4, 0, 0, 0));
-        player.addAction(KeyCode.RIGHT, ActionFactory.createMoveAction(Sprite.NO_ANIMATION, "right", 4, 0, 0, 0));
-        player.addAction(KeyCode.UP, ActionFactory.createMoveAction(Sprite.NO_ANIMATION, "up", 0, -4, 0, 0));
-        player.addAction(KeyCode.DOWN, ActionFactory.createMoveAction(Sprite.NO_ANIMATION, "down", 0, 4, 0, 0));
+        player.addAction(KeyCode.A, ActionFactory.createMoveAction(Sprite.NO_ANIMATION, "left", -4, 0, 0, 0));
+        player.addAction(KeyCode.D, ActionFactory.createMoveAction(Sprite.NO_ANIMATION, "right", 4, 0, 0, 0));
+        player.addAction(KeyCode.S, ActionFactory.createMoveAction(Sprite.NO_ANIMATION, "up", 0, -4, 0, 0));
+        player.addAction(KeyCode.X, ActionFactory.createMoveAction(Sprite.NO_ANIMATION, "down", 0, 4, 0, 0));
         this.addSprite(player);
         this.setCamera(new Camera(player.getXProperty(), player.getYProperty()));
     }

@@ -38,7 +38,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-
 /**
  *
  * @author antonepple
@@ -77,7 +76,7 @@ public class Level extends Screen implements Handler {
         this.cameraMaxY = playfieldHeight - viewPortHeight;
         this.layers = new ArrayList<Layer>();
         this.sprites = new HashMap<String, Sprite>();
-        eventSource = EventSource.create(this, "game-canvas",true);
+        eventSource = EventSource.create(this, "game-canvas", true);
         addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -93,7 +92,6 @@ public class Level extends Screen implements Handler {
 
     }
 
-  
     protected void initGame() {
     }
 
@@ -225,11 +223,11 @@ public class Level extends Screen implements Handler {
     }
 
     private void render(long delta) {
-   
+
         // draw each individual layer
         for (Layer layer : layers) {
             if (layer.isVisible()) {
-                layer.draw( cameraX * layer.getParallaxFactor(), cameraY * layer.getParallaxFactor(), screenWidth, screenHeight);
+                layer.draw(cameraX * layer.getParallaxFactor(), cameraY * layer.getParallaxFactor(), screenWidth, screenHeight);
             }
             if (layer.getName().equals("sprites")) {
                 List<Sprite> values = new ArrayList<Sprite>(sprites.values());
@@ -239,11 +237,11 @@ public class Level extends Screen implements Handler {
                     double y = sprite.getY();
 
                     if (isOnScreen(sprite)) {
-//                        graphicsContext.save();
-//                        graphicsContext.translate(x - cameraX,
-//                                y - cameraY);
-//                        sprite.drawSprite(graphicsContext, alpha, delta);
-//                        graphicsContext.restore();
+                        graphicsContext.save();
+                        graphicsContext.translate(x - cameraX,
+                                y - cameraY);
+                        sprite.drawSprite(layer.graphicsContext, alpha, delta);
+                        layer.graphicsContext.restore();
                     }
 
                 }

@@ -21,6 +21,7 @@
  */
 package de.eppleton.fx2d.samples.spaceinvaders;
 
+import com.dukescript.api.canvas.GraphicsContext2D;
 import com.dukescript.api.canvas.Style;
 import de.eppleton.fx2d.beans.DoubleProperty;
 import de.eppleton.fx2d.tileengine.action.TileSetAnimation;
@@ -31,6 +32,7 @@ import de.eppleton.fx2d.action.*;
 import com.dukescript.api.events.KeyCode;
 import de.eppleton.fx2d.tileengine.*;
 import java.util.Collection;
+import java.util.logging.Logger;
 import net.java.html.sound.AudioClip;
 import org.openide.util.lookup.ServiceProvider;
 @ServiceProvider(service = Level.class)
@@ -53,6 +55,8 @@ public class SpaceInvaders extends Level {
     @Override
     protected void initGame() {
         final Level canvas = this;
+        Layer.createCanvas("tiles");
+        GraphicsContext2D g2d = GraphicsContext2D.getOrCreate("tiles");
         enemies = new int[][]{
             {30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30},
             {20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20},
@@ -60,8 +64,9 @@ public class SpaceInvaders extends Level {
             {10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10},
             {10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10}
         };
-//        try {
-            TileMap map = null;//TileMapReader.readMap(getGraphicsContext2D(),"/assets/graphics/spaceinvaders.json");
+        try {
+            
+            TileMap map = TileMapReader.readMap(g2d,"/assets/graphics/spaceinvaders.json");
             TileSet invaders = map.getTileSet("invaders1");//TileMapReader.readSet("/assets/graphics/invaders1.tsx");
             TileSet playerTiles = map.getTileSet("player");//TileMapReader.readSet("/assets/graphics/player.tsx");
             
@@ -87,13 +92,14 @@ public class SpaceInvaders extends Level {
             player.addAction(KeyCode.A, ActionFactory.createMoveAction(playerAnimation, "left", -4, 0, 0, 0));
             player.addAction(KeyCode.D, ActionFactory.createMoveAction(playerAnimation, "right", 4, 0, 0, 0));
             player.addAction(KeyCode.S, new ShootAction(playerAnimation, "fire", new BulletProvider(), new HitHandler(), shootSound));
-//        } catch (TileMapException ex) {
-//            Logger.getLogger(SpaceInvaders.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
+        } catch (TileMapException ex) {
+            Logger.getLogger(SpaceInvaders.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
         canvas.addLayer(new Background("background"));
         canvas.addBehaviour(new MoveInvadersBehavior());
         canvas.addBehaviour(new DefaultMoveBehavior());
         canvas.addLayer(new SpriteLayer());
+        canvas.addLayer(new DebugLayer(Style.Color.WHITE, canvas));
     }
 
     private class Points {
