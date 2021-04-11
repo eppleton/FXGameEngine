@@ -178,7 +178,7 @@
  "tilesets":[
         {
          "firstgid":1,
-         "image":"..\/graphics\/tilesets\/tiles\/base_out_atlas.png",
+         "image":".\/graphics\/tilesets\/tiles\/base_out_atlas.png",
          "imageheight":1024,
          "imagewidth":1024,
          "margin":0,
@@ -193,7 +193,7 @@
         }, 
         {
          "firstgid":1025,
-         "image":"..\/graphics\/tilesets\/tiles\/terrain_atlas.png",
+         "image":".\/graphics\/tilesets\/tiles\/terrain_atlas.png",
          "imageheight":1024,
          "imagewidth":1024,
          "margin":0,
@@ -208,7 +208,7 @@
         }, 
         {
          "firstgid":2049,
-         "image":"..\/graphics\/tilesets\/meta\/meta.png",
+         "image":".\/graphics\/tilesets\/meta\/meta.png",
          "imageheight":32,
          "imagewidth":64,
          "margin":0,
@@ -234,7 +234,7 @@
         }, 
         {
          "firstgid":2051,
-         "image":"..\/graphics\/tilesets\/sprites\/walkcycle\/BODY_skeleton.png",
+         "image":".\/graphics\/tilesets\/sprites\/walkcycle\/BODY_skeleton.png",
          "imageheight":256,
          "imagewidth":576,
          "margin":0,
@@ -249,7 +249,7 @@
         }, 
         {
          "firstgid":2087,
-         "image":"..\/graphics\/tilesets\/sprites\/walkcycle\/HEAD_chain_armor_helmet.png",
+         "image":".\/graphics\/tilesets\/sprites\/walkcycle\/HEAD_chain_armor_helmet.png",
          "imageheight":256,
          "imagewidth":576,
          "margin":1,
@@ -269,7 +269,7 @@
         }, 
         {
          "firstgid":2111,
-         "image":"..\/graphics\/tilesets\/sprites\/walkcycle\/WEAPON_shield_cutout_body.png",
+         "image":".\/graphics\/tilesets\/sprites\/walkcycle\/WEAPON_shield_cutout_body.png",
          "imageheight":256,
          "imagewidth":576,
          "margin":0,
@@ -284,7 +284,7 @@
         }, 
         {
          "firstgid":2147,
-         "image":"..\/graphics\/tilesets\/sprites\/all\/WEAPON_dagger.png",
+         "image":".\/graphics\/tilesets\/sprites\/all\/WEAPON_dagger.png",
          "imageheight":1024,
          "imagewidth":1024,
          "margin":0,
@@ -299,7 +299,7 @@
         }, 
         {
          "firstgid":2403,
-         "image":"..\/graphics\/tilesets\/sprites\/all\/BODY_male.png",
+         "image":".\/graphics\/tilesets\/sprites\/all\/BODY_male.png",
          "imageheight":1024,
          "imagewidth":1024,
          "margin":0,
@@ -314,7 +314,7 @@
         }, 
         {
          "firstgid":2659,
-         "image":"..\/graphics\/tilesets\/sprites\/all\/BEHIND_quiver.png",
+         "image":".\/graphics\/tilesets\/sprites\/all\/BEHIND_quiver.png",
          "imageheight":1024,
          "imagewidth":1024,
          "margin":0,
@@ -329,7 +329,7 @@
         }, 
         {
          "firstgid":2915,
-         "image":"..\/graphics\/tilesets\/sprites\/all\/FEET_shoes_brown.png",
+         "image":".\/graphics\/tilesets\/sprites\/all\/FEET_shoes_brown.png",
          "imageheight":1024,
          "imagewidth":1024,
          "margin":0,
@@ -344,7 +344,7 @@
         }, 
         {
          "firstgid":3171,
-         "image":"..\/graphics\/tilesets\/sprites\/all\/HEAD_hair_blonde.png",
+         "image":".\/graphics\/tilesets\/sprites\/all\/HEAD_hair_blonde.png",
          "imageheight":1024,
          "imagewidth":1024,
          "margin":0,
@@ -359,7 +359,7 @@
         }, 
         {
          "firstgid":3427,
-         "image":"..\/graphics\/tilesets\/sprites\/all\/HEAD_leather_armor_hat.png",
+         "image":".\/graphics\/tilesets\/sprites\/all\/HEAD_leather_armor_hat.png",
          "imageheight":1024,
          "imagewidth":1024,
          "margin":0,
@@ -374,7 +374,7 @@
         }, 
         {
          "firstgid":3683,
-         "image":"..\/graphics\/tilesets\/sprites\/all\/LEGS_pants_greenish.png",
+         "image":".\/graphics\/tilesets\/sprites\/all\/LEGS_pants_greenish.png",
          "imageheight":1024,
          "imagewidth":1024,
          "margin":0,
@@ -389,7 +389,7 @@
         }, 
         {
          "firstgid":3939,
-         "image":"..\/graphics\/tilesets\/sprites\/all\/TORSO_leather_armor_shirt_white.png",
+         "image":".\/graphics\/tilesets\/sprites\/all\/TORSO_leather_armor_shirt_white.png",
          "imageheight":1024,
          "imagewidth":1024,
          "margin":0,
@@ -404,7 +404,7 @@
         }, 
         {
          "firstgid":4195,
-         "image":"..\/graphics\/tilesets\/sprites\/all\/TORSO_leather_armor_torso.png",
+         "image":".\/graphics\/tilesets\/sprites\/all\/TORSO_leather_armor_torso.png",
          "imageheight":1024,
          "imagewidth":1024,
          "margin":0,
@@ -419,7 +419,7 @@
         }, 
         {
          "firstgid":4451,
-         "image":"..\/graphics\/tilesets\/sprites\/all\/TORSO_leather_armor_shoulders.png",
+         "image":".\/graphics\/tilesets\/sprites\/all\/TORSO_leather_armor_shoulders.png",
          "imageheight":1024,
          "imagewidth":1024,
          "margin":0,
@@ -434,7 +434,7 @@
         }, 
         {
          "firstgid":4707,
-         "image":"..\/graphics\/tilesets\/sprites\/all\/TORSO_leather_armor_bracers.png",
+         "image":".\/graphics\/tilesets\/sprites\/all\/TORSO_leather_armor_bracers.png",
          "imageheight":1024,
          "imagewidth":1024,
          "margin":0,

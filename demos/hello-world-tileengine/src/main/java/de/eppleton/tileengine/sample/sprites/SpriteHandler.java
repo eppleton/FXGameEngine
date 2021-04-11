@@ -74,7 +74,9 @@ public class SpriteHandler implements ObjectGroupHandler {
                                 Gear createdGear = GearFactory.createGear(x, y, gearSet, 0, new Properties(), field, layer);
                                 hero.offer(createdGear);
                             }
+                            
                         }
+                        hero.mergeTileSets();
                     }
                 }
             }

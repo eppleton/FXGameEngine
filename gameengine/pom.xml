@@ -73,7 +73,7 @@
         <dependency>
             <groupId>com.dukescript.canvas</groupId>
             <artifactId>canvas-api</artifactId>
-            <version>0.12</version>
+            <version>1.0-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
         <dependency>

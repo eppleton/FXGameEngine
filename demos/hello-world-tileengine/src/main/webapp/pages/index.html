@@ -3,19 +3,52 @@
     <head>
         <title></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-    </head>
+        <style>.layer {
+                position: absolute;
+                width: 100vw;
+                height: 100vh;
+            }</style>
+    </head> 
     <body>
-        <h1>Canvas Demo</h1>
-        <canvas tabindex="1" id="canvas" width="500" height="500" data-bind=" keyPress : onKeyDown" ></canvas>
-
-
-                <!-- boot bck2brwsr -->
+        <div id="game-canvas"></div>
+        <div class="hidden">
+            <script >
+                var images = new Array();
+                function preload() {
+                    var numImages = preload.arguments.length;
+                    for (i = 0; i < preload.arguments.length; i++) {
+                        images[i] = new Image();
+                        images[i].src = preload.arguments[i];
+                        images[i].id = preload.arguments[i].replace(/[^a-zA-Z0-9]/g,'_');
+                        document.body.appendChild(images[i]);
+                    }
+                }
+                    preload(
+                            "./graphics/tilesets/meta/meta.png",
+                            "./graphics/tilesets/sprites/walkcycle/BODY_skeleton.png",
+                            "./graphics/tilesets/sprites/walkcycle/HEAD_chain_armor_helmet.png",
+                            "./graphics/tilesets/sprites/walkcycle/WEAPON_shield_cutout_body.png",
+                            "./graphics/tilesets/sprites/all/WEAPON_dagger.png",
+                            "./graphics/tilesets/sprites/all/BODY_male.png",
+                            "./graphics/tilesets/sprites/all/BEHIND_quiver.png",
+                            "./graphics/tilesets/sprites/all/FEET_shoes_brown.png",
+                            "./graphics/tilesets/sprites/all/HEAD_hair_blonde.png",
+                            "./graphics/tilesets/sprites/all/HEAD_leather_armor_hat.png",
+                            "./graphics/tilesets/sprites/all/LEGS_pants_greenish.png",
+                            "./graphics/tilesets/sprites/all/TORSO_leather_armor_shirt_white.png",
+                            "./graphics/tilesets/sprites/all/TORSO_leather_armor_torso.png",
+                            "./graphics/tilesets/sprites/all/TORSO_leather_armor_shoulders.png",
+                            "./graphics/tilesets/sprites/all/TORSO_leather_armor_bracers.png"
+                            )
+                    //--><!]]>
+            </script>
+        </div>
+        <!-- boot bck2brwsr -->
         <script type="text/javascript" src="bck2brwsr.js"></script>
         <script>
-            var vm = bck2brwsr('hello-world-tileengine.js');
-            var c = vm.loadClass('de.eppleton.fx2d.hello.world.tileengine.Main');
-            c.invoke('onPageLoad');
+                    var vm = bck2brwsr('hello-world-tileengine.js');
+                    var c = vm.loadClass('de.eppleton.fx2d.hello.world.tileengine.Main');
+                    c.invoke('onPageLoad');
         </script>
-            </body>
+    </body>
 </html>

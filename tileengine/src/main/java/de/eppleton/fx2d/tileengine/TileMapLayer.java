@@ -68,7 +68,7 @@ public class TileMapLayer extends Layer {
 
         double cameraMaxX = (tileMap.getWidth() * tileMap.getTilewidth()) - screenWidth;
         double cameraMaxY = (tileMap.getHeight() * tileMap.getTileheight()) - screenHeight;
-       
+       graphicsContext.clearRect(0,0, screenWidth,screenHeight );
         for (int y = 0; y < screenHeightInTiles
                 // render an extra row to make up for the offset
                 + (startY >= (int) (cameraMaxY / tileMap.getTileheight()) ? 1 : 2); y++) {
@@ -80,6 +80,7 @@ public class TileMapLayer extends Layer {
                 int gid = getGid(idx);
 
                 graphicsContext.save();
+                
                 graphicsContext.translate((x * tileMap.getTilewidth()) - offX,
                         (y * tileMap.getTileheight()) - offY);
                 tileMap.drawTile(graphicsContext, gid);

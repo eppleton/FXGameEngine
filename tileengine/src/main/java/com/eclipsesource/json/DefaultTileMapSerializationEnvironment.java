@@ -178,12 +178,13 @@ public class DefaultTileMapSerializationEnvironment implements TileMapSerializat
         }
 
         tileSet.setImage(parseImage(asObject));
-        String source = Image.class.getResource(TileMapReader.resourcePath(tileSet.getImage().getSource(), baseUrl)).toString();
-           System.out.println("source "+source);
+//        String source = Image.class.getResource(TileMapReader.resourcePath(tileSet.getImage().getSource(), baseUrl)).toString();
+        String source = tileSet.getImage().getSource();
+        System.out.println("\""+source+"\"");
         Image image = Image.create(source);
         tileSet.init(g2d, image);
+        g2d.drawImage(image, 0, 0);
         return tileSet;
-
     }
 
     private SourceImage parseImage(JsonObject asObject) {
@@ -191,9 +192,7 @@ public class DefaultTileMapSerializationEnvironment implements TileMapSerializat
         sourceImage.setHeight(asObject.get("imageheight").asInt());
         sourceImage.setWidth(asObject.get("imagewidth").asInt());
         sourceImage.setSource(asObject.get("image").asString());
-
         return sourceImage;
-
     }
 
     private ArrayList<Tile> parseTileProperties(JsonObject object) {

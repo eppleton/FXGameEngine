@@ -19,7 +19,7 @@
         <maven.compiler.source>1.6</maven.compiler.source>
         <maven.compiler.target>1.6</maven.compiler.target>
         <nb.html.version>1.0</nb.html.version>
-        <dukescript.canvas.version>0.12</dukescript.canvas.version>
+        <dukescript.canvas.version>1.1-SNAPSHOT</dukescript.canvas.version>
     </properties>
     <organization>
         <name>Eppleton IT Consulting</name>

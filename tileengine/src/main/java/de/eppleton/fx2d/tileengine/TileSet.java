@@ -24,6 +24,7 @@ package de.eppleton.fx2d.tileengine;
 import com.dukescript.api.canvas.GraphicsContext2D;
 import com.dukescript.api.canvas.Image;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -161,8 +162,14 @@ public class TileSet {
         return rows;
     }
 
-    public void merge(GraphicsContext2D gc, TileSet other) {
-        Image merge = gc.merge(this.getTileImage(), other.getTileImage());
+    public void merge(GraphicsContext2D gc, List<TileSet> other) {
+        System.out.println("tilesets to merge "+other.size());
+        List<Image> images = new ArrayList<>();
+        for (TileSet set : other) {
+               images.add(set.getTileImage());
+        }
+        System.out.println("images to merge "+other.size());
+        Image merge = gc.merge(this.getTileImage(),images );
         init(gc, merge);
     }
 

@@ -83,7 +83,7 @@
         <dependency>
             <groupId>com.dukescript.canvas</groupId>
             <artifactId>canvas-api</artifactId>
-            <version>0.7.1</version>
+            <version>${dukescript.canvas.version}</version>
             <type>jar</type>
         </dependency>
     </dependencies>

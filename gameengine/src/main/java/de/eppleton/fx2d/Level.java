@@ -21,6 +21,7 @@
  */
 package de.eppleton.fx2d;
 
+import com.dukescript.api.canvas.GraphicsContext2D;
 import de.eppleton.fx2d.action.Behavior;
 import de.eppleton.fx2d.action.SpriteBehavior;
 import de.eppleton.fx2d.collision.Collision;
@@ -42,7 +43,7 @@ import java.util.Set;
  *
  * @author antonepple
  */
-public class Level extends Screen implements Handler {
+public class Level  implements Handler {
 
     final double screenWidth;
     final double screenHeight;
@@ -230,6 +231,9 @@ public class Level extends Screen implements Handler {
                 layer.draw(cameraX * layer.getParallaxFactor(), cameraY * layer.getParallaxFactor(), screenWidth, screenHeight);
             }
             if (layer.getName().equals("sprites")) {
+                
+                layer.graphicsContext.clearRect(
+                        0,  0,layer.graphicsContext.getWidth(), layer.graphicsContext.getHeight());
                 List<Sprite> values = new ArrayList<Sprite>(sprites.values());
                 Collections.sort(values, Sprite.COMPARATOR);
                 for (Sprite sprite : values) {
@@ -237,8 +241,8 @@ public class Level extends Screen implements Handler {
                     double y = sprite.getY();
 
                     if (isOnScreen(sprite)) {
-                        graphicsContext.save();
-                        graphicsContext.translate(x - cameraX,
+                        layer.graphicsContext.save();
+                        layer.graphicsContext.translate(x - cameraX,
                                 y - cameraY);
                         sprite.drawSprite(layer.graphicsContext, alpha, delta);
                         layer.graphicsContext.restore();
@@ -389,6 +393,10 @@ public class Level extends Screen implements Handler {
             return true;
         }
         return false;
+    }
+    
+    public GraphicsContext2D getGraphicsContext2D(){
+        return layers.get(0).graphicsContext;
     }
 
     public interface MoveValidator {

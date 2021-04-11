@@ -67,7 +67,7 @@ public class TileSetAnimation implements Renderer {
             }
         }
         this.tileSet = set;
-        frameDelta = 1000000000 / speed;
+        frameDelta = 1000 / speed;
         play();
     }
 

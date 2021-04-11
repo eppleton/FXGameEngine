@@ -33,8 +33,10 @@ import de.eppleton.fx2d.tileengine.action.TileSetAnimation;
 import de.eppleton.tileengine.sample.sprites.actions.MoveAction;
 import de.eppleton.tileengine.sample.sprites.actions.StateAnimation;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Logger;
 
 /**
@@ -127,22 +129,22 @@ public class Hero extends Sprite {
         
     }
     
-    private void mergeTileSets() {
+    public  void mergeTileSets() {
 //        String source = heroSet.getImage().getSource();
 //        String resourcePath = TileMapReader.resourcePath(source, heroSet.getBaseUrl());
 //        Image image = Image.create(SampleGame.class.getResource(resourcePath).toString());
-//        heroSet.init(image);
-//        
-//        
-//        Collections.sort(gearList, LAYER_COMPARATOR);
-//        for (Gear gear : gearList) {
-//            heroSet.merge(getParent().getGraphicsContext2D(), gear.getTileset());
-//        }
+//        heroSet.init(getParent().getGraphicsContext2D(),image);
+        Collections.sort(gearList, LAYER_COMPARATOR);
+        List<TileSet> tileSets = new ArrayList<>();
+        System.out.println("gearlist size "+gearList.size());
+        for (Gear gear : gearList) {
+            tileSets.add(gear.getTileset());
+        }
+            heroSet.merge(getParent().getGraphicsContext2D(), tileSets);
     }
     
     public boolean offer(Gear gear) {
         gearList.add(gear);
-        mergeTileSets();
         return true;
     }
     
