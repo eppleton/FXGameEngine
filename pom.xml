@@ -14,12 +14,12 @@
         </license>
     </licenses>
     <properties>
-        <net.java.html.version>2.0-SNAPSHOT</net.java.html.version>
+        <net.java.html.version>1.7.1</net.java.html.version>
         <bck2brwsr.version>0.32</bck2brwsr.version>
-        <maven.compiler.source>1.6</maven.compiler.source>
-        <maven.compiler.target>1.6</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <nb.html.version>1.0</nb.html.version>
-        <dukescript.canvas.version>1.1-SNAPSHOT</dukescript.canvas.version>
+        <dukescript.canvas.version>0.13</dukescript.canvas.version>
     </properties>
     <organization>
         <name>Eppleton IT Consulting</name>
